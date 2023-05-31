@@ -38,7 +38,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form role="form" method="post" action="build/php/inc/Add_Post.php" onsubmit="return Check_Fields()">
+            <form role="form" method="post" action="build/php/inc/Add_Post.php" id="NewPostForm">
                 <div class="card-body">
                     <center>
                         <table style="width: 100%" class="table table-striped">
@@ -50,9 +50,9 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                             <tr>
                                 <th colspan="1">نام اثر*</th>
                                 <td colspan="5">
-                                    <input type="text" class="form-control" id="name"
+                                    <input type="text" class="form-control" id="postName"
                                            placeholder="نام اثر را وارد کنید"
-                                           name="name">
+                                           name="postName">
                                 </td>
                             </tr>
                             <tr>
@@ -78,7 +78,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                 </td>
                                 <th>زبان*</th>
                                 <td>
-                                    <select name="science_rank" id="science_rank" class="form-control select2"
+                                    <select name="science_rank" id="post_format" class="form-control select2"
                                             title="قالب علمی را انتخاب کنید">
                                         <option disabled selected>انتخاب کنید</option>
                                         <?php
@@ -93,7 +93,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                             <tr class="bookTR">
                                 <th>ناشر*</th>
                                 <td colspan="3">
-                                    <select name="science_rank" id="science_rank" class="form-control select2"
+                                    <select name="science_rank" id="publisher" class="form-control select2"
                                             title="ناشر را انتخاب کنید">
                                         <option disabled selected>انتخاب کنید</option>
                                         <?php
@@ -920,8 +920,6 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
 
     <script src="build/js/SearchInMagManagerTable.js"></script>
     <script src="build/js/PostsManagerScripts.js"></script>
-    <script src="build/js/ChangeTabsInMagManager.js"></script>
-    <script src="build/js/Mag_Manager_Check_Fields.js"></script>
     <script src="build/js/GetMagInfo.js"></script>
     <script src="build/js/UpdateMagInfo.js"></script>
     <script src="build/js/Delete_Mag.js"></script>
