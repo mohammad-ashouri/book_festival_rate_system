@@ -1,3 +1,3 @@
 <?php
-mysqli_close($connection_maghalat);
+mysqli_close($connection_book);
 ?>

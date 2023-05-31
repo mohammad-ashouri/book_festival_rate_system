@@ -76,10 +76,10 @@ if (isset($_POST['Add_Journal']) and isset($_POST['name']) and isset($_SESSION['
         $query="insert into mag_info (admin_id,name,science_rank,scientific_group,international_position,mag_type,ISSN,publication_period,adder,date_added)
                 values ('$LastAdminID','$name','$science_rank','$scientific_group','$international_position','$type','$ISSN','$publication_period','$adder','$datewithtime')";
         mysqli_query($connection_mag,$query);
-        header("Location: ../../../mag_manager.php?MagAdded=$name");
+        header("Location: ../../../posts_manager.php?MagAdded=$name");
     }
     else{
-        header("Location: ../../../mag_manager.php?NameExists='$name");
+        header("Location: ../../../posts_manager.php?NameExists='$name");
     }
 }
 else{

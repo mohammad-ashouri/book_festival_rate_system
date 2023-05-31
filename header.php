@@ -5,11 +5,11 @@ session_start();
 $urlofthispage=$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 if (!isset($_SESSION['islogin'])){
     $operation="Access Denied";
-    logsend($operation,$urlofthispage,$connection_maghalat);
+    logsend($operation,$urlofthispage,$connection_book);
     header("location: index.php?errorlog");
 }
 $user=$_SESSION['id'];
-$query=mysqli_query($connection_maghalat,"select * from users where id='$user'");
+$query=mysqli_query($connection_book,"select * from users where id='$user'");
 foreach ($query as $User_Info){}
 ?>
 <!DOCTYPE html>
@@ -19,7 +19,7 @@ foreach ($query as $User_Info){}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>سامانه جشنواره مقالات علمی حوزه</title>
+    <title>سامانه همایش کتاب سال حوزه</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
@@ -58,19 +58,13 @@ foreach ($query as $User_Info){}
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-<!--    <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">-->
-        <!-- Left navbar links -->
-<!--        <ul class="navbar-nav" style="text-align: center">-->
-<!--            به سامانه ارزیابی جشنواره مقالات علمی حوزه خوش آمدید-->
-<!--        </ul>-->
-<!--    </nav>-->
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="index.php" class="brand-link">
             <center>
-                <span class="brand-text font-weight-bold">سامانه جشنواره مقالات علمی حوزه</span>
+                <span class="brand-text font-weight-bold">سامانه همایش کتاب سال حوزه</span>
             </center>
         </a>
 

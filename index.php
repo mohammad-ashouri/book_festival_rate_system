@@ -39,7 +39,7 @@ session_abort();
                     <!--					<span class="login100-form-title p-b-26">-->
                     <center>
                         <p style=" font-family: 'B Titr'; font-size: 20px; color: black">
-                            صفحه ورود به سامانه جشنواره مقالات علمی حوزه
+                            صفحه ورود به سامانه همایش کتاب سال حوزه
                         </p>
                     </center>
                     <br/>

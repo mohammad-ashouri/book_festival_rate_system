@@ -14,26 +14,19 @@ $sec=jdate('s');
 $date=$year."/".$month."/".$day;
 $datewithtime=$year."/".$month."/".$day.' '.$hour.":".$min.":".$sec;
 
-$connection_maghalat = @mysqli_connect('localhost', 'root', '', 'ssmp_jashnvarehmaghalat');
+$connection_book = @mysqli_connect('localhost', 'root', '', 'ssmp_bookfestival');
 if (mysqli_connect_errno()) {
     echo 'ارتباط با دیتابیس دچار اختلال شده است. خطا به این صورت میباشد:' . mysqli_connect_error();
     exit();
 }
-$connection_mag = @mysqli_connect('localhost', 'root', '', 'ssmp_magbase');
-if (mysqli_connect_errno()) {
-    echo 'ارتباط با دیتابیس دچار اختلال شده است. خطا به این صورت میباشد:' . mysqli_connect_error();
-    exit();
-}
-$connection_variables = @mysqli_connect('localhost', 'root', '', 'ssmp_variables');
-if (mysqli_connect_errno()) {
-    echo 'ارتباط با دیتابیس دچار اختلال شده است. خطا به این صورت میباشد:' . mysqli_connect_error();
-    exit();
-}
-mysqli_set_charset($connection_maghalat, 'utf8');
-mysqli_set_charset($connection_mag, 'utf8');
-mysqli_set_charset($connection_variables, 'utf8');
+mysqli_set_charset($connection_book, 'utf8');
 
-
+$connection_book_signup = @mysqli_connect('localhost', 'root', '', 'book_festival');
+if (mysqli_connect_errno()) {
+    echo 'ارتباط با دیتابیس دچار اختلال شده است. خطا به این صورت میباشد:' . mysqli_connect_error();
+    exit();
+}
+mysqli_set_charset($connection_book_signup, 'utf8');
 //$conn = "";
 //
 //try {

@@ -7,7 +7,7 @@ include_once 'build/php/functions.php';
 $urlofthispage=$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 $user= $_SESSION['id'];
 $operation="Logout user= $user";
-logsend($operation,$urlofthispage,$connection_maghalat);
+logsend($operation,$urlofthispage,$connection_book);
 unset($_SESSION["id"]);
 unset($_SESSION["islogin"]);
 unset($_SESSION["username"]);
