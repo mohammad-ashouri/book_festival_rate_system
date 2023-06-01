@@ -50,15 +50,15 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                             <tr>
                                 <th colspan="1">نام اثر*</th>
                                 <td colspan="5">
-                                    <input type="text" class="form-control" id="postName"
+                                    <input type="text" class="form-control"
                                            placeholder="نام اثر را وارد کنید"
-                                           name="postName">
+                                           name="postName" id="postName">
                                 </td>
                             </tr>
                             <tr>
                                 <th>قالب علمی*</th>
                                 <td>
-                                    <select name="science_rank" id="science_rank" class="form-control select2"
+                                    <select name="postFormat" id="postFormat" class="form-control select2"
                                             title="قالب علمی را انتخاب کنید">
                                         <option disabled selected>انتخاب کنید</option>
                                         <option value="کتاب">کتاب</option>
@@ -68,8 +68,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                 <th>نوع اثر*</th>
                                 <td>
                                     <select class="form-control select2"
-                                            style="width: 100%;text-align: right" name="scientific_group"
-                                            id="scientific_group">
+                                            style="width: 100%;text-align: right" name="postType" id="postType">
                                         <option disabled selected>انتخاب کنید</option>
                                         <option value="تحقیق و تألیف">تحقیق و تألیف</option>
                                         <option value="ترجمه">ترجمه</option>
@@ -78,7 +77,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                 </td>
                                 <th>زبان*</th>
                                 <td>
-                                    <select name="science_rank" id="post_format" class="form-control select2"
+                                    <select name="language" id="language" class="form-control select2"
                                             title="قالب علمی را انتخاب کنید">
                                         <option disabled selected>انتخاب کنید</option>
                                         <?php
@@ -93,7 +92,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                             <tr class="bookTR">
                                 <th>ناشر*</th>
                                 <td colspan="3">
-                                    <select name="science_rank" id="publisher" class="form-control select2"
+                                    <select name="publisher" id="publisher" class="form-control select2"
                                             title="ناشر را انتخاب کنید">
                                         <option disabled selected>انتخاب کنید</option>
                                         <?php
@@ -106,76 +105,83 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                 </td>
                                 <th>شابک</th>
                                 <td>
-                                    <input type="text" class="form-control" id="name"
+                                    <input type="text" class="form-control"
                                            placeholder="شابک اثر را وارد کنید"
-                                           name="name">
+                                           name="ISSN" id="ISSN">
                                 </td>
                             </tr>
                             <tr class="bookTR">
                                 <th>تعداد جلد</th>
                                 <td>
-                                    <input type="text" class="form-control" id="name"
+                                    <input type="text" class="form-control"
                                            placeholder="تعداد جلد اثر را وارد کنید"
-                                           name="name">
+                                           name="numberOfCovers" id="numberOfCovers">
                                 </td>
                                 <th>تیراژ</th>
                                 <td>
-                                    <input type="text" class="form-control" id="name"
+                                    <input type="text" class="form-control"
                                            placeholder="تیراژ اثر را وارد کنید"
-                                           name="name">
+                                           name="circulation" id="circulation">
                                 </td>
                                 <th>قطع</th>
                                 <td>
-                                    <input type="text" class="form-control" id="name"
-                                           placeholder="تعداد جلد اثر را وارد کنید"
-                                           name="name">
+                                    <select name="bookSize" id="bookSize" class="form-control select2"
+                                            title="قطع اثر را انتخاب کنید">
+                                        <option disabled selected>انتخاب کنید</option>
+                                        <option value="رحلی">رحلی</option>
+                                        <option value="رقعی">رقعی</option>
+                                        <option value="نیم رقعی">نیم رقعی</option>
+                                        <option value="وزیری">وزیری</option>
+                                        <option value="بیاضی">بیاضی</option>
+                                        <option value="پالتویی">پالتویی</option>
+                                    </select>
                                 </td>
                             </tr>
                             <tr class="thesisTR">
                                 <th>شماره گواهی دفاع پایان نامه*</th>
                                 <td>
-                                    <input type="text" class="form-control" id="name"
+                                    <input type="text" class="form-control"
                                            placeholder="تعداد جلد اثر را وارد کنید"
-                                           name="name">
+                                           name="thesisCertificateNumber" id="thesisCertificateNumber">
                                 </td>
                                 <th>محل دفاع*</th>
                                 <td>
-                                    <input type="text" class="form-control" id="name"
+                                    <input type="text" class="form-control"
                                            placeholder="تیراژ اثر را وارد کنید"
-                                           name="name">
+                                           name="thesisDefencePlace" id="thesisDefencePlace">
                                 </td>
                                 <th>امتیاز پایان نامه*</th>
                                 <td>
-                                    <input type="text" class="form-control" id="name"
+                                    <input type="text" class="form-control"
                                            placeholder="تعداد جلد اثر را وارد کنید"
-                                           name="name">
+                                           name="thesisGrade" id="thesisGrade">
                                 </td>
                             </tr>
                             <tr class="thesisTR">
                                 <th>مشخصات استاد راهنما*</th>
                                 <td colspan="2">
-                                    <input type="text" class="form-control" id="name"
+                                    <input type="text" class="form-control"
                                            placeholder="نام و نام خانوادگی استاد راهنما را وارد کنید"
-                                           name="name">
+                                           name="thesisSupervisor" id="thesisSupervisor">
                                 </td>
                                 <th>مشخصات استاد مشاور*</th>
                                 <td colspan="2">
-                                    <input type="text" class="form-control" id="name"
+                                    <input type="text" class="form-control"
                                            placeholder="نام و نام خانوادگی استاد مشاور را وارد کنید"
-                                           name="name">
+                                           name="thesisAdvisor" id="thesisAdvisor">
                                 </td>
                             </tr>
                             <tr>
                                 <th>شمارگان صفحه*</th>
                                 <td>
-                                    <input type="text" class="form-control" id="name"
+                                    <input type="text" class="form-control"
                                            placeholder="شمارگان صفحه اثر را وارد کنید"
-                                           name="name">
+                                           name="pagesNumber" id="pagesNumber">
                                 </td>
                                 <th>محور ویژه</th>
                                 <td colspan="4">
-                                    <select name="science_rank" id="science_rank" class="form-control select2"
-                                            title="ناشر را انتخاب کنید">
+                                    <select name="specialSection" id="specialSection" class="form-control select2"
+                                            title="محور ویژه را انتخاب کنید">
                                         <option disabled selected>انتخاب کنید</option>
                                         <?php
                                         $query=mysqli_query($connection_book_signup,"select * from special_sections where active=1 order by title");
@@ -189,7 +195,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                             <tr>
                                 <th>ویژگی های اثر</th>
                                 <td colspan="5">
-                                    <textarea class="form-control" rows="3" placeholder="ویژگی های اثر را وارد کنید."></textarea>
+                                    <textarea name="properties" id="properties" class="form-control" rows="3" placeholder="ویژگی های اثر را وارد کنید."></textarea>
                                 </td>
                             </tr>
                         </table>
@@ -203,8 +209,8 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                             <tr>
                                 <th>نوع تحقیق را انتخاب کنید.*</th>
                                 <td>
-                                    <select name="science_rank" id="science_rank" class="form-control select2"
-                                            title="قالب علمی را انتخاب کنید">
+                                    <select name="research_type" id="research_type" class="form-control select2"
+                                            title="نوع تحقیق را انتخاب کنید">
                                         <option disabled selected>انتخاب کنید</option>
                                         <option value="تک رشته ای">تک رشته ای</option>
                                         <option value="چند رشته ای">چند رشته ای</option>
@@ -212,7 +218,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                 </td>
                                 <th>گروه علمی اول*</th>
                                 <td>
-                                    <select name="science_rank" id="science_rank" class="form-control select2"
+                                    <select name="scientificGroup1" id="scientificGroup1" class="form-control select2"
                                             title="گروه علمی اول را انتخاب کنید">
                                         <option disabled selected>انتخاب کنید</option>
                                         <?php
@@ -225,7 +231,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                 </td>
                                 <th>گروه علمی دوم*</th>
                                 <td>
-                                    <select name="science_rank" id="science_rank" class="form-control select2"
+                                    <select name="scientificGroup2" id="scientificGroup2" class="form-control select2"
                                             title="گروه علمی دوم را انتخاب کنید">
                                         <option disabled selected>انتخاب کنید</option>
                                         <?php
@@ -249,7 +255,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                             <tr>
                                 <th>نوع همکاری*</th>
                                 <td>
-                                    <select name="science_rank" id="science_rank" class="form-control select2"
+                                    <select name="activityType" id="activityType" class="form-control select2"
                                             title="نوع همکاری را انتخاب کنید">
                                         <option disabled selected>انتخاب کنید</option>
                                         <option value="فردی">فردی</option>
@@ -280,7 +286,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                             </tr>
                             <tr>
                                 <th colspan="3">نحوه تحویل اثر*
-                                    <select style="width: 40%; margin-left: 50px" name="science_rank" id="science_rank" class="form-control select2"
+                                    <select style="width: 40%; margin-left: 50px" name="postDeliveryMethod" id="postDeliveryMethod" class="form-control select2"
                                             title="نحوه تحویل را انتخاب کنید">
                                         <option disabled selected>انتخاب کنید</option>
                                         <option value="physical">نسخه فیزیکی</option>
@@ -288,7 +294,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                     </select>
                                 </th>
                             </tr>
-                            <tr>
+                            <tr id="filesTR" hidden="hidden">
                                 <th colspan="1">فایل اثر</th>
                                 <td colspan="2">
                                     <div class="custom-file">
@@ -297,8 +303,8 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                         <label id="post_file_label" class="custom-file-label">انتخاب فایل</label>
                                     </div>
                                 </td>
-                                <th colspan="1">فایل صورتجلسه</th>
-                                <td colspan="2">
+                                <th id="thesisFileTH" hidden="hidden" colspan="1">فایل صورتجلسه</th>
+                                <td id="thesisFileTD" hidden="hidden" colspan="2">
                                     <div class="custom-file">
                                         <input title="فایل صورتجلسه" accept="application/pdf,.jpg,.jpeg" type="file"
                                                class="custom-file-input" id="proceedings_file" name="proceedings_file">
@@ -921,8 +927,8 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
     <script src="build/js/SearchInMagManagerTable.js"></script>
     <script src="build/js/PostsManagerScripts.js"></script>
     <script src="build/js/GetMagInfo.js"></script>
-    <script src="build/js/UpdateMagInfo.js"></script>
-    <script src="build/js/Delete_Mag.js"></script>
+<!--    <script src="build/js/UpdateMagInfo.js"></script>-->
+<!--    <script src="build/js/Delete_Mag.js"></script>-->
 <?php
 endif;
 include_once __DIR__ . '/footer.php'; ?>
