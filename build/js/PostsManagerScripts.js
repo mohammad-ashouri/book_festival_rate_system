@@ -1,43 +1,97 @@
+var rowCounter = 2;
+$(document).ready(function () {
+    function updateRowIds() {
+        $("#cooperatorsTable tbody tr").each(function (index) {
+            var rowId = index + 1;
+            $(this).attr("id", "row" + rowId);
+            $(this)
+                .find("input")
+                .each(function () {
+                    var inputId = $(this).attr("id");
+                    if (inputId) {
+                        var updatedInputId = inputId.replace(/\d+$/, rowId);
+                        $(this).attr("id", updatedInputId);
+                    }
+                });
+            $(this).find("td:first").text(index + 1);
+            rowCounter = index + 2;
+        });
+    }
+
+    $("#addRowButton").click(function () {
+        var lastRow = $("#cooperatorsTable tbody tr:last");
+        var clonedRow = lastRow.clone();
+        clonedRow.find("td:first").text(rowCounter);
+        clonedRow.find("td input").val("");
+        var deleteButton = $("<button class='deleteRowButton btn btn-danger'>حذف</button>");
+        clonedRow.find("td:last").empty().append(deleteButton);
+        lastRow.after(clonedRow);
+        rowCounter++;
+        updateRowIds();
+        return false;
+    });
+
+    $(document).on("click", ".deleteRowButton", function () {
+        $(this).closest("tr").remove();
+        updateRowIds();
+        return false;
+    });
+});
+
 document.getElementById("postFormat").onchange = function () {
     if (postFormat.value == 'کتاب') {
-        bookTR1.hidden=false;
-        bookTR2.hidden=false;
-        publisherTD.colspan=3;
-        thesisTR1.hidden=true;
-        thesisTR2.hidden=true;
+        bookTR1.hidden = false;
+        bookTR2.hidden = false;
+        publisherTD.colspan = 3;
+        thesisTR1.hidden = true;
+        thesisTR2.hidden = true;
         var selectElement = document.querySelector('#publisher');
-        selectElement.style.width='100% !important';
+        selectElement.style.width = '100% !important';
 
-    }else if (postFormat.value == 'پایان نامه') {
-        thesisTR1.hidden=false;
-        thesisTR2.hidden=false;
-        bookTR1.hidden=true;
-        bookTR2.hidden=true;
+    } else if (postFormat.value == 'پایان نامه') {
+        thesisTR1.hidden = false;
+        thesisTR2.hidden = false;
+        bookTR1.hidden = true;
+        bookTR2.hidden = true;
     }
 }
 
 document.getElementById("research_type").onchange = function () {
     if (research_type.value == 'تک رشته ای') {
-        scientificGroup1TH.hidden=false;
-        scientificGroup1TD.hidden=false;
-        scientificGroup2TH.hidden=true;
-        scientificGroup2TD.hidden=true;
-    }else if (research_type.value == 'چند رشته ای'){
-        scientificGroup1TH.hidden=false;
-        scientificGroup1TD.hidden=false;
-        scientificGroup2TH.hidden=false;
-        scientificGroup2TD.hidden=false;
+        scientificGroup1TH.hidden = false;
+        scientificGroup1TD.hidden = false;
+        scientificGroup2TH.hidden = true;
+        scientificGroup2TD.hidden = true;
+    } else if (research_type.value == 'چند رشته ای') {
+        scientificGroup1TH.hidden = false;
+        scientificGroup1TD.hidden = false;
+        scientificGroup2TH.hidden = false;
+        scientificGroup2TD.hidden = false;
     }
 }
 
-properties.addEventListener("input", function() {
+properties.addEventListener("change", function () {
     const wordCount = document.getElementById("wordCount");
-    const text = properties.value.trim();
-    const words = text.split(/\s+/);
-    const wordCountValue = words.length;
+    if (properties.value.length > 0) {
+        const text = properties.value.trim();
+        const words = text.split(/\s+/);
+        let wordCountValue = words.length;
+    } else {
+        let wordCountValue = 0;
+    }
 
     wordCount.textContent = "تعداد کلمات: " + wordCountValue;
 });
+
+document.getElementById("activityType").onchange = function () {
+    const cooperatorsTable = document.getElementById("cooperatorsTable");
+    if (activityType.value == 'فردی') {
+        cooperatorsTable.hidden = true;
+    } else if (activityType.value == 'مشترک') {
+        cooperatorsTable.hidden = false;
+    }
+}
+
 
 document.getElementById("proceedings_file").onchange = function () {
     var proceedings_file_label = document.getElementById("proceedings_file_label");
@@ -53,17 +107,17 @@ document.getElementById("post_file").onchange = function () {
 }
 
 document.getElementById("postDeliveryMethod").onchange = function () {
-    if (postDeliveryMethod.value=='digital'){
-        filesTR.hidden=false;
-        if (postFormat.value=='پایان نامه'){
-            thesisFileTH.hidden=false;
-            thesisFileTD.hidden=false;
+    if (postDeliveryMethod.value == 'digital') {
+        filesTR.hidden = false;
+        if (postFormat.value == 'پایان نامه') {
+            thesisFileTH.hidden = false;
+            thesisFileTD.hidden = false;
         }
-    }else if(postDeliveryMethod.value=='physical'){
-        filesTR.hidden=true;
+    } else if (postDeliveryMethod.value == 'physical') {
+        filesTR.hidden = true;
     }
 }
-document.getElementById("NewPostForm").addEventListener("submit", function(event) {
+document.getElementById("NewPostForm").addEventListener("submit", function (event) {
     event.preventDefault();
 
     // دریافت اطلاعات فرم
