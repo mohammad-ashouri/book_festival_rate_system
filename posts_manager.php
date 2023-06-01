@@ -196,6 +196,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                 <th>ویژگی های اثر</th>
                                 <td colspan="5">
                                     <textarea name="properties" id="properties" class="form-control" rows="3" placeholder="ویژگی های اثر را وارد کنید."></textarea>
+                                    <p dir="ltr"  id="wordCount">تعداد کلمات: 0</p>
                                 </td>
                             </tr>
                         </table>

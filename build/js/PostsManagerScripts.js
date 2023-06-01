@@ -30,6 +30,15 @@ document.getElementById("research_type").onchange = function () {
     }
 }
 
+properties.addEventListener("input", function() {
+    const wordCount = document.getElementById("wordCount");
+    const text = properties.value.trim();
+    const words = text.split(/\s+/);
+    const wordCountValue = words.length;
+
+    wordCount.textContent = "تعداد کلمات: " + wordCountValue;
+});
+
 document.getElementById("proceedings_file").onchange = function () {
     var proceedings_file_label = document.getElementById("proceedings_file_label");
     if (proceedings_file.value.length !== 0) {
