@@ -89,9 +89,9 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                     </select>
                                 </td>
                             </tr>
-                            <tr class="bookTR">
+                            <tr id="bookTR1" hidden="hidden">
                                 <th>ناشر*</th>
-                                <td colspan="3">
+                                <td id="publisherTD">
                                     <select name="publisher" id="publisher" class="form-control select2"
                                             title="ناشر را انتخاب کنید">
                                         <option disabled selected>انتخاب کنید</option>
@@ -110,7 +110,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                            name="ISSN" id="ISSN">
                                 </td>
                             </tr>
-                            <tr class="bookTR">
+                            <tr id="bookTR2" hidden="hidden">
                                 <th>تعداد جلد</th>
                                 <td>
                                     <input type="text" class="form-control"
@@ -137,27 +137,27 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                     </select>
                                 </td>
                             </tr>
-                            <tr class="thesisTR">
+                            <tr id="thesisTR1" hidden="hidden">
                                 <th>شماره گواهی دفاع پایان نامه*</th>
                                 <td>
                                     <input type="text" class="form-control"
-                                           placeholder="تعداد جلد اثر را وارد کنید"
+                                           placeholder="شماره گواهی دفاع پایان نامه را وارد کنید"
                                            name="thesisCertificateNumber" id="thesisCertificateNumber">
                                 </td>
                                 <th>محل دفاع*</th>
                                 <td>
                                     <input type="text" class="form-control"
-                                           placeholder="تیراژ اثر را وارد کنید"
+                                           placeholder="محل دفاع اثر را وارد کنید"
                                            name="thesisDefencePlace" id="thesisDefencePlace">
                                 </td>
                                 <th>امتیاز پایان نامه*</th>
                                 <td>
                                     <input type="text" class="form-control"
-                                           placeholder="تعداد جلد اثر را وارد کنید"
+                                           placeholder="امتیاز پایان نامه را وارد کنید"
                                            name="thesisGrade" id="thesisGrade">
                                 </td>
                             </tr>
-                            <tr class="thesisTR">
+                            <tr id="thesisTR2" hidden="hidden">
                                 <th>مشخصات استاد راهنما*</th>
                                 <td colspan="2">
                                     <input type="text" class="form-control"

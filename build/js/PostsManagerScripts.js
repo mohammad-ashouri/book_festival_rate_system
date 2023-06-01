@@ -1,3 +1,21 @@
+document.getElementById("postFormat").onchange = function () {
+    if (postFormat.value == 'کتاب') {
+        bookTR1.hidden=false;
+        bookTR2.hidden=false;
+        publisherTD.colspan=3;
+        thesisTR1.hidden=true;
+        thesisTR2.hidden=true;
+        var selectElement = document.querySelector('#publisher');
+        selectElement.style.width='100% !important';
+
+    }else if (postFormat.value == 'پایان نامه') {
+        thesisTR1.hidden=false;
+        thesisTR2.hidden=false;
+        bookTR1.hidden=true;
+        bookTR2.hidden=true;
+    }
+}
+
 document.getElementById("proceedings_file").onchange = function () {
     var proceedings_file_label = document.getElementById("proceedings_file_label");
     if (proceedings_file.value.length !== 0) {
