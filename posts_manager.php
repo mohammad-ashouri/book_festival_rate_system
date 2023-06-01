@@ -216,8 +216,8 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                         <option value="چند رشته ای">چند رشته ای</option>
                                     </select>
                                 </td>
-                                <th>گروه علمی اول*</th>
-                                <td>
+                                <th id="scientificGroup1TH" hidden="hidden">گروه علمی اول*</th>
+                                <td id="scientificGroup1TD" hidden="hidden">
                                     <select name="scientificGroup1" id="scientificGroup1" class="form-control select2"
                                             title="گروه علمی اول را انتخاب کنید">
                                         <option disabled selected>انتخاب کنید</option>
@@ -229,8 +229,8 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                         <?php endforeach; ?>
                                     </select>
                                 </td>
-                                <th>گروه علمی دوم*</th>
-                                <td>
+                                <th id="scientificGroup2TH" hidden="hidden">گروه علمی دوم*</th>
+                                <td id="scientificGroup2TD" hidden="hidden">
                                     <select name="scientificGroup2" id="scientificGroup2" class="form-control select2"
                                             title="گروه علمی دوم را انتخاب کنید">
                                         <option disabled selected>انتخاب کنید</option>

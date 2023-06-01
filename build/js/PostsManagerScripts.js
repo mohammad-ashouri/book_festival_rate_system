@@ -16,6 +16,20 @@ document.getElementById("postFormat").onchange = function () {
     }
 }
 
+document.getElementById("research_type").onchange = function () {
+    if (research_type.value == 'تک رشته ای') {
+        scientificGroup1TH.hidden=false;
+        scientificGroup1TD.hidden=false;
+        scientificGroup2TH.hidden=true;
+        scientificGroup2TD.hidden=true;
+    }else if (research_type.value == 'چند رشته ای'){
+        scientificGroup1TH.hidden=false;
+        scientificGroup1TD.hidden=false;
+        scientificGroup2TH.hidden=false;
+        scientificGroup2TD.hidden=false;
+    }
+}
+
 document.getElementById("proceedings_file").onchange = function () {
     var proceedings_file_label = document.getElementById("proceedings_file_label");
     if (proceedings_file.value.length !== 0) {
