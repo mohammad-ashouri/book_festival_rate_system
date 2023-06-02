@@ -38,7 +38,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form role="form" method="post" action="build/php/inc/Add_Post.php" id="NewPostForm">
+            <form role="form" method="post" action="build/php/inc/Add_Post.php" id="NewPostForm" enctype="multipart/form-data">
                 <div class="card-body">
                     <center>
                         <table style="width: 100%" class="table table-striped">
@@ -416,6 +416,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                 </center>
 
             </form>
+
         </div>
 
         <!--        <div class="row">-->

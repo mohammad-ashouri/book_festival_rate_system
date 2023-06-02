@@ -119,8 +119,7 @@ document.getElementById("postDeliveryMethod").onchange = function () {
 }
 document.getElementById("NewPostForm").addEventListener("submit", function (event) {
     event.preventDefault();
-
-    var formData = $("#NewPostForm").serialize();
+    var formData = new FormData();
     var postName = $("#postName").val();
     var postFormat = $("#postFormat").val();
     var language = $("#language").val();
@@ -167,86 +166,107 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
     var mobile = $("#mobile").val();
     var shparvandetahsili = $("#shparvandetahsili").val();
 
-    if (!postName) {
-        alert('نام اثر وارد نشده است.');
-        return false;
-    } else if (!postFormat) {
-        alert('قالب علمی انتخاب نشده است.');
-        return false;
-    } else if (!postType) {
-        alert('نوع اثر انتخاب نشده است.');
-        return false;
-    } else if (!language) {
-        alert('زبان اثر انتخاب نشده است.');
-        return false;
-    } else if (postFormat === 'کتاب') {
-        if (!publisher) {
-            alert('ناشر انتخاب نشده است.');
-            return false;
-        } else if (numberOfCovers === "") {
-            alert('تعداد جلد وارد نشده است.');
-            return false;
-        } else if (circulation === "") {
-            alert('تیراژ وارد نشده است.');
-            return false;
-        } else if (!bookSize) {
-            alert('قطع انتخاب نشده است.');
-            return false;
-        }
-    } else if (postFormat === 'پایان نامه') {
-        if (thesisCertificateNumber === "") {
-            alert('شماره گواهی دفاع پایان نامه وارد نشده است.');
-            return false;
-        } else if (thesisDefencePlace === "") {
-            alert('محل دفاع وارد نشده است.');
-            return false;
-        } else if (thesisGrade === "") {
-            alert('امتیاز پایان نامه وارد نشده است.');
-            return false;
-        } else if (thesisSupervisor === "") {
-            alert('مشخصات استاد راهنما وارد نشده است.');
-            return false;
-        } else if (thesisAdvisor === "") {
-            alert('مشخصات استاد مشاور وارد نشده است.');
-            return false;
-        }
-    } else if (pagesNumber === "") {
-        alert('شمارگان صفحه وارد نشده است.');
-        return false;
-    } else if (!research_type) {
-        alert('نوع تحقیق انتخاب نشده است.');
-        return false;
-    } else if (research_type === "تک رشته ای" && !scientificGroup1) {
-        alert('گروه علمی اول انتخاب نشده است.');
-        return false;
-    } else if (research_type === 'چند رشته ای') {
-        if (!scientificGroup1) {
-            alert('گروه علمی اول انتخاب نشده است.');
-            return false;
-        } else if (!scientificGroup2) {
-            alert('گروه علمی دوم انتخاب نشده است.');
-            return false;
-        } else if (scientificGroup1 === scientificGroup2) {
-            alert('گروه علمی اول و دوم با هم برابر می باشد.')
-            return false;
-        }
-    } else if (fName === "") {
-        alert('نام صاحب اثر وارد نشده است.')
-        return false;
-    } else if (lName === "") {
-        alert('نام خانوادگی صاحب اثر وارد نشده است.')
-        return false;
-    } else if (national_code === "") {
-        alert('کد ملی صاحب اثر وارد نشده است.')
-        return false;
-    } else if (mobile === "") {
-        alert('شماره همراه صاحب اثر وارد نشده است.')
-        return false;
-    } else {
+    formData.append("postName", postName);
+    formData.append("postFormat", postFormat);
+    formData.append("language", language);
+    formData.append("postType", postType);
+    formData.append("pagesNumber", pagesNumber);
+    formData.append("specialSection", specialSection);
+    formData.append("properties", properties);
+    formData.append("research_type", research_type);
+    formData.append("scientificGroup1", scientificGroup1);
+    formData.append("activityType", activityType);
+    formData.append("postDeliveryMethod", postDeliveryMethod);
+    formData.append("fName", fName);
+    formData.append("lName", lName);
+    formData.append("national_code", national_code);
+    formData.append("mobile", mobile);
+    formData.append("shparvandetahsili", shparvandetahsili);
+    formData.append("post_file", post_file.files[0]);
+    formData.append("proceedings_file", proceedings_file.files[0]);
+
+    // if (!postName) {
+    //     alert('نام اثر وارد نشده است.');
+    //     return false;
+    // } else if (!postFormat) {
+    //     alert('قالب علمی انتخاب نشده است.');
+    //     return false;
+    // } else if (!postType) {
+    //     alert('نوع اثر انتخاب نشده است.');
+    //     return false;
+    // } else if (!language) {
+    //     alert('زبان اثر انتخاب نشده است.');
+    //     return false;
+    // } else if (postFormat === 'کتاب') {
+    //     if (!publisher) {
+    //         alert('ناشر انتخاب نشده است.');
+    //         return false;
+    //     } else if (numberOfCovers === "") {
+    //         alert('تعداد جلد وارد نشده است.');
+    //         return false;
+    //     } else if (circulation === "") {
+    //         alert('تیراژ وارد نشده است.');
+    //         return false;
+    //     } else if (!bookSize) {
+    //         alert('قطع انتخاب نشده است.');
+    //         return false;
+    //     }
+    // } else if (postFormat === 'پایان نامه') {
+    //     if (thesisCertificateNumber === "") {
+    //         alert('شماره گواهی دفاع پایان نامه وارد نشده است.');
+    //         return false;
+    //     } else if (thesisDefencePlace === "") {
+    //         alert('محل دفاع وارد نشده است.');
+    //         return false;
+    //     } else if (thesisGrade === "") {
+    //         alert('امتیاز پایان نامه وارد نشده است.');
+    //         return false;
+    //     } else if (thesisSupervisor === "") {
+    //         alert('مشخصات استاد راهنما وارد نشده است.');
+    //         return false;
+    //     } else if (thesisAdvisor === "") {
+    //         alert('مشخصات استاد مشاور وارد نشده است.');
+    //         return false;
+    //     }
+    // } else if (pagesNumber === "") {
+    //     alert('شمارگان صفحه وارد نشده است.');
+    //     return false;
+    // } else if (!research_type) {
+    //     alert('نوع تحقیق انتخاب نشده است.');
+    //     return false;
+    // } else if (research_type === "تک رشته ای" && !scientificGroup1) {
+    //     alert('گروه علمی اول انتخاب نشده است.');
+    //     return false;
+    // } else if (research_type === 'چند رشته ای') {
+    //     if (!scientificGroup1) {
+    //         alert('گروه علمی اول انتخاب نشده است.');
+    //         return false;
+    //     } else if (!scientificGroup2) {
+    //         alert('گروه علمی دوم انتخاب نشده است.');
+    //         return false;
+    //     } else if (scientificGroup1 === scientificGroup2) {
+    //         alert('گروه علمی اول و دوم با هم برابر می باشد.')
+    //         return false;
+    //     }
+    // } else if (fName === "") {
+    //     alert('نام صاحب اثر وارد نشده است.')
+    //     return false;
+    // } else if (lName === "") {
+    //     alert('نام خانوادگی صاحب اثر وارد نشده است.')
+    //     return false;
+    // } else if (national_code === "") {
+    //     alert('کد ملی صاحب اثر وارد نشده است.')
+    //     return false;
+    // } else if (mobile === "") {
+    //     alert('شماره همراه صاحب اثر وارد نشده است.')
+    //     return false;
+    // } else {
         $.ajax({
             url: "build/php/inc/Add_Post.php",
             method: "POST",
             data: formData,
+            processData: false,
+            contentType: false,
             success: function (response) {
                 console.log(response);
             },
@@ -254,7 +274,5 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
                 console.log(xhr.responseText);
             }
         });
-    }
-
-
+    // }
 });
