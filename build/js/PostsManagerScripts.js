@@ -156,7 +156,14 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
     }
 
     if (postDeliveryMethod === 'digital') {
-
+        if (post_file.value.length===0){
+            alert('فایل اثر انتخاب نشده است.');
+            return false;
+        }
+        if (postFormat==='پایان نامه' && proceedings_file.value.length===0){
+            alert('فایل صورتجلسه انتخاب نشده است.');
+            return false;
+        }
     }
 
     //Person Info
