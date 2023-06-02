@@ -111,19 +111,19 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                 </td>
                             </tr>
                             <tr id="bookTR2" hidden="hidden">
-                                <th>تعداد جلد</th>
+                                <th>تعداد جلد*</th>
                                 <td>
-                                    <input type="text" class="form-control"
+                                    <input type="text" class="form-control" value="1"
                                            placeholder="تعداد جلد اثر را وارد کنید"
                                            name="numberOfCovers" id="numberOfCovers">
                                 </td>
-                                <th>تیراژ</th>
+                                <th>تیراژ*</th>
                                 <td>
                                     <input type="text" class="form-control"
                                            placeholder="تیراژ اثر را وارد کنید"
                                            name="circulation" id="circulation">
                                 </td>
-                                <th>قطع</th>
+                                <th>قطع*</th>
                                 <td>
                                     <select name="bookSize" id="bookSize" class="form-control select2"
                                             title="قطع اثر را انتخاب کنید">
@@ -266,7 +266,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                     </td>
                                 </tr>
                             </table>
-                            <div id="cooperatorsTable">
+                            <div hidden="hidden" id="cooperatorsTable">
                                 <table style="width: 100%" class="table table-striped">
                                     <thead>
                                     <tr style="text-align: center">
@@ -313,10 +313,6 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                 </table>
                             </div>
                             <button class="btn btn-success mb-4" id="addRowButton">اضافه کردن ردیف</button>
-                            <script>
-
-                            </script>
-
                         </div>
 
                         <table style="width: 100%" class="table table-striped">
@@ -352,6 +348,60 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                class="custom-file-input" id="proceedings_file" name="proceedings_file">
                                         <label id="proceedings_file_label" class="custom-file-label">انتخاب فایل</label>
                                     </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <table style="width: 100%" class="table table-striped">
+                            <tr>
+                                <th colspan="6" style="text-align: center;background-color: #dee2e6">
+                                    اطلاعات صاحب اثر
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    نام*
+                                </th>
+                                <td>
+                                    <input type="text" class="form-control"
+                                           placeholder="نام صاحب اثر را وارد کنید"
+                                           name="fName" id="fName">
+                                </td>
+                                <th>
+                                    نام خانوادگی*
+                                </th>
+                                <td>
+                                    <input type="text" class="form-control"
+                                           placeholder="نام خانوادگی صاحب اثر را وارد کنید"
+                                           name="lName" id="lName">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    کد ملی*
+                                </th>
+                                <td>
+                                    <input type="text" class="form-control"
+                                           placeholder="به دلیل ثبت اثر با کد ملی لطفا با دقت وارد کنید"
+                                           name="national_code" id="national_code">
+                                </td>
+                                <th>
+                                    شماره همراه*
+                                </th>
+                                <td>
+                                    <input type="text" class="form-control"
+                                           placeholder="ترجیحا شماره ای که حساب کاربری ایتا دارد"
+                                           name="mobile" id="mobile">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    شماره پرونده حوزوی
+                                </th>
+                                <td>
+                                    <input type="text" class="form-control"
+                                           placeholder="شماره پرونده حوزوی صاحب اثر را وارد کنید"
+                                           name="shparvandetahsili" id="shparvandetahsili">
                                 </td>
                             </tr>
                         </table>
