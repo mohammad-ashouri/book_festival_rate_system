@@ -20,14 +20,28 @@ $(document).ready(function () {
 
     $("#addRowButton").click(function () {
         var lastRow = $("#cooperatorsTable tbody tr:last");
-        var clonedRow = lastRow.clone();
-        clonedRow.find("td:first").text(rowCounter);
-        clonedRow.find("td input").val("");
-        var deleteButton = $("<button class='deleteRowButton btn btn-danger'>حذف</button>");
-        clonedRow.find("td:last").empty().append(deleteButton);
-        lastRow.after(clonedRow);
-        rowCounter++;
-        updateRowIds();
+        var inputs = lastRow.find("input");
+        var isRowValid = true;
+
+        inputs.each(function() {
+            if ($(this).val().trim() === '') {
+                isRowValid = false;
+                alert('لطفاً تمامی فیلدها را پر کنید');
+                return false;
+            }
+        });
+
+        if (isRowValid) {
+            var clonedRow = lastRow.clone();
+            clonedRow.find("td:first").text(rowCounter);
+            clonedRow.find("td input").val("");
+            var deleteButton = $("<button class='deleteRowButton btn btn-danger'>حذف</button>");
+            clonedRow.find("td:last").empty().append(deleteButton);
+            lastRow.after(clonedRow);
+            rowCounter++;
+            updateRowIds();
+        }
+
         return false;
     });
 

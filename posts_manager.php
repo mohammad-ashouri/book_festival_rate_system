@@ -312,7 +312,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                     </tbody>
                                 </table>
                             </div>
-                            <button class="btn btn-success mb-4" id="addRowButton">اضافه کردن ردیف</button>
+                            <button class="btn btn-success mb-4" id="addRowButton">اضافه کردن مشارک</button>
                         </div>
 
                         <table style="width: 100%" class="table table-striped">
