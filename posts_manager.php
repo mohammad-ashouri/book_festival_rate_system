@@ -267,7 +267,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                 </tr>
                             </table>
                             <div hidden="hidden" id="cooperatorsTable">
-                                <table style="width: 100%" class="table table-striped">
+                                <table id="postTable" style="width: 100%" class="table table-striped">
                                     <thead>
                                     <tr style="text-align: center">
                                         <th>ردیف</th>
@@ -286,27 +286,27 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                         <td style="text-align: center; vertical-align: middle;"><input
                                                     class="form-control"
                                                     style="width: 110px; margin: 0 auto; text-align: center;"
-                                                    id="coopName1" type="text"></td>
+                                                    id="coopName1[]" type="text"></td>
                                         <td style="text-align: center; vertical-align: middle;"><input
                                                     class="form-control"
                                                     style="width: 110px; margin: 0 auto; text-align: center;"
-                                                    id="coopFamily1" type="text"></td>
+                                                    id="coopFamily1[]" type="text"></td>
                                         <td style="text-align: center; vertical-align: middle;"><input
                                                     class="form-control"
                                                     style="width: 110px; margin: 0 auto; text-align: center;"
-                                                    id="coopNationalCode1" type="text"></td>
+                                                    id="coopNationalCode1[]" type="text"></td>
                                         <td style="text-align: center; vertical-align: middle;"><input
                                                     class="form-control"
                                                     style="width: 110px; margin: 0 auto; text-align: center;"
-                                                    id="coopCode1" type="number"></td>
+                                                    id="coopCode1[]" type="number"></td>
                                         <td style="text-align: center; vertical-align: middle;"><input
                                                     class="form-control"
                                                     style="width: 80px; margin: 0 auto; text-align: center;"
-                                                    id="coopPer1" type="number"></td>
+                                                    id="coopPer1[]" type="number"></td>
                                         <td style="text-align: center; vertical-align: middle;"><input
                                                     class="form-control"
                                                     style="width: 110px; margin: 0 auto; text-align: center;"
-                                                    id="coopMobile1" type="text"></td>
+                                                    id="coopMobile1[]" type="text"></td>
                                         <td></td>
                                     </tr>
                                     </tbody>

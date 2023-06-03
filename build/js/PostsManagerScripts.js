@@ -177,7 +177,18 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
     }
 
     if (activityType === 'مشترک') {
-
+        $("#postTable tbody tr").each(function() {
+            var row = $(this);
+            var postData = {
+                'coopName': row.find('td:eq(1) input').val(),
+                'coopFamily': row.find('td:eq(2) input').val(),
+                'coopNationalCode': row.find('td:eq(3) input').val(),
+                'coopCode': row.find('td:eq(4) input').val(),
+                'coopPer': row.find('td:eq(5) input').val(),
+                'coopMobile': row.find('td:eq(6) input').val(),
+            };
+            formData.append('postData[]', JSON.stringify(postData));
+        });
     }
 
     if (postDeliveryMethod === 'digital') {
