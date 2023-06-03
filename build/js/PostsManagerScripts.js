@@ -23,7 +23,7 @@ $(document).ready(function () {
         var inputs = lastRow.find("input");
         var isRowValid = true;
 
-        inputs.each(function() {
+        inputs.each(function () {
             if ($(this).val().trim() === '') {
                 isRowValid = false;
                 alert('لطفاً تمامی فیلدها را پر کنید');
@@ -152,6 +152,11 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
         var numberOfCovers = $("#numberOfCovers").val();
         var circulation = $("#circulation").val();
         var bookSize = $("#bookSize").val();
+        formData.append("publisher", publisher);
+        formData.append("ISSN", ISSN);
+        formData.append("numberOfCovers", numberOfCovers);
+        formData.append("circulation", circulation);
+        formData.append("bookSize", bookSize);
 
     } else if (postFormat === 'پایان نامه') {
         var thesisCertificateNumber = $("#thesisCertificateNumber").val();
@@ -159,10 +164,16 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
         var thesisGrade = $("#thesisGrade").val();
         var thesisSupervisor = $("#thesisSupervisor").val();
         var thesisAdvisor = $("#thesisAdvisor").val();
+        formData.append("thesisCertificateNumber", thesisCertificateNumber);
+        formData.append("thesisDefencePlace", thesisDefencePlace);
+        formData.append("thesisGrade", thesisGrade);
+        formData.append("thesisSupervisor", thesisSupervisor);
+        formData.append("thesisAdvisor", thesisAdvisor);
     }
 
     if (research_type === 'چند رشته ای') {
         var scientificGroup2 = $("#scientificGroup2").val();
+        formData.append("scientificGroup2", scientificGroup2);
     }
 
     if (activityType === 'مشترک') {
@@ -170,11 +181,11 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
     }
 
     if (postDeliveryMethod === 'digital') {
-        if (post_file.value.length===0){
+        if (post_file.value.length === 0) {
             alert('فایل اثر انتخاب نشده است.');
             return false;
         }
-        if (postFormat==='پایان نامه' && proceedings_file.value.length===0){
+        if (postFormat === 'پایان نامه' && proceedings_file.value.length === 0) {
             alert('فایل صورتجلسه انتخاب نشده است.');
             return false;
         }
@@ -185,6 +196,7 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
     var lName = $("#lName").val();
     var national_code = $("#national_code").val();
     var mobile = $("#mobile").val();
+    var gender = $("#gender").val();
     var shparvandetahsili = $("#shparvandetahsili").val();
 
     formData.append("postName", postName);
@@ -201,6 +213,7 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
     formData.append("fName", fName);
     formData.append("lName", lName);
     formData.append("national_code", national_code);
+    formData.append("gender", gender);
     formData.append("mobile", mobile);
     formData.append("shparvandetahsili", shparvandetahsili);
     formData.append("post_file", post_file.files[0]);
@@ -281,19 +294,22 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
     // } else if (mobile === "") {
     //     alert('شماره همراه صاحب اثر وارد نشده است.')
     //     return false;
+    // }else if (!gender) {
+    //     alert('جنسیت صاحب اثر انتخاب نشده است.')
+    //     return false;
     // } else {
-        $.ajax({
-            url: "build/php/inc/Add_Post.php",
-            method: "POST",
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (response) {
-                console.log(response);
-            },
-            error: function (xhr, status, error) {
-                console.log(xhr.responseText);
-            }
-        });
+    $.ajax({
+        url: "build/php/inc/Add_Post.php",
+        method: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            console.log(response);
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr.responseText);
+        }
+    });
     // }
 });

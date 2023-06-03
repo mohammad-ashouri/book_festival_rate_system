@@ -298,11 +298,11 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                         <td style="text-align: center; vertical-align: middle;"><input
                                                     class="form-control"
                                                     style="width: 110px; margin: 0 auto; text-align: center;"
-                                                    id="coopCode1" type="text"></td>
+                                                    id="coopCode1" type="number"></td>
                                         <td style="text-align: center; vertical-align: middle;"><input
                                                     class="form-control"
-                                                    style="width: 50px; margin: 0 auto; text-align: center;"
-                                                    id="coopPer1" type="text"></td>
+                                                    style="width: 80px; margin: 0 auto; text-align: center;"
+                                                    id="coopPer1" type="number"></td>
                                         <td style="text-align: center; vertical-align: middle;"><input
                                                     class="form-control"
                                                     style="width: 110px; margin: 0 auto; text-align: center;"
@@ -395,6 +395,17 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                 </td>
                             </tr>
                             <tr>
+                                <th>
+                                    جنسیت
+                                </th>
+                                <td>
+                                    <select name="gender" id="gender" class="form-control select2"
+                                            title="نوع همکاری را انتخاب کنید">
+                                        <option disabled selected>انتخاب کنید</option>
+                                        <option value="مرد">مرد</option>
+                                        <option value="زن">زن</option>
+                                    </select>
+                                </td>
                                 <th>
                                     شماره پرونده حوزوی
                                 </th>
