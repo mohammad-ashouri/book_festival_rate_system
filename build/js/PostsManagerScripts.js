@@ -31,6 +31,24 @@ $(document).ready(function () {
             }
         });
 
+        var percentageInputs = $("input[id^='coopPer']");
+        var totalPercentage = 0;
+        percentageInputs.each(function () {
+            var percentageValue = parseInt($(this).val());
+            if (percentageValue === 0) {
+                alert('درصد همکاری نمی تواند 0 باشد.');
+                isRowValid = false;
+                return false;
+            }
+            totalPercentage += percentageValue;
+        });
+
+        if (totalPercentage > 50) {
+            alert('جمع مقادیر درصد همکاری نمی تواند بیشتر از 50 باشد');
+            isRowValid = false;
+            return false;
+        }
+
         if (isRowValid) {
             var clonedRow = lastRow.clone();
             clonedRow.find("td:first").text(rowCounter);
@@ -177,7 +195,7 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
     }
 
     if (activityType === 'مشترک') {
-        $("#postTable tbody tr").each(function() {
+        $("#postTable tbody tr").each(function () {
             var row = $(this);
             var postData = {
                 'coopName': row.find('td:eq(1) input').val(),
@@ -230,97 +248,99 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
     formData.append("post_file", post_file.files[0]);
     formData.append("proceedings_file", proceedings_file.files[0]);
 
-    // if (!postName) {
-    //     alert('نام اثر وارد نشده است.');
-    //     return false;
-    // } else if (!postFormat) {
-    //     alert('قالب علمی انتخاب نشده است.');
-    //     return false;
-    // } else if (!postType) {
-    //     alert('نوع اثر انتخاب نشده است.');
-    //     return false;
-    // } else if (!language) {
-    //     alert('زبان اثر انتخاب نشده است.');
-    //     return false;
-    // } else if (postFormat === 'کتاب') {
-    //     if (!publisher) {
-    //         alert('ناشر انتخاب نشده است.');
-    //         return false;
-    //     } else if (numberOfCovers === "") {
-    //         alert('تعداد جلد وارد نشده است.');
-    //         return false;
-    //     } else if (circulation === "") {
-    //         alert('تیراژ وارد نشده است.');
-    //         return false;
-    //     } else if (!bookSize) {
-    //         alert('قطع انتخاب نشده است.');
-    //         return false;
-    //     }
-    // } else if (postFormat === 'پایان نامه') {
-    //     if (thesisCertificateNumber === "") {
-    //         alert('شماره گواهی دفاع پایان نامه وارد نشده است.');
-    //         return false;
-    //     } else if (thesisDefencePlace === "") {
-    //         alert('محل دفاع وارد نشده است.');
-    //         return false;
-    //     } else if (thesisGrade === "") {
-    //         alert('امتیاز پایان نامه وارد نشده است.');
-    //         return false;
-    //     } else if (thesisSupervisor === "") {
-    //         alert('مشخصات استاد راهنما وارد نشده است.');
-    //         return false;
-    //     } else if (thesisAdvisor === "") {
-    //         alert('مشخصات استاد مشاور وارد نشده است.');
-    //         return false;
-    //     }
-    // } else if (pagesNumber === "") {
-    //     alert('شمارگان صفحه وارد نشده است.');
-    //     return false;
-    // } else if (!research_type) {
-    //     alert('نوع تحقیق انتخاب نشده است.');
-    //     return false;
-    // } else if (research_type === "تک رشته ای" && !scientificGroup1) {
-    //     alert('گروه علمی اول انتخاب نشده است.');
-    //     return false;
-    // } else if (research_type === 'چند رشته ای') {
-    //     if (!scientificGroup1) {
-    //         alert('گروه علمی اول انتخاب نشده است.');
-    //         return false;
-    //     } else if (!scientificGroup2) {
-    //         alert('گروه علمی دوم انتخاب نشده است.');
-    //         return false;
-    //     } else if (scientificGroup1 === scientificGroup2) {
-    //         alert('گروه علمی اول و دوم با هم برابر می باشد.')
-    //         return false;
-    //     }
-    // } else if (fName === "") {
-    //     alert('نام صاحب اثر وارد نشده است.')
-    //     return false;
-    // } else if (lName === "") {
-    //     alert('نام خانوادگی صاحب اثر وارد نشده است.')
-    //     return false;
-    // } else if (national_code === "") {
-    //     alert('کد ملی صاحب اثر وارد نشده است.')
-    //     return false;
-    // } else if (mobile === "") {
-    //     alert('شماره همراه صاحب اثر وارد نشده است.')
-    //     return false;
-    // }else if (!gender) {
-    //     alert('جنسیت صاحب اثر انتخاب نشده است.')
-    //     return false;
-    // } else {
-    $.ajax({
-        url: "build/php/inc/Add_Post.php",
-        method: "POST",
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function (response) {
-            console.log(response);
-        },
-        error: function (xhr, status, error) {
-            console.log(xhr.responseText);
+    if (!postName) {
+        alert('نام اثر وارد نشده است.');
+        return false;
+    } else if (!postFormat) {
+        alert('قالب علمی انتخاب نشده است.');
+        return false;
+    } else if (!postType) {
+        alert('نوع اثر انتخاب نشده است.');
+        return false;
+    } else if (!language) {
+        alert('زبان اثر انتخاب نشده است.');
+        return false;
+    } else if (postFormat === 'کتاب') {
+        if (!publisher) {
+            alert('ناشر انتخاب نشده است.');
+            return false;
+        } else if (numberOfCovers === "") {
+            alert('تعداد جلد وارد نشده است.');
+            return false;
+        } else if (circulation === "") {
+            alert('تیراژ وارد نشده است.');
+            return false;
+        } else if (!bookSize) {
+            alert('قطع انتخاب نشده است.');
+            return false;
         }
-    });
-    // }
+    } else if (postFormat === 'پایان نامه') {
+        if (thesisCertificateNumber === "") {
+            alert('شماره گواهی دفاع پایان نامه وارد نشده است.');
+            return false;
+        } else if (thesisDefencePlace === "") {
+            alert('محل دفاع وارد نشده است.');
+            return false;
+        } else if (thesisGrade === "") {
+            alert('امتیاز پایان نامه وارد نشده است.');
+            return false;
+        } else if (thesisSupervisor === "") {
+            alert('مشخصات استاد راهنما وارد نشده است.');
+            return false;
+        } else if (thesisAdvisor === "") {
+            alert('مشخصات استاد مشاور وارد نشده است.');
+            return false;
+        }
+    } else if (pagesNumber === "") {
+        alert('شمارگان صفحه وارد نشده است.');
+        return false;
+    } else if (!research_type) {
+        alert('نوع تحقیق انتخاب نشده است.');
+        return false;
+    } else if (research_type === "تک رشته ای" && !scientificGroup1) {
+        alert('گروه علمی اول انتخاب نشده است.');
+        return false;
+    } else if (research_type === 'چند رشته ای') {
+        if (!scientificGroup1) {
+            alert('گروه علمی اول انتخاب نشده است.');
+            return false;
+        } else if (!scientificGroup2) {
+            alert('گروه علمی دوم انتخاب نشده است.');
+            return false;
+        } else if (scientificGroup1 === scientificGroup2) {
+            alert('گروه علمی اول و دوم با هم برابر می باشد.')
+            return false;
+        }
+    } else if (fName === "") {
+        alert('نام صاحب اثر وارد نشده است.')
+        return false;
+    } else if (lName === "") {
+        alert('نام خانوادگی صاحب اثر وارد نشده است.')
+        return false;
+    } else if (national_code === "") {
+        alert('کد ملی صاحب اثر وارد نشده است.')
+        return false;
+    } else if (mobile === "") {
+        alert('شماره همراه صاحب اثر وارد نشده است.')
+        return false;
+    } else if (!gender) {
+        alert('جنسیت صاحب اثر انتخاب نشده است.')
+        return false;
+    } else {
+        if (confirm('اطلاعات وارد شده شما قابل ویرایش نیست. آیا مطمئن هستید؟')){
+            $.ajax({
+                url: "build/php/inc/Add_Post.php",
+                method: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+    }
 });
