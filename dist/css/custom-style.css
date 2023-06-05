@@ -59,6 +59,9 @@
 }
 
 /*---------------------------------- End of fonts ---------------------------------- */
+*{
+    font-family: 'Vazir', sans-serif !important;
+}
 
 body {
     font-family: 'Vazir', sans-serif !important;
