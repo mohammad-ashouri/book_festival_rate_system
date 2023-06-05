@@ -29,8 +29,8 @@ if (isset($_POST['postName']) and $_POST['postName'] != null and !empty($_POST['
 
     if (@$checkUser == null) {
         mysqli_query($connection_book_signup, "insert into users (name, family, national_code, gender, created_at) values ('$fname','$lname','$national_code','$gender','$now')");
-        $insertContact = mysqli_query($connection_book_signup, "insert into contacts (national_code,mobile) values ('$national_code','$mobile')");
-        $insertEducational = mysqli_query($connection_book_signup, "insert into educational_infos (national_code,shparvandetahsili) values ('$national_code','$shparvandetahsili')");
+        $insertContact = mysqli_query($connection_book_signup, "insert into contacts (national_code,mobile,created_at) values ('$national_code','$mobile','$now')");
+        $insertEducational = mysqli_query($connection_book_signup, "insert into educational_infos (national_code,shparvandetahsili,created_at) values ('$national_code','$shparvandetahsili','$now')");
     }
 
     $query = mysqli_query($connection_book_signup, "select * from users where national_code='$national_code'");
@@ -39,8 +39,14 @@ if (isset($_POST['postName']) and $_POST['postName'] != null and !empty($_POST['
 
     $userID = $userInfo['id'];
 
+    $query = mysqli_query($connection_book_signup, "select * from festivals where active=1");
+    foreach ($query as $festivalInfo) {
+    }
+
+    $festival_id = $festivalInfo['id'];
+
     $insertPost = mysqli_query($connection_book_signup, "insert into posts (user_id,festival_id,title,post_format,post_type,language,pages_number,special_section,properties,research_type,scientific_group_v1,activity_type,post_delivery_method,created_at) values
-                                                                           ('$userID',25,'$postName','$postFormat','$postType','$language','$pagesNumber',null,'$properties','$research_type','$scientificGroup1','$activityType','$postDeliveryMethod','$now')");
+                                                                           ('$userID','$festival_id','$postName','$postFormat','$postType','$language','$pagesNumber',null,'$properties','$research_type','$scientificGroup1','$activityType','$postDeliveryMethod','$now')");
     if ($insertPost) {
         $lastInsertedId = mysqli_insert_id($connection_book_signup);
         if ($research_type == 'چند رشته ای') {
@@ -49,18 +55,23 @@ if (isset($_POST['postName']) and $_POST['postName'] != null and !empty($_POST['
         }
 
         if ($activityType == 'مشترک') {
+            $coopPerSum = 0;
             $postData = $_POST['postData'];
             foreach ($postData as $post) {
                 $data = json_decode($post);
-                $coopName=$data->coopName;
-                $coopFamily=$data->coopFamily;
-                $coopNationalCode=$data->coopNationalCode;
-                $coopCode=$data->coopCode;
-                $coopPer=$data->coopPer;
-                $coopMobile=$data->coopMobile;
-                mysqli_query($connection_book_signup,"insert into participants (post_id, name, family, national_code, case_number, participation_percentage, mobile, created_at)
-                                                                                    values ('$lastInsertedId','$coopName','$coopFamily','$coopNationalCode','$coopCode','$coopPer','$coopMobile','$now')");
+                $coopName = $data->coopName;
+                if ($coopName != null and $coopName != '' and !empty($coopName)) {
+                    $coopFamily = $data->coopFamily;
+                    $coopNationalCode = $data->coopNationalCode;
+                    $coopPer = $data->coopPer;
+                    $coopMobile = $data->coopMobile;
+                    mysqli_query($connection_book_signup, "insert into participants (post_id, name, family, national_code, participation_percentage, mobile, created_at)
+                                                                                    values ('$lastInsertedId','$coopName','$coopFamily','$coopNationalCode','$coopPer','$coopMobile','$now')");
+                    $coopPerSum += $coopPer;
+                }
             }
+            $coopPerSum = 100 - $coopPerSum;
+            mysqli_query($connection_book_signup, "update posts set participation_percentage ='$coopPerSum' where id='$lastInsertedId'");
         }
 
         if ($postFormat == 'کتاب') {
@@ -120,6 +131,7 @@ if (isset($_POST['postName']) and $_POST['postName'] != null and !empty($_POST['
             mysqli_query($connection_book_signup, "update posts set post_delivery_method='نسخه فیزیکی' where id='$lastInsertedId'");
         }
 
+        mysqli_query($connection_book, "insert into posts (post_id,festival_id) values ('$lastInsertedId','$festival_id')");
     }
 
 }

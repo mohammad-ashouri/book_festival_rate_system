@@ -38,18 +38,24 @@ $(document).ready(function () {
             if (percentageValue === 0) {
                 alert('درصد همکاری نمی تواند 0 باشد.');
                 isRowValid = false;
-                return false;
+            }else if (percentageValue <= 0) {
+                alert('درصد همکاری نمی تواند کمتر از 0 باشد.');
+                isRowValid = false;
             }
             totalPercentage += percentageValue;
-        });
 
+        });
+        alert(totalPercentage);
         if (totalPercentage > 50) {
             alert('جمع مقادیر درصد همکاری نمی تواند بیشتر از 50 باشد');
             isRowValid = false;
             return false;
         }
-
-        if (isRowValid) {
+        else if (totalPercentage < 0) {
+            alert('جمع مقادیر درصد همکاری نمی تواند کمتر از 0 باشد');
+            isRowValid = false;
+            return false;
+        }else if (isRowValid) {
             var clonedRow = lastRow.clone();
             clonedRow.find("td:first").text(rowCounter);
             clonedRow.find("td input").val("");
@@ -59,7 +65,6 @@ $(document).ready(function () {
             rowCounter++;
             updateRowIds();
         }
-
         return false;
     });
 
@@ -115,11 +120,45 @@ properties.addEventListener("input", function () {
 
 });
 
+document.getElementById("thesisCertificateNumber").oninput = function () {
+    let checkCertificateP = document.getElementById("checkCertificateP");
+    if (isNaN(thesisCertificateNumber.value)){
+        alert('مقدار عددی وارد کنید.');
+        thesisCertificateNumber.value="";
+        return false;
+    }else{
+        $.ajax({
+            url: "build/ajax/SearchInputs.php",
+            method: "POST",
+            data: {
+                'work':'thesisCertificateNumberCheck',
+                'data':thesisCertificateNumber.value
+            },
+            success: function (response) {
+                if (response==='Wrong'){
+                    checkCertificateP.innerText = "شماره گواهی وارد شده تکراری می باشد.";
+                    checkCertificateP.style.color = "red";
+                    Add_Post.hidden=true;
+                }else{
+                    checkCertificateP.innerText = "شماره گواهی قابل ثبت می باشد.";
+                    checkCertificateP.style.color = "green";
+                    Add_Post.hidden=false;
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+    }
+}
+
 document.getElementById("activityType").onchange = function () {
     const cooperatorsTable = document.getElementById("cooperatorsTable");
     if (activityType.value === 'فردی') {
         cooperatorsTable.hidden = true;
+        addRowButton.hidden = true;
     } else if (activityType.value === 'مشترک') {
+        addRowButton.hidden = false;
         cooperatorsTable.hidden = false;
     }
 }
@@ -260,37 +299,33 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
     } else if (!language) {
         alert('زبان اثر انتخاب نشده است.');
         return false;
-    } else if (postFormat === 'کتاب') {
-        if (!publisher) {
-            alert('ناشر انتخاب نشده است.');
-            return false;
-        } else if (numberOfCovers === "") {
-            alert('تعداد جلد وارد نشده است.');
-            return false;
-        } else if (circulation === "") {
-            alert('تیراژ وارد نشده است.');
-            return false;
-        } else if (!bookSize) {
-            alert('قطع انتخاب نشده است.');
-            return false;
-        }
-    } else if (postFormat === 'پایان نامه') {
-        if (thesisCertificateNumber === "") {
-            alert('شماره گواهی دفاع پایان نامه وارد نشده است.');
-            return false;
-        } else if (thesisDefencePlace === "") {
-            alert('محل دفاع وارد نشده است.');
-            return false;
-        } else if (thesisGrade === "") {
-            alert('امتیاز پایان نامه وارد نشده است.');
-            return false;
-        } else if (thesisSupervisor === "") {
-            alert('مشخصات استاد راهنما وارد نشده است.');
-            return false;
-        } else if (thesisAdvisor === "") {
-            alert('مشخصات استاد مشاور وارد نشده است.');
-            return false;
-        }
+    } else if (postFormat === 'کتاب' && !publisher) {
+        alert('ناشر انتخاب نشده است.');
+        return false;
+    } else if (postFormat === 'کتاب' && numberOfCovers === "") {
+        alert('تعداد جلد وارد نشده است.');
+        return false;
+    } else if (postFormat === 'کتاب' && circulation === "") {
+        alert('تیراژ وارد نشده است.');
+        return false;
+    } else if (postFormat === 'کتاب' && !bookSize) {
+        alert('قطع انتخاب نشده است.');
+        return false;
+    } else if (postFormat === 'پایان نامه' && thesisCertificateNumber === "") {
+        alert('شماره گواهی دفاع پایان نامه وارد نشده است.');
+        return false;
+    } else if (postFormat === 'پایان نامه' && thesisDefencePlace === "") {
+        alert('محل دفاع وارد نشده است.');
+        return false;
+    } else if (postFormat === 'پایان نامه' && thesisGrade === "") {
+        alert('امتیاز پایان نامه وارد نشده است.');
+        return false;
+    } else if (postFormat === 'پایان نامه' && thesisSupervisor === "") {
+        alert('مشخصات استاد راهنما وارد نشده است.');
+        return false;
+    } else if (postFormat === 'پایان نامه' && thesisAdvisor === "") {
+        alert('مشخصات استاد مشاور وارد نشده است.');
+        return false;
     } else if (pagesNumber === "") {
         alert('شمارگان صفحه وارد نشده است.');
         return false;
@@ -300,17 +335,21 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
     } else if (research_type === "تک رشته ای" && !scientificGroup1) {
         alert('گروه علمی اول انتخاب نشده است.');
         return false;
-    } else if (research_type === 'چند رشته ای') {
-        if (!scientificGroup1) {
-            alert('گروه علمی اول انتخاب نشده است.');
-            return false;
-        } else if (!scientificGroup2) {
-            alert('گروه علمی دوم انتخاب نشده است.');
-            return false;
-        } else if (scientificGroup1 === scientificGroup2) {
-            alert('گروه علمی اول و دوم با هم برابر می باشد.')
-            return false;
-        }
+    } else if (research_type === 'چند رشته ای' && !scientificGroup1) {
+        alert('گروه علمی اول انتخاب نشده است.');
+        return false;
+    } else if (research_type === 'چند رشته ای' && !scientificGroup2) {
+        alert('گروه علمی دوم انتخاب نشده است.');
+        return false;
+    } else if (research_type === 'چند رشته ای' && scientificGroup1 === scientificGroup2) {
+        alert('گروه علمی اول و دوم با هم برابر می باشد.')
+        return false;
+    } else if (!activityType) {
+        alert('نوع همکاری انتخاب نشده است.')
+        return false;
+    } else if (!postDeliveryMethod) {
+        alert('نحوه تحویل اثر انتخاب نشده است.')
+        return false;
     } else if (fName === "") {
         alert('نام صاحب اثر وارد نشده است.')
         return false;
@@ -327,7 +366,7 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
         alert('جنسیت صاحب اثر انتخاب نشده است.')
         return false;
     } else {
-        if (confirm('اطلاعات وارد شده شما قابل ویرایش نیست. آیا مطمئن هستید؟')){
+        if (confirm('اطلاعات وارد شده قابل تغییر نیست. آیا مطمئن هستید؟')) {
             $.ajax({
                 url: "build/php/inc/Add_Post.php",
                 method: "POST",
@@ -335,7 +374,9 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
                 processData: false,
                 contentType: false,
                 success: function (response) {
+                    alert('اثر جدید با موفقیت اضافه شد.');
                     console.log(response);
+                    location.reload();
                 },
                 error: function (xhr, status, error) {
                     console.log(xhr.responseText);
@@ -343,4 +384,21 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
             });
         }
     }
-});
+})
+;
+
+
+
+
+
+
+
+document.getElementById("showPosts").onsubmit = function () {
+    var festival = document.getElementById('festival');
+    if (festival.value==="" || festival.value==='انتخاب کنید' || festival.value===null){
+        alert('لطفا جشنواره را انتخاب نمایید.');
+        return false;
+    }else{
+        return true;
+    }
+}

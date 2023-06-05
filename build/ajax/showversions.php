@@ -1,5 +1,4 @@
-<?php include_once __DIR__ . '/../../config/connection.php'; ?>
-<?php
+<?php include_once __DIR__ . '/../../config/connection.php';
 session_start();
 $mag_id = $_GET['magid'];
 $query = mysqli_query($connection_mag, "select * from mag_versions where mag_info_id='$mag_id' order by id desc");
