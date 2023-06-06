@@ -10,7 +10,7 @@ session_abort();
     <!DOCTYPE html>
     <html lang="fa">
     <head>
-        <title>ورود به سامانه جشنواره مقالات علمی حوزه</title>
+        <title>ورود به سامانه همایش کتاب سال حوزه</title>
         <link rel="icon" type="image/x-icon" href="/dist/img/favicon.ico">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
