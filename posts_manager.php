@@ -34,7 +34,13 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
     <section class="content">
         <div class="card card-primary" id="newPostDiv">
             <div class="card-header">
-                <h3 class="card-title">ثبت اثر جدید</h3>
+                <h3 class="card-title">ثبت اثر جدید در دوره جاری: دوره
+                <?php
+                $query=mysqli_query($connection_book_signup,"select * from festivals where active=1");
+                foreach ($query as $festivalInfo){}
+                echo $festivalInfo['title'];
+                ?>
+                </h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->

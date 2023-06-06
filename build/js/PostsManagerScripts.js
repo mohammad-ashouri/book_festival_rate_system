@@ -380,10 +380,6 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
                     alert('اثر جدید با موفقیت اضافه شد.');
                     console.log(response);
                     location.reload();
-                    setTimeout(function() {
-                        var newPostDiv = document.getElementById('newPostDiv');
-                        window.scrollTo(0, newPostDiv.offsetTop);
-                    }, 1000);
                 },
                 error: function (xhr, status, error) {
                     console.log(xhr.responseText);
