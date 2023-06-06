@@ -32,7 +32,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
     <?php endif; ?>
     <!-- Main content -->
     <section class="content">
-        <div class="card card-primary">
+        <div class="card card-primary" id="newPostDiv">
             <div class="card-header">
                 <h3 class="card-title">ثبت اثر جدید</h3>
             </div>

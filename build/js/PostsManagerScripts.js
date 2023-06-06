@@ -37,25 +37,29 @@ $(document).ready(function () {
             var percentageValue = parseInt($(this).val());
             if (percentageValue === 0) {
                 alert('درصد همکاری نمی تواند 0 باشد.');
+                Add_Post.hidden=true;
                 isRowValid = false;
             }else if (percentageValue <= 0) {
                 alert('درصد همکاری نمی تواند کمتر از 0 باشد.');
+                Add_Post.hidden=true;
                 isRowValid = false;
             }
             totalPercentage += percentageValue;
 
         });
-        alert(totalPercentage);
         if (totalPercentage > 50) {
             alert('جمع مقادیر درصد همکاری نمی تواند بیشتر از 50 باشد');
             isRowValid = false;
+            Add_Post.hidden=true;
             return false;
         }
         else if (totalPercentage < 0) {
             alert('جمع مقادیر درصد همکاری نمی تواند کمتر از 0 باشد');
+            Add_Post.hidden=true;
             isRowValid = false;
             return false;
         }else if (isRowValid) {
+            Add_Post.hidden=false;
             var clonedRow = lastRow.clone();
             clonedRow.find("td:first").text(rowCounter);
             clonedRow.find("td input").val("");
@@ -376,6 +380,10 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
                     alert('اثر جدید با موفقیت اضافه شد.');
                     console.log(response);
                     location.reload();
+                    setTimeout(function() {
+                        var newPostDiv = document.getElementById('newPostDiv');
+                        window.scrollTo(0, newPostDiv.offsetTop);
+                    }, 1000);
                 },
                 error: function (xhr, status, error) {
                     console.log(xhr.responseText);
