@@ -3,6 +3,8 @@ include_once 'jdf.php';
 include_once 'GDate.php';
 //include_once 'PHPExcel/Classes/PHPExcel.php';
 //ini_set('session.gc_maxlifetime', 36000);
+ini_set("error_reporting", E_ALL);
+ini_set("display_errors", 1);
 date_default_timezone_set("Asia/Tehran");
 $main_url="https://localhost/";
 $year=jdate('Y');
