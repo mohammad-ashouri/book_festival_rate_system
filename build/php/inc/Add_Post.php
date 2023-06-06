@@ -2,6 +2,7 @@
 include_once __DIR__ . '/../../../config/connection.php';
 session_start();
 if (isset($_POST['postName']) and $_POST['postName'] != null and !empty($_POST['postName']) and isset($_SESSION['id'])) {
+    $registrar=$_SESSION['id'];
     $postName = $_POST['postName'];
     $postFormat = $_POST['postFormat'];
     $language = $_POST['language'];
@@ -131,7 +132,7 @@ if (isset($_POST['postName']) and $_POST['postName'] != null and !empty($_POST['
             mysqli_query($connection_book_signup, "update posts set post_delivery_method='نسخه فیزیکی' where id='$lastInsertedId'");
         }
 
-        mysqli_query($connection_book, "insert into posts (post_id,festival_id) values ('$lastInsertedId','$festival_id')");
+        mysqli_query($connection_book, "insert into posts (post_id,festival_id,adder,date_added) values ('$lastInsertedId','$festival_id','$registrar','$datewithtime')");
     }
 
 }
