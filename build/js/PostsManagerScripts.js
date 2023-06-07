@@ -37,11 +37,11 @@ $(document).ready(function () {
             var percentageValue = parseInt($(this).val());
             if (percentageValue === 0) {
                 alert('درصد همکاری نمی تواند 0 باشد.');
-                Add_Post.hidden=true;
+                Add_Post.hidden = true;
                 isRowValid = false;
-            }else if (percentageValue <= 0) {
+            } else if (percentageValue <= 0) {
                 alert('درصد همکاری نمی تواند کمتر از 0 باشد.');
-                Add_Post.hidden=true;
+                Add_Post.hidden = true;
                 isRowValid = false;
             }
             totalPercentage += percentageValue;
@@ -50,16 +50,15 @@ $(document).ready(function () {
         if (totalPercentage > 50) {
             alert('جمع مقادیر درصد همکاری نمی تواند بیشتر از 50 باشد');
             isRowValid = false;
-            Add_Post.hidden=true;
+            Add_Post.hidden = true;
             return false;
-        }
-        else if (totalPercentage < 0) {
+        } else if (totalPercentage < 0) {
             alert('جمع مقادیر درصد همکاری نمی تواند کمتر از 0 باشد');
-            Add_Post.hidden=true;
+            Add_Post.hidden = true;
             isRowValid = false;
             return false;
-        }else if (isRowValid) {
-            Add_Post.hidden=false;
+        } else if (isRowValid) {
+            Add_Post.hidden = false;
             var clonedRow = lastRow.clone();
             clonedRow.find("td:first").text(rowCounter);
             clonedRow.find("td input").val("");
@@ -111,6 +110,29 @@ document.getElementById("research_type").onchange = function () {
     }
 }
 
+document.getElementById("getUserInfo").onchange = function () {
+    if (getUserInfo.value!=null){
+        $.ajax({
+            url: "build/ajax/UserInfo.php",
+            method: "GET",
+            data: {
+                'id': getUserInfo.value,
+            },
+            success: function (response) {
+                $("#fName").val(response.name);
+                $("#lName").val(response.family);
+                $("#national_code").val(response.national_code);
+                $("#mobile").val(response.mobile);
+                $("#shparvandetahsili").val(response.shparvandetahsili);
+                $("#gender").val(response.gender).trigger('change');
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+    }
+}
+
 properties.addEventListener("input", function () {
     const wordCount = document.getElementById("wordCount");
     if (properties.value === "") {
@@ -126,27 +148,27 @@ properties.addEventListener("input", function () {
 
 document.getElementById("thesisCertificateNumber").oninput = function () {
     let checkCertificateP = document.getElementById("checkCertificateP");
-    if (isNaN(thesisCertificateNumber.value)){
+    if (isNaN(thesisCertificateNumber.value)) {
         alert('مقدار عددی وارد کنید.');
-        thesisCertificateNumber.value="";
+        thesisCertificateNumber.value = "";
         return false;
-    }else{
+    } else {
         $.ajax({
             url: "build/ajax/SearchInputs.php",
             method: "POST",
             data: {
-                'work':'thesisCertificateNumberCheck',
-                'data':thesisCertificateNumber.value
+                'work': 'thesisCertificateNumberCheck',
+                'data': thesisCertificateNumber.value
             },
             success: function (response) {
-                if (response==='Wrong'){
+                if (response === 'Wrong') {
                     checkCertificateP.innerText = "شماره گواهی وارد شده تکراری می باشد.";
                     checkCertificateP.style.color = "red";
-                    Add_Post.hidden=true;
-                }else{
+                    Add_Post.hidden = true;
+                } else {
                     checkCertificateP.innerText = "شماره گواهی قابل ثبت می باشد.";
                     checkCertificateP.style.color = "green";
-                    Add_Post.hidden=false;
+                    Add_Post.hidden = false;
                 }
             },
             error: function (xhr, status, error) {
@@ -391,17 +413,12 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
 ;
 
 
-
-
-
-
-
 document.getElementById("showPosts").onsubmit = function () {
     var festival = document.getElementById('festival');
-    if (festival.value==="" || festival.value==='انتخاب کنید' || festival.value===null){
+    if (festival.value === "" || festival.value === 'انتخاب کنید' || festival.value === null) {
         alert('لطفا جشنواره را انتخاب نمایید.');
         return false;
-    }else{
+    } else {
         return true;
     }
 }

@@ -357,12 +357,29 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                             </tr>
                         </table>
 
+
                         <table style="width: 100%" class="table table-striped">
                             <tr>
                                 <th colspan="6" style="text-align: center;background-color: #dee2e6">
                                     اطلاعات صاحب اثر
                                 </th>
                             </tr>
+                        </table>
+                        <div style="text-align: right">
+                            <h6 style="display: inline-block">ثبت اثر برای کاربر از قبل ثبت شده:</h6>
+                            <select style="width: 40%; margin-left: 50px;" name="getUserInfo"
+                                    id="getUserInfo" class="form-control select2"
+                                    title="کاربر را انتخاب کنید">
+                                <option disabled selected>انتخاب کنید</option>
+                                <?php
+                                $query=mysqli_query($connection_book_signup,"select * from users");
+                                foreach ($query as $users):
+                                ?>
+                                <option value="<?php echo $users['id']; ?>"><?php echo $users['name'].' '. $users['family']. ' - '.$users['national_code']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <table style="width: 100%" class="table table-striped">
                             <tr>
                                 <th>
                                     نام*
