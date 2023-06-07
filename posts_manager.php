@@ -467,7 +467,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                 } ?> value="<?php echo $festivals['id']; ?>"><?php echo $festivals['title']; ?></option>
                             <?php endforeach; ?>
                         </select>
-                        <button name="Search_Posts" type="submit" class="btn btn-warning">جستجو</button>
+                        <button name="Search_Posts" id="Search_Posts" type="submit" class="btn btn-warning">جستجو</button>
                     </h3>
                 </form>
             </div>
@@ -500,7 +500,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                     }
                                     ?></td>
                                 <td>
-                                    <button onclick="getInfo(<?php echo $posts['id']; ?>)" type="button"
+                                    <button onclick="getInfo(<?php echo $posts['id']; ?>)" type="button" id="getInfo"
                                             class="btn btn-primary" data-toggle="modal" data-target="#postInformation">
                                         نمایش جزئیات
                                     </button>
@@ -516,7 +516,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                 <div class="modal-header">
                                     <h6 style="color: red" class="modal-title" id="exampleModalLongTitle">در صورت تغییر
                                         هر فیلد، مقادیر به صورت خودکار تغییر خواهند کرد.</h6>
-                                    <button type="button" style="margin-right: 20%" class="close" data-dismiss="modal"
+                                    <button type="button" style="margin-left: -10px" class="close" data-dismiss="modal"
                                             aria-label="Close">
                                         <span>&times;</span>
                                     </button>
@@ -540,9 +540,9 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                             <tr>
                                                 <th>قالب علمی*</th>
                                                 <td>
-                                                    <select name="postFormat" id="postFormatForEdit"
+                                                    <select disabled name="postFormat" id="postFormatForEdit"
                                                             class="form-control select2"
-                                                            title="قالب علمی را انتخاب کنید">
+                                                            title="قابل تغییر نیست">
                                                         <option disabled selected>انتخاب کنید</option>
                                                         <option value="کتاب">کتاب</option>
                                                         <option value="پایان نامه">پایان نامه</option>
@@ -551,7 +551,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                 <th>نوع اثر*</th>
                                                 <td>
                                                     <select class="form-control select2"
-                                                            style="width: 100%;text-align: right" name="postType"
+                                                            style="width: 100%;text-align: right" name="postTypeForEdit"
                                                             id="postTypeForEdit">
                                                         <option disabled selected>انتخاب کنید</option>
                                                         <option value="تحقیق و تألیف">تحقیق و تألیف</option>
@@ -561,7 +561,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                 </td>
                                                 <th>زبان*</th>
                                                 <td>
-                                                    <select name="language" id="languageForEdit"
+                                                    <select name="languageForEdit" id="languageForEdit"
                                                             class="form-control select2"
                                                             title="قالب علمی را انتخاب کنید">
                                                         <option disabled selected>انتخاب کنید</option>
@@ -937,6 +937,8 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
                                 </div>
+                                <script src="build/js/UpdateBookInfo.js"></script>
+                                <!--    <script src="build/js/Delete_Mag.js"></script>-->
                             </div>
                         </div>
                     </div>
@@ -951,8 +953,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
     <script src="build/js/SearchInMagManagerTable.js"></script>
     <script src="build/js/PostsManagerScripts.js"></script>
     <script src="build/js/GetBookInfo.js"></script>
-    <script src="build/js/UpdateBookInfo.js"></script>
-    <!--    <script src="build/js/Delete_Mag.js"></script>-->
+
 <?php
 endif;
 include_once __DIR__ . '/footer.php'; ?>
