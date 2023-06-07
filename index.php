@@ -11,22 +11,22 @@ session_abort();
     <html lang="fa">
     <head>
         <title>ورود به سامانه همایش کتاب سال حوزه</title>
-        <link rel="icon" type="image/x-icon" href="/dist/img/favicon.ico">
+        <link rel="icon" type="image/x-icon" href="./dist/img/favicon.ico">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="login/vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="./login/vendor/bootstrap/css/bootstrap.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="./login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="login/fonts/iconic/css/material-design-iconic-font.min.css">
+        <link rel="stylesheet" type="text/css" href="./login/fonts/iconic/css/material-design-iconic-font.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="login/vendor/animate/animate.css">
+        <link rel="stylesheet" type="text/css" href="./login/vendor/animate/animate.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="login/vendor/animsition/css/animsition.min.css">
+        <link rel="stylesheet" type="text/css" href="./login/vendor/animsition/css/animsition.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="login/css/util.css">
-        <link rel="stylesheet" type="text/css" href="login/css/main.css">
+        <link rel="stylesheet" type="text/css" href="./login/css/util.css">
+        <link rel="stylesheet" type="text/css" href="./login/css/main.css">
         <!--===============================================================================================-->
     </head>
     <body>
@@ -35,7 +35,7 @@ session_abort();
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
-                <form  action="chk.php" class="login100-form validate-form" method="post">
+                <form action="./chk.php" class="login100-form validate-form" method="post">
                     <!--					<span class="login100-form-title p-b-26">-->
                     <center>
                         <p style=" font-family: 'B Titr'; font-size: 20px; color: black">
@@ -101,21 +101,21 @@ session_abort();
 
 
     <!--===============================================================================================-->
-    <script src="login/vendor/jquery/jquery-3.6.0.min.js"></script>
+    <script src="./login/vendor/jquery/jquery-3.6.0.min.js"></script>
     <!--===============================================================================================-->
-    <script src="login/vendor/animsition/js/animsition.min.js"></script>
+    <script src="./login/vendor/animsition/js/animsition.min.js"></script>
     <!--===============================================================================================-->
-    <script src="login/vendor/bootstrap/js/popper.js"></script>
-    <script src="login/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./login/vendor/bootstrap/js/popper.js"></script>
+    <script src="./login/vendor/bootstrap/js/bootstrap.min.js"></script>
     <!--===============================================================================================-->
-    <script src="login/vendor/select2/select2.min.js"></script>
+    <script src="./login/vendor/select2/select2.min.js"></script>
     <!--===============================================================================================-->
-    <script src="login/vendor/daterangepicker/moment.min.js"></script>
-    <script src="login/vendor/daterangepicker/daterangepicker.js"></script>
+    <script src="./login/vendor/daterangepicker/moment.min.js"></script>
+    <script src="./login/vendor/daterangepicker/daterangepicker.js"></script>
     <!--===============================================================================================-->
-    <script src="login/vendor/countdowntime/countdowntime.js"></script>
+    <script src="./login/vendor/countdowntime/countdowntime.js"></script>
     <!--===============================================================================================-->
-    <script src="login/js/main.js"></script>
+    <script src="./login/js/main.js"></script>
 
     </body>
     </html>
