@@ -491,8 +491,10 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content" style="width:auto">
                                 <div class="modal-header">
-                                    <h6 style="color: red" class="modal-title" id="exampleModalLongTitle">در صورت تغییر هر فیلد، مقادیر به صورت خودکار تغییر خواهند کرد.</h6>
-                                    <button type="button" style="margin-right: 20%" class="close" data-dismiss="modal" aria-label="Close">
+                                    <h6 style="color: red" class="modal-title" id="exampleModalLongTitle">در صورت تغییر
+                                        هر فیلد، مقادیر به صورت خودکار تغییر خواهند کرد.</h6>
+                                    <button type="button" style="margin-right: 20%" class="close" data-dismiss="modal"
+                                            aria-label="Close">
                                         <span>&times;</span>
                                     </button>
                                 </div>
@@ -907,11 +909,10 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                             </tr>
                                         </table>
                                     </center>
-
+                                    <input type="hidden" id="post_id" value="">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
-                                    <button type="button" class="btn btn-success">ذخیره اطلاعات</button>
                                 </div>
                             </div>
                         </div>
@@ -927,7 +928,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
     <script src="build/js/SearchInMagManagerTable.js"></script>
     <script src="build/js/PostsManagerScripts.js"></script>
     <script src="build/js/GetBookInfo.js"></script>
-    <!--        <script src="build/js/UpdateMagInfo.js"></script>-->
+    <script src="build/js/UpdateBookInfo.js"></script>
     <!--    <script src="build/js/Delete_Mag.js"></script>-->
 <?php
 endif;

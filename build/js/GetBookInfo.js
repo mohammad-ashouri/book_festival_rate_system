@@ -100,6 +100,7 @@ function getInfo(id) {
             $("#genderForEdit").val(response.gender).trigger('change');
             $("#shparvandetahsiliForEdit").val(response.shparvandetahsili);
 
+            $("#post_id").val(response.id);
         }
     });
 }

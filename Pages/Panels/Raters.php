@@ -19,10 +19,10 @@
                 $a = 1;
                 $MyGroup = $_SESSION['group'];
                 $Me = $_SESSION['id'];
-                $query = mysqli_query($connection_maghalat, "select * from article where rate_status like 'اجمالی' and ((ejmali1_ratercode_g1='$Me' and ejmali1_g1_done!=1) or (ejmali2_ratercode_g1='$Me' and ejmali2_g1_done!=1) or (ejmali3_ratercode_g1='$Me' and ejmali3_g1_done!=1) or (ejmali1_ratercode_g2='$Me' and ejmali1_g2_done!=1) or (ejmali2_ratercode_g2='$Me' and ejmali2_g2_done!=1) or (ejmali3_ratercode_g2='$Me' and ejmali3_g2_done!=1)) order by festival_id asc ");
+                $query = mysqli_query($connection_book, "select * from article where rate_status like 'اجمالی' and ((ejmali1_ratercode_g1='$Me' and ejmali1_g1_done!=1) or (ejmali2_ratercode_g1='$Me' and ejmali2_g1_done!=1) or (ejmali3_ratercode_g1='$Me' and ejmali3_g1_done!=1) or (ejmali1_ratercode_g2='$Me' and ejmali1_g2_done!=1) or (ejmali2_ratercode_g2='$Me' and ejmali2_g2_done!=1) or (ejmali3_ratercode_g2='$Me' and ejmali3_g2_done!=1)) order by festival_id asc ");
                 foreach ($query as $Ejmali_list):
                     $id = $Ejmali_list['article_id'];
-                    $query = mysqli_query($connection_mag, "select * from mag_articles where id='$id'");
+                    $query = mysqli_query($connection_book_signup, "select * from mag_articles where id='$id'");
                     foreach ($query as $article) {
                     }
                     ?>
@@ -43,7 +43,7 @@
                             <?php
                             if (($Ejmali_list['ejmali1_ratercode_g1'] == $Me and $Ejmali_list['ejmali1_g1_done'] == 0) or ($Ejmali_list['ejmali2_ratercode_g1'] == $Me and $Ejmali_list['ejmali2_g1_done'] == 0) or ($Ejmali_list['ejmali3_ratercode_g1'] == $Me and $Ejmali_list['ejmali3_g1_done'] == 0)) {
                                 $groupID = $article['scientific_group_1'];
-                                $query = mysqli_query($connection_maghalat, "Select * from scientific_group where id='$groupID'");
+                                $query = mysqli_query($connection_book_signup, "Select * from scientific_group where id='$groupID'");
                                 foreach ($query as $groupInfo) {
                                 }
                                 echo $groupInfo['name'];

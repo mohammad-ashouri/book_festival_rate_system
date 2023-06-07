@@ -3,7 +3,7 @@ include_once 'config/connection.php';
 include_once 'build/php/functions.php';
 session_start();
 $urlofthispage=$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
-if (!isset($_SESSION['islogin'])){
+if (!isset($_SESSION['islogin']) or !isset($_SESSION['head'])){
     $operation="Access Denied";
     logsend($operation,$urlofthispage,$connection_book);
     header("location: index.php?errorlog");
