@@ -15,6 +15,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3) {
     foreach ($education as $educationInfo){}
     header('Content-Type: application/json');
     echo json_encode([
+        'id'=>$bookInfo['id'],
         'postName' => $bookInfo['title'],
         'postFormat' => $bookInfo['post_format'],
         'postType' => $bookInfo['post_type'],

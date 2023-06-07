@@ -3,7 +3,7 @@ include_once 'config/connection.php';
 include_once 'build/php/functions.php';
 session_start();
 $urlofthispage=$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
-if (!isset($_SESSION['islogin'])){
+if (!isset($_SESSION['islogin']) or !isset($_SESSION['head'])){
     $operation="Access Denied";
     logsend($operation,$urlofthispage,$connection_book);
     header("location: index.php?errorlog");
@@ -20,42 +20,42 @@ foreach ($query as $User_Info){}
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <title>سامانه همایش کتاب سال حوزه</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">-->
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="./plugins/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-eTuR/g3w1lDgMFndavz0y3yD2tZ4sg+PiBcD1d+ylZpb1XqilckGw1Fd/SlWHRP" crossorigin="anonymous">
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-eTuR/g3w1lDgMFndavz0y3yD2tZ4sg+PiBcD1d+ylZpb1XqilckGw1Fd/SlWHRP" crossorigin="anonymous">-->
     <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="./dist/css/adminlte.min.css">
     <!-- Select2 -->
-    <link rel="stylesheet" href="plugins/select2/select2.min.css">
+    <link rel="stylesheet" href="./plugins/select2/select2.min.css">
     <!-- bootstrap rtl -->
-    <link rel="stylesheet" href="dist/css/bootstrap-rtl.min.css">
+    <link rel="stylesheet" href="./dist/css/bootstrap-rtl.min.css">
     <!-- template rtl version -->
-    <link rel="stylesheet" href="dist/css/custom-style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./dist/css/custom-style.css">
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">-->
     <!-- daterange picker -->
-    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+    <link rel="stylesheet" href="./plugins/daterangepicker/daterangepicker-bs3.css">
     <!-- iCheck for checkboxes and radio inputs -->
-    <link rel="stylesheet" href="plugins/iCheck/all.css">
+    <link rel="stylesheet" href="./plugins/iCheck/all.css">
     <!-- Bootstrap Color Picker -->
-    <link rel="stylesheet" href="plugins/colorpicker/bootstrap-colorpicker.min.css">
+    <link rel="stylesheet" href="./plugins/colorpicker/bootstrap-colorpicker.min.css">
     <!-- Bootstrap time Picker -->
-    <link rel="stylesheet" href="plugins/timepicker/bootstrap-timepicker.min.css">
+    <link rel="stylesheet" href="./plugins/timepicker/bootstrap-timepicker.min.css">
     <!-- Persian Data Picker -->
-    <link rel="stylesheet" href="dist/css/persian-datepicker.min.css">
+    <link rel="stylesheet" href="./dist/css/persian-datepicker.min.css">
 <!--    Select2 CSS-->
 <!--    <link rel="stylesheet" type="text/css" href="/bower_components/select2/dist/css/select2.min.css">-->
     <!-- jQuery -->
-    <script src="bower_components/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script src="./bower_components/jquery-3.3.1.min.js" type="text/javascript"></script>
     <!-- Select2 JS -->
-    <script src="bower_components/select2/dist/js/select2.min.js" type="text/javascript"></script>
+    <script src="./bower_components/select2/dist/js/select2.min.js" type="text/javascript"></script>
     <!-- Bootstrap time Picker -->
-    <link rel="stylesheet" href="plugins/timepicker/bootstrap-timepicker.min.css">
+    <link rel="stylesheet" href="./plugins/timepicker/bootstrap-timepicker.min.css">
 
     <!-- bootstrap rtl -->
-    <link rel="stylesheet" href="dist/css/bootstrap-rtl.min.css">
+    <link rel="stylesheet" href="./dist/css/bootstrap-rtl.min.css">
     <!-- template rtl version -->
-    <link rel="stylesheet" href="dist/css/custom-style.css">
+    <link rel="stylesheet" href="./dist/css/custom-style.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
