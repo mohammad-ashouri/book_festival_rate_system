@@ -577,7 +577,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                             <tr id="bookTR1ForEdit" hidden="hidden">
                                                 <th>ناشر*</th>
                                                 <td id="publisherTD">
-                                                    <select name="publisher" id="publisherForEdit"
+                                                    <select name="publisherForEdit" id="publisherForEdit"
                                                             class="form-control select2"
                                                             title="ناشر را انتخاب کنید">
                                                         <option disabled selected>انتخاب کنید</option>
@@ -593,7 +593,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                 <td>
                                                     <input type="text" class="form-control"
                                                            placeholder="شابک اثر را وارد کنید"
-                                                           name="ISSN" id="ISSNForEdit">
+                                                           name="ISSNForEdit" id="ISSNForEdit">
                                                 </td>
                                             </tr>
                                             <tr id="bookTR2ForEdit" hidden="hidden">
@@ -601,17 +601,17 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                 <td>
                                                     <input type="text" class="form-control" value="1"
                                                            placeholder="تعداد جلد اثر را وارد کنید"
-                                                           name="numberOfCovers" id="numberOfCoversForEdit">
+                                                           name="numberOfCoversForEdit" id="numberOfCoversForEdit">
                                                 </td>
                                                 <th>تیراژ*</th>
                                                 <td>
                                                     <input type="text" class="form-control"
                                                            placeholder="تیراژ اثر را وارد کنید"
-                                                           name="circulation" id="circulationForEdit">
+                                                           name="circulationForEdit" id="circulationForEdit">
                                                 </td>
                                                 <th>قطع*</th>
                                                 <td>
-                                                    <select name="bookSize" id="bookSizeForEdit"
+                                                    <select name="bookSizeForEdit" id="bookSizeForEdit"
                                                             class="form-control select2"
                                                             title="قطع اثر را انتخاب کنید">
                                                         <option disabled selected>انتخاب کنید</option>
@@ -629,20 +629,20 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                 <td>
                                                     <input type="text" class="form-control"
                                                            placeholder="شماره گواهی دفاع پایان نامه را وارد کنید"
-                                                           name="thesisCertificateNumber"
+                                                           name="thesisCertificateNumberForEdit"
                                                            id="thesisCertificateNumberForEdit">
                                                 </td>
                                                 <th>محل دفاع*</th>
                                                 <td>
                                                     <input type="text" class="form-control"
                                                            placeholder="محل دفاع اثر را وارد کنید"
-                                                           name="thesisDefencePlace" id="thesisDefencePlaceForEdit">
+                                                           name="thesisDefencePlaceForEdit" id="thesisDefencePlaceForEdit">
                                                 </td>
                                                 <th>امتیاز پایان نامه*</th>
                                                 <td>
                                                     <input type="text" class="form-control"
                                                            placeholder="امتیاز پایان نامه را وارد کنید"
-                                                           name="thesisGrade" id="thesisGradeForEdit">
+                                                           name="thesisGradeForEdit" id="thesisGradeForEdit">
                                                 </td>
                                             </tr>
                                             <tr id="thesisTR2ForEdit" hidden="hidden">
@@ -650,13 +650,13 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                 <td colspan="2">
                                                     <input type="text" class="form-control"
                                                            placeholder="نام و نام خانوادگی استاد راهنما را وارد کنید"
-                                                           name="thesisSupervisor" id="thesisSupervisorForEdit">
+                                                           name="thesisSupervisorForEdit" id="thesisSupervisorForEdit">
                                                 </td>
                                                 <th>مشخصات استاد مشاور*</th>
                                                 <td colspan="2">
                                                     <input type="text" class="form-control"
                                                            placeholder="نام و نام خانوادگی استاد مشاور را وارد کنید"
-                                                           name="thesisAdvisor" id="thesisAdvisorForEdit">
+                                                           name="thesisAdvisorForEdit" id="thesisAdvisorForEdit">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -664,11 +664,11 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                 <td>
                                                     <input type="text" class="form-control"
                                                            placeholder="شمارگان صفحه اثر را وارد کنید"
-                                                           name="pagesNumber" id="pagesNumberForEdit">
+                                                           name="pagesNumberForEdit" id="pagesNumberForEdit">
                                                 </td>
                                                 <th>محور ویژه</th>
                                                 <td colspan="4">
-                                                    <select name="specialSection" id="specialSectionForEdit"
+                                                    <select name="specialSectionForEdit" id="specialSectionForEdit"
                                                             class="form-control select2"
                                                             title="محور ویژه را انتخاب کنید">
                                                         <option disabled selected>انتخاب کنید</option>
@@ -684,7 +684,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                             <tr>
                                                 <th>ویژگی های اثر</th>
                                                 <td colspan="5">
-                                    <textarea name="properties" id="propertiesForEdit" class="form-control" rows="3"
+                                    <textarea name="propertiesForEdit" id="propertiesForEdit" class="form-control" rows="3"
                                               placeholder="ویژگی های اثر را وارد کنید."></textarea>
                                                     <p dir="ltr" id="wordCountForEdit">تعداد کلمات: 0</p>
                                                 </td>
@@ -701,7 +701,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                 <tr>
                                                     <th>نوع تحقیق*</th>
                                                     <td>
-                                                        <select name="research_type" id="research_typeForEdit"
+                                                        <select name="research_typeForEdit" id="research_typeForEdit"
                                                                 class="form-control select2"
                                                                 title="نوع تحقیق را انتخاب کنید">
                                                             <option disabled selected>انتخاب کنید</option>
@@ -711,7 +711,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                     </td>
                                                     <th id="scientificGroup1TH">گروه علمی اول*</th>
                                                     <td id="scientificGroup1TD">
-                                                        <select name="scientificGroup1" id="scientificGroup1ForEdit"
+                                                        <select name="scientificGroup1ForEdit" id="scientificGroup1ForEdit"
                                                                 class="form-control select2"
                                                                 title="گروه علمی اول را انتخاب کنید">
                                                             <option disabled selected>انتخاب کنید</option>
@@ -752,7 +752,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                 <tr>
                                                     <th style="width: 20%">نوع همکاری*</th>
                                                     <td>
-                                                        <select name="activityType" id="activityTypeForEdit"
+                                                        <select name="activityTypeForEdit" id="activityTypeForEdit"
                                                                 class="form-control select2"
                                                                 title="نوع همکاری را انتخاب کنید">
                                                             <option disabled selected>انتخاب کنید</option>
@@ -869,7 +869,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                         <table style="width: 100%" class="table table-striped">
                                             <tr>
                                                 <th colspan="6" style="text-align: center;background-color: #dee2e6">
-                                                    اطلاعات صاحب اثر
+                                                    اطلاعات صاحب اثر (در صورت تغییر اطلاعات، تمامی اطلاعاتی که با این کد ملی ثبت شده اند تغییر خواهد کرد)
                                                 </th>
                                             </tr>
                                             <tr>
@@ -879,7 +879,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                 <td>
                                                     <input type="text" class="form-control"
                                                            placeholder="نام صاحب اثر را وارد کنید"
-                                                           name="fName" id="fNameForEdit">
+                                                           name="fNameForEdit" id="fNameForEdit">
                                                 </td>
                                                 <th>
                                                     نام خانوادگی*
@@ -887,7 +887,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                 <td>
                                                     <input type="text" class="form-control"
                                                            placeholder="نام خانوادگی صاحب اثر را وارد کنید"
-                                                           name="lName" id="lNameForEdit">
+                                                           name="lNameForEdit" id="lNameForEdit">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -895,9 +895,8 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                     کد ملی*
                                                 </th>
                                                 <td>
-                                                    <input type="text" class="form-control"
-                                                           placeholder="به دلیل ثبت اثر با کد ملی لطفا با دقت وارد کنید"
-                                                           name="national_code" id="national_codeForEdit">
+                                                    <input type="text" class="form-control" disabled
+                                                           name="national_codeForEdit" id="national_codeForEdit">
                                                 </td>
                                                 <th>
                                                     شماره همراه*
@@ -905,7 +904,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                 <td>
                                                     <input type="text" class="form-control"
                                                            placeholder="ترجیحا شماره ای که حساب کاربری ایتا دارد"
-                                                           name="mobile" id="mobileForEdit">
+                                                           name="mobileForEdit" id="mobileForEdit">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -913,7 +912,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                     جنسیت
                                                 </th>
                                                 <td>
-                                                    <select name="gender" id="genderForEdit"
+                                                    <select name="genderForEdit" id="genderForEdit"
                                                             class="form-control select2"
                                                             title="نوع همکاری را انتخاب کنید">
                                                         <option disabled selected>انتخاب کنید</option>
@@ -927,7 +926,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                 <td>
                                                     <input type="text" class="form-control"
                                                            placeholder="شماره پرونده حوزوی صاحب اثر را وارد کنید"
-                                                           name="shparvandetahsili" id="shparvandetahsiliForEdit">
+                                                           name="shparvandetahsiliForEdit" id="shparvandetahsiliForEdit">
                                                 </td>
                                             </tr>
                                         </table>
