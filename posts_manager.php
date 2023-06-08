@@ -180,6 +180,12 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                            placeholder="نام و نام خانوادگی استاد مشاور را وارد کنید"
                                            name="thesisAdvisor" id="thesisAdvisor">
                                 </td>
+                                <th>مشخصات استاد داور*</th>
+                                <td colspan="2">
+                                    <input type="text" class="form-control"
+                                           placeholder="نام و نام خانوادگی استاد داور را وارد کنید"
+                                           name="thesisAdvisor" id="thesisAdvisor">
+                                </td>
                             </tr>
                             <tr>
                                 <th>شمارگان صفحه*</th>
@@ -403,7 +409,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                             </tr>
                             <tr>
                                 <th>
-                                    کد ملی*
+                                    کد ملی/گذرنامه*
                                 </th>
                                 <td>
                                     <input type="text" class="form-control"
@@ -895,7 +901,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                             </tr>
                                             <tr>
                                                 <th>
-                                                    کد ملی*
+                                                    کد ملی/گذرنامه*
                                                 </th>
                                                 <td>
                                                     <input type="text" class="form-control" disabled
