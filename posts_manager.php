@@ -76,9 +76,10 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                     <select class="form-control select2"
                                             style="width: 100%;text-align: right" name="postType" id="postType">
                                         <option disabled selected>انتخاب کنید</option>
-                                        <option value="تحقیق و تألیف">تحقیق و تألیف</option>
+                                        <option value="تألیف">تالیف</option>
+                                        <option value="تصحیح و تحقیق">تصحیح و تحقیق</option>
+                                        <option value="شرح و تلخیص">شرح و تلخیص</option>
                                         <option value="ترجمه">ترجمه</option>
-                                        <option value="تصحیح و تعلیق">تصحیح و تعلیق</option>
                                     </select>
                                 </td>
                                 <th>زبان*</th>
@@ -140,6 +141,8 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                         <option value="وزیری">وزیری</option>
                                         <option value="بیاضی">بیاضی</option>
                                         <option value="پالتویی">پالتویی</option>
+                                        <option value="خشتی">خشتی</option>
+                                        <option value="جیبی">جیبی</option>
                                     </select>
                                 </td>
                             </tr>
