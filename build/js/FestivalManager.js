@@ -28,6 +28,9 @@ if (document.getElementById('New_Festival')) {
         } else if (!start_date) {
             alert('تاریخ شروع فراخوان انتخاب نشده است.');
             return false;
+        } else if (!password) {
+            alert('رمز عبور وارد نشده است.');
+            return false;
         } else {
             if (confirm('این عملیات قابل بازگشت نیست، آیا مطمئن هستید؟')) {
 
