@@ -11,7 +11,6 @@ if ($_SESSION['head'] == 3 or $_SESSION['head'] == 4) {
     foreach ($query as $postInfo) {
     }
 
-
     if ($postID) {
         switch ($work) {
             case 'updateName':
@@ -114,8 +113,8 @@ if ($_SESSION['head'] == 3 or $_SESSION['head'] == 4) {
                 if ($data == 'تک رشته ای') {
                     $query = mysqli_query($connection_book_signup, "update posts set scientific_group_v2 =null,updated_at='$now' where id='$postID'");
                 }
-                $query = mysqli_query($connection_book_signup, "update posts set research_type ='$data',updated_at='$now' where id='$postID'");
-                if ($query) {
+                $query2 = mysqli_query($connection_book_signup, "update posts set research_type ='$data',updated_at='$now' where id='$postID'");
+                if ($query2) {
                     echo 'Done';
                 }
                 break;

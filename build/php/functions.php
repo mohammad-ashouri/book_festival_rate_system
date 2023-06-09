@@ -1,8 +1,8 @@
 <?php
 
 // used in festival_manager.php
-function last_festival_id($connection_maghalat){
-    $query=mysqli_query($connection_maghalat,"select * from festival order by id desc limit 1");
+function last_festival_id($connection_book_signup){
+    $query=mysqli_query($connection_book_signup,"select * from festivals order by id desc limit 1");
     foreach ($query as $last_id){}
     return @$last_id['id'];
 }

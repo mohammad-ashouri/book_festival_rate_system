@@ -15,6 +15,7 @@ $min=jdate('i');
 $sec=jdate('s');
 $date=$year."/".$month."/".$day;
 $datewithtime=$year."/".$month."/".$day.' '.$hour.":".$min.":".$sec;
+$now = date('Y-m-d H:i:s');
 
 $connection_book = @mysqli_connect('localhost', 'root', '', 'ssmp_bookfestival');
 if (mysqli_connect_errno()) {
