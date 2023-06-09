@@ -1,6 +1,6 @@
 function getInfo(id) {
     $.ajax({
-        url: "build/ajax/GetBookAllInfo.php",
+        url: "build/ajax/GetPostAllInfo.php",
         type: "GET",
         data: {
             id: id,
@@ -12,9 +12,11 @@ function getInfo(id) {
                 bookTR2ForEdit.hidden=false;
                 thesisTR1ForEdit.hidden=true;
                 thesisTR2ForEdit.hidden=true;
+                thesisTR3ForEdit.hidden=true;
             }else if (response.postFormat==='پایان نامه'){
                 thesisTR1ForEdit.hidden=false;
                 thesisTR2ForEdit.hidden=false;
+                thesisTR3ForEdit.hidden=false;
                 bookTR1ForEdit.hidden=true;
                 bookTR2ForEdit.hidden=true;
             }
@@ -46,10 +48,11 @@ function getInfo(id) {
 
             //Thesis
             $("#thesisCertificateNumberForEdit").val(response.thesisCertificateNumber);
-            $("#thesisDefencePlaceForEdit").val(response.thesisDefencePlace);
+            $("#thesisDefencePlaceForEdit").val(response.thesisDefencePlace).trigger('change');
             $("#thesisGradeForEdit").val(response.thesisGrade);
             $("#thesisSupervisorForEdit").val(response.thesisSupervisor);
             $("#thesisAdvisorForEdit").val(response.thesisAdvisor);
+            $("#thesisRefereeForEdit").val(response.thesisReferee);
 
             //Research_Type
             $("#research_typeForEdit").val(response.research_type).trigger('change');

@@ -9,7 +9,7 @@ function sendwork(post_id, work, data) {
         },
         success: function (response) {
             console.log(response);
-            if (response == 'Done') {
+            if (response === 'Done') {
                 // console.clear();
             }
         },
@@ -66,6 +66,9 @@ document.getElementById('thesisSupervisorForEdit').onchange = function () {
 document.getElementById('thesisAdvisorForEdit').onchange = function () {
     sendwork(post_id.value, "updateThesisAdvisor", thesisAdvisorForEdit.value);
 }
+document.getElementById('thesisRefereeForEdit').onchange = function () {
+    sendwork(post_id.value, "updateThesisReferee", thesisRefereeForEdit.value);
+}
 document.getElementById('pagesNumberForEdit').onchange = function () {
     sendwork(post_id.value, "updatePagesNumber", pagesNumberForEdit.value);
 }
@@ -90,8 +93,15 @@ document.getElementById('scientificGroup1ForEdit').onchange = function () {
     sendwork(post_id.value, "updateScientificGroup1", scientificGroup1ForEdit.value);
 }
 document.getElementById('scientificGroup2ForEdit').onchange = function () {
-    if (scientificGroup2ForEdit.value !== null && scientificGroup2ForEdit.value != 'انتخاب کنید') {
-        sendwork(post_id.value, "updateScientificGroup2", scientificGroup2ForEdit.value);
+    if (scientificGroup2ForEdit.value === scientificGroup1ForEdit.value) {
+        alert('گروه علمی اول با دوم نمی تواند برابر باشد.');
+        alert('گروه علمی دوم انتخاب نشد.');
+        scientificGroup2ForEdit.selected = false;
+        return false;
+    } else {
+        if (scientificGroup2ForEdit.value !== null && scientificGroup2ForEdit.value !== 'انتخاب کنید') {
+            sendwork(post_id.value, "updateScientificGroup2", scientificGroup2ForEdit.value);
+        }
     }
 }
 document.getElementById('activityTypeForEdit').onchange = function () {

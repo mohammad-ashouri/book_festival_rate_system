@@ -85,12 +85,14 @@ document.getElementById("postFormat").onchange = function () {
         publisherTD.colspan = 3;
         thesisTR1.hidden = true;
         thesisTR2.hidden = true;
+        thesisTR3.hidden = true;
         var selectElement = document.querySelector('#publisher');
         selectElement.style.width = '100% !important';
 
     } else if (postFormat.value === 'پایان نامه') {
         thesisTR1.hidden = false;
         thesisTR2.hidden = false;
+        thesisTR3.hidden = false;
         bookTR1.hidden = true;
         bookTR2.hidden = true;
     }
@@ -146,37 +148,37 @@ properties.addEventListener("input", function () {
 
 });
 
-document.getElementById("thesisCertificateNumber").oninput = function () {
-    let checkCertificateP = document.getElementById("checkCertificateP");
-    if (isNaN(thesisCertificateNumber.value)) {
-        alert('مقدار عددی وارد کنید.');
-        thesisCertificateNumber.value = "";
-        return false;
-    } else {
-        $.ajax({
-            url: "build/ajax/SearchInputs.php",
-            method: "POST",
-            data: {
-                'work': 'thesisCertificateNumberCheck',
-                'data': thesisCertificateNumber.value
-            },
-            success: function (response) {
-                if (response === 'Wrong') {
-                    checkCertificateP.innerText = "شماره گواهی وارد شده تکراری می باشد.";
-                    checkCertificateP.style.color = "red";
-                    Add_Post.hidden = true;
-                } else {
-                    checkCertificateP.innerText = "شماره گواهی قابل ثبت می باشد.";
-                    checkCertificateP.style.color = "green";
-                    Add_Post.hidden = false;
-                }
-            },
-            error: function (xhr, status, error) {
-                console.log(xhr.responseText);
-            }
-        });
-    }
-}
+// document.getElementById("thesisCertificateNumber").oninput = function () {
+//     let checkCertificateP = document.getElementById("checkCertificateP");
+//     if (isNaN(thesisCertificateNumber.value)) {
+//         alert('مقدار عددی وارد کنید.');
+//         thesisCertificateNumber.value = "";
+//         return false;
+//     } else {
+//         $.ajax({
+//             url: "build/ajax/SearchInputs.php",
+//             method: "POST",
+//             data: {
+//                 'work': 'thesisCertificateNumberCheck',
+//                 'data': thesisCertificateNumber.value
+//             },
+//             success: function (response) {
+//                 if (response === 'Wrong') {
+//                     checkCertificateP.innerText = "شماره گواهی وارد شده تکراری می باشد.";
+//                     checkCertificateP.style.color = "red";
+//                     Add_Post.hidden = true;
+//                 } else {
+//                     checkCertificateP.innerText = "شماره گواهی قابل ثبت می باشد.";
+//                     checkCertificateP.style.color = "green";
+//                     Add_Post.hidden = false;
+//                 }
+//             },
+//             error: function (xhr, status, error) {
+//                 console.log(xhr.responseText);
+//             }
+//         });
+//     }
+// }
 
 document.getElementById("activityType").onchange = function () {
     const cooperatorsTable = document.getElementById("cooperatorsTable");
@@ -247,11 +249,13 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
         var thesisGrade = $("#thesisGrade").val();
         var thesisSupervisor = $("#thesisSupervisor").val();
         var thesisAdvisor = $("#thesisAdvisor").val();
+        var thesisReferee= $("#thesisReferee").val();
         formData.append("thesisCertificateNumber", thesisCertificateNumber);
         formData.append("thesisDefencePlace", thesisDefencePlace);
         formData.append("thesisGrade", thesisGrade);
         formData.append("thesisSupervisor", thesisSupervisor);
         formData.append("thesisAdvisor", thesisAdvisor);
+        formData.append("thesisReferee", thesisReferee);
     }
 
     if (research_type === 'چند رشته ای') {
@@ -336,11 +340,8 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
     } else if (postFormat === 'کتاب' && !bookSize) {
         alert('قطع انتخاب نشده است.');
         return false;
-    } else if (postFormat === 'پایان نامه' && thesisCertificateNumber === "") {
-        alert('شماره گواهی دفاع پایان نامه وارد نشده است.');
-        return false;
-    } else if (postFormat === 'پایان نامه' && thesisDefencePlace === "") {
-        alert('محل دفاع وارد نشده است.');
+    } else if (postFormat === 'پایان نامه' && (thesisDefencePlace === "" || thesisDefencePlace==='انتخاب کنید')) {
+        alert('محل دفاع انتخاب نشده است.');
         return false;
     } else if (postFormat === 'پایان نامه' && thesisGrade === "") {
         alert('امتیاز پایان نامه وارد نشده است.');
@@ -350,6 +351,9 @@ document.getElementById("NewPostForm").addEventListener("submit", function (even
         return false;
     } else if (postFormat === 'پایان نامه' && thesisAdvisor === "") {
         alert('مشخصات استاد مشاور وارد نشده است.');
+        return false;
+    } else if (postFormat === 'پایان نامه' && thesisReferee === "") {
+        alert('مشخصات استاد داور وارد نشده است.');
         return false;
     } else if (pagesNumber === "") {
         alert('شمارگان صفحه وارد نشده است.');

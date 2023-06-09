@@ -154,18 +154,26 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                     </td>
                                 </tr>
                                 <tr id="thesisTR1" hidden="hidden">
-                                    <th>شماره گواهی دفاع پایان نامه*</th>
+                                    <th>شماره گواهی دفاع پایان نامه</th>
                                     <td>
-                                        <input type="text" class="form-control"
+                                        <input type="text" class="form-control" value="0"
                                                placeholder="شماره گواهی دفاع پایان نامه را وارد کنید"
                                                name="thesisCertificateNumber" id="thesisCertificateNumber">
                                         <p class="mr-3" id="checkCertificateP"></p>
                                     </td>
                                     <th>محل دفاع*</th>
                                     <td>
-                                        <input type="text" class="form-control"
-                                               placeholder="محل دفاع اثر را وارد کنید"
-                                               name="thesisDefencePlace" id="thesisDefencePlace">
+                                        <select name="thesisDefencePlace" id="thesisDefencePlace"
+                                                class="form-control select2"
+                                                title="محل دفاع اثر را انتخاب کنید">
+                                            <option disabled selected>انتخاب کنید</option>
+                                            <?php
+                                            $query = mysqli_query($connection_book_signup, "select * from defence_places where active=1 order by title");
+                                            foreach ($query as $defencePlaces):
+                                                ?>
+                                                <option value="<?php echo $defencePlaces['title']; ?>"><?php echo $defencePlaces['title']; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
                                     </td>
                                     <th>امتیاز پایان نامه*</th>
                                     <td>
@@ -187,11 +195,13 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                placeholder="نام و نام خانوادگی استاد مشاور را وارد کنید"
                                                name="thesisAdvisor" id="thesisAdvisor">
                                     </td>
+                                </tr>
+                                <tr id="thesisTR3" hidden="hidden">
                                     <th>مشخصات استاد داور*</th>
                                     <td colspan="2">
                                         <input type="text" class="form-control"
                                                placeholder="نام و نام خانوادگی استاد داور را وارد کنید"
-                                               name="thesisAdvisor" id="thesisAdvisor">
+                                               name="thesisReferee" id="thesisReferee">
                                     </td>
                                 </tr>
                                 <tr>
@@ -586,9 +596,10 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                             style="width: 100%;text-align: right" name="postTypeForEdit"
                                                             id="postTypeForEdit">
                                                         <option disabled selected>انتخاب کنید</option>
-                                                        <option value="تحقیق و تألیف">تحقیق و تألیف</option>
+                                                        <option value="تألیف">تالیف</option>
+                                                        <option value="تصحیح و تحقیق">تصحیح و تحقیق</option>
+                                                        <option value="شرح و تلخیص">شرح و تلخیص</option>
                                                         <option value="ترجمه">ترجمه</option>
-                                                        <option value="تصحیح و تعلیق">تصحیح و تعلیق</option>
                                                     </select>
                                                 </td>
                                                 <th>زبان*</th>
@@ -653,6 +664,8 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                         <option value="وزیری">وزیری</option>
                                                         <option value="بیاضی">بیاضی</option>
                                                         <option value="پالتویی">پالتویی</option>
+                                                        <option value="خشتی">خشتی</option>
+                                                        <option value="جیبی">جیبی</option>
                                                     </select>
                                                 </td>
                                             </tr>
@@ -666,10 +679,16 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                 </td>
                                                 <th>محل دفاع*</th>
                                                 <td>
-                                                    <input type="text" class="form-control"
-                                                           placeholder="محل دفاع اثر را وارد کنید"
-                                                           name="thesisDefencePlaceForEdit"
-                                                           id="thesisDefencePlaceForEdit">
+                                                    <select name="thesisDefencePlaceForEdit"
+                                                            id="thesisDefencePlaceForEdit" class="form-control select2"
+                                                            title="محل دفاع اثر را انتخاب کنید">
+                                                        <?php
+                                                        $query = mysqli_query($connection_book_signup, "select * from defence_places where active=1 order by title");
+                                                        foreach ($query as $defencePlaces):
+                                                            ?>
+                                                            <option value="<?php echo $defencePlaces['title']; ?>"><?php echo $defencePlaces['title']; ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
                                                 </td>
                                                 <th>امتیاز پایان نامه*</th>
                                                 <td>
@@ -690,6 +709,14 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                     <input type="text" class="form-control"
                                                            placeholder="نام و نام خانوادگی استاد مشاور را وارد کنید"
                                                            name="thesisAdvisorForEdit" id="thesisAdvisorForEdit">
+                                                </td>
+                                            </tr>
+                                            <tr id="thesisTR3ForEdit" hidden="hidden">
+                                                <th>مشخصات استاد داور*</th>
+                                                <td colspan="2">
+                                                    <input type="text" class="form-control"
+                                                           placeholder="نام و نام خانوادگی استاد داور را وارد کنید"
+                                                           name="thesisRefereeForEdit" id="thesisRefereeForEdit">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -988,7 +1015,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
 
     <script src="build/js/SearchInMagManagerTable.js"></script>
     <script src="build/js/PostsManagerScripts.js"></script>
-    <script src="build/js/GetBookInfo.js"></script>
+    <script src="build/js/GetPostInfo.js"></script>
 
 <?php
 endif;

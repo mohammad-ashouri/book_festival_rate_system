@@ -30,6 +30,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3) {
         'thesisGrade' => $bookInfo['thesis_grade'],
         'thesisSupervisor' => $bookInfo['thesis_supervisor'],
         'thesisAdvisor' => $bookInfo['thesis_advisor'],
+        'thesisReferee' => $bookInfo['thesis_referee'],
         'pagesNumber' => $bookInfo['pages_number'],
         'specialSection' => $bookInfo['special_section'],
         'properties' => $bookInfo['properties'],

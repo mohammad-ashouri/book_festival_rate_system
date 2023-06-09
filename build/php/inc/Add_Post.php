@@ -88,7 +88,8 @@ if (isset($_POST['postName']) and $_POST['postName'] != null and !empty($_POST['
             $thesisGrade = $_POST['thesisGrade'];
             $thesisSupervisor = $_POST['thesisSupervisor'];
             $thesisAdvisor = $_POST['thesisAdvisor'];
-            mysqli_query($connection_book_signup, "update posts set thesis_certificate_number='$thesisCertificateNumber',thesis_defence_place='$thesisDefencePlace',thesis_grade='$thesisGrade',thesis_supervisor='$thesisSupervisor',thesis_advisor='$thesisAdvisor' where id='$lastInsertedId'");
+            $thesisReferee = $_POST['thesisReferee'];
+            mysqli_query($connection_book_signup, "update posts set thesis_certificate_number='$thesisCertificateNumber',thesis_defence_place='$thesisDefencePlace',thesis_grade='$thesisGrade',thesis_supervisor='$thesisSupervisor',thesis_advisor='$thesisAdvisor',thesis_referee='$thesisReferee' where id='$lastInsertedId'");
         }
 
         if ($postDeliveryMethod == 'digital') {

@@ -6,7 +6,6 @@ if ($_SESSION['head'] == 3 or $_SESSION['head'] == 4) {
     $work = $_POST['work'];
     $postID = $_POST['postID'];
     $data = $_POST['data'];
-    $now = date('Y-m-d H:i:s');
     $query = mysqli_query($connection_book_signup, "select * from posts where id='$postID'");
     foreach ($query as $postInfo) {
     }
@@ -87,6 +86,12 @@ if ($_SESSION['head'] == 3 or $_SESSION['head'] == 4) {
                 break;
             case 'updateThesisAdvisor':
                 $query = mysqli_query($connection_book_signup, "update posts set thesis_advisor ='$data',updated_at='$now' where id='$postID'");
+                if ($query) {
+                    echo 'Done';
+                }
+                break;
+            case 'updateThesisReferee':
+                $query = mysqli_query($connection_book_signup, "update posts set thesis_referee ='$data',updated_at='$now' where id='$postID'");
                 if ($query) {
                     echo 'Done';
                 }
