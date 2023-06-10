@@ -106,7 +106,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                 <tr id="bookTR1" hidden="hidden">
                                     <th>ناشر*</th>
                                     <td id="publisherTD">
-                                        <select name="publisher" id="publisher" class="form-control select2"
+                                        <select name="publisher" id="publisher" class="form-control select2" style="width: 100%;"
                                                 title="ناشر را انتخاب کنید">
                                             <option disabled selected>انتخاب کنید</option>
                                             <?php
