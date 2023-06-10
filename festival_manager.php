@@ -57,6 +57,7 @@ if ($_SESSION['head'] == 4):
                                 <input type="text" class="form-control" id="festival_name"
                                        placeholder="نام فارسی دوره (شماره دوره به حروف) مثلا سیزدهم"
                                        name="festival_name">
+                                <p style="padding-top: 10px" id="acceptFestivalName"></p>
                             </td>
                         </tr>
                         <tr>
@@ -70,7 +71,6 @@ if ($_SESSION['head'] == 4):
                                     </div>
                                     <input class="festival_start_date form-control" name="start_date" id="start_date"
                                 </div>
-                                <!-- /.input group -->
                             </td>
                         </tr>
                         <tr>

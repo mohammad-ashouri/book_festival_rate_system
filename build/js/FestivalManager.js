@@ -1,3 +1,22 @@
+document.getElementById('festival_name').oninput = function () {
+    $.ajax({
+        url: "build/ajax/GetFestivalInfo.php",
+        type: "GET",
+        data: {
+            name: festival_name.value,
+        },
+        success: function (response) {
+            if (response === 'این نام قابل ثبت نمی باشد.') {
+                acceptFestivalName.style.color = 'red';
+                New_Festival.hidden = true;
+            } else {
+                acceptFestivalName.style.color = 'green';
+            }
+            acceptFestivalName.innerText = response;
+        }
+    });
+}
+
 if (document.getElementById('finishFestival')) {
     document.getElementById('finishFestival').onclick = function () {
         if (confirm('این عملیات قابل بازگشت نیست، آیا مطمئن هستید؟')) {
@@ -33,7 +52,6 @@ if (document.getElementById('New_Festival')) {
             return false;
         } else {
             if (confirm('این عملیات قابل بازگشت نیست، آیا مطمئن هستید؟')) {
-
                 function convertDigitsToFarsi(input) {
                     const persianDigits = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g];
                     const englishDigits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
