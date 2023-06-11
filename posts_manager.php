@@ -113,7 +113,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                             $query = mysqli_query($connection_book_signup, "select * from publishers where active=1 order by title");
                                             foreach ($query as $publishers):
                                                 ?>
-                                                <option value="<?php echo $publishers['title']; ?>"><?php echo $publishers['title']; ?></option>
+                                                <option value="<?php echo $publishers['id']; ?>"><?php echo $publishers['title']; ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </td>
@@ -628,7 +628,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                         $query = mysqli_query($connection_book_signup, "select * from publishers where active=1 order by title");
                                                         foreach ($query as $publishers):
                                                             ?>
-                                                            <option value="<?php echo $publishers['title']; ?>"><?php echo $publishers['title']; ?></option>
+                                                            <option value="<?php echo $publishers['id']; ?>"><?php echo $publishers['title']; ?></option>
                                                         <?php endforeach; ?>
                                                     </select>
                                                 </td>

@@ -31,7 +31,7 @@ if ($_SESSION['head'] == 3 or $_SESSION['head'] == 4):
                                 $query = mysqli_query($connection_book_signup, "select * from publishers order by title");
                                 foreach ($query as $publishers):
                                     ?>
-                                    <option>
+                                    <option value="<?php echo $publishers['id']; ?>">
                                         <?php echo $publishers['title']; ?>
                                     </option>
                                 <?php endforeach; ?>
@@ -61,10 +61,25 @@ if ($_SESSION['head'] == 3 or $_SESSION['head'] == 4):
                                     <h3 id="publishersCardTitle" class="card-title">تعریف ناشر</h3>
                                 </div>
                                 <div class="card-body text-center publisherBody">
-                                    <input type="text" class="form-control" id="publisherName" style="display: inline-block"
-                                           placeholder="نام نشریه مورد نظر را وارد کنید."
-                                           name="publisherName">
-                                    <button id="addPublisher" type="submit" class="btn btn-primary mt-2">اضافه کردن</button>
+                                    <input type="hidden" value="" id="publisherIDForUpdate">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <label id="publisherNameForDisplayLabel" for="publisherNameForDisplay" hidden="hidden" style="margin-left: 10px;">
+                                            از
+                                        </label>
+                                        <input disabled class="form-control" hidden="hidden" id="publisherNameForDisplay" value="">
+                                    </div>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <label id="publisherNameLabel" hidden="hidden" for="publisherName" style="margin-left: 10px;">
+                                            به
+                                        </label>
+                                        <input type="text" class="form-control" id="publisherName"
+                                               style="display: inline-block"
+                                               placeholder="نام نشریه را وارد کنید."
+                                               name="publisherName">
+                                    </div>
+                                    <button id="addPublisher" type="submit" class="btn btn-primary mt-2">اضافه
+                                        کردن
+                                    </button>
                                 </div>
                             </div>
 
