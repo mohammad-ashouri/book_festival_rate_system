@@ -25,7 +25,7 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3) {
         case 'updatePublisher':
             $publisherID = $_REQUEST['data']['id'];
             $updatedValue = $_REQUEST['data']['editedValue'];
-            $query = mysqli_query($connection_book_signup, "update publishers set title='$updatedValue' where id='$publisherID'");
+            $query = mysqli_query($connection_book_signup, "update publishers set title='$updatedValue',updated_at='$now' where id='$publisherID'");
             if ($query) {
                 echo 'Done';
             }
@@ -53,14 +53,14 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3) {
             break;
         case 'deactivePublisher':
             $publisherID = $_REQUEST['data'];
-            $query = mysqli_query($connection_book_signup, "update publishers set active=0 where id='$publisherID' and active=1");
+            $query = mysqli_query($connection_book_signup, "update publishers set active=0,updated_at='$now' where id='$publisherID' and active=1");
             if ($query) {
                 echo 'Done';
             }
             break;
         case 'activePublisher':
             $publisherID = $_REQUEST['data'];
-            $query = mysqli_query($connection_book_signup, "update publishers set active=1 where id='$publisherID' and active=0");
+            $query = mysqli_query($connection_book_signup, "update publishers set active=1,updated_at='$now' where id='$publisherID' and active=0");
             if ($query) {
                 echo 'Done';
             }
