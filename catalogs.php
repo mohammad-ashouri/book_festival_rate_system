@@ -61,6 +61,8 @@ if ($_SESSION['head'] == 3 or $_SESSION['head'] == 4):
                                         </button>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="card card-warning">
                                 <div class="card-header">
                                     <h3 class="card-title">ناشران فعال</h3>
                                 </div>
@@ -68,7 +70,8 @@ if ($_SESSION['head'] == 3 or $_SESSION['head'] == 4):
                                     <div class="d-flex align-items-center">
                                         <select name="activePublisherSubject" class="form-control"
                                                 id="activePublisherSubject" style="width: 100%"> </select>
-                                        <button id="deactivePublisher" type="submit" class="btn btn-danger mr-2">غیرفعال
+                                        <button id="deactivePublisher" type="submit" class="btn btn-danger mr-2">
+                                            غیرفعال
                                             کردن
                                         </button>
                                     </div>
