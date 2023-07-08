@@ -27,7 +27,7 @@ function getInfo(id) {
             $("#postTypeForEdit").val(response.postType).trigger('change');
             $("#languageForEdit").val(response.language).trigger('change');
             $("#pagesNumberForEdit").val(response.pagesNumber);
-            $("#specialSectionForEdit").val(response.specialSection);
+            $("#specialSectionForEdit").val(response.specialSection).trigger('change');
             $("#propertiesForEdit").val(response.properties);
             let wordCount = document.getElementById("wordCountForEdit");
             if (response.properties === "") {

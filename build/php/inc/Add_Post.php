@@ -55,6 +55,12 @@ if (isset($_POST['postName']) and $_POST['postName'] != null and !empty($_POST['
             mysqli_query($connection_book_signup, "update posts set scientific_group_v2='$scientificGroup2' where id='$lastInsertedId'");
         }
 
+        if ($specialSection == '' or $specialSection==null) {
+            mysqli_query($connection_book_signup, "update posts set special_section=null where id='$lastInsertedId'");
+        }else{
+            mysqli_query($connection_book_signup, "update posts set special_section='$specialSection' where id='$lastInsertedId'");
+        }
+
         if ($activityType == 'مشترک') {
             $coopPerSum = 0;
             $postData = $_POST['postData'];

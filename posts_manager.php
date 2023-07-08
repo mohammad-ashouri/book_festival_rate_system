@@ -218,9 +218,9 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                             <option disabled selected>انتخاب کنید</option>
                                             <?php
                                             $query = mysqli_query($connection_book_signup, "select * from special_sections where active=1 order by title");
-                                            foreach ($query as $publishers):
+                                            foreach ($query as $specialSections):
                                                 ?>
-                                                <option value="<?php echo $publishers['title']; ?>"><?php echo $publishers['title']; ?></option>
+                                                <option value="<?php echo $specialSections['id']; ?>"><?php echo $specialSections['title']; ?></option>
                                             <?php endforeach; ?>
                                         </select>
                                     </td>
@@ -734,9 +734,9 @@ if ($_SESSION['head'] == 4 or $_SESSION['head'] == 3):
                                                         <option disabled selected>انتخاب کنید</option>
                                                         <?php
                                                         $query = mysqli_query($connection_book_signup, "select * from special_sections where active=1 order by title");
-                                                        foreach ($query as $publishers):
+                                                        foreach ($query as $specialSections):
                                                             ?>
-                                                            <option value="<?php echo $publishers['title']; ?>"><?php echo $publishers['title']; ?></option>
+                                                            <option  value="<?php echo $specialSections['id']; ?>"><?php echo $specialSections['title']; ?></option>
                                                         <?php endforeach; ?>
                                                     </select>
                                                 </td>
