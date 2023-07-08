@@ -11,7 +11,7 @@ $urlofthispage = $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
 //type=2 => header
 //type=3 => admin
 //type=4 => super-admin
-//type=5 => journal-admin
+//type=5 => Sorter
 //approved=0 => کاربر غیر فعال شده
 $dateforinsertloglogins = $year . '/' . $month . '/' . $day . ' ' . $hour . ':' . $min . ':' . $sec;
 
@@ -83,8 +83,18 @@ if (isset($_POST) & !empty($_POST)) {
                     $operation = "SuperAdminLoginSuccess";
                     logsend($operation, $urlofthispage, $connection_book);
                     header("location:panel.php");
+                } elseif ($rows['type'] == 5) {
+                    $_SESSION['username'] = $rows['username'];
+                    $_SESSION['head'] = $rows['type'];
+                    $_SESSION['islogin'] = true;
+                    $_SESSION['id'] = $rows['id'];
+                    $_SESSION['start'] = time();
+                    $_SESSION['end'] = $_SESSION['start'] + (36000);
+                    $operation = "SorterLoginSuccess";
+                    logsend($operation, $urlofthispage, $connection_book);
+                    header("location:panel.php");
                 } else {
-                    echo 'hi';
+                    header("location:index?error");
                 }
             }
         }

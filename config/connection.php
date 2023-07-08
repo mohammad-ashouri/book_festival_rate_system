@@ -7,6 +7,7 @@ ini_set("error_reporting", E_ALL);
 ini_set("display_errors", 1);
 date_default_timezone_set("Asia/Tehran");
 $main_url="https://localhost/";
+$signup_url="https://localhost:8000/";
 $year=jdate('Y');
 $month=jdate('n');
 $day=jdate('j');
@@ -24,7 +25,7 @@ if (mysqli_connect_errno()) {
 }
 mysqli_set_charset($connection_book, 'utf8');
 
-$connection_book_signup = @mysqli_connect('localhost', 'root', '', 'book_festival');
+$connection_book_signup = @mysqli_connect('localhost', 'root', '', 'book_festival_signup');
 if (mysqli_connect_errno()) {
     echo 'ارتباط با دیتابیس دچار اختلال شده است. خطا به این صورت میباشد:' . mysqli_connect_error();
     exit();
