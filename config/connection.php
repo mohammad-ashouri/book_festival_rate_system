@@ -31,22 +31,5 @@ if (mysqli_connect_errno()) {
     exit();
 }
 mysqli_set_charset($connection_book_signup, 'utf8');
-//$conn = "";
-//
-//try {
-//    $servername = "localhost";
-//    $dbname = "pooyagra_helli-info";
-//    $username = "pooyagra_adminhelli";
-//    $password = "Mohammad1377";
-//
-//    $conn = new PDO(
-//        "mysql:host=$servername; dbname=$dbname",
-//        $username, $password
-//    );
-//
-//    $conn->setAttribute(PDO::ATTR_ERRMODE,
-//        PDO::ERRMODE_EXCEPTION);
-//} catch (PDOException $e) {
-//    echo "Connection failed: " . $e->getMessage();
-//}
-//
+
+include_once __DIR__.'/../build/php/functions.php';

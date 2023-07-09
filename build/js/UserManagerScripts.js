@@ -19,3 +19,11 @@ function myFunction() {
         }
     }
 }
+
+document.getElementById('type').onchange=function (){
+    if (type.value==1) {
+        scientific_group_tr.hidden = false;
+    }else{
+        scientific_group_tr.hidden = true;
+    }
+}

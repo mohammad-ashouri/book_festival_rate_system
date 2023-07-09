@@ -4,24 +4,22 @@
 <body>
 <?php
 session_start();
-$coderater = $_GET['coderater'];
-$codeasar = $_GET['codeasar'];
+$raterCode = $_GET['raterCode'];
+$postID = $_GET['postID'];
 $registrar = $_SESSION['id'];
-$query=mysqli_query($connection_mag,"select * from mag_articles where id='$codeasar'");
-foreach ($query as $festival_detail){}
-$festival_id=$festival_detail['festival_id'];
-$query=mysqli_query($connection_maghalat,"select * from article where festival_id='$festival_id' and article_id='$codeasar'");
-foreach ($query as $CheckIfArticleExists){}
-if (empty($CheckIfArticleExists)){
-    mysqli_query($connection_maghalat,"insert into article (article_id, festival_id,ejmali2_registrar_g2,ejmali2_set_date_g2, adder, date_added) values ('$codeasar','$festival_id','$registrar','$datewithtime','$registrar','$datewithtime')");
-    mysqli_query($connection_maghalat,"update article set ejmali2_ratercode_g2='$coderater' where article_id='$codeasar'");
-}else{
-    mysqli_query($connection_maghalat,"update article set ejmali2_ratercode_g2='$coderater',ejmali2_registrar_g2='$registrar',ejmali2_set_date_g2='$datewithtime' where article_id='$codeasar'");
+if ($_SESSION['head'] == 2 or $_SESSION['head'] == 3 or $_SESSION['head'] == 4) {
+    $query=mysqli_query($connection_book,"select * from posts where id='$postID'");
+    foreach ($query as $postInfo){}
+    if ($postInfo['ejmali1_ratercode_g2']!=$raterCode and $postInfo['ejmali3_ratercode_g2']!=$raterCode) {
+        $query = mysqli_query($connection_book, "update posts set ejmali2_ratercode_g2='$raterCode',ejmali2_registrar_g2='$registrar',ejmali2_set_date_g2='$datewithtime' where id='$postID'");
+        $operation = "Set Post For Rater2 Group2";
+        $urlofthispage = $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
+        logsend($operation, $urlofthispage, $connection_book);
+        $codeasar = null;
+        $raterCode = null;
+    }
 }
-
-$codeasar = null;
-$coderater = null;
-mysqli_close($connection_maghalat);
+mysqli_close($connection_book);
 ?>
 
 </body>

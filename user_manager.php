@@ -129,11 +129,26 @@ elseif (isset($_GET['UserAdded'])):
                             <td>
                                 <select class="form-control select2" data-placeholder=""
                                         style="width: 100%;text-align: right" name="type" id="type">
+                                    <option value="" disabled selected>انتخاب کنید</option>
                                     <option value="1">ارزیاب</option>
                                     <option value="2">سرگروه</option>
                                     <option value="3">کارشناس</option>
                                     <option value="4">مدیر</option>
                                     <option value="5">کارشناس گونه بندی</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr id="scientific_group_tr" hidden="hidden">
+                            <th>گروه علمی*</th>
+                            <td>
+                                <select class="form-control select2" data-placeholder="" multiple="multiple"
+                                        style="width: 100%;text-align: right" name="scientific_group" id="scientific_group">
+                                    <?php
+                                    $query=mysqli_query($connection_book_signup,"select * from scientific_groups order by title");
+                                    foreach ($query as $groups):
+                                    ?>
+                                    <option value="<?php echo $groups['title'] ?>"><?php echo $groups['title'] ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </td>
                         </tr>
@@ -242,7 +257,7 @@ elseif (isset($_GET['UserAdded'])):
 
 <!-- /.content-wrapper -->
 
-<script src="build/js/SearchInUserManagerTable.js"></script>
+<script src="build/js/UserManagerScripts.js"></script>
 
 <?php
 endif;

@@ -29,7 +29,7 @@ function getIPAddress(){
     return $ip;
 }
 
-function logsend($operation,$urlofthispage,$connection_maghalat){
+function logsend($operation,$urlofthispage,$connection_book){
     $year=jdate('Y');
     $month=jdate('n');
     $day=jdate('j');
@@ -45,5 +45,5 @@ function logsend($operation,$urlofthispage,$connection_maghalat){
     }
     $ip=getIPAddress();
     $browsername=$_SERVER['HTTP_USER_AGENT'];
-    mysqli_query($connection_maghalat,"insert into logs (user_id,operation,url,dateandtime,ip_address,browser) values ('$user','$operation','$urlofthispage','$datewithtime','$ip','$browsername')");
+    mysqli_query($connection_book,"insert into logs (user_id,operation,url,dateandtime,ip_address,browser) values ('$user','$operation','$urlofthispage','$datewithtime','$ip','$browsername')");
 }
