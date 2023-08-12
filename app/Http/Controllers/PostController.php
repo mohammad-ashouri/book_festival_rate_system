@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Person;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
-class PersonController extends Controller
+class PostController extends Controller
 {
-    public function newPerson(Request $request)
+    public function newPost(Request $request)
     {
         $name = $request->input('name');
         $family = $request->input('family');
@@ -54,7 +54,7 @@ class PersonController extends Controller
         $this->logActivity('Person Added =>' . $Person->id, \request()->ip(), \request()->userAgent(), \session('id'));
         return $this->success(true, 'PersonAdded', 'برای نمایش اطلاعات جدید، لطفا صفحه را رفرش نمایید.');
     }
-    public function editPerson(Request $request)
+    public function editPost(Request $request)
     {
         $PersonID=$request->input('personID');
         $name = $request->input('nameForEdit');
@@ -90,7 +90,7 @@ class PersonController extends Controller
         $this->logActivity('Person Edited =>' . $PersonID, \request()->ip(), \request()->userAgent(), \session('id'));
         return $this->success(true, 'personEdited', 'برای نمایش اطلاعات جدید، لطفا صفحه را رفرش نمایید.');
     }
-    public function getPersonInfo(Request $request)
+    public function getPostInfo(Request $request)
     {
         $personID = $request->input('id');
         if ($personID) {
@@ -99,7 +99,7 @@ class PersonController extends Controller
     }
     public function index()
     {
-        $personList = Person::orderBy('national_code', 'asc')->paginate(20);
-        return \view('PersonManager', ['personList' => $personList]);
+        $postList = Post::orderBy('festival_id', 'asc')->paginate(20);
+        return \view('PostManager', ['postList' => $postList]);
     }
 }

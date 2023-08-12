@@ -63,6 +63,7 @@
                                                        class="block text-gray-700 text-sm font-bold mb-2">جنسیت*:</label>
                                                 <select id="gender" class="border rounded-md w-full px-3 py-2 "
                                                         name="gender">
+                                                    <option value="" disabled selected>انتخاب کنید</option>
                                                     <option value="مرد">مرد</option>
                                                     <option value="زن">زن</option>
                                                 </select>
@@ -151,6 +152,7 @@
                                                        class="block text-gray-700 text-sm font-bold mb-2">جنسیت*:</label>
                                                 <select id="genderForEdit" class="border rounded-md w-full px-3 py-2 "
                                                         name="genderForEdit">
+                                                    <option value="" disabled selected>انتخاب کنید</option>
                                                     <option value="مرد">مرد</option>
                                                     <option value="زن">زن</option>
                                                 </select>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserManager;
 use App\Http\Middleware\CheckLoginMiddleware;
@@ -66,6 +67,11 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
             Route::post('/newPerson', [PersonController::class, 'newPerson'])->name('newPerson');
             Route::get('/getPersonInfo', [PersonController::class, 'getPersonInfo'])->name('getPersonInfo');
             Route::post('/editPerson', [PersonController::class, 'editPerson'])->name('editPerson');
+
+            Route::get('/Posts', [PostController::class, 'index'])->name('Posts');
+            Route::post('/newPost', [PostController::class, 'newPost'])->name('newPost');
+            Route::get('/getPostInfo', [PostController::class, 'getPostInfo'])->name('getPostInfo');
+            Route::post('/editPost', [PostController::class, 'editPost'])->name('editPost');
 
         });
         Route::middleware('roleAuthorization:2')->group(function () {
