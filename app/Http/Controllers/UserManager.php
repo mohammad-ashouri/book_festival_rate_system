@@ -88,15 +88,19 @@ class UserManager extends Controller
         $username = $request->input('username');
         $password = $request->input('password');
         $type = $request->input('type');
+        $scientific_group = $request->input('scientific_group');
         switch ($type) {
             case 1:
                 $subject = 'ادمین کل';
                 break;
             case 2:
-                $subject = 'کارشناس ستاد';
+                $subject = 'کارشناس سامانه';
                 break;
             case 3:
-                $subject = 'کارشناس فناوری استان';
+                $subject = 'مدیر گروه';
+                break;
+            case 4:
+                $subject = 'ارزیاب';
                 break;
         }
         $lastUserId=User::first()->orderBy('id','desc')->value('id');
@@ -105,6 +109,7 @@ class UserManager extends Controller
         $user->family = $family;
         $user->username = $username;
         $user->password = bcrypt($password);
+        $user->scientific_group = $scientific_group;
         $user->type = $type;
         $user->subject = $subject;
         $user->save();

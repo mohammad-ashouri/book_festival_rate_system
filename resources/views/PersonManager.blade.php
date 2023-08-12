@@ -3,11 +3,11 @@
 @section('content')
     <main class="flex-1 bg-gray-100 py-6 px-8 ">
         <div class=" mx-auto lg:mr-72">
-            <h1 class="text-2xl font-bold mb-4">مدیریت پرسنل</h1>
+            <h1 class="text-2xl font-bold mb-4">مدیریت صاحب اثر</h1>
             <div class="flex">
                 <button id="new-person-button" type="button"
                         class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300">
-                    پرسنل جدید
+                    صاحب اثر جدید
                 </button>
                 <form id="new-person">
                     @csrf
@@ -23,84 +23,66 @@
                                     class="inline-block align-bottom bg-white rounded-lg text-right overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full sm:max-w-[550px]">
                                     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                         <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
-                                            تعریف پرسنل جدید
+                                            تعریف صاحب اثر جدید
                                         </h3>
                                         <div class="mt-4">
-                                            <div class="flex flex-col items-right mb-2">
+                                            <div class="flex flex-col items-right mb-4">
                                                 <label for="name"
                                                        class="block text-gray-700 text-sm font-bold mb-2">نام*:</label>
                                                 <input type="text" id="name" name="name" autocomplete="off"
                                                        class="border rounded-md w-full mb-4 px-3 py-2 text-right"
-                                                       placeholder="نام پرسنل را وارد کنید">
+                                                       placeholder="نام را وارد کنید">
+                                            </div>
+                                            <div class="flex flex-col items-right mb-4">
                                                 <label for="family"
                                                        class="block text-gray-700 text-sm font-bold mb-2">نام
                                                     خانوادگی*:</label>
                                                 <input type="text" id="family" name="family" autocomplete="off"
-                                                       class="border rounded-md w-full mb-2 px-3 py-2 text-right"
-                                                       placeholder="نام خانوادگی پرسنل را وارد کنید">
+                                                       class="border rounded-md w-full mb-4 px-3 py-2 text-right"
+                                                       placeholder="نام خانوادگی را وارد کنید">
                                             </div>
-                                            <div class="flex flex-col mb-4">
-                                                <label for="personnel_code"
+                                            <div class="flex flex-col items-right mb-4">
+                                                <label for="national_code"
                                                        class="block text-gray-700 text-sm font-bold mb-2">کد
-                                                    پرسنلی*:</label>
-                                                <input type="text" name="personnel_code" id="personnel_code"
-                                                       class="border rounded-md w-full mb-4 px-3 py-2"
-                                                       placeholder="کد پرسنلی را وارد کنید">
+                                                    ملی*:</label>
+                                                <input type="text" id="national_code" name="national_code"
+                                                       autocomplete="off"
+                                                       class="border rounded-md w-full mb-4 px-3 py-2 text-right"
+                                                       placeholder="کد ملی را وارد کنید">
                                             </div>
-                                            <div class="flex flex-col mb-4">
-                                                <label for="phone"
-                                                       class="block text-gray-700 text-sm font-bold mb-2">شماره
-                                                    داخلی:</label>
-                                                <input type="text" name="phone" id="phone"
-                                                       class="border rounded-md w-full mb-4 px-3 py-2"
-                                                       placeholder="شماره داخلی را وارد کنید (اختیاری)">
-                                            </div>
-                                            <div class="flex flex-col mb-4">
+                                            <div class="flex flex-col items-right mb-2">
                                                 <label for="mobile"
                                                        class="block text-gray-700 text-sm font-bold mb-2">شماره
-                                                    همراه:</label>
-                                                <input type="text" name="mobile" id="mobile"
-                                                       class="border rounded-md w-full mb-4 px-3 py-2 "
-                                                       placeholder="شماره همراه را وارد کنید (اختیاری)">
-                                            </div>
-                                            <div class="flex flex-col mb-4">
-                                                <label for="net_username"
-                                                       class="block text-gray-700 text-sm font-bold mb-2">یوزر
-                                                    شبکه:</label>
-                                                <input type="text" name="net_username" id="net_username"
-                                                       class="border rounded-md w-full mb-4 px-3 py-2"
-                                                       placeholder="یوزر شبکه را وارد کنید (اختیاری)">
-                                            </div>
-                                            <div class="flex flex-col mb-4">
-                                                <label for="room_number"
-                                                       class="block text-gray-700 text-sm font-bold mb-2">شماره
-                                                    اتاق:</label>
-                                                <input type="text" name="room_number" id="room_number"
-                                                       class="border rounded-md w-full mb-4 px-3 py-2"
-                                                       placeholder="شماره اتاق را وارد کنید (اختیاری)">
+                                                    همراه*:</label>
+                                                <input type="text" id="mobile" name="mobile" autocomplete="off"
+                                                       class="border rounded-md w-full mb-4 px-3 py-2 text-right"
+                                                       placeholder="شماره همراه را وارد کنید">
                                             </div>
                                             <div class="mb-4">
-                                                <label for="assistance"
-                                                       class="block text-gray-700 text-sm font-bold mb-2">معاونت/بخش:</label>
-                                                <select id="assistance" class="border rounded-md w-full px-3 py-2"
-                                                        name="assistance"
-                                                        title="معاونت/بخش را وارد کنید (اختیاری)">
-                                                    <option value="" disabled selected>انتخاب کنید</option>
-                                                    @php
-                                                        $assistances=\App\Models\Catalogs\Assistance::orderBy('name')->get();
-                                                    @endphp
-                                                    @foreach($assistances as $assistance)
-                                                        <option
-                                                            value="{{ $assistance->id }}">{{$assistance->name}}</option>
-                                                    @endforeach
+                                                <label for="gender"
+                                                       class="block text-gray-700 text-sm font-bold mb-2">جنسیت*:</label>
+                                                <select id="gender" class="border rounded-md w-full px-3 py-2 "
+                                                        name="gender">
+                                                    <option value="مرد">مرد</option>
+                                                    <option value="زن">زن</option>
                                                 </select>
+                                            </div>
+                                            <div class="flex flex-col items-right mb-4">
+                                                <label for="howzah_code"
+                                                       class="block text-gray-700 text-sm font-bold mb-2">شماره پرونده
+                                                    حوزوی*:</label>
+                                                <input type="text" id="howzah_code" name="howzah_code"
+                                                       autocomplete="off"
+                                                       class="border rounded-md w-full mb-4 px-3 py-2 text-right"
+                                                       placeholder="شماره پرونده حوزوی را وارد کنید">
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                                         <button type="submit"
                                                 class="px-4 py-2 mr-3 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300">
-                                            ثبت پرسنل جدید
+                                            ثبت صاحب اثر جدید
                                         </button>
                                         <button id="cancel-new-person" type="button"
                                                 class="mt-3 w-full inline-flex justify-center px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-blue-300 sm:mt-0 sm:w-auto">
@@ -126,81 +108,61 @@
                                     class="inline-block align-bottom bg-white rounded-lg text-right overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full sm:max-w-[550px]">
                                     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                         <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
-                                            ویرایش پرسنل
+                                            ویرایش صاحب اثر
                                         </h3>
                                         <div class="mt-4">
-                                            <div class="flex flex-col items-right mb-2">
+                                            <div class="flex flex-col items-right mb-4">
                                                 <label for="nameForEdit"
                                                        class="block text-gray-700 text-sm font-bold mb-2">نام*:</label>
                                                 <input type="text" id="nameForEdit" name="nameForEdit"
                                                        autocomplete="off"
                                                        class="border rounded-md w-full mb-4 px-3 py-2 text-right"
-                                                       placeholder="نام پرسنل را وارد کنید">
+                                                       placeholder="نام را وارد کنید">
+                                            </div>
+                                            <div class="flex flex-col items-right mb-4">
                                                 <label for="familyForEdit"
                                                        class="block text-gray-700 text-sm font-bold mb-2">نام
                                                     خانوادگی*:</label>
                                                 <input type="text" id="familyForEdit" name="familyForEdit"
                                                        autocomplete="off"
-                                                       class="border rounded-md w-full mb-2 px-3 py-2 text-right"
-                                                       placeholder="نام خانوادگی پرسنل را وارد کنید">
+                                                       class="border rounded-md w-full mb-4 px-3 py-2 text-right"
+                                                       placeholder="نام خانوادگی را وارد کنید">
                                             </div>
-                                            <div class="flex flex-col mb-4">
-                                                <label for="personnel_codeForEdit"
+                                            <div class="flex flex-col items-right mb-4">
+                                                <label for="national_codeForEdit"
                                                        class="block text-gray-700 text-sm font-bold mb-2">کد
-                                                    پرسنلی*:</label>
-                                                <input type="text" disabled name="personnel_codeForEdit"
-                                                       id="personnel_codeForEdit"
-                                                       class="border rounded-md bg-gray-300 w-full mb-4 px-3 py-2"
-                                                       placeholder="کد پرسنلی را وارد کنید">
+                                                    ملی*:</label>
+                                                <input type="text" id="national_codeForEdit" name="national_codeForEdit"
+                                                       autocomplete="off" disabled
+                                                       class="border rounded-md bg-gray-300 w-full mb-4 px-3 py-2 text-right"
+                                                       placeholder="کد ملی را وارد کنید">
                                             </div>
-                                            <div class="flex flex-col mb-4">
-                                                <label for="phoneForEdit"
-                                                       class="block text-gray-700 text-sm font-bold mb-2">شماره
-                                                    داخلی:</label>
-                                                <input type="text" name="phoneForEdit" id="phoneForEdit"
-                                                       class="border rounded-md w-full mb-4 px-3 py-2"
-                                                       placeholder="شماره داخلی را وارد کنید (اختیاری)">
-                                            </div>
-                                            <div class="flex flex-col mb-4">
+                                            <div class="flex flex-col items-right mb-2">
                                                 <label for="mobileForEdit"
                                                        class="block text-gray-700 text-sm font-bold mb-2">شماره
-                                                    همراه:</label>
-                                                <input type="text" name="mobileForEdit" id="mobileForEdit"
-                                                       class="border rounded-md w-full mb-4 px-3 py-2 "
-                                                       placeholder="شماره همراه را وارد کنید (اختیاری)">
-                                            </div>
-                                            <div class="flex flex-col mb-4">
-                                                <label for="net_usernameForEdit"
-                                                       class="block text-gray-700 text-sm font-bold mb-2">یوزر
-                                                    شبکه:</label>
-                                                <input type="text" name="net_usernameForEdit" id="net_usernameForEdit"
-                                                       class="border rounded-md w-full mb-4 px-3 py-2"
-                                                       placeholder="یوزر شبکه را وارد کنید (اختیاری)">
-                                            </div>
-                                            <div class="flex flex-col mb-4">
-                                                <label for="room_numberForEdit"
-                                                       class="block text-gray-700 text-sm font-bold mb-2">شماره
-                                                    اتاق:</label>
-                                                <input type="text" name="room_numberForEdit" id="room_numberForEdit"
-                                                       class="border rounded-md w-full mb-4 px-3 py-2"
-                                                       placeholder="شماره اتاق را وارد کنید (اختیاری)">
+                                                    همراه*:</label>
+                                                <input type="text" id="mobileForEdit" name="mobileForEdit"
+                                                       autocomplete="off"
+                                                       class="border rounded-md w-full mb-4 px-3 py-2 text-right"
+                                                       placeholder="شماره همراه را وارد کنید">
                                             </div>
                                             <div class="mb-4">
-                                                <label for="assistanceForEdit"
-                                                       class="block text-gray-700 text-sm font-bold mb-2">معاونت/بخش:</label>
-                                                <select id="assistanceForEdit"
-                                                        class="border rounded-md w-full px-3 py-2"
-                                                        name="assistanceForEdit"
-                                                        title="معاونت/بخش را وارد کنید (اختیاری)">
-                                                    <option value="" disabled selected>انتخاب کنید</option>
-                                                    @php
-                                                        $assistances=\App\Models\Catalogs\Assistance::orderBy('name')->get();
-                                                    @endphp
-                                                    @foreach($assistances as $assistance)
-                                                        <option
-                                                            value="{{ $assistance->id }}">{{$assistance->name}}</option>
-                                                    @endforeach
+                                                <label for="genderForEdit"
+                                                       class="block text-gray-700 text-sm font-bold mb-2">جنسیت*:</label>
+                                                <select id="genderForEdit" class="border rounded-md w-full px-3 py-2 "
+                                                        name="genderForEdit">
+                                                    <option value="مرد">مرد</option>
+                                                    <option value="زن">زن</option>
                                                 </select>
+                                            </div>
+                                            <div class="flex flex-col items-right mb-4">
+                                                <label for="howzah_codeForEdit"
+                                                       class="block text-gray-700 text-sm font-bold mb-2">شماره پرونده
+                                                    حوزوی*:</label>
+                                                <input type="text" id="howzah_codeForEdit" name="howzah_codeForEdit"
+                                                       autocomplete="off"
+                                                       class="border rounded-md w-full mb-4 px-3 py-2 text-right"
+                                                       placeholder="شماره پرونده حوزوی را وارد کنید">
                                             </div>
                                         </div>
                                     </div>
@@ -208,7 +170,7 @@
                                         <input type="hidden" name="personID" id="personID" value="">
                                         <button type="submit"
                                                 class="px-4 py-2 mr-3 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300">
-                                            ویرایش پرسنل
+                                            ویرایش صاحب اثر
                                         </button>
                                         <button id="cancel-edit-person" type="button"
                                                 class="mt-3 w-full inline-flex justify-center px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-blue-300 sm:mt-0 sm:w-auto">
@@ -225,14 +187,14 @@
                 <div class=" mb-4 flex w-full">
                     {{--                    <label for="search-Username-UserManager" class="block mt-3 text-sm font-bold text-gray-700">جستجو در--}}
                     {{--                        کد--}}
-                    {{--                        پرسنلی:</label>--}}
+                    {{--                        صاحب اثری:</label>--}}
                     {{--                    <input id="search-Username-UserManager" autocomplete="off"--}}
-                    {{--                           placeholder="لطفا کد پرسنلی را وارد نمایید."--}}
+                    {{--                           placeholder="لطفا کد صاحب اثری را وارد نمایید."--}}
                     {{--                           type="text" name="search-Username-UserManager"--}}
                     {{--                           class="ml-4 mt-1 px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"/>--}}
                     {{--                    <label for="search-type-UserManager"--}}
                     {{--                           class="block text-gray-700 text-sm font-bold mt-3 ">جستجو در نقش--}}
-                    {{--                        پرسنلی:</label>--}}
+                    {{--                        صاحب اثری:</label>--}}
                     {{--                    <select id="search-type-UserManager" class="border rounded-md  px-3 "--}}
                     {{--                            name="search-type-UserManager">--}}
                     {{--                        <option value="">بدون فیلتر</option>--}}
@@ -245,30 +207,26 @@
                     <table class="w-full border-collapse rounded-lg overflow-hidden text-center">
                         <thead>
                         <tr class="bg-gradient-to-r from-blue-400 to-purple-500 items-center text-center text-white">
-                            <th class=" px-6 py-3  font-bold ">کد پرسنلی</th>
-                            <th class=" px-6 py-3  font-bold ">مشخصات</th>
-                            <th class=" px-3 py-3  font-bold ">شماره داخلی</th>
+                            <th class=" px-6 py-3  font-bold ">ردیف</th>
+                            <th class=" px-6 py-3  font-bold ">نام</th>
+                            <th class=" px-3 py-3  font-bold ">نام خانوادگی</th>
+                            <th class=" px-3 py-3  font-bold ">کد ملی</th>
                             <th class=" px-3 py-3  font-bold ">شماره همراه</th>
-                            <th class=" px-3 py-3  font-bold ">یوزر شبکه</th>
-                            <th class=" px-3 py-3  font-bold ">معاونت</th>
-                            <th class=" px-3 py-3  font-bold ">شماره اتاق</th>
+                            <th class=" px-3 py-3  font-bold ">جنسیت</th>
+                            <th class=" px-3 py-3  font-bold ">شماره پرونده حوزوی</th>
                             <th class=" px-3 py-3  font-bold ">عملیات</th>
                         </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-300">
                         @foreach ($personList as $person)
                             <tr class="bg-white">
-                                <td class="px-3 py-4">{{ $person->personnel_code }}</td>
-                                <td class="px-6 py-4">{{ $person->name . ' ' . $person->family  }}</td>
-                                <td class="px-3 py-4">{{ $person->phone }}</td>
+                                <td class="px-6 py-4">{{ $loop->iteration  }}</td>
+                                <td class="px-6 py-4">{{ $person->name  }}</td>
+                                <td class="px-6 py-4">{{$person->family  }}</td>
+                                <td class="px-3 py-4">{{ $person->national_code }}</td>
                                 <td class="px-3 py-4">{{ $person->mobile }}</td>
-                                <td class="px-3 py-4">{{ $person->net_username }}</td>
-                                <td class="px-3 py-4">
-                                    @php
-                                        $assistanceInfo=\App\Models\Catalogs\Assistance::find($person->assistance);
-                                    @endphp
-                                    {{ @$assistanceInfo->name }}</td>
-                                <td class="px-3 py-4">{{ $person->room_number }}</td>
+                                <td class="px-3 py-4">{{ $person->gender }}</td>
+                                <td class="px-3 py-4">{{ $person->howzah_code }}</td>
                                 <td class="px-6 py-4">
                                     <button type="submit" data-id="{{ $person->id }}"
                                             class="px-4 py-2 mr-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300 PersonControl">

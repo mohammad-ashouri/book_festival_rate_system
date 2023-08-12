@@ -56,13 +56,6 @@
                                                        id="password"
                                                        class="border rounded-md w-full mb-4 px-3 py-2 text-left"
                                                        placeholder="رمزعبور">
-                                                <label for="repeat-password"
-                                                       class="block text-gray-700 text-sm font-bold mb-2">تکرار رمز
-                                                    عبور*:</label>
-                                                <input type="password" autocomplete="new-password"
-                                                       name="repeat-password" id="repeat-password"
-                                                       class="border rounded-md w-full px-3 py-2 text-left"
-                                                       placeholder="تکرار رمزعبور">
                                             </div>
                                             <div class="mb-4">
                                                 <label for="type"
@@ -72,8 +65,25 @@
                                                         name="type">
                                                     <option value="" disabled selected>انتخاب کنید</option>
                                                     <option value="1">ادمین کل</option>
-                                                    <option value="2">کارشناس ستاد</option>
-                                                    <option value="3">کارشناس فناوری استان</option>
+                                                    <option value="2">کارشناس سامانه</option>
+                                                    <option value="3">مدیر گروه</option>
+                                                    <option value="4">ارزیاب</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-4" id="scientific_groupDIV" hidden="hidden">
+                                                <label for="scientific_group"
+                                                       class="block text-gray-700 text-sm font-bold mb-2">گروه علمی:</label>
+                                                <select id="scientific_group" class="border rounded-md w-full px-3 py-2"
+                                                        name="scientific_group">
+                                                    <option value="" disabled selected>انتخاب کنید</option>
+                                                    @php
+                                                        $groups=\App\Models\Catalogs\ScientificGroup::
+                                                        where('active',1)
+                                                        ->orderBy('name')->get();
+                                                    @endphp
+                                                    @foreach($groups as $group)
+                                                        <option value="{{ $group->id }}">{{$group->name}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -153,8 +163,25 @@
                                                         name="editedType">
                                                     <option value="" disabled selected>انتخاب کنید</option>
                                                     <option value="1">ادمین کل</option>
-                                                    <option value="2">کارشناس ستاد</option>
-                                                    <option value="3">کارشناس فناوری استان</option>
+                                                    <option value="2">کارشناس سامانه</option>
+                                                    <option value="3">مدیر گروه</option>
+                                                    <option value="4">ارزیاب</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-4" id="editedscientific_groupDIV" hidden="hidden">
+                                                <label for="editedscientific_group"
+                                                       class="block text-gray-700 text-sm font-bold mb-2">گروه علمی:</label>
+                                                <select id="editedscientific_group" class="border rounded-md w-full px-3 py-2"
+                                                        name="editedscientific_group">
+                                                    <option value="" disabled selected>انتخاب کنید</option>
+                                                    @php
+                                                        $groups=\App\Models\Catalogs\ScientificGroup::
+                                                        where('active',1)
+                                                        ->orderBy('name')->get();
+                                                    @endphp
+                                                    @foreach($groups as $group)
+                                                        <option value="{{ $group->id }}">{{$group->name}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>

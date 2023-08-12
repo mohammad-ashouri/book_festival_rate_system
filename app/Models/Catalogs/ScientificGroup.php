@@ -1,22 +1,14 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Catalogs;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Person extends Model
+class ScientificGroup extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $table='persons';
+    protected $table='scientific_groups';
     protected $hidden=['created_at','updated_at','deleted_at'];
-    protected $fillable=[
-        'name',
-        'family',
-        'national_code',
-        'mobile',
-        'howzah_code',
-        'gender'
-    ];
 }

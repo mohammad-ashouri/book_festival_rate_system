@@ -18,8 +18,10 @@ return new class extends Migration {
             $table->string('username')->unique();
             $table->string('password');
             $table->tinyInteger('type')->comment('
-            1 => SuperAdmin , 2 => Province Admin
+            1 => SuperAdmin , 2 => Admin , 3 => Header , 4 => Rater
             ');
+            $table->unsignedBigInteger('scientific_group')->nullable();
+            $table->foreign('scientific_group')->references('id')->on('scientific_groups');
             $table->string('subject');
             $table->tinyInteger('active')->default(1);
             $table->tinyInteger('NTCP')->default(0)->comment('Needs To Change Password');
