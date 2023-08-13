@@ -21,7 +21,7 @@
                                 </div>
 
                                 <div
-                                    class="inline-block align-bottom bg-white rounded-lg text-right overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full sm:max-w-[550px]">
+                                    class="inline-block align-bottom bg-white rounded-lg text-right overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full sm:max-w-[900px]">
                                     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                         <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
                                             تعریف اثر جدید در جشنواره
@@ -32,11 +32,11 @@
                                         </h3>
                                         <div class="mt-4">
                                             <div class="flex flex-col items-right mb-4">
-                                                <label for="name"
+                                                <label for="person"
                                                        class="block text-gray-700 text-sm font-bold mb-2">مشخصات صاحب
                                                     اثر*:</label>
-                                                <select id="gender" class="border rounded-md w-full px-3 py-2 "
-                                                        name="gender">
+                                                <select id="person" class="border rounded-md w-full px-3 py-2 "
+                                                        name="person">
                                                     <option value="" disabled selected>انتخاب کنید</option>
                                                     @php
                                                         $persons=\App\Models\Person::orderBy('family','asc')->get();
@@ -56,62 +56,24 @@
                                                        class="border rounded-md w-full mb-2 px-3 py-2 text-right"
                                                        placeholder="نام اثر را وارد کنید">
                                             </div>
-                                            <div class="flex justify-between">
-                                                <div class="flex justify-between">
-                                                    <div class="ml-3">
-                                                        <label for="scientific_group1"
-                                                               class="text-gray-700 text-sm font-bold whitespace-nowrap">گروه
-                                                            علمی اول*:</label>
-                                                        <select id="scientific_group1"
-                                                                class="border rounded-md w-full px-3 py-2"
-                                                                name="scientific_group1">
-                                                            name="scientific_group1">
-                                                            <option value="" disabled selected>انتخاب کنید</option>
-                                                            @php
-                                                                $groups=\App\Models\Catalogs\ScientificGroup::orderBy('name','asc')->get();
-                                                            @endphp
-                                                            @foreach($groups as $group)
-                                                                <option
-                                                                    value="{{ $group->id }}">{{ $group->name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div>
-                                                        <label for="scientific_group2"
-                                                               class="text-gray-700 text-sm font-bold whitespace-nowrap">گروه
-                                                            علمی دوم*:</label>
-                                                        <select id="scientific_group2"
-                                                                class="border rounded-md w-full px-3 py-2"
-                                                                name="scientific_group2">
-                                                            name="scientific_group2">
-                                                            <option value="" disabled selected>انتخاب کنید</option>
-                                                            @php
-                                                                $groups=\App\Models\Catalogs\ScientificGroup::orderBy('name','asc')->get();
-                                                            @endphp
-                                                            @foreach($groups as $group)
-                                                                <option
-                                                                    value="{{ $group->id }}">{{ $group->name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="ml-3">
-                                                    <label for="post_type"
-                                                           class="text-gray-700 text-sm font-bold whitespace-nowrap">قالب
+                                            <div class="flex justify-between mb-4">
+                                                <div class="w-1/3 ml-3">
+                                                    <label for="post_format"
+                                                           class="block text-gray-700 text-sm font-bold mb-2">قالب
                                                         علمی*:</label>
-                                                    <select id="post_type" class="border rounded-md w-full px-3 py-2 "
-                                                            name="post_type">
+                                                    <select id="post_format" class="border rounded-md w-full px-3 py-2 "
+                                                            name="post_format">
                                                         <option value="" disabled selected>انتخاب کنید</option>
                                                         <option value="کتاب">کتاب</option>
                                                         <option value="پایان نامه">پایان نامه</option>
                                                     </select>
                                                 </div>
-                                                <div>
-                                                    <label for="post_format"
-                                                           class=" text-gray-700 text-sm font-bold mb-1 whitespace-nowrap">نوع
+                                                <div class="w-1/3 ml-3">
+                                                    <label for="post_type"
+                                                           class=" block text-gray-700 text-sm font-bold mb-2">نوع
                                                         اثر*:</label>
-                                                    <select id="post_format" class="border rounded-md w-full px-3 py-2 "
-                                                            name="post_format">
+                                                    <select id="post_type" class="border rounded-md w-full px-3 py-2 "
+                                                            name="post_type">
                                                         <option value="" disabled selected>انتخاب کنید</option>
                                                         <option value="تالیف">تالیف</option>
                                                         <option value="تصحیح و تحقیق">تصحیح و تحقیق</option>
@@ -119,32 +81,152 @@
                                                         <option value="تقریر">تقریر</option>
                                                     </select>
                                                 </div>
+                                                <div class="w-1/3 ml-3">
+                                                    <label for="language"
+                                                           class="block text-gray-700 text-sm font-bold mb-2">زبان*:</label>
+                                                    <select id="language" class="border rounded-md w-full px-3 py-2 "
+                                                            name="language">
+                                                        <option value="" disabled selected>انتخاب کنید</option>
+                                                        @php
+                                                            $languages=\App\Models\Catalogs\Language::orderBy('name','asc')->get();
+                                                        @endphp
+                                                        @foreach($languages as $language)
+                                                            <option
+                                                                value="{{ $language->id }}">{{ $language->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div class="mb-4">
-                                                <label for="gender"
-                                                       class="block text-gray-700 text-sm font-bold mb-2">زبان*:</label>
-                                                <select id="gender" class="border rounded-md w-full px-3 py-2 "
-                                                        name="gender">
-                                                    <option value="" disabled selected>انتخاب کنید</option>
-                                                    @php
-                                                        $languages=\App\Models\Catalogs\Language::orderBy('name','asc')->get();
-                                                    @endphp
-                                                    @foreach($languages as $language)
-                                                        <option
-                                                            value="{{ $language->id }}">{{ $language->name }}</option>
-                                                    @endforeach
-                                                </select>
+                                            <div id="bookDIV1" class="flex justify-left mb-4 hidden">
+                                                <div class="w-1/3 ml-3">
+                                                    <label for="publisher"
+                                                           class="block text-gray-700 text-sm font-bold mb-2">ناشر:</label>
+                                                    <select id="publisher"
+                                                            class="border rounded-md w-full px-3 py-2"
+                                                            name="publisher">
+                                                        <option value="" disabled selected>انتخاب کنید</option>
+                                                        @php
+                                                            $publishers=\App\Models\Catalogs\Publisher::orderBy('name','asc')->get();
+                                                        @endphp
+                                                        @foreach($publishers as $publisher)
+                                                            <option
+                                                                value="{{ $publisher->id }}">{{ $publisher->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="w-1/3 ml-3">
+                                                    <label for="ISSN"
+                                                           class="block text-gray-700 text-sm font-bold mb-2">شابک*:</label>
+                                                    <input type="text" id="ISSN" name="ISSN"
+                                                           autocomplete="off"
+                                                           class="border rounded-md w-full px-3 py-2 "
+                                                           placeholder="شابک را وارد کنید">
+                                                </div>
                                             </div>
-                                            <div class="flex flex-col items-right mb-4">
-                                                <label for="howzah_code"
-                                                       class="block text-gray-700 text-sm font-bold mb-2">شمارگان
-                                                    صفحه*:</label>
-                                                <input type="text" id="howzah_code" name="howzah_code"
-                                                       autocomplete="off"
-                                                       class="border rounded-md w-full mb-4 px-3 py-2 text-right"
-                                                       placeholder="شمارگان صفحه را وارد کنید">
+                                            <div id="bookDIV2" class="flex justify-between mb-4 hidden">
+                                                <div class="w-1/3 ml-3">
+                                                    <label for="number_of_covers"
+                                                           class="block text-gray-700 text-sm font-bold mb-2">تعداد
+                                                        جلد*:</label>
+                                                    <input type="text" id="number_of_covers" name="number_of_covers"
+                                                           autocomplete="off"
+                                                           class="border rounded-md w-full px-3 py-2 "
+                                                           placeholder="تعداد جلد را وارد کنید">
+                                                </div>
+                                                <div class="w-1/3 ml-3">
+                                                    <label for="circulation"
+                                                           class="block text-gray-700 text-sm font-bold mb-2">تیراژ*:</label>
+                                                    <input type="text" id="circulation" name="circulation"
+                                                           autocomplete="off"
+                                                           class="border rounded-md w-full px-3 py-2 "
+                                                           placeholder="تیراژ را وارد کنید">
+                                                </div>
+                                                <div class="w-1/3 ml-3">
+                                                    <label for="book_size"
+                                                           class="block text-gray-700 text-sm font-bold mb-2">قطع</label>
+                                                    <select id="book_size"
+                                                            class="border rounded-md w-full px-3 py-2 mb-2"
+                                                            name="book_size">
+                                                        <option value="" disabled selected>انتخاب کنید</option>
+                                                        <option value="رحلی">رحلی</option>
+                                                        <option value="رقعی">رقعی</option>
+                                                        <option value="نیم رقعی">نیم رقعی</option>
+                                                        <option value="وزیری">وزیری</option>
+                                                        <option value="بیاضی">بیاضی</option>
+                                                        <option value="پالتویی">پالتویی</option>
+                                                        <option value="خشتی">خشتی</option>
+                                                        <option value="جیبی">جیبی</option>
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div class="flex justify-between">
+                                            <div id="thesisDIV1" class="flex justify-between mb-4 hidden">
+                                                <div class="w-1/3 ml-3">
+                                                    <label for="thesis_certificate_number"
+                                                           class="text-gray-700 text-sm font-bold whitespace-nowrap">شماره
+                                                        گواهی دفاع پایان نامه:</label>
+                                                    <input type="text" id="thesis_certificate_number"
+                                                           name="thesis_certificate_number"
+                                                           autocomplete="off"
+                                                           class="border rounded-md w-full px-3 py-2 "
+                                                           placeholder="شابک را وارد کنید">
+                                                </div>
+                                                <div class="w-1/3 ml-3">
+                                                    <label for="thesis_defence_place"
+                                                           class="block text-gray-700 text-sm font-bold mb-1">محل
+                                                        دفاع*:</label>
+                                                    <select id="thesis_defence_place"
+                                                            class="border rounded-md w-full px-3 py-2"
+                                                            name="thesis_defence_place">
+                                                        <option value="" disabled selected>انتخاب کنید</option>
+                                                        @php
+                                                            $publishers=\App\Models\Catalogs\Publisher::orderBy('name','asc')->get();
+                                                        @endphp
+                                                        @foreach($publishers as $publisher)
+                                                            <option
+                                                                value="{{ $publisher->id }}">{{ $publisher->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="w-1/3 ml-3">
+                                                    <label for="thesis_grade"
+                                                           class="text-gray-700 text-sm font-bold whitespace-nowrap">امتیاز
+                                                        پایان نامه:</label>
+                                                    <input type="text" id="thesis_grade" name="thesis_grade"
+                                                           autocomplete="off"
+                                                           class="border rounded-md w-full px-3 py-2 "
+                                                           placeholder="شابک را وارد کنید">
+                                                </div>
+                                            </div>
+                                            <div id="thesisDIV2" class="flex justify-between mb-4 hidden">
+                                                <div class="w-1/3 ml-3">
+                                                    <label for="thesis_supervisor"
+                                                           class="block text-gray-700 text-sm font-bold mb-2">مشخصات
+                                                        استاد راهنما*:</label>
+                                                    <input type="text" id="thesis_supervisor" name="thesis_supervisor"
+                                                           autocomplete="off"
+                                                           class="border rounded-md w-full px-3 py-2 "
+                                                           placeholder="نام و نام خانوادگی استاد راهنما ">
+                                                </div>
+                                                <div class="w-1/3 ml-3">
+                                                    <label for="thesis_advisor"
+                                                           class="block text-gray-700 text-sm font-bold mb-2">مشخصات
+                                                        استاد مشاور*:</label>
+                                                    <input type="text" id="thesis_advisor" name="thesis_advisor"
+                                                           autocomplete="off"
+                                                           class="border rounded-md w-full px-3 py-2 "
+                                                           placeholder="نام و نام خانوادگی استاد مشاور ">
+                                                </div>
+                                                <div class="w-1/3 ml-3">
+                                                    <label for="thesis_referee"
+                                                           class="block text-gray-700 text-sm font-bold mb-2">مشخصات
+                                                        استاد داور*:</label>
+                                                    <input type="text" id="thesis_referee" name="thesis_referee"
+                                                           autocomplete="off"
+                                                           class="border rounded-md w-full px-3 py-2 "
+                                                           placeholder="نام و نام خانوادگی استاد داور ">
+                                                </div>
+                                            </div>
+                                            <div class="flex justify-right mb-4">
                                                 <div class="ml-3">
                                                     <label for="scientific_group1"
                                                            class="text-gray-700 text-sm font-bold whitespace-nowrap">گروه
@@ -170,8 +252,7 @@
                                                     <select id="scientific_group2"
                                                             class="border rounded-md w-full px-3 py-2"
                                                             name="scientific_group2">
-                                                        name="scientific_group2">
-                                                        <option value="" disabled selected>انتخاب کنید</option>
+                                                        <option value="">بدون گروه علمی دوم</option>
                                                         @php
                                                             $groups=\App\Models\Catalogs\ScientificGroup::orderBy('name','asc')->get();
                                                         @endphp
@@ -180,6 +261,172 @@
                                                                 value="{{ $group->id }}">{{ $group->name }}</option>
                                                         @endforeach
                                                     </select>
+                                                </div>
+                                            </div>
+                                            <div class="flex flex-col items-right mb-4">
+                                                <label for="properties"
+                                                       class="text-gray-700 text-sm font-bold whitespace-nowrap">ویژگی
+                                                    های اثر:</label>
+                                                <textarea name="properties" id="properties"
+                                                          class="border rounded-md w-full px-3 py-2"></textarea>
+                                            </div>
+                                            <div class="flex flex-col items-right mb-4">
+                                                <div class="mb-4">
+                                                    <label for="research_type"
+                                                           class="text-gray-700 text-sm font-bold whitespace-nowrap">نوع
+                                                        همکاری:</label>
+                                                    <select id="research_type"
+                                                            class="border rounded-md w-full px-3 py-2"
+                                                            name="research_type">
+                                                        <option value="" disabled selected>انتخاب کنید</option>
+                                                        <option value="individual">فردی</option>
+                                                        <option value="common">مشترک</option>
+                                                    </select>
+                                                </div>
+                                                <div id="commonDIV" class="mb-4 hidden">
+                                                    <table class="min-w-full divide-y divide-gray-200 text-center">
+                                                        <thead class="bg-gray-50">
+                                                        <tr>
+                                                            <th scope="col"
+                                                                class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                                نام
+                                                            </th>
+                                                            <th scope="col"
+                                                                class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                                                                نام خانوادگی
+                                                            </th>
+                                                            <th scope="col"
+                                                                class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                                                                کد ملی
+                                                            </th>
+                                                            <th scope="col"
+                                                                class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                                                                درصد همکاری
+                                                            </th>
+                                                            <th scope="col"
+                                                                class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap">
+                                                                شماره همراه
+                                                            </th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody id="tableBody"
+                                                               class="bg-white divide-y divide-gray-200 ">
+                                                        <tr>
+                                                            <td><input type="text" name="comm_name1"
+                                                                       class="border rounded-md w-full px-3 py-2"
+                                                                       placeholder="نام"></td>
+                                                            <td><input type="text" name="comm_family1"
+                                                                       class="border rounded-md w-full px-3 py-2"
+                                                                       placeholder="نام خانوادگی"></td>
+                                                            <td><input type="text" name="comm_national_code1"
+                                                                       class="border rounded-md w-full px-3 py-2"
+                                                                       placeholder="کد ملی"></td>
+                                                            <td><input type="text" name="comm_percentage1"
+                                                                       class="border rounded-md w-16 px-3 py-2"
+                                                                       placeholder="درصد همکاری"></td>
+                                                            <td><input type="text" name="comm_mobile1"
+                                                                       class="border rounded-md w-full px-3 py-2"
+                                                                       placeholder="شماره همراه"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><input type="text" name="comm_name2"
+                                                                       class="border rounded-md w-full px-3 py-2"
+                                                                       placeholder="نام"></td>
+                                                            <td><input type="text" name="comm_family2"
+                                                                       class="border rounded-md w-full px-3 py-2"
+                                                                       placeholder="نام خانوادگی"></td>
+                                                            <td><input type="text" name="comm_national_code2"
+                                                                       class="border rounded-md w-full px-3 py-2"
+                                                                       placeholder="کد ملی"></td>
+                                                            <td><input type="text" name="comm_percentage2"
+                                                                       class="border rounded-md w-16 px-3 py-2"
+                                                                       placeholder="درصد همکاری"></td>
+                                                            <td><input type="text" name="comm_mobile2"
+                                                                       class="border rounded-md w-full px-3 py-2"
+                                                                       placeholder="شماره همراه"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><input type="text" name="comm_name3"
+                                                                       class="border rounded-md w-full px-3 py-2"
+                                                                       placeholder="نام"></td>
+                                                            <td><input type="text" name="comm_family3"
+                                                                       class="border rounded-md w-full px-3 py-2"
+                                                                       placeholder="نام خانوادگی"></td>
+                                                            <td><input type="text" name="comm_national_code3"
+                                                                       class="border rounded-md w-full px-3 py-2"
+                                                                       placeholder="کد ملی"></td>
+                                                            <td><input type="text" name="comm_percentage3"
+                                                                       class="border rounded-md w-16 px-3 py-2"
+                                                                       placeholder="درصد همکاری"></td>
+                                                            <td><input type="text" name="comm_mobile3"
+                                                                       class="border rounded-md w-full px-3 py-2"
+                                                                       placeholder="شماره همراه"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><input type="text" name="comm_name4"
+                                                                       class="border rounded-md w-full px-3 py-2"
+                                                                       placeholder="نام"></td>
+                                                            <td><input type="text" name="comm_family4"
+                                                                       class="border rounded-md w-full px-3 py-2"
+                                                                       placeholder="نام خانوادگی"></td>
+                                                            <td><input type="text" name="comm_national_code4"
+                                                                       class="border rounded-md w-full px-3 py-2"
+                                                                       placeholder="کد ملی"></td>
+                                                            <td><input type="text" name="comm_percentage4"
+                                                                       class="border rounded-md w-16 px-3 py-2"
+                                                                       placeholder="درصد همکاری"></td>
+                                                            <td><input type="text" name="comm_mobile4"
+                                                                       class="border rounded-md w-full px-3 py-2"
+                                                                       placeholder="شماره همراه"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><input type="text" name="comm_name5"
+                                                                       class="border rounded-md w-full px-3 py-2"
+                                                                       placeholder="نام"></td>
+                                                            <td><input type="text" name="comm_family5"
+                                                                       class="border rounded-md w-full px-3 py-2"
+                                                                       placeholder="نام خانوادگی"></td>
+                                                            <td><input type="text" name="comm_national_code5"
+                                                                       class="border rounded-md w-full px-3 py-2"
+                                                                       placeholder="کد ملی"></td>
+                                                            <td><input type="text" name="comm_percentage5"
+                                                                       class="border rounded-md w-16 px-3 py-2"
+                                                                       placeholder="درصد همکاری"></td>
+                                                            <td><input type="text" name="comm_mobile5"
+                                                                       class="border rounded-md w-full px-3 py-2"
+                                                                       placeholder="شماره همراه"></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="flex flex-col items-right mb-4">
+                                                <div class="mb-4">
+                                                    <label for="post_delivery_method"
+                                                           class="text-gray-700 text-sm font-bold whitespace-nowrap">نحوه
+                                                        تحویل اثر:</label>
+                                                    <select id="post_delivery_method"
+                                                            class="border rounded-md w-full px-3 py-2"
+                                                            name="post_delivery_method">
+                                                        <option value="" disabled selected>انتخاب کنید</option>
+                                                        <option value="physical">فیزیکی</option>
+                                                        <option value="digital">دیجیتال</option>
+                                                    </select>
+                                                </div>
+                                                <div id="file_srcDIV" class="mb-4 hidden">
+                                                    <label for="file_src"
+                                                           class="text-gray-700 text-sm font-bold whitespace-nowrap">فایل
+                                                        اثر:</label>
+                                                    <input id="file_src" name="file_src" type="file"
+                                                           class="border border-gray-300 px-3 py-2 w-full rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                                                </div>
+                                                <div id="thesis_proceedings_srcDIV" class="mb-4 hidden">
+                                                    <label for="thesis_proceedings_src"
+                                                           class="text-gray-700 text-sm font-bold whitespace-nowrap">فایل
+                                                        دفاعیه پایان نامه:</label>
+                                                    <input id="thesis_proceedings_src" name="thesis_proceedings_src"
+                                                           type="file"
+                                                           class="border border-gray-300 px-3 py-2 w-full rounded-lg focus:ring-blue-500 focus:border-blue-500">
                                                 </div>
                                             </div>
                                         </div>
@@ -191,94 +438,6 @@
                                             ثبت اثر جدید
                                         </button>
                                         <button id="cancel-new-post" type="button"
-                                                class="mt-3 w-full inline-flex justify-center px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-blue-300 sm:mt-0 sm:w-auto">
-                                            انصراف
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <form id="edit-person">
-                    @csrf
-                    <div class="mt-4 mb-4 flex items-center">
-                        <div class="fixed z-10 inset-0 overflow-y-auto hidden" id="editPersonModal">
-                            <div
-                                class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center  sm:block sm:p-0">
-                                <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-                                    <div class="absolute inset-0 bg-gray-500 opacity-75 edit"></div>
-                                </div>
-
-                                <div
-                                    class="inline-block align-bottom bg-white rounded-lg text-right overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full sm:max-w-[550px]">
-                                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
-                                            ویرایش اثر
-                                        </h3>
-                                        <div class="mt-4">
-                                            <div class="flex flex-col items-right mb-4">
-                                                <label for="nameForEdit"
-                                                       class="block text-gray-700 text-sm font-bold mb-2">نام*:</label>
-                                                <input type="text" id="nameForEdit" name="nameForEdit"
-                                                       autocomplete="off"
-                                                       class="border rounded-md w-full mb-4 px-3 py-2 text-right"
-                                                       placeholder="نام را وارد کنید">
-                                            </div>
-                                            <div class="flex flex-col items-right mb-4">
-                                                <label for="familyForEdit"
-                                                       class="block text-gray-700 text-sm font-bold mb-2">نام
-                                                    خانوادگی*:</label>
-                                                <input type="text" id="familyForEdit" name="familyForEdit"
-                                                       autocomplete="off"
-                                                       class="border rounded-md w-full mb-4 px-3 py-2 text-right"
-                                                       placeholder="نام خانوادگی را وارد کنید">
-                                            </div>
-                                            <div class="flex flex-col items-right mb-4">
-                                                <label for="national_codeForEdit"
-                                                       class="block text-gray-700 text-sm font-bold mb-2">کد
-                                                    ملی*:</label>
-                                                <input type="text" id="national_codeForEdit" name="national_codeForEdit"
-                                                       autocomplete="off" disabled
-                                                       class="border rounded-md bg-gray-300 w-full mb-4 px-3 py-2 text-right"
-                                                       placeholder="کد ملی را وارد کنید">
-                                            </div>
-                                            <div class="flex flex-col items-right mb-2">
-                                                <label for="mobileForEdit"
-                                                       class="block text-gray-700 text-sm font-bold mb-2">شماره
-                                                    همراه*:</label>
-                                                <input type="text" id="mobileForEdit" name="mobileForEdit"
-                                                       autocomplete="off"
-                                                       class="border rounded-md w-full mb-4 px-3 py-2 text-right"
-                                                       placeholder="شماره همراه را وارد کنید">
-                                            </div>
-                                            <div class="mb-4">
-                                                <label for="genderForEdit"
-                                                       class="block text-gray-700 text-sm font-bold mb-2">جنسیت*:</label>
-                                                <select id="genderForEdit" class="border rounded-md w-full px-3 py-2 "
-                                                        name="genderForEdit">
-                                                    <option value="مرد">مرد</option>
-                                                    <option value="زن">زن</option>
-                                                </select>
-                                            </div>
-                                            <div class="flex flex-col items-right mb-4">
-                                                <label for="howzah_codeForEdit"
-                                                       class="block text-gray-700 text-sm font-bold mb-2">شماره پرونده
-                                                    حوزوی*:</label>
-                                                <input type="text" id="howzah_codeForEdit" name="howzah_codeForEdit"
-                                                       autocomplete="off"
-                                                       class="border rounded-md w-full mb-4 px-3 py-2 text-right"
-                                                       placeholder="شماره پرونده حوزوی را وارد کنید">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                                        <input type="hidden" name="personID" id="personID" value="">
-                                        <button type="submit"
-                                                class="px-4 py-2 mr-3 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300">
-                                            ویرایش اثر
-                                        </button>
-                                        <button id="cancel-edit-person" type="button"
                                                 class="mt-3 w-full inline-flex justify-center px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-blue-300 sm:mt-0 sm:w-auto">
                                             انصراف
                                         </button>

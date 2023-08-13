@@ -702,66 +702,104 @@ $(document).ready(function () {
             });
             break;
         case '/Posts':
-            $('#new-post-button, #cancel-new-post').on('click', function () {
-                toggleModal(newPostModal.id);
-            });
             $('.absolute.inset-0.bg-gray-500.opacity-75.add').on('click', function () {
                 toggleModal(newPostModal.id)
             });
             $('.absolute.inset-0.bg-gray-500.opacity-75.edit').on('click', function () {
                 toggleModal(editPostModal.id)
             });
+            $('#post_format').on('change', function () {
+                if (post_format.value=='کتاب'){
+                    bookDIV1.classList.remove('hidden');
+                    bookDIV2.classList.remove('hidden');
+                    thesisDIV1.classList.add('hidden');
+                    thesisDIV1.classList.add('hidden');
+                }else if(post_format.value=='پایان نامه'){
+                    bookDIV1.classList.add('hidden');
+                    bookDIV2.classList.add('hidden');
+                    thesisDIV1.classList.remove('hidden');
+                    thesisDIV1.classList.remove('hidden');
+                    if (post_delivery_method.value=='digital'){
+                        file_srcDIV.classList.remove('hidden');
+                        if(post_format.value=='پایان نامه') {
+                            thesis_proceedings_srcDIV.classList.remove('hidden');
+                        }
+                    }
+                }
+            });
+
+            $('#research_type').on('change', function () {
+                if (research_type.value=='common'){
+                    commonDIV.classList.remove('hidden');
+                }else{
+                    commonDIV.classList.add('hidden');
+                }
+            });
+            $('#post_delivery_method').on('change', function () {
+                if (post_delivery_method.value=='physical'){
+                    file_srcDIV.classList.add('hidden');
+                    thesis_proceedings_srcDIV.classList.add('hidden');
+                }
+                else if (post_delivery_method.value=='digital'){
+                    file_srcDIV.classList.remove('hidden');
+                    if(post_format.value=='پایان نامه') {
+                        thesis_proceedings_srcDIV.classList.remove('hidden');
+                    }
+                }
+            });
             $('.PostControl,#cancel-edit-post').on('click', function () {
                 toggleModal(editPostModal.id);
             });
             $('#new-post').on('submit', function (e) {
                 e.preventDefault();
-                Swal.fire({
-                    title: 'آیا مطمئن هستید؟',
-                    text: 'این مقدار به صورت دائمی اضافه خواهد شد.',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    cancelButtonText: 'خیر',
-                    confirmButtonText: 'بله',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        var form = $(this);
-                        var data = form.serialize();
-                        $.ajax({
-                            type: 'POST',
-                            url: '/newPost',
-                            data: data,
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                            },
-                            success: function (response) {
-                                if (response.errors) {
-                                    if (response.errors.nullName) {
-                                        swalFire('خطا!', response.errors.nullName[0], 'error', 'تلاش مجدد');
-                                    } else if (response.errors.nullFamily) {
-                                        swalFire('خطا!', response.errors.nullFamily[0], 'error', 'تلاش مجدد');
-                                    } else if (response.errors.nullNationalCode) {
-                                        swalFire('خطا!', response.errors.nullNationalCode[0], 'error', 'تلاش مجدد');
-                                    } else if (response.errors.wrongNationalCode) {
-                                        swalFire('خطا!', response.errors.wrongNationalCode[0], 'error', 'تلاش مجدد');
-                                    } else if (response.errors.nullGender) {
-                                        swalFire('خطا!', response.errors.nullGender[0], 'error', 'تلاش مجدد');
-                                    } else if (response.errors.nullMobile) {
-                                        swalFire('خطا!', response.errors.nullMobile[0], 'error', 'تلاش مجدد');
-                                    } else if (response.errors.wrongMobile) {
-                                        swalFire('خطا!', response.errors.wrongMobile[0], 'error', 'تلاش مجدد');
-                                    } else if (response.errors.dupNationalCode) {
-                                        swalFire('خطا!', response.errors.dupNationalCode[0], 'error', 'تلاش مجدد');
-                                    }
-                                } else if (response.success) {
-                                    swalFire('ثبت اطلاعات صاحب اثر موفقیت آمیز بود!', response.message.PersonAdded[0], 'success', 'بستن');
-                                    toggleModal(newPersonModal.id);
-                                    resetFields();
+
+                    Swal.fire({
+                        title: 'آیا مطمئن هستید؟',
+                        text: 'این مقدار به صورت دائمی اضافه خواهد شد.',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        cancelButtonText: 'خیر',
+                        confirmButtonText: 'بله',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            var form = $(this);
+                            var data = form.serialize();
+                            $.ajax({
+                                type: 'POST',
+                                url: '/newPost',
+                                data: data,
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                                },
+                                success: function (response) {
+                                    console.log(response);
+                                    // if (response.errors) {
+                                    //     if (response.errors.nullName) {
+                                    //         swalFire('خطا!', response.errors.nullName[0], 'error', 'تلاش مجدد');
+                                    //     } else if (response.errors.nullFamily) {
+                                    //         swalFire('خطا!', response.errors.nullFamily[0], 'error', 'تلاش مجدد');
+                                    //     } else if (response.errors.nullNationalCode) {
+                                    //         swalFire('خطا!', response.errors.nullNationalCode[0], 'error', 'تلاش مجدد');
+                                    //     } else if (response.errors.wrongNationalCode) {
+                                    //         swalFire('خطا!', response.errors.wrongNationalCode[0], 'error', 'تلاش مجدد');
+                                    //     } else if (response.errors.nullGender) {
+                                    //         swalFire('خطا!', response.errors.nullGender[0], 'error', 'تلاش مجدد');
+                                    //     } else if (response.errors.nullMobile) {
+                                    //         swalFire('خطا!', response.errors.nullMobile[0], 'error', 'تلاش مجدد');
+                                    //     } else if (response.errors.wrongMobile) {
+                                    //         swalFire('خطا!', response.errors.wrongMobile[0], 'error', 'تلاش مجدد');
+                                    //     } else if (response.errors.dupNationalCode) {
+                                    //         swalFire('خطا!', response.errors.dupNationalCode[0], 'error', 'تلاش مجدد');
+                                    //     }
+                                    // } else if (response.success) {
+                                    //     swalFire('ثبت اطلاعات صاحب اثر موفقیت آمیز بود!', response.message.PersonAdded[0], 'success', 'بستن');
+                                    //     toggleModal(newPersonModal.id);
+                                    //     resetFields();
+                                    // }
                                 }
-                            }
-                        });
-                    }
-                });
+                            });
+                        }
+                    });
             });
             $('.PersonControl').on('click', function () {
                 $.ajax({
