@@ -713,12 +713,12 @@ $(document).ready(function () {
                     bookDIV1.classList.remove('hidden');
                     bookDIV2.classList.remove('hidden');
                     thesisDIV1.classList.add('hidden');
-                    thesisDIV1.classList.add('hidden');
+                    thesisDIV2.classList.add('hidden');
                 }else if(post_format.value=='پایان نامه'){
                     bookDIV1.classList.add('hidden');
                     bookDIV2.classList.add('hidden');
                     thesisDIV1.classList.remove('hidden');
-                    thesisDIV1.classList.remove('hidden');
+                    thesisDIV2.classList.remove('hidden');
                     if (post_delivery_method.value=='digital'){
                         file_srcDIV.classList.remove('hidden');
                         if(post_format.value=='پایان نامه') {
@@ -728,8 +728,8 @@ $(document).ready(function () {
                 }
             });
 
-            $('#research_type').on('change', function () {
-                if (research_type.value=='common'){
+            $('#activity_type').on('change', function () {
+                if (activity_type.value=='common'){
                     commonDIV.classList.remove('hidden');
                 }else{
                     commonDIV.classList.add('hidden');
@@ -750,6 +750,9 @@ $(document).ready(function () {
             $('.PostControl,#cancel-edit-post').on('click', function () {
                 toggleModal(editPostModal.id);
             });
+            $('#new-post-button,#cancel-add-post').on('click', function () {
+                toggleModal(newPostModal.id);
+            });
             $('#new-post').on('submit', function (e) {
                 e.preventDefault();
 
@@ -763,63 +766,97 @@ $(document).ready(function () {
                     }).then((result) => {
                         if (result.isConfirmed) {
                             var form = $(this);
-                            var data = form.serialize();
+                            var formData = new FormData(form[0]);
                             $.ajax({
                                 type: 'POST',
                                 url: '/newPost',
-                                data: data,
+                                data: formData,
                                 headers: {
                                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                                 },
+                                contentType: false,
+                                processData: false,
                                 success: function (response) {
                                     console.log(response);
-                                    // if (response.errors) {
-                                    //     if (response.errors.nullName) {
-                                    //         swalFire('خطا!', response.errors.nullName[0], 'error', 'تلاش مجدد');
-                                    //     } else if (response.errors.nullFamily) {
-                                    //         swalFire('خطا!', response.errors.nullFamily[0], 'error', 'تلاش مجدد');
-                                    //     } else if (response.errors.nullNationalCode) {
-                                    //         swalFire('خطا!', response.errors.nullNationalCode[0], 'error', 'تلاش مجدد');
-                                    //     } else if (response.errors.wrongNationalCode) {
-                                    //         swalFire('خطا!', response.errors.wrongNationalCode[0], 'error', 'تلاش مجدد');
-                                    //     } else if (response.errors.nullGender) {
-                                    //         swalFire('خطا!', response.errors.nullGender[0], 'error', 'تلاش مجدد');
-                                    //     } else if (response.errors.nullMobile) {
-                                    //         swalFire('خطا!', response.errors.nullMobile[0], 'error', 'تلاش مجدد');
-                                    //     } else if (response.errors.wrongMobile) {
-                                    //         swalFire('خطا!', response.errors.wrongMobile[0], 'error', 'تلاش مجدد');
-                                    //     } else if (response.errors.dupNationalCode) {
-                                    //         swalFire('خطا!', response.errors.dupNationalCode[0], 'error', 'تلاش مجدد');
-                                    //     }
-                                    // } else if (response.success) {
-                                    //     swalFire('ثبت اطلاعات صاحب اثر موفقیت آمیز بود!', response.message.PersonAdded[0], 'success', 'بستن');
-                                    //     toggleModal(newPersonModal.id);
-                                    //     resetFields();
-                                    // }
+                                    if (response.errors) {
+                                        if (response.errors.nullPerson) {
+                                            swalFire('خطا!', response.errors.nullPerson[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullName) {
+                                            swalFire('خطا!', response.errors.nullName[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullPostFormat) {
+                                            swalFire('خطا!', response.errors.nullPostFormat[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullPostType) {
+                                            swalFire('خطا!', response.errors.nullPostType[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullLanguage) {
+                                            swalFire('خطا!', response.errors.nullLanguage[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullPagesNumber) {
+                                            swalFire('خطا!', response.errors.nullPagesNumber[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullSG1) {
+                                            swalFire('خطا!', response.errors.nullSG1[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullActivityType) {
+                                            swalFire('خطا!', response.errors.nullActivityType[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullPostDeliveryMethod) {
+                                            swalFire('خطا!', response.errors.nullPostDeliveryMethod[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullPublisher) {
+                                            swalFire('خطا!', response.errors.nullPublisher[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullISSN) {
+                                            swalFire('خطا!', response.errors.nullISSN[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullNumberOfCovers) {
+                                            swalFire('خطا!', response.errors.nullNumberOfCovers[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullCirculation) {
+                                            swalFire('خطا!', response.errors.nullCirculation[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullBookSize) {
+                                            swalFire('خطا!', response.errors.nullBookSize[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullThesisCertificateNumber) {
+                                            swalFire('خطا!', response.errors.nullThesisCertificateNumber[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullThesisDefencePlace) {
+                                            swalFire('خطا!', response.errors.nullThesisDefencePlace[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullGrade) {
+                                            swalFire('خطا!', response.errors.nullGrade[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullSupervisor) {
+                                            swalFire('خطا!', response.errors.nullSupervisor[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullAdvisor) {
+                                            swalFire('خطا!', response.errors.nullAdvisor[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullReferee) {
+                                            swalFire('خطا!', response.errors.nullReferee[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullCooperatorInformation) {
+                                            swalFire('خطا!', response.errors.nullCooperatorInformation[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullPostFile) {
+                                            swalFire('خطا!', response.errors.nullPostFile[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullThesisFile) {
+                                            swalFire('خطا!', response.errors.nullThesisFile[0], 'error', 'تلاش مجدد');
+                                        }
+                                    } else if (response.success) {
+                                        swalFire('ثبت اثر جدید موفقیت آمیز بود!', response.message.PostAdded[0], 'success', 'بستن');
+                                        toggleModal(newPostModal.id);
+                                        resetFields();
+                                    }
                                 }
                             });
                         }
                     });
-            });
-            $('.PersonControl').on('click', function () {
-                $.ajax({
-                    type: 'GET',
-                    url: '/getPersonInfo',
-                    data: {
-                        id: $(this).data('id')
-                    },
-                    success: function (response) {
-                        if (response) {
-                            personID.value = response.id;
-                            nameForEdit.value = response.name;
-                            familyForEdit.value = response.family;
-                            national_codeForEdit.value = response.national_code;
-                            mobileForEdit.value = response.mobile;
-                            genderForEdit.value = response.gender;
-                            howzah_codeForEdit.value = response.howzah_code;
-                        }
-                    }
-                });
             });
             $('#edit-person').on('submit', function (e) {
                 e.preventDefault();

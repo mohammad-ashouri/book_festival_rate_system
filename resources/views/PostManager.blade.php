@@ -12,8 +12,8 @@
                 <form id="new-post">
                     @csrf
                     <div class="mt-4 mb-4 flex items-center">
-                        {{--                        <div class="fixed z-10 inset-0 overflow-y-auto hidden" id="newPostModal">--}}
-                        <div class="fixed z-10 inset-0 overflow-y-auto" id="newPostModal">
+                                                <div class="fixed z-10 inset-0 overflow-y-auto hidden" id="newPostModal">
+{{--                        <div class="fixed z-10 inset-0 overflow-y-auto" id="newPostModal">--}}
                             <div
                                 class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center  sm:block sm:p-0">
                                 <div class="fixed inset-0 transition-opacity" aria-hidden="true">
@@ -97,7 +97,33 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div id="bookDIV1" class="flex justify-left mb-4 hidden">
+                                            <div class="flex justify-right mb-4">
+                                            <div class="w-1/3 ml-3">
+                                                <label for="pages_number"
+                                                       class="block text-gray-700 text-sm font-bold mb-1">تعداد صفحه*:</label>
+                                                <input type="text" id="pages_number" name="pages_number"
+                                                       autocomplete="off"
+                                                       class="border rounded-md w-full px-3 py-2 "
+                                                       placeholder="تعداد صفحه را وارد کنید">
+                                            </div>
+                                                <div class="w-1/3 ml-3">
+                                                    <label for="thesis_defence_place"
+                                                           class="block text-gray-700 text-sm font-bold mb-1">محور ویژه*:</label>
+                                                    <select id="thesis_defence_place"
+                                                            class="border rounded-md w-full px-3 py-2"
+                                                            name="thesis_defence_place">
+                                                        <option value="">این اثر در محور ویژه قرار نمی گیرد</option>
+                                                        @php
+                                                            $special_sections=\App\Models\Catalogs\SpecialSection::orderBy('name','asc')->get();
+                                                        @endphp
+                                                        @foreach($special_sections as $special_section)
+                                                            <option
+                                                                value="{{ $special_section->id }}">{{ $special_section->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div id="bookDIV1" class="flex justify-right mb-4 hidden">
                                                 <div class="w-1/3 ml-3">
                                                     <label for="publisher"
                                                            class="block text-gray-700 text-sm font-bold mb-2">ناشر:</label>
@@ -159,7 +185,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div id="thesisDIV1" class="flex justify-between mb-4 hidden">
+                                            <div id="thesisDIV1" class="flex justify-right mb-4 hidden">
                                                 <div class="w-1/3 ml-3">
                                                     <label for="thesis_certificate_number"
                                                            class="text-gray-700 text-sm font-bold whitespace-nowrap">شماره
@@ -197,7 +223,7 @@
                                                            placeholder="شابک را وارد کنید">
                                                 </div>
                                             </div>
-                                            <div id="thesisDIV2" class="flex justify-between mb-4 hidden">
+                                            <div id="thesisDIV2" class="flex justify-right mb-4 hidden">
                                                 <div class="w-1/3 ml-3">
                                                     <label for="thesis_supervisor"
                                                            class="block text-gray-700 text-sm font-bold mb-2">مشخصات
@@ -272,12 +298,12 @@
                                             </div>
                                             <div class="flex flex-col items-right mb-4">
                                                 <div class="mb-4">
-                                                    <label for="research_type"
+                                                    <label for="activity_type"
                                                            class="text-gray-700 text-sm font-bold whitespace-nowrap">نوع
                                                         همکاری:</label>
-                                                    <select id="research_type"
+                                                    <select id="activity_type"
                                                             class="border rounded-md w-full px-3 py-2"
-                                                            name="research_type">
+                                                            name="activity_type">
                                                         <option value="" disabled selected>انتخاب کنید</option>
                                                         <option value="individual">فردی</option>
                                                         <option value="common">مشترک</option>

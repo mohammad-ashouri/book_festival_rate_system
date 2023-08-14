@@ -29,7 +29,7 @@ return new class extends Migration
             //book fields
             $table->string('publisher')->nullable();
             $table->string('ISSN')->nullable();
-            $table->string('publish_status')->default('منتشر نشده')->nullable();
+            $table->string('publish_status')->default('منتشر شده')->nullable();
             $table->integer('number_of_covers')->nullable();
             $table->string('book_size')->nullable();
             $table->integer('circulation')->nullable();
