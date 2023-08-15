@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Catalogs\Festival;
+use App\Models\Participants;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -23,9 +24,10 @@ class PostController extends Controller
         $scientific_group2 = $request->input('scientific_group2');
         $properties = $request->input('properties');
         $activity_type = $request->input('activity_type');
+        $participation_percentage = 100;
         $post_delivery_method = $request->input('post_delivery_method');
-        $postFilePath=null;
-        $thesisFilePath=null;
+        $postFilePath = null;
+        $thesisFilePath = null;
         if (!$person) {
             return $this->alerts(false, 'nullPerson', 'کاربر انتخاب نشده است');
         }
@@ -52,6 +54,65 @@ class PostController extends Controller
         }
         if (!$post_delivery_method) {
             return $this->alerts(false, 'nullPostDeliveryMethod', 'نحوه تحویل اثر انتخاب نشده است');
+        }
+
+        //cooperators
+        if ($activity_type == 'common') {
+            if ($request->input('comm_name1') and $request->input('comm_family1') and $request->input('comm_percentage1') and $request->input('comm_national_code1') and $request->input('comm_mobile1')) {
+                $comm_name1 = $request->input('comm_name1');
+                $comm_family1 = $request->input('comm_family1');
+                $comm_national_code1 = $request->input('comm_national_code1');
+                $comm_percentage1 = $request->input('comm_percentage1');
+                $comm_mobile1 = $request->input('comm_mobile1');
+                $participation_percentage -= $comm_percentage1;
+                if (!$comm_national_code1) {
+                    return $this->alerts(false, 'nullCooperatorInformation', 'اطلاعات مشترک ناقص وارد است');
+                }
+            }
+            if ($request->input('comm_name2') and $request->input('comm_family2') and $request->input('comm_percentage2') and $request->input('comm_national_code2') and $request->input('comm_mobile2')) {
+                $comm_name2 = $request->input('comm_name2');
+                $comm_family2 = $request->input('comm_family2');
+                $comm_national_code2 = $request->input('comm_national_code2');
+                $comm_percentage2 = $request->input('comm_percentage2');
+                $comm_mobile2 = $request->input('comm_mobile2');
+                $participation_percentage -= $comm_percentage2;
+                if (!$comm_national_code2) {
+                    return $this->alerts(false, 'nullCooperatorInformation', 'اطلاعات مشترک ناقص وارد است');
+                }
+            }
+            if ($request->input('comm_name3') and $request->input('comm_family3') and $request->input('comm_percentage3') and $request->input('comm_national_code3') and $request->input('comm_mobile3')) {
+                $comm_name3 = $request->input('comm_name3');
+                $comm_family3 = $request->input('comm_family3');
+                $comm_national_code3 = $request->input('comm_national_code3');
+                $comm_percentage3 = $request->input('comm_percentage3');
+                $comm_mobile3 = $request->input('comm_mobile3');
+                $participation_percentage -= $comm_percentage3;
+                if (!$comm_national_code3) {
+                    return $this->alerts(false, 'nullCooperatorInformation', 'اطلاعات مشترک ناقص وارد است');
+                }
+            }
+            if ($request->input('comm_name4') and $request->input('comm_family4') and $request->input('comm_percentage4') and $request->input('comm_national_code4') and $request->input('comm_mobile4')) {
+                $comm_name4 = $request->input('comm_name4');
+                $comm_family4 = $request->input('comm_family4');
+                $comm_national_code4 = $request->input('comm_national_code4');
+                $comm_percentage4 = $request->input('comm_percentage4');
+                $comm_mobile4 = $request->input('comm_mobile4');
+                $participation_percentage -= $comm_percentage4;
+                if (!$comm_national_code4) {
+                    return $this->alerts(false, 'nullCooperatorInformation', 'اطلاعات مشترک ناقص وارد است');
+                }
+            }
+            if ($request->input('comm_name5') and $request->input('comm_family5') and $request->input('comm_percentage5') and $request->input('comm_national_code5') and $request->input('comm_mobile5')) {
+                $comm_name5 = $request->input('comm_name5');
+                $comm_family5 = $request->input('comm_family5');
+                $comm_national_code5 = $request->input('comm_national_code5');
+                $comm_percentage5 = $request->input('comm_percentage5');
+                $comm_mobile5 = $request->input('comm_mobile5');
+                $participation_percentage -= $comm_percentage5;
+                if (!$comm_national_code5) {
+                    return $this->alerts(false, 'nullCooperatorInformation', 'اطلاعات مشترک ناقص وارد است');
+                }
+            }
         }
 
         switch ($post_format) {
@@ -111,61 +172,6 @@ class PostController extends Controller
             $research_type = 1;
         }
 
-        //cooperators
-        $participation_percentage = 100;
-        if ($activity_type == 'common') {
-            if ($request->input('comm_name1') and $request->input('comm_family1') and $request->input('comm_percentage1') and $request->input('comm_national_code1') and $request->input('comm_mobile1')) {
-                $comm_name1 = $request->input('comm_name1');
-                $comm_family1 = $request->input('comm_family1');
-                $comm_national_code1 = $request->input('comm_national_code1');
-                $comm_percentage1 = $request->input('comm_percentage1');
-                $comm_mobile1 = $request->input('comm_mobile1');
-                $participation_percentage -= $comm_percentage1;
-            }else{
-                return $this->alerts(false, 'nullCooperatorInformation', 'اطلاعات مشترک ناقص وارد است');
-            }
-            if ($request->input('comm_name2') and $request->input('comm_family2') and $request->input('comm_percentage2') and $request->input('comm_national_code2') and $request->input('comm_mobile2')) {
-                $comm_name2 = $request->input('comm_name2');
-                $comm_family2 = $request->input('comm_family2');
-                $comm_national_code2 = $request->input('comm_national_code2');
-                $comm_percentage2 = $request->input('comm_percentage2');
-                $comm_mobile2 = $request->input('comm_mobile2');
-                $participation_percentage -= $comm_percentage2;
-            }else{
-                return $this->alerts(false, 'nullCooperatorInformation', 'اطلاعات مشترک ناقص وارد است');
-            }
-            if ($request->input('comm_name3') and $request->input('comm_family3') and $request->input('comm_percentage3') and $request->input('comm_national_code3') and $request->input('comm_mobile3')) {
-                $comm_name3 = $request->input('comm_name3');
-                $comm_family3 = $request->input('comm_family3');
-                $comm_national_code3 = $request->input('comm_national_code3');
-                $comm_percentage3 = $request->input('comm_percentage3');
-                $comm_mobile3 = $request->input('comm_mobile3');
-                $participation_percentage -= $comm_percentage3;
-            }else{
-                return $this->alerts(false, 'nullCooperatorInformation', 'اطلاعات مشترک ناقص وارد است');
-            }
-            if ($request->input('comm_name4') and $request->input('comm_family4') and $request->input('comm_percentage4') and $request->input('comm_national_code4') and $request->input('comm_mobile4')) {
-                $comm_name4 = $request->input('comm_name4');
-                $comm_family4 = $request->input('comm_family4');
-                $comm_national_code4 = $request->input('comm_national_code4');
-                $comm_percentage4 = $request->input('comm_percentage4');
-                $comm_mobile4 = $request->input('comm_mobile4');
-                $participation_percentage -= $comm_percentage4;
-            }else{
-                return $this->alerts(false, 'nullCooperatorInformation', 'اطلاعات مشترک ناقص وارد است');
-            }
-            if ($request->input('comm_name5') and $request->input('comm_family5') and $request->input('comm_percentage5') and $request->input('comm_national_code5') and $request->input('comm_mobile5')) {
-                $comm_name5 = $request->input('comm_name5');
-                $comm_family5 = $request->input('comm_family5');
-                $comm_national_code5 = $request->input('comm_national_code5');
-                $comm_percentage5 = $request->input('comm_percentage5');
-                $comm_mobile5 = $request->input('comm_mobile5');
-                $participation_percentage -= $comm_percentage5;
-            }else{
-                return $this->alerts(false, 'nullCooperatorInformation', 'اطلاعات مشترک ناقص وارد است');
-            }
-        }
-
         if ($post_delivery_method == 'digital') {
             if ($post_format == 'کتاب') {
                 $file_src = $request->file('file_src');
@@ -179,9 +185,9 @@ class PostController extends Controller
             }
 
             if ($post_format == 'پایان نامه') {
-                $file_src = $request->file('file_src');
-                $thesis_proceedings_src = $request->input('thesis_proceedings_src');
-                if ($file_src->getClientOriginalName() and $thesis_proceedings_src->getClientOriginalName()) {
+                if ($request->hasFile('file_src') and $request->hasFile('thesis_proceedings_src')) {
+                    $file_src = $request->file('file_src');
+                    $thesis_proceedings_src = $request->file('thesis_proceedings_src');
                     $folderName = str_replace('/', '', bcrypt($file_src->getClientOriginalName()));
                     $folderName = str_replace('\\', '', $folderName);
                     $postFilePath = $file_src->storeAs('public/PostFiles/' . $folderName, $file_src->getClientOriginalName());
@@ -189,9 +195,9 @@ class PostController extends Controller
                     $folderName = str_replace('/', '', bcrypt($thesis_proceedings_src->getClientOriginalName()));
                     $folderName = str_replace('\\', '', $folderName);
                     $thesisFilePath = $file_src->storeAs('public/ThesisFiles/' . $folderName, $thesis_proceedings_src->getClientOriginalName());
-                } elseif (!$file_src->getClientOriginalName()) {
+                } elseif (!$request->hasFile('file_src')) {
                     return $this->alerts(false, 'nullPostFile', 'فایل اثر انتخاب نشده است');
-                } elseif (!$thesis_proceedings_src->getClientOriginalName()) {
+                } elseif (!$request->hasFile('thesis_proceedings_src')) {
                     return $this->alerts(false, 'nullThesisFile', 'فایل دفاعیه پایان نامه انتخاب نشده است');
                 }
             }
@@ -235,6 +241,62 @@ class PostController extends Controller
         $Post->thesis_proceedings_src = $thesisFilePath;
         $Post->save();
 
+
+        if (@$comm_name1) {
+            $participant = new Participants();
+            $participant->post_id = $Post->id;
+            $participant->name = $comm_name1;
+            $participant->family = $comm_family1;
+            $participant->national_code = $comm_national_code1;
+            $participant->participation_percentage = $comm_percentage1;
+            $participant->mobile = $comm_mobile1;
+            $participant->save();
+        }
+
+        if (@$comm_name2) {
+            $participant = new Participants();
+            $participant->post_id = $Post->id;
+            $participant->name = $comm_name2;
+            $participant->family = $comm_family2;
+            $participant->national_code = $comm_national_code2;
+            $participant->participation_percentage = $comm_percentage2;
+            $participant->mobile = $comm_mobile2;
+            $participant->save();
+        }
+
+        if (@$comm_name3) {
+            $participant = new Participants();
+            $participant->post_id = $Post->id;
+            $participant->name = $comm_name3;
+            $participant->family = $comm_family3;
+            $participant->national_code = $comm_national_code3;
+            $participant->participation_percentage = $comm_percentage3;
+            $participant->mobile = $comm_mobile3;
+            $participant->save();
+        }
+
+        if (@$comm_name4) {
+            $participant = new Participants();
+            $participant->post_id = $Post->id;
+            $participant->name = $comm_name4;
+            $participant->family = $comm_family4;
+            $participant->national_code = $comm_national_code4;
+            $participant->participation_percentage = $comm_percentage4;
+            $participant->mobile = $comm_mobile4;
+            $participant->save();
+        }
+
+        if (@$comm_name5) {
+            $participant = new Participants();
+            $participant->post_id = $Post->id;
+            $participant->name = $comm_name5;
+            $participant->family = $comm_family5;
+            $participant->national_code = $comm_national_code5;
+            $participant->participation_percentage = $comm_percentage5;
+            $participant->mobile = $comm_mobile5;
+            $participant->save();
+        }
+
         $this->logActivity('Post Added =>' . $Post->id, \request()->ip(), \request()->userAgent(), \session('id'));
         return $this->success(true, 'PostAdded', 'برای نمایش اطلاعات جدید، لطفا صفحه را رفرش نمایید.');
     }
@@ -250,7 +312,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $postList = Post::orderBy('festival_id', 'asc')->paginate(20);
+        $postList = Post::orderBy('festival_id', 'asc')->paginate(10);
         return \view('PostManager', ['postList' => $postList]);
     }
 }

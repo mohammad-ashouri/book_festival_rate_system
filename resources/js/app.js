@@ -727,7 +727,6 @@ $(document).ready(function () {
                     }
                 }
             });
-
             $('#activity_type').on('change', function () {
                 if (activity_type.value=='common'){
                     commonDIV.classList.remove('hidden');
@@ -750,12 +749,11 @@ $(document).ready(function () {
             $('.PostControl,#cancel-edit-post').on('click', function () {
                 toggleModal(editPostModal.id);
             });
-            $('#new-post-button,#cancel-add-post').on('click', function () {
+            $('#new-post-button,#cancel-new-post').on('click', function () {
                 toggleModal(newPostModal.id);
             });
             $('#new-post').on('submit', function (e) {
                 e.preventDefault();
-
                     Swal.fire({
                         title: 'آیا مطمئن هستید؟',
                         text: 'این مقدار به صورت دائمی اضافه خواهد شد.',
@@ -857,49 +855,6 @@ $(document).ready(function () {
                             });
                         }
                     });
-            });
-            $('#edit-person').on('submit', function (e) {
-                e.preventDefault();
-                Swal.fire({
-                    title: 'آیا مطمئن هستید؟',
-                    text: 'با ویرایش این مقدار، تمامی فیلدها تغییر خواهند کرد.',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    cancelButtonText: 'خیر',
-                    confirmButtonText: 'بله',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        var form = $(this);
-                        var data = form.serialize();
-                        $.ajax({
-                            type: 'POST',
-                            url: '/editPerson',
-                            data: data,
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                            },
-                            success: function (response) {
-                                if (response.errors) {
-                                    if (response.errors.nullName) {
-                                        swalFire('خطا!', response.errors.nullName[0], 'error', 'تلاش مجدد');
-                                    } else if (response.errors.nullFamily) {
-                                        swalFire('خطا!', response.errors.nullFamily[0], 'error', 'تلاش مجدد');
-                                    } else if (response.errors.nullGender) {
-                                        swalFire('خطا!', response.errors.nullGender[0], 'error', 'تلاش مجدد');
-                                    } else if (response.errors.nullMobile) {
-                                        swalFire('خطا!', response.errors.nullMobile[0], 'error', 'تلاش مجدد');
-                                    } else if (response.errors.wrongMobile) {
-                                        swalFire('خطا!', response.errors.wrongMobile[0], 'error', 'تلاش مجدد');
-                                    }
-                                } else if (response.success) {
-                                    swalFire('ویرایش صاحب اثر موفقیت آمیز بود!', response.message.personEdited[0], 'success', 'بستن');
-                                    toggleModal(editPersonModal.id);
-                                    resetFields();
-                                }
-                            }
-                        });
-                    }
-                });
             });
             break;
     }

@@ -514,14 +514,38 @@
                         @foreach ($postList as $post)
                             <tr class="bg-white">
                                 <td class="px-6 py-4">{{ $loop->iteration  }}</td>
-                                <td class="px-6 py-4">{{ $post->festival_id  }}</td>
+                                <td class="px-6 py-4">
+                                    @php
+                                        $festivalInfo=\App\Models\Catalogs\Festival::find($post->festival_id)
+                                    @endphp
+                                    {{ $festivalInfo->name }}
+                                </td>
                                 <td class="px-6 py-4">{{ $post->title  }}</td>
                                 <td class="px-6 py-4">{{$post->post_format  }}</td>
                                 <td class="px-3 py-4">{{ $post->post_type }}</td>
-                                <td class="px-3 py-4">{{ $post->language }}</td>
-                                <td class="px-3 py-4">{{ $post->scientific_group_v1 }}</td>
-                                <td class="px-3 py-4">{{ @$post->scientific_group_v2 }}</td>
-                                <td class="px-3 py-4">{{ $post->user_id }}</td>
+                                <td class="px-3 py-4">
+                                    @php
+                                    $languageInfo=\App\Models\Catalogs\Language::find($post->language)
+                                    @endphp
+                                    {{ $languageInfo->name }}
+                                </td>
+                                <td class="px-3 py-4">
+                                    @php
+                                        $sg1Info=\App\Models\Catalogs\ScientificGroup::find($post->scientific_group_v1)
+                                    @endphp
+                                    {{ $sg1Info->name }}
+                                <td class="px-3 py-4">
+                                    @php
+                                        $sg2Info=\App\Models\Catalogs\ScientificGroup::find($post->scientific_group_v2)
+                                    @endphp
+                                    {{ @$sg2Info->name }}
+                                </td>
+                                <td class="px-3 py-4">
+                                    @php
+                                        $personInfo=\App\Models\Person::find($post->person_id)
+                                    @endphp
+                                    {{ @$personInfo->name .' ' . @$personInfo->family }}
+                                </td>
                                 <td class="px-6 py-4">
                                     <button type="submit" data-id="{{ $post->id }}"
                                             class="px-4 py-2 mr-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300 PostControl">
