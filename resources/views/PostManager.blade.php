@@ -205,11 +205,11 @@
                                                             name="thesis_defence_place">
                                                         <option value="" disabled selected>انتخاب کنید</option>
                                                         @php
-                                                            $publishers=\App\Models\Catalogs\Publisher::orderBy('name','asc')->get();
+                                                            $defenceplaces=\App\Models\Catalogs\DefencePlace::orderBy('name','asc')->get();
                                                         @endphp
-                                                        @foreach($publishers as $publisher)
+                                                        @foreach($defenceplaces as $defenceplace)
                                                             <option
-                                                                value="{{ $publisher->id }}">{{ $publisher->name }}</option>
+                                                                value="{{ $defenceplace->id }}">{{ $defenceplace->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>

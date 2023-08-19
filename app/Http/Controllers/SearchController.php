@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Catalogs\Company;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -12,19 +13,40 @@ class SearchController extends Controller
     {
         $work = $request->input('work');
         switch ($work) {
-            case 'BrandCatalogSearch':
-                $name = $request->input('name');
-                $search = Company::query();
-                if ($name) {
-                    $search->where('name', 'LIKE', '%' . $name . '%');
-                    $search->where('name','!=','ONBOARD');
-                    $this->logActivity('Search In Company Catalog With Name => ' . $name, request()->ip(), request()->userAgent(), session('id'));
-                }else{
-                    $search->where('name', 'LIKE', '%' . '%');
-                    $search->where('name','!=','ONBOARD');
+            case 'UserManagerSearch':
+                $username = $request->input('username');
+                $type = $request->input('type');
+                $search = User::query();
+                if ($username && $type) {
+                    $search->where('username', 'LIKE', '%' . $username . '%')
+                        ->where(function ($query) use ($type) {
+                            $query->where('type', $type);
+                        });
+                    $this->logActivity('Search In User Manager With Username => ' . $username . ' And Type => ' . $type, request()->ip(), request()->userAgent(), session('id'));
+                } elseif ($username) {
+                    $search->where('username', 'LIKE', '%' . $username . '%');
+                    $this->logActivity('Search In User Manager With Username => ' . $username, request()->ip(), request()->userAgent(), session('id'));
+                } elseif ($type) {
+                    $search->where(function ($query) use ($type) {
+                        $query->where('type', $type);
+                    });
+                    $this->logActivity('Search In User Manager With Type => ' . $type, request()->ip(), request()->userAgent(), session('id'));
                 }
-                $search->orderBy('name','asc');
                 $result = $search->get();
+                return response()->json($result);
+                break;
+            case 'ClassificationSearch':
+                $title = $request->input('Title');
+                $SG1 = $request->input('SG1');
+                $SG2 = $request->input('SG2');
+                $search = Post::query();
+                    $search->where('title', 'LIKE', '%' . $title . '%')
+                        ->where('scientific_group_v1','LIKE', '%' . $SG1)
+                        ->where('scientific_group_v2','LIKE', '%' .$SG2)
+                    ;
+                $result = $search->get();
+
+//                $this->logActivity('Search In User Manager With Username => ' . $username . ' And Type => ' . $type, request()->ip(), request()->userAgent(), session('id'));
                 return response()->json($result);
         }
     }

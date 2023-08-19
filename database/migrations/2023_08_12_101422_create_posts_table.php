@@ -54,6 +54,7 @@ return new class extends Migration
             $table->integer('sorter')->nullable();
             $table->string('sorted_date')->nullable();
             $table->integer('sorting_classification_id')->nullable();
+            $table->foreign('sorting_classification_id')->references('id')->on('users');
 
             //cooperation method
             $table->string('activity_type')->default('فردی');

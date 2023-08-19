@@ -67,7 +67,6 @@ function resetFields() {
 }
 
 $(document).ready(function () {
-    resetFields();
     //Check Login Form
     $('#loginForm').submit(function (e) {
         e.preventDefault();
@@ -173,6 +172,7 @@ $(document).ready(function () {
     });
     switch (window.location.pathname) {
         case "/UserManager":
+            resetFields();
             //Search In User Manager
             $('#search-Username-UserManager').on('input', function () {
                 var inputUsername = $('#search-Username-UserManager').val().trim().toLowerCase();
@@ -195,14 +195,17 @@ $(document).ready(function () {
                                 case 1:
                                     type = 'ادمین کل';
                                     break;
-                                case 5:
-                                    type = 'سازمان';
+                                case 2:
+                                    type = 'کارشناس سامانه';
                                     break;
-                                case 6:
-                                    type = 'باسکول';
+                                case 3:
+                                    type = 'مدیر گروه';
+                                    break;
+                                case 4:
+                                    type = 'ارزیاب';
                                     break;
                             }
-                            var row = '<tr class="bg-white"><td class="px-6 py-4">' + user.id + '</td><td class="px-6 py-4">' + user.name + '</td><td class="px-6 py-4">' + type + '</td>';
+                            var row = '<tr class="bg-white"><td class="px-6 py-4">' + user.username + '</td><td class="px-6 py-4">' + user.name + '</td><td class="px-6 py-4">' + type + '</td>';
                             if (user.active == 1) {
                                 row += '<td class="px-6 py-4">' + '<button type="submit" data-username="' + user.username + '" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-blue-300 ASUM" data-active="1">غیرفعال‌سازی</button>';
                             } else if (user.active == 0) {
@@ -257,7 +260,7 @@ $(document).ready(function () {
                                     type = 'ارزیاب';
                                     break;
                             }
-                            var row = '<tr class="bg-white"><td class="px-6 py-4">' + user.id + '</td><td class="px-6 py-4">' + user.name + '</td><td class="px-6 py-4">' + type + '</td>';
+                            var row = '<tr class="bg-white"><td class="px-6 py-4">' + user.username + '</td><td class="px-6 py-4">' + user.name + '</td><td class="px-6 py-4">' + type + '</td>';
                             if (user.active == 1) {
                                 row += '<td class="px-6 py-4">' + '<button type="submit" data-username="' + user.username + '" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-blue-300 ASUM" data-active="1">غیرفعال‌سازی</button>';
                             } else if (user.active == 0) {
@@ -576,6 +579,7 @@ $(document).ready(function () {
             });
             break;
         case '/Person':
+            resetFields();
             $('#new-person-button, #cancel-new-person').on('click', function () {
                 toggleModal(newPersonModal.id);
             });
@@ -702,6 +706,7 @@ $(document).ready(function () {
             });
             break;
         case '/Posts':
+            resetFields();
             $('.absolute.inset-0.bg-gray-500.opacity-75.add').on('click', function () {
                 toggleModal(newPostModal.id)
             });
@@ -775,7 +780,6 @@ $(document).ready(function () {
                                 contentType: false,
                                 processData: false,
                                 success: function (response) {
-                                    console.log(response);
                                     if (response.errors) {
                                         if (response.errors.nullPerson) {
                                             swalFire('خطا!', response.errors.nullPerson[0], 'error', 'تلاش مجدد');
@@ -855,6 +859,113 @@ $(document).ready(function () {
                             });
                         }
                     });
+            });
+            break;
+        case '/Classification':
+            $('.sg1').on('change', function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '/changeScientificGroup',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    data: {
+                        PostID: $(this).data('postid'),
+                        work: 'ChangeScientificGroup1',
+                        newSG1: $(this).val(),
+                    },
+                    success: function (response) {
+                        console.log(response)
+                    }
+                });
+            });
+            $('.sg2').on('change', function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '/changeScientificGroup',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    data: {
+                        PostID: $(this).data('postid'),
+                        work: 'ChangeScientificGroup2',
+                        newSG2: $(this).val(),
+                    },
+                    success: function (response) {
+                        console.log(response)
+                    }
+                });
+            });
+            $('#classification-form').on('submit', function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'آیا مطمئن هستید؟',
+                    text: 'کلیه آثار، گونه بندی شده و به مرحله اجمالی راه خواهند یافت.' +
+                        '\n' +
+                        'این عملیات برگشت پذیر نیست.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    cancelButtonText: 'خیر',
+                    confirmButtonText: 'بله',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var form = $(this);
+                        var formData = new FormData(form[0]);
+                        $.ajax({
+                            type: 'POST',
+                            url: '/Classification',
+                            data: formData,
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            },
+                            contentType: false,
+                            processData: false,
+                            success: function (response) {
+                                console.log(response);
+                                if (response.errors) {
+                                    if (response.errors.wrongFileType) {
+                                        swalFire('خطا!', response.errors.wrongFileType[0], 'error', 'تلاش مجدد');
+                                    }
+                                }
+                                else if (response.success) {
+                                    location.reload();
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+            $('#search-title-Classification').on('input', function () {
+                var inputTitle = $('#search-title-Classification').val();
+                var SG1 = $('#search-SG1-Classification').val();
+                var SG2 = $('#search-SG2-Classification').val();
+                $.ajax({
+                    url: '/Search',
+                    type: 'GET',
+                    data: {
+                        Title: inputTitle,
+                        SG1: SG1,
+                        SG2: SG2,
+                        work: 'ClassificationSearch'
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        var tableBody = $('.w-full.border-collapse.rounded-lg.overflow-hidden.text-center tbody');
+                        tableBody.empty();
+
+                        data.forEach(function (classification) {
+                            var row = '<tr class="bg-white">'
+                            row += "<td class='px-6 py-4'>" + classification.festival_id + '</td>'
+                            row += "<td class='px-6 py-4'>" + classification.festival_id + '</td>'
+                            row += '<td class="px-6 py-4">' + classification.title + '</td>';
+                            row += '</tr>';
+                            tableBody.append(row);
+                        });
+                    },
+                    error: function () {
+                        console.log('خطا در ارتباط با سرور');
+                    }
+                });
             });
             break;
     }

@@ -41,7 +41,6 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::middleware(ThrottleRequests::class)->post('/login', [LoginController::class, 'login']);
 Route::get('/captcha', [LoginController::class, 'getCaptcha'])->name('captcha');
 
-
 //Panel Routes
 Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class)->group(function () {
     Route::get('/date', [DashboardController::class, 'jalaliDate'])->name('getNow');
@@ -72,6 +71,10 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
             Route::post('/newPost', [PostController::class, 'newPost'])->name('newPost');
             Route::get('/getPostInfo', [PostController::class, 'getPostInfo'])->name('getPostInfo');
             Route::post('/editPost', [PostController::class, 'editPost'])->name('editPost');
+
+            Route::get('/Classification', [PostController::class, 'showClassification'])->name('Classification');
+            Route::post('/changeScientificGroup', [PostController::class, 'changeScientificGroup'])->name('changeScientificGroup');
+            Route::post('/Classification', [PostController::class, 'Classification']);
 
         });
         Route::middleware('roleAuthorization:2')->group(function () {
