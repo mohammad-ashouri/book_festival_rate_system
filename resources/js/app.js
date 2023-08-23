@@ -714,39 +714,38 @@ $(document).ready(function () {
                 toggleModal(editPostModal.id)
             });
             $('#post_format').on('change', function () {
-                if (post_format.value=='کتاب'){
+                if (post_format.value == 'کتاب') {
                     bookDIV1.classList.remove('hidden');
                     bookDIV2.classList.remove('hidden');
                     thesisDIV1.classList.add('hidden');
                     thesisDIV2.classList.add('hidden');
-                }else if(post_format.value=='پایان نامه'){
+                } else if (post_format.value == 'پایان نامه') {
                     bookDIV1.classList.add('hidden');
                     bookDIV2.classList.add('hidden');
                     thesisDIV1.classList.remove('hidden');
                     thesisDIV2.classList.remove('hidden');
-                    if (post_delivery_method.value=='digital'){
+                    if (post_delivery_method.value == 'digital') {
                         file_srcDIV.classList.remove('hidden');
-                        if(post_format.value=='پایان نامه') {
+                        if (post_format.value == 'پایان نامه') {
                             thesis_proceedings_srcDIV.classList.remove('hidden');
                         }
                     }
                 }
             });
             $('#activity_type').on('change', function () {
-                if (activity_type.value=='common'){
+                if (activity_type.value == 'common') {
                     commonDIV.classList.remove('hidden');
-                }else{
+                } else {
                     commonDIV.classList.add('hidden');
                 }
             });
             $('#post_delivery_method').on('change', function () {
-                if (post_delivery_method.value=='physical'){
+                if (post_delivery_method.value == 'physical') {
                     file_srcDIV.classList.add('hidden');
                     thesis_proceedings_srcDIV.classList.add('hidden');
-                }
-                else if (post_delivery_method.value=='digital'){
+                } else if (post_delivery_method.value == 'digital') {
                     file_srcDIV.classList.remove('hidden');
-                    if(post_format.value=='پایان نامه') {
+                    if (post_format.value == 'پایان نامه') {
                         thesis_proceedings_srcDIV.classList.remove('hidden');
                     }
                 }
@@ -759,109 +758,110 @@ $(document).ready(function () {
             });
             $('#new-post').on('submit', function (e) {
                 e.preventDefault();
-                    Swal.fire({
-                        title: 'آیا مطمئن هستید؟',
-                        text: 'این مقدار به صورت دائمی اضافه خواهد شد.',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        cancelButtonText: 'خیر',
-                        confirmButtonText: 'بله',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            var form = $(this);
-                            var formData = new FormData(form[0]);
-                            $.ajax({
-                                type: 'POST',
-                                url: '/newPost',
-                                data: formData,
-                                headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                                },
-                                contentType: false,
-                                processData: false,
-                                success: function (response) {
-                                    if (response.errors) {
-                                        if (response.errors.nullPerson) {
-                                            swalFire('خطا!', response.errors.nullPerson[0], 'error', 'تلاش مجدد');
-                                        }
-                                        if (response.errors.nullName) {
-                                            swalFire('خطا!', response.errors.nullName[0], 'error', 'تلاش مجدد');
-                                        }
-                                        if (response.errors.nullPostFormat) {
-                                            swalFire('خطا!', response.errors.nullPostFormat[0], 'error', 'تلاش مجدد');
-                                        }
-                                        if (response.errors.nullPostType) {
-                                            swalFire('خطا!', response.errors.nullPostType[0], 'error', 'تلاش مجدد');
-                                        }
-                                        if (response.errors.nullLanguage) {
-                                            swalFire('خطا!', response.errors.nullLanguage[0], 'error', 'تلاش مجدد');
-                                        }
-                                        if (response.errors.nullPagesNumber) {
-                                            swalFire('خطا!', response.errors.nullPagesNumber[0], 'error', 'تلاش مجدد');
-                                        }
-                                        if (response.errors.nullSG1) {
-                                            swalFire('خطا!', response.errors.nullSG1[0], 'error', 'تلاش مجدد');
-                                        }
-                                        if (response.errors.nullActivityType) {
-                                            swalFire('خطا!', response.errors.nullActivityType[0], 'error', 'تلاش مجدد');
-                                        }
-                                        if (response.errors.nullPostDeliveryMethod) {
-                                            swalFire('خطا!', response.errors.nullPostDeliveryMethod[0], 'error', 'تلاش مجدد');
-                                        }
-                                        if (response.errors.nullPublisher) {
-                                            swalFire('خطا!', response.errors.nullPublisher[0], 'error', 'تلاش مجدد');
-                                        }
-                                        if (response.errors.nullISSN) {
-                                            swalFire('خطا!', response.errors.nullISSN[0], 'error', 'تلاش مجدد');
-                                        }
-                                        if (response.errors.nullNumberOfCovers) {
-                                            swalFire('خطا!', response.errors.nullNumberOfCovers[0], 'error', 'تلاش مجدد');
-                                        }
-                                        if (response.errors.nullCirculation) {
-                                            swalFire('خطا!', response.errors.nullCirculation[0], 'error', 'تلاش مجدد');
-                                        }
-                                        if (response.errors.nullBookSize) {
-                                            swalFire('خطا!', response.errors.nullBookSize[0], 'error', 'تلاش مجدد');
-                                        }
-                                        if (response.errors.nullThesisCertificateNumber) {
-                                            swalFire('خطا!', response.errors.nullThesisCertificateNumber[0], 'error', 'تلاش مجدد');
-                                        }
-                                        if (response.errors.nullThesisDefencePlace) {
-                                            swalFire('خطا!', response.errors.nullThesisDefencePlace[0], 'error', 'تلاش مجدد');
-                                        }
-                                        if (response.errors.nullGrade) {
-                                            swalFire('خطا!', response.errors.nullGrade[0], 'error', 'تلاش مجدد');
-                                        }
-                                        if (response.errors.nullSupervisor) {
-                                            swalFire('خطا!', response.errors.nullSupervisor[0], 'error', 'تلاش مجدد');
-                                        }
-                                        if (response.errors.nullAdvisor) {
-                                            swalFire('خطا!', response.errors.nullAdvisor[0], 'error', 'تلاش مجدد');
-                                        }
-                                        if (response.errors.nullReferee) {
-                                            swalFire('خطا!', response.errors.nullReferee[0], 'error', 'تلاش مجدد');
-                                        }
-                                        if (response.errors.nullCooperatorInformation) {
-                                            swalFire('خطا!', response.errors.nullCooperatorInformation[0], 'error', 'تلاش مجدد');
-                                        }
-                                        if (response.errors.nullPostFile) {
-                                            swalFire('خطا!', response.errors.nullPostFile[0], 'error', 'تلاش مجدد');
-                                        }
-                                        if (response.errors.nullThesisFile) {
-                                            swalFire('خطا!', response.errors.nullThesisFile[0], 'error', 'تلاش مجدد');
-                                        }
-                                    } else if (response.success) {
-                                        swalFire('ثبت اثر جدید موفقیت آمیز بود!', response.message.PostAdded[0], 'success', 'بستن');
-                                        toggleModal(newPostModal.id);
-                                        resetFields();
+                Swal.fire({
+                    title: 'آیا مطمئن هستید؟',
+                    text: 'این مقدار به صورت دائمی اضافه خواهد شد.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    cancelButtonText: 'خیر',
+                    confirmButtonText: 'بله',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var form = $(this);
+                        var formData = new FormData(form[0]);
+                        $.ajax({
+                            type: 'POST',
+                            url: '/newPost',
+                            data: formData,
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            },
+                            contentType: false,
+                            processData: false,
+                            success: function (response) {
+                                if (response.errors) {
+                                    if (response.errors.nullPerson) {
+                                        swalFire('خطا!', response.errors.nullPerson[0], 'error', 'تلاش مجدد');
                                     }
+                                    if (response.errors.nullName) {
+                                        swalFire('خطا!', response.errors.nullName[0], 'error', 'تلاش مجدد');
+                                    }
+                                    if (response.errors.nullPostFormat) {
+                                        swalFire('خطا!', response.errors.nullPostFormat[0], 'error', 'تلاش مجدد');
+                                    }
+                                    if (response.errors.nullPostType) {
+                                        swalFire('خطا!', response.errors.nullPostType[0], 'error', 'تلاش مجدد');
+                                    }
+                                    if (response.errors.nullLanguage) {
+                                        swalFire('خطا!', response.errors.nullLanguage[0], 'error', 'تلاش مجدد');
+                                    }
+                                    if (response.errors.nullPagesNumber) {
+                                        swalFire('خطا!', response.errors.nullPagesNumber[0], 'error', 'تلاش مجدد');
+                                    }
+                                    if (response.errors.nullSG1) {
+                                        swalFire('خطا!', response.errors.nullSG1[0], 'error', 'تلاش مجدد');
+                                    }
+                                    if (response.errors.nullActivityType) {
+                                        swalFire('خطا!', response.errors.nullActivityType[0], 'error', 'تلاش مجدد');
+                                    }
+                                    if (response.errors.nullPostDeliveryMethod) {
+                                        swalFire('خطا!', response.errors.nullPostDeliveryMethod[0], 'error', 'تلاش مجدد');
+                                    }
+                                    if (response.errors.nullPublisher) {
+                                        swalFire('خطا!', response.errors.nullPublisher[0], 'error', 'تلاش مجدد');
+                                    }
+                                    if (response.errors.nullISSN) {
+                                        swalFire('خطا!', response.errors.nullISSN[0], 'error', 'تلاش مجدد');
+                                    }
+                                    if (response.errors.nullNumberOfCovers) {
+                                        swalFire('خطا!', response.errors.nullNumberOfCovers[0], 'error', 'تلاش مجدد');
+                                    }
+                                    if (response.errors.nullCirculation) {
+                                        swalFire('خطا!', response.errors.nullCirculation[0], 'error', 'تلاش مجدد');
+                                    }
+                                    if (response.errors.nullBookSize) {
+                                        swalFire('خطا!', response.errors.nullBookSize[0], 'error', 'تلاش مجدد');
+                                    }
+                                    if (response.errors.nullThesisCertificateNumber) {
+                                        swalFire('خطا!', response.errors.nullThesisCertificateNumber[0], 'error', 'تلاش مجدد');
+                                    }
+                                    if (response.errors.nullThesisDefencePlace) {
+                                        swalFire('خطا!', response.errors.nullThesisDefencePlace[0], 'error', 'تلاش مجدد');
+                                    }
+                                    if (response.errors.nullGrade) {
+                                        swalFire('خطا!', response.errors.nullGrade[0], 'error', 'تلاش مجدد');
+                                    }
+                                    if (response.errors.nullSupervisor) {
+                                        swalFire('خطا!', response.errors.nullSupervisor[0], 'error', 'تلاش مجدد');
+                                    }
+                                    if (response.errors.nullAdvisor) {
+                                        swalFire('خطا!', response.errors.nullAdvisor[0], 'error', 'تلاش مجدد');
+                                    }
+                                    if (response.errors.nullReferee) {
+                                        swalFire('خطا!', response.errors.nullReferee[0], 'error', 'تلاش مجدد');
+                                    }
+                                    if (response.errors.nullCooperatorInformation) {
+                                        swalFire('خطا!', response.errors.nullCooperatorInformation[0], 'error', 'تلاش مجدد');
+                                    }
+                                    if (response.errors.nullPostFile) {
+                                        swalFire('خطا!', response.errors.nullPostFile[0], 'error', 'تلاش مجدد');
+                                    }
+                                    if (response.errors.nullThesisFile) {
+                                        swalFire('خطا!', response.errors.nullThesisFile[0], 'error', 'تلاش مجدد');
+                                    }
+                                } else if (response.success) {
+                                    swalFire('ثبت اثر جدید موفقیت آمیز بود!', response.message.PostAdded[0], 'success', 'بستن');
+                                    toggleModal(newPostModal.id);
+                                    resetFields();
                                 }
-                            });
-                        }
-                    });
+                            }
+                        });
+                    }
+                });
             });
             break;
         case '/Classification':
+        function bindChangeEvents() {
             $('.sg1').on('change', function () {
                 $.ajax({
                     type: 'POST',
@@ -879,6 +879,7 @@ $(document).ready(function () {
                     }
                 });
             });
+
             $('.sg2').on('change', function () {
                 $.ajax({
                     type: 'POST',
@@ -896,6 +897,8 @@ $(document).ready(function () {
                     }
                 });
             });
+        }
+            bindChangeEvents();
             $('#classification-form').on('submit', function (e) {
                 e.preventDefault();
                 Swal.fire({
@@ -926,8 +929,7 @@ $(document).ready(function () {
                                     if (response.errors.wrongFileType) {
                                         swalFire('خطا!', response.errors.wrongFileType[0], 'error', 'تلاش مجدد');
                                     }
-                                }
-                                else if (response.success) {
+                                } else if (response.success) {
                                     location.reload();
                                 }
                             }
@@ -949,18 +951,249 @@ $(document).ready(function () {
                         work: 'ClassificationSearch'
                     },
                     success: function (data) {
-                        console.log(data);
                         var tableBody = $('.w-full.border-collapse.rounded-lg.overflow-hidden.text-center tbody');
                         tableBody.empty();
+                        async function fetchDataAndPopulateTable() {
+                            for (const classification of data) {
+                                try {
+                                    let festivalResponse = await $.ajax({
+                                        type: 'GET',
+                                        url: '/getFestivalInfo',
+                                        data: {
+                                            id: classification.festival_id
+                                        }
+                                    });
+                                    let FestivalName = festivalResponse;
 
-                        data.forEach(function (classification) {
-                            var row = '<tr class="bg-white">'
-                            row += "<td class='px-6 py-4'>" + classification.festival_id + '</td>'
-                            row += "<td class='px-6 py-4'>" + classification.festival_id + '</td>'
-                            row += '<td class="px-6 py-4">' + classification.title + '</td>';
-                            row += '</tr>';
-                            tableBody.append(row);
-                        });
+                                    let languageResponse = await $.ajax({
+                                        type: 'GET',
+                                        url: '/getLanguageInfo',
+                                        data: {
+                                            id: classification.language
+                                        }
+                                    });
+                                    let LanguageName = languageResponse;
+
+                                    let personResponse = await $.ajax({
+                                        type: 'GET',
+                                        url: '/getPersonInfo',
+                                        data: {
+                                            id: classification.person_id
+                                        }
+                                    });
+                                    let PersonName = personResponse;
+
+                                    let group1Response = await $.ajax({
+                                        type: 'GET',
+                                        url: '/getScientificGroupInfo',
+                                        data: {
+                                            id: classification.scientific_group_v1
+                                        }
+                                    });
+                                    let SG1Name = group1Response;
+
+                                    let SG2Name=null;
+                                    let group2Response = await $.ajax({
+                                        type: 'GET',
+                                        url: '/getScientificGroupInfo',
+                                        data: {
+                                            id: classification.scientific_group_v2
+                                        }
+                                    });
+                                    SG2Name = group2Response;
+
+                                    let groupsResponse = await $.ajax({
+                                        type: 'GET',
+                                        url: '/getAllGroups',
+                                    });
+                                    let groups = groupsResponse;
+
+                                    const selectSG1Element = document.createElement('select');
+                                    selectSG1Element.classList.add('border', 'rounded-md', 'w-full', 'px-3', 'py-2', 'sg1');
+                                    selectSG1Element.id = 'sg1';
+                                    selectSG1Element.name = 'sg1';
+                                    selectSG1Element.setAttribute('data-postid', classification.id);
+                                    groups.forEach(function(currentValue) {
+                                        const option = document.createElement('option');
+                                        option.value = currentValue.id;
+                                        option.text = currentValue.name;
+                                        if (currentValue.id == Number(classification.scientific_group_v1)){
+                                            option.setAttribute('selected','selected');
+                                        }
+                                        selectSG1Element.appendChild(option);
+                                    });
+
+                                    const selectSG2Element = document.createElement('select');
+                                    selectSG2Element.classList.add('border', 'rounded-md', 'w-full', 'px-3', 'py-2', 'sg2');
+                                    selectSG2Element.id = 'sg2';
+                                    selectSG2Element.name = 'sg2';
+                                    selectSG2Element.setAttribute('data-postid', classification.id);
+                                    const option = document.createElement('option');
+                                    option.value = '';
+                                    option.text = 'بدون گروه علمی دوم';
+                                    option.setAttribute('selected','selected');
+                                    selectSG2Element.appendChild(option);
+                                    groups.forEach(function(currentValue) {
+                                        const option = document.createElement('option');
+                                        option.value = currentValue.id;
+                                        option.text = currentValue.name;
+                                        if (currentValue.id == Number(classification.scientific_group_v2)){
+                                            option.setAttribute('selected','selected');
+                                        }
+                                        selectSG2Element.appendChild(option);
+                                    });
+                                    const selectSG1HTML = selectSG1Element.outerHTML;
+                                    const selectSG2HTML = selectSG2Element.outerHTML;
+
+                                    const row = '<tr class="bg-white">'
+                                        + '<td class="px-6 py-4">' + FestivalName.name + '</td>'
+                                        + '<td class="px-6 py-4">' + classification.festival_id + '</td>'
+                                        + '<td class="px-6 py-4">' + classification.title + '</td>'
+                                        + '<td class="px-6 py-4">' + classification.post_format + '</td>'
+                                        + '<td class="px-6 py-4">' + classification.post_type + '</td>'
+                                        + '<td class="px-6 py-4">' + LanguageName + '</td>'
+                                        + '<td class="px-6 py-4">' + selectSG1HTML + '</td>'
+                                        + '<td class="px-6 py-4">' + selectSG2HTML + '</td>'
+                                        + '<td class="px-6 py-4">' + PersonName.name+ ' ' + PersonName.family + '</td>'
+                                        + '</tr>';
+
+                                    tableBody.append(row);
+                                } catch (error) {
+                                    console.error('Error fetching data:', error);
+                                }
+                            }
+                            bindChangeEvents();
+                        }
+                        fetchDataAndPopulateTable();
+
+                    },
+                    error: function () {
+                        console.log('خطا در ارتباط با سرور');
+                    }
+                });
+            });
+            $('#search-SG1-Classification,#search-SG2-Classification').on('change', function () {
+                var inputTitle = $('#search-title-Classification').val();
+                var SG1 = $('#search-SG1-Classification').val();
+                var SG2 = $('#search-SG2-Classification').val();
+                $.ajax({
+                    url: '/Search',
+                    type: 'GET',
+                    data: {
+                        Title: inputTitle,
+                        SG1: SG1,
+                        SG2: SG2,
+                        work: 'ClassificationSearch'
+                    },
+                    success: function (data) {
+                        var tableBody = $('.w-full.border-collapse.rounded-lg.overflow-hidden.text-center tbody');
+                        tableBody.empty();
+                        async function fetchDataAndPopulateTable() {
+                            for (const classification of data) {
+                                try {
+                                    let festivalResponse = await $.ajax({
+                                        type: 'GET',
+                                        url: '/getFestivalInfo',
+                                        data: {
+                                            id: classification.festival_id
+                                        }
+                                    });
+                                    let FestivalName = festivalResponse;
+
+                                    let languageResponse = await $.ajax({
+                                        type: 'GET',
+                                        url: '/getLanguageInfo',
+                                        data: {
+                                            id: classification.language
+                                        }
+                                    });
+                                    let LanguageName = languageResponse;
+
+                                    let personResponse = await $.ajax({
+                                        type: 'GET',
+                                        url: '/getPersonInfo',
+                                        data: {
+                                            id: classification.person_id
+                                        }
+                                    });
+                                    let PersonName = personResponse;
+
+                                    let group1Response = await $.ajax({
+                                        type: 'GET',
+                                        url: '/getScientificGroupInfo',
+                                    });
+                                    let SG1Name = group1Response;
+
+                                    let SG2Name=null;
+                                    let group2Response = await $.ajax({
+                                        type: 'GET',
+                                        url: '/getScientificGroupInfo',
+                                    });
+                                    SG2Name = group2Response;
+
+                                    let groupsResponse = await $.ajax({
+                                        type: 'GET',
+                                        url: '/getAllGroups',
+                                    });
+                                    let groups = groupsResponse;
+                                    const selectSG1Element = document.createElement('select');
+                                    selectSG1Element.classList.add('border', 'rounded-md', 'w-full', 'px-3', 'py-2', 'sg1');
+                                    selectSG1Element.id = 'sg1';
+                                    selectSG1Element.name = 'sg1';
+                                    selectSG1Element.setAttribute('data-postid', classification.id);
+                                    groups.forEach(function(currentValue) {
+                                        const option = document.createElement('option');
+                                        option.value = currentValue.id;
+                                        option.text = currentValue.name;
+                                        if (currentValue.id == Number(classification.scientific_group_v1)){
+                                            option.setAttribute('selected','selected');
+                                        }
+                                        selectSG1Element.appendChild(option);
+                                    });
+
+                                    const selectSG2Element = document.createElement('select');
+                                    selectSG2Element.classList.add('border', 'rounded-md', 'w-full', 'px-3', 'py-2', 'sg2');
+                                    selectSG2Element.id = 'sg2';
+                                    selectSG2Element.name = 'sg2';
+                                    selectSG2Element.setAttribute('data-postid', classification.id);
+                                    const option = document.createElement('option');
+                                    option.value = '';
+                                    option.text = 'بدون گروه علمی دوم';
+                                    option.setAttribute('selected','selected');
+                                    selectSG2Element.appendChild(option);
+                                    groups.forEach(function(currentValue) {
+                                        const option = document.createElement('option');
+                                        option.value = currentValue.id;
+                                        option.text = currentValue.name;
+                                        if (currentValue.id == Number(classification.scientific_group_v2)){
+                                            option.setAttribute('selected','selected');
+                                        }
+                                        selectSG2Element.appendChild(option);
+                                    });
+                                    const selectSG1HTML = selectSG1Element.outerHTML;
+                                    const selectSG2HTML = selectSG2Element.outerHTML;
+
+                                    const row = '<tr class="bg-white">'
+                                        + '<td class="px-6 py-4">' + FestivalName.name + '</td>'
+                                        + '<td class="px-6 py-4">' + classification.festival_id + '</td>'
+                                        + '<td class="px-6 py-4">' + classification.title + '</td>'
+                                        + '<td class="px-6 py-4">' + classification.post_format + '</td>'
+                                        + '<td class="px-6 py-4">' + classification.post_type + '</td>'
+                                        + '<td class="px-6 py-4">' + LanguageName + '</td>'
+                                        + '<td class="px-6 py-4">' + selectSG1HTML + '</td>'
+                                        + '<td class="px-6 py-4">' + selectSG2HTML + '</td>'
+                                        + '<td class="px-6 py-4">' + PersonName.name+ ' ' + PersonName.family + '</td>'
+                                        + '</tr>';
+
+                                    tableBody.append(row);
+                                } catch (error) {
+                                    console.error('Error fetching data:', error);
+                                }
+                            }
+                            bindChangeEvents();
+                        }
+                        fetchDataAndPopulateTable();
+
                     },
                     error: function () {
                         console.log('خطا در ارتباط با سرور');

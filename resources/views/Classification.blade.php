@@ -32,7 +32,7 @@
                                 @php $SG=\App\Models\Catalogs\ScientificGroup::orderBy('name','asc')->get() @endphp
                                 @foreach($SG as $scientific_groups)
                                     <option
-                                        value="{{ $scientific_groups->name }}">{{ $scientific_groups->name }}</option>
+                                        value="{{ $scientific_groups->id }}">{{ $scientific_groups->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -45,7 +45,7 @@
                                 @php $SG=\App\Models\Catalogs\ScientificGroup::orderBy('name','asc')->get() @endphp
                                 @foreach($SG as $scientific_groups)
                                     <option
-                                        value="{{ $scientific_groups->name }}">{{ $scientific_groups->name }}</option>
+                                        value="{{ $scientific_groups->id }}">{{ $scientific_groups->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -105,7 +105,7 @@
                                         <select id="sg2" data-postid="{{ $post->id }}"
                                                 class="border rounded-md w-full px-3 py-2 sg2"
                                                 name="sg2">
-                                            <option value="" disabled selected>انتخاب کنید</option>
+                                            <option value="">بدون گروه علمی دوم</option>
                                             @php
                                                 $sg2=\App\Models\Catalogs\ScientificGroup::orderBy('name','asc')->get();
                                             @endphp

@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Catalogs\FestivalController;
+use App\Http\Controllers\Catalogs\LanguageController;
+use App\Http\Controllers\Catalogs\ScientificGroupController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PersonController;
@@ -61,6 +64,14 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
             Route::Post('/ChangeUserActivationStatus', [UserManager::class, 'changeUserActivationStatus'])->name('ChangeUserActivationStatus');
             Route::Post('/ChangeUserNTCP', [UserManager::class, 'ChangeUserNTCP'])->name('ChangeUserNTCP');
             Route::Post('/ResetPassword', [UserManager::class, 'ResetPassword'])->name('ResetPassword');
+            //End User Manager
+
+            //Catalogs
+            Route::get('/getLanguageInfo', [LanguageController::class, 'getLanguageInfo']);
+            Route::get('/getScientificGroupInfo', [ScientificGroupController::class, 'getScientificGroupInfo']);
+            Route::get('/getFestivalInfo', [FestivalController::class, 'getFestivalInfo']);
+            Route::get('/getAllGroups', [ScientificGroupController::class, 'getAllGroups']);
+            //End Catalogs
 
             Route::get('/Person', [PersonController::class, 'index'])->name('Person');
             Route::post('/newPerson', [PersonController::class, 'newPerson'])->name('newPerson');
