@@ -739,6 +739,13 @@ $(document).ready(function () {
                     commonDIV.classList.add('hidden');
                 }
             });
+            $('#activity_typeForEdit').on('change', function () {
+                if (activity_typeForEdit.value == 'common') {
+                    commonDIVForEdit.classList.remove('hidden');
+                } else {
+                    commonDIVForEdit.classList.add('hidden');
+                }
+            });
             $('#post_delivery_method').on('change', function () {
                 if (post_delivery_method.value == 'physical') {
                     file_srcDIV.classList.add('hidden');
@@ -750,9 +757,6 @@ $(document).ready(function () {
                     }
                 }
             });
-            $('.PostControl,#cancel-edit-post').on('click', function () {
-                toggleModal(editPostModal.id);
-            });
             $('#new-post-button,#cancel-new-post').on('click', function () {
                 toggleModal(newPostModal.id);
             });
@@ -760,7 +764,7 @@ $(document).ready(function () {
                 e.preventDefault();
                 Swal.fire({
                     title: 'آیا مطمئن هستید؟',
-                    text: 'این مقدار به صورت دائمی اضافه خواهد شد.',
+                    text: 'این اثر در سامانه اضافه خواهد شد.',
                     icon: 'warning',
                     showCancelButton: true,
                     cancelButtonText: 'خیر',
@@ -854,6 +858,157 @@ $(document).ready(function () {
                                     toggleModal(newPostModal.id);
                                     resetFields();
                                 }
+                            }
+                        });
+                    }
+                });
+            });
+            $('.PostControl,#cancel-edit-post').on('click', function () {
+                toggleModal(editPostModal.id);
+            });
+            $('.PostControl').on('click', function () {
+                $.ajax({
+                    type: 'GET',
+                    url: '/getPostInfo',
+                    data: {
+                        id: $(this).data('id')
+                    },
+                    success: function (response) {
+                        if (response) {
+                            console.log(response);
+                            postIDForEdit.value = response.id;
+                            personForEdit.value = response.person_id;
+                            nameForEdit.value = response.title;
+                            post_formatForEdit.value = response.post_format;
+                            post_typeForEdit.value = response.post_type;
+                            languageForEdit.value = response.language;
+                            pages_numberForEdit.value = response.pages_number;
+                            if (response.special_section) {
+                                special_sectionForEdit.value = response.special_section;
+                            }
+
+                            if (response.post_format=='کتاب'){
+                                bookDIV1ForEdit.classList.remove('hidden');
+                                bookDIV2ForEdit.classList.remove('hidden');
+                                thesisDIV1ForEdit.classList.add('hidden');
+                                thesisDIV2ForEdit.classList.add('hidden');
+                                publisherForEdit.value=response.publisher;
+                                ISSNForEdit.value=response.ISSN;
+                                number_of_coversForEdit.value=response.number_of_covers;
+                                circulationForEdit.value=response.circulation
+                                book_sizeForEdit.value=response.book_size
+                            }else if (response.post_format=='پایان نامه'){
+                                bookDIV1ForEdit.classList.add('hidden');
+                                bookDIV2ForEdit.classList.add('hidden');
+                                thesisDIV1ForEdit.classList.remove('hidden');
+                                thesisDIV2ForEdit.classList.remove('hidden');
+                                thesis_certificate_numberForEdit.value=response.thesis_certificate_number;
+                                thesis_defence_placeForEdit.value=response.thesis_defence_place;
+                                thesis_gradeForEdit.value=response.thesis_grade;
+                                thesis_supervisorForEdit.value=response.thesis_supervisor;
+                                thesis_advisorForEdit.value=response.thesis_advisor;
+                                thesis_refereeForEdit.value=response.thesis_referee;
+                            }
+
+
+                            scientific_group1ForEdit.value = response.scientific_group_v1;
+                            if (response.scientific_group_v2) {
+                                scientific_group2ForEdit.value = response.scientific_group_v2;
+                            }
+                            propertiesForEdit.value = response.properties;
+                            activity_typeForEdit.value = response.activity_type;
+                            if (response.activity_type=='individual'){
+                                commonDIVForEdit.classList.add('hidden');
+                            }else if (response.activity_type=='common'){
+                                $.ajax({
+                                    type: 'GET',
+                                    url: '/getParticipants',
+                                    data: {
+                                        id: response.id
+                                    },
+                                    success: function (response) {
+                                        if (response[0]){
+                                            comm_name1ForEdit.value=response[0].name;
+                                            comm_family1ForEdit.value=response[0].family;
+                                            comm_national_code1ForEdit.value=response[0].national_code;
+                                            comm_percentage1ForEdit.value=response[0].participation_percentage;
+                                            comm_mobile1ForEdit.value=response[0].mobile;
+                                        }
+                                        if (response[1]){
+                                            comm_name2ForEdit.value=response[1].name;
+                                            comm_family2ForEdit.value=response[1].family;
+                                            comm_national_code2ForEdit.value=response[1].national_code;
+                                            comm_percentage2ForEdit.value=response[1].participation_percentage;
+                                            comm_mobile2ForEdit.value=response[1].mobile;
+                                        }
+                                        if (response[2]){
+                                            comm_name3ForEdit.value=response[2].name;
+                                            comm_family3ForEdit.value=response[2].family;
+                                            comm_national_code3ForEdit.value=response[2].national_code;
+                                            comm_percentage3ForEdit.value=response[2].participation_percentage;
+                                            comm_mobile3ForEdit.value=response[2].mobile;
+                                        }
+                                        if (response[3]){
+                                            comm_name4ForEdit.value=response[3].name;
+                                            comm_family4ForEdit.value=response[3].family;
+                                            comm_national_code4ForEdit.value=response[3].national_code;
+                                            comm_percentage4ForEdit.value=response[3].participation_percentage;
+                                            comm_mobile4ForEdit.value=response[3].mobile;
+                                        }
+                                        if (response[4]){
+                                            comm_name5ForEdit.value=response[4].name;
+                                            comm_family5ForEdit.value=response[4].family;
+                                            comm_national_code5ForEdit.value=response[4].national_code;
+                                            comm_percentage5ForEdit.value=response[4].participation_percentage;
+                                            comm_mobile5ForEdit.value=response[4].mobile;
+                                        }
+
+                                    }
+                                });
+                                commonDIVForEdit.classList.remove('hidden');
+                            }
+                            post_delivery_methodForEdit.value = response.post_delivery_method;
+                            if (response.post_delivery_method=='digital'){
+                                file_srcDIVForEdit.classList.remove('hidden');
+                                response.file_src=response.file_src.replace('public','storage');
+                                postFile.href=response.file_src;
+                                if (response.post_format=='پایان نامه'){
+                                    response.thesis_proceedings_src=response.thesis_proceedings_src.replace('public','storage');
+                                    proceedingsFile.href=response.thesis_proceedings_src;
+                                    thesis_proceedings_srcDIVForEdit.classList.remove('hidden');
+                                }else{
+                                    thesis_proceedings_srcDIVForEdit.classList.add('hidden');
+                                }
+                            }else{
+                                file_srcDIVForEdit.classList.add('hidden');
+                                thesis_proceedings_src.classList.add('hidden');
+                            }
+                        }
+                    }
+                });
+            });
+            $('.DeletePost').on('click', function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'آیا مطمئن هستید؟',
+                    text: 'این اثر به صورت دائمی حذف خواهد شد.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    cancelButtonText: 'خیر',
+                    confirmButtonText: 'بله',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: 'DELETE',
+                            url: '/deletePost',
+                            data: {
+                                id: $(this).data('id')
+                            },
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            },
+                            success: function (response) {
+                                location.reload();
                             }
                         });
                     }

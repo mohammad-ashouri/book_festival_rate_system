@@ -73,18 +73,20 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
             Route::get('/getAllGroups', [ScientificGroupController::class, 'getAllGroups']);
             //End Catalogs
 
-            Route::get('/Person', [PersonController::class, 'index'])->name('Person');
-            Route::post('/newPerson', [PersonController::class, 'newPerson'])->name('newPerson');
-            Route::get('/getPersonInfo', [PersonController::class, 'getPersonInfo'])->name('getPersonInfo');
-            Route::post('/editPerson', [PersonController::class, 'editPerson'])->name('editPerson');
+            Route::get('/Person', [PersonController::class, 'index']);
+            Route::post('/newPerson', [PersonController::class, 'newPerson']);
+            Route::get('/getPersonInfo', [PersonController::class, 'getPersonInfo']);
+            Route::post('/editPerson', [PersonController::class, 'editPerson']);
 
-            Route::get('/Posts', [PostController::class, 'index'])->name('Posts');
-            Route::post('/newPost', [PostController::class, 'newPost'])->name('newPost');
-            Route::get('/getPostInfo', [PostController::class, 'getPostInfo'])->name('getPostInfo');
-            Route::post('/editPost', [PostController::class, 'editPost'])->name('editPost');
+            Route::get('/Posts', [PostController::class, 'index']);
+            Route::post('/newPost', [PostController::class, 'newPost']);
+            Route::get('/getPostInfo', [PostController::class, 'getPostInfo']);
+            Route::get('/getParticipants', [PostController::class, 'getParticipants']);
+            Route::post('/editPost', [PostController::class, 'editPost']);
+            Route::delete('/deletePost', [PostController::class, 'deletePost']);
 
-            Route::get('/Classification', [PostController::class, 'showClassification'])->name('Classification');
-            Route::post('/changeScientificGroup', [PostController::class, 'changeScientificGroup'])->name('changeScientificGroup');
+            Route::get('/Classification', [PostController::class, 'showClassification']);
+            Route::post('/changeScientificGroup', [PostController::class, 'changeScientificGroup']);
             Route::post('/Classification', [PostController::class, 'Classification']);
 
         });

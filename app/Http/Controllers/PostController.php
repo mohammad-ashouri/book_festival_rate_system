@@ -22,7 +22,7 @@ class PostController extends Controller
         $post_type = $request->input('post_type');
         $language = $request->input('language');
         $pages_number = $request->input('pages_number');
-        $special_section = $request->input('specialSection');
+        $special_section = $request->input('special_section');
         $scientific_group1 = $request->input('scientific_group1');
         $scientific_group2 = $request->input('scientific_group2');
         $properties = $request->input('properties');
@@ -303,7 +303,6 @@ class PostController extends Controller
         $this->logActivity('Post Added =>' . $Post->id, \request()->ip(), \request()->userAgent(), \session('id'));
         return $this->success(true, 'PostAdded', 'برای نمایش اطلاعات جدید، لطفا صفحه را رفرش نمایید.');
     }
-
     public function getPostInfo(Request $request)
     {
         $postID = $request->input('id');
@@ -311,13 +310,18 @@ class PostController extends Controller
             return Post::find($postID);
         }
     }
-
+    public function getParticipants(Request $request)
+    {
+        $postID = $request->input('id');
+        if ($postID){
+            return Participants::where('post_id',$postID)->get();
+        }
+    }
     public function showClassification()
     {
         $postList = Post::where('sorted', 0)->orderBy('festival_id', 'asc')->orderBy('title', 'asc')->get();
         return \view('Classification', ['postList' => $postList]);
     }
-
     public function changeScientificGroup(Request $request)
     {
         $work = $request->input('work');
@@ -341,7 +345,14 @@ class PostController extends Controller
                 break;
         }
     }
-
+    public function deletePost(Request $request)
+    {
+        $postID = $request->input('id');
+        if ($postID){
+            $post=Post::find($postID);
+            $post->delete();
+        }
+    }
     public function Classification(Request $request)
     {
         if ($request->hasFile('file_src')) {
@@ -373,7 +384,6 @@ class PostController extends Controller
         $this->logActivity('Classification Done ', \request()->ip(), \request()->userAgent(), \session('id'));
         return $this->success(true, 'classificationSuccessful', 'برای نمایش اطلاعات جدید، لطفا صفحه را رفرش نمایید.');
     }
-
     public function index()
     {
         $postList = Post::orderBy('festival_id', 'asc')->paginate(10);
