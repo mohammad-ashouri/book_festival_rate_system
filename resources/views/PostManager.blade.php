@@ -12,8 +12,8 @@
                 <form id="new-post">
                     @csrf
                     <div class="mt-4 mb-4 flex items-center">
-                                                <div class="fixed z-10 inset-0 overflow-y-auto hidden" id="newPostModal">
-{{--                        <div class="fixed z-10 inset-0 overflow-y-auto" id="newPostModal">--}}
+                        <div class="fixed z-10 inset-0 overflow-y-auto hidden" id="newPostModal">
+                            {{--                        <div class="fixed z-10 inset-0 overflow-y-auto" id="newPostModal">--}}
                             <div
                                 class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center  sm:block sm:p-0">
                                 <div class="fixed inset-0 transition-opacity" aria-hidden="true">
@@ -98,17 +98,19 @@
                                                 </div>
                                             </div>
                                             <div class="flex justify-right mb-4">
-                                            <div class="w-1/3 ml-3">
-                                                <label for="pages_number"
-                                                       class="block text-gray-700 text-sm font-bold mb-1">تعداد صفحه*:</label>
-                                                <input type="text" id="pages_number" name="pages_number"
-                                                       autocomplete="off"
-                                                       class="border rounded-md w-full px-3 py-2 "
-                                                       placeholder="تعداد صفحه را وارد کنید">
-                                            </div>
+                                                <div class="w-1/3 ml-3">
+                                                    <label for="pages_number"
+                                                           class="block text-gray-700 text-sm font-bold mb-1">تعداد
+                                                        صفحه*:</label>
+                                                    <input type="text" id="pages_number" name="pages_number"
+                                                           autocomplete="off"
+                                                           class="border rounded-md w-full px-3 py-2 "
+                                                           placeholder="تعداد صفحه را وارد کنید">
+                                                </div>
                                                 <div class="w-1/3 ml-3">
                                                     <label for="special_section"
-                                                           class="block text-gray-700 text-sm font-bold mb-1">محور ویژه*:</label>
+                                                           class="block text-gray-700 text-sm font-bold mb-1">محور
+                                                        ویژه*:</label>
                                                     <select id="special_section"
                                                             class="border rounded-md w-full px-3 py-2"
                                                             name="special_section">
@@ -444,6 +446,7 @@
                                                            class="text-gray-700 text-sm font-bold whitespace-nowrap">فایل
                                                         اثر:</label>
                                                     <input id="file_src" name="file_src" type="file"
+                                                           accept=".pdf, .doc, .docx, .jpg, .jpeg, .bmp"
                                                            class="border border-gray-300 px-3 py-2 w-full rounded-lg focus:ring-blue-500 focus:border-blue-500">
                                                 </div>
                                                 <div id="thesis_proceedings_srcDIV" class="mb-4 hidden">
@@ -451,7 +454,7 @@
                                                            class="text-gray-700 text-sm font-bold whitespace-nowrap">فایل
                                                         دفاعیه پایان نامه:</label>
                                                     <input id="thesis_proceedings_src" name="thesis_proceedings_src"
-                                                           type="file"
+                                                           type="file" accept=".pdf, .doc, .docx, .jpg, .jpeg, .bmp"
                                                            class="border border-gray-300 px-3 py-2 w-full rounded-lg focus:ring-blue-500 focus:border-blue-500">
                                                 </div>
                                             </div>
@@ -476,8 +479,8 @@
                 <form id="edit-post">
                     @csrf
                     <div class="mt-4 mb-4 flex items-center">
-                                                <div class="fixed z-10 inset-0 overflow-y-auto hidden" id="editPostModal">
-{{--                        <div class="fixed z-10 inset-0 overflow-y-auto" id="newPostModal">--}}
+                        <div class="fixed z-10 inset-0 overflow-y-auto hidden" id="editPostModal">
+                            {{--                        <div class="fixed z-10 inset-0 overflow-y-auto" id="newPostModal">--}}
                             <div
                                 class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center  sm:block sm:p-0">
                                 <div class="fixed inset-0 transition-opacity" aria-hidden="true">
@@ -521,7 +524,8 @@
                                                     <label for="post_formatForEdit"
                                                            class="block text-gray-700 text-sm font-bold mb-2">قالب
                                                         علمی*:</label>
-                                                    <select id="post_formatForEdit" class="border rounded-md w-full px-3 py-2 "
+                                                    <select id="post_formatForEdit"
+                                                            class="border rounded-md w-full px-3 py-2 "
                                                             name="post_formatForEdit">
                                                         <option value="" disabled selected>انتخاب کنید</option>
                                                         <option value="کتاب">کتاب</option>
@@ -532,7 +536,8 @@
                                                     <label for="post_typeForEdit"
                                                            class=" block text-gray-700 text-sm font-bold mb-2">نوع
                                                         اثر*:</label>
-                                                    <select id="post_typeForEdit" class="border rounded-md w-full px-3 py-2 "
+                                                    <select id="post_typeForEdit"
+                                                            class="border rounded-md w-full px-3 py-2 "
                                                             name="post_typeForEdit">
                                                         <option value="" disabled selected>انتخاب کنید</option>
                                                         <option value="تالیف">تالیف</option>
@@ -544,7 +549,8 @@
                                                 <div class="w-1/3 ml-3">
                                                     <label for="languageForEdit"
                                                            class="block text-gray-700 text-sm font-bold mb-2">زبان*:</label>
-                                                    <select id="languageForEdit" class="border rounded-md w-full px-3 py-2 "
+                                                    <select id="languageForEdit"
+                                                            class="border rounded-md w-full px-3 py-2 "
                                                             name="languageForEdit">
                                                         <option value="" disabled selected>انتخاب کنید</option>
                                                         @php
@@ -558,21 +564,25 @@
                                                 </div>
                                             </div>
                                             <div class="flex justify-right mb-4">
-                                            <div class="w-1/3 ml-3">
-                                                <label for="pages_numberForEdit"
-                                                       class="block text-gray-700 text-sm font-bold mb-1">تعداد صفحه*:</label>
-                                                <input type="text" id="pages_numberForEdit" name="pages_numberForEdit"
-                                                       autocomplete="off"
-                                                       class="border rounded-md w-full px-3 py-2 "
-                                                       placeholder="تعداد صفحه را وارد کنید">
-                                            </div>
+                                                <div class="w-1/3 ml-3">
+                                                    <label for="pages_numberForEdit"
+                                                           class="block text-gray-700 text-sm font-bold mb-1">تعداد
+                                                        صفحه*:</label>
+                                                    <input type="text" id="pages_numberForEdit"
+                                                           name="pages_numberForEdit"
+                                                           autocomplete="off"
+                                                           class="border rounded-md w-full px-3 py-2 "
+                                                           placeholder="تعداد صفحه را وارد کنید">
+                                                </div>
                                                 <div class="w-1/3 ml-3">
                                                     <label for="special_sectionForEdit"
-                                                           class="block text-gray-700 text-sm font-bold mb-1">محور ویژه*:</label>
+                                                           class="block text-gray-700 text-sm font-bold mb-1">محور
+                                                        ویژه*:</label>
                                                     <select id="special_sectionForEdit"
                                                             class="border rounded-md w-full px-3 py-2"
                                                             name="special_sectionForEdit">
-                                                        <option value="" selected>این اثر در محور ویژه قرار نمی گیرد</option>
+                                                        <option value="" selected>این اثر در محور ویژه قرار نمی گیرد
+                                                        </option>
                                                         @php
                                                             $special_sections=\App\Models\Catalogs\SpecialSection::orderBy('name','asc')->get();
                                                         @endphp
@@ -614,7 +624,8 @@
                                                     <label for="number_of_coversForEdit"
                                                            class="block text-gray-700 text-sm font-bold mb-2">تعداد
                                                         جلد*:</label>
-                                                    <input type="text" id="number_of_coversForEdit" name="number_of_coversForEdit"
+                                                    <input type="text" id="number_of_coversForEdit"
+                                                           name="number_of_coversForEdit"
                                                            autocomplete="off"
                                                            class="border rounded-md w-full px-3 py-2 "
                                                            placeholder="تعداد جلد را وارد کنید">
@@ -677,7 +688,8 @@
                                                     <label for="thesis_gradeForEdit"
                                                            class="text-gray-700 text-sm font-bold whitespace-nowrap">امتیاز
                                                         پایان نامه:</label>
-                                                    <input type="text" id="thesis_gradeForEdit" name="thesis_gradeForEdit"
+                                                    <input type="text" id="thesis_gradeForEdit"
+                                                           name="thesis_gradeForEdit"
                                                            autocomplete="off"
                                                            class="border rounded-md w-full px-3 py-2 "
                                                            placeholder="شابک را وارد کنید">
@@ -688,7 +700,8 @@
                                                     <label for="thesis_supervisorForEdit"
                                                            class="block text-gray-700 text-sm font-bold mb-2">مشخصات
                                                         استاد راهنما*:</label>
-                                                    <input type="text" id="thesis_supervisorForEdit" name="thesis_supervisorForEdit"
+                                                    <input type="text" id="thesis_supervisorForEdit"
+                                                           name="thesis_supervisorForEdit"
                                                            autocomplete="off"
                                                            class="border rounded-md w-full px-3 py-2 "
                                                            placeholder="نام و نام خانوادگی استاد راهنما ">
@@ -697,7 +710,8 @@
                                                     <label for="thesis_advisorForEdit"
                                                            class="block text-gray-700 text-sm font-bold mb-2">مشخصات
                                                         استاد مشاور*:</label>
-                                                    <input type="text" id="thesis_advisorForEdit" name="thesis_advisorForEdit"
+                                                    <input type="text" id="thesis_advisorForEdit"
+                                                           name="thesis_advisorForEdit"
                                                            autocomplete="off"
                                                            class="border rounded-md w-full px-3 py-2 "
                                                            placeholder="نام و نام خانوادگی استاد مشاور ">
@@ -706,7 +720,8 @@
                                                     <label for="thesis_refereeForEdit"
                                                            class="block text-gray-700 text-sm font-bold mb-2">مشخصات
                                                         استاد داور*:</label>
-                                                    <input type="text" id="thesis_refereeForEdit" name="thesis_refereeForEdit"
+                                                    <input type="text" id="thesis_refereeForEdit"
+                                                           name="thesis_refereeForEdit"
                                                            autocomplete="off"
                                                            class="border rounded-md w-full px-3 py-2 "
                                                            placeholder="نام و نام خانوادگی استاد داور ">
@@ -798,87 +813,112 @@
                                                         <tbody id="tableBodyForEdit"
                                                                class="bg-white divide-y divide-gray-200 ">
                                                         <tr>
-                                                            <td><input type="text" name="comm_name1ForEdit" id="comm_name1ForEdit"
+                                                            <td><input type="text" name="comm_name1ForEdit"
+                                                                       id="comm_name1ForEdit"
                                                                        class="border rounded-md w-full px-3 py-2"
                                                                        placeholder="نام"></td>
-                                                            <td><input type="text" name="comm_family1ForEdit" id="comm_family1ForEdit"
+                                                            <td><input type="text" name="comm_family1ForEdit"
+                                                                       id="comm_family1ForEdit"
                                                                        class="border rounded-md w-full px-3 py-2"
                                                                        placeholder="نام خانوادگی"></td>
-                                                            <td><input type="text" name="comm_national_code1ForEdit" id="comm_national_code1ForEdit"
+                                                            <td><input type="text" name="comm_national_code1ForEdit"
+                                                                       id="comm_national_code1ForEdit"
                                                                        class="border rounded-md w-full px-3 py-2"
                                                                        placeholder="کد ملی"></td>
-                                                            <td><input type="text" name="comm_percentage1ForEdit" id="comm_percentage1ForEdit"
+                                                            <td><input type="text" name="comm_percentage1ForEdit"
+                                                                       id="comm_percentage1ForEdit"
                                                                        class="border rounded-md w-16 px-3 py-2"
                                                                        placeholder="درصد همکاری"></td>
-                                                            <td><input type="text" name="comm_mobile1ForEdit" id="comm_mobile1ForEdit"
+                                                            <td><input type="text" name="comm_mobile1ForEdit"
+                                                                       id="comm_mobile1ForEdit"
                                                                        class="border rounded-md w-full px-3 py-2"
                                                                        placeholder="شماره همراه"></td>
                                                         </tr>
                                                         <tr>
-                                                            <td><input type="text" name="comm_name2ForEdit" id="comm_name2ForEdit"
+                                                            <td><input type="text" name="comm_name2ForEdit"
+                                                                       id="comm_name2ForEdit"
                                                                        class="border rounded-md w-full px-3 py-2"
                                                                        placeholder="نام"></td>
-                                                            <td><input type="text" name="comm_family2ForEdit" id="comm_family2ForEdit"
+                                                            <td><input type="text" name="comm_family2ForEdit"
+                                                                       id="comm_family2ForEdit"
                                                                        class="border rounded-md w-full px-3 py-2"
                                                                        placeholder="نام خانوادگی"></td>
-                                                            <td><input type="text" name="comm_national_code2ForEdit" id="comm_national_code2ForEdit"
+                                                            <td><input type="text" name="comm_national_code2ForEdit"
+                                                                       id="comm_national_code2ForEdit"
                                                                        class="border rounded-md w-full px-3 py-2"
                                                                        placeholder="کد ملی"></td>
-                                                            <td><input type="text" name="comm_percentage2ForEdit" id="comm_percentage2ForEdit"
+                                                            <td><input type="text" name="comm_percentage2ForEdit"
+                                                                       id="comm_percentage2ForEdit"
                                                                        class="border rounded-md w-16 px-3 py-2"
                                                                        placeholder="درصد همکاری"></td>
-                                                            <td><input type="text" name="comm_mobile2ForEdit" id="comm_mobile2ForEdit"
+                                                            <td><input type="text" name="comm_mobile2ForEdit"
+                                                                       id="comm_mobile2ForEdit"
                                                                        class="border rounded-md w-full px-3 py-2"
                                                                        placeholder="شماره همراه"></td>
                                                         </tr>
                                                         <tr>
-                                                            <td><input type="text" name="comm_name3ForEdit" id="comm_name3ForEdit"
+                                                            <td><input type="text" name="comm_name3ForEdit"
+                                                                       id="comm_name3ForEdit"
                                                                        class="border rounded-md w-full px-3 py-2"
                                                                        placeholder="نام"></td>
-                                                            <td><input type="text" name="comm_family3ForEdit" id="comm_family3ForEdit"
+                                                            <td><input type="text" name="comm_family3ForEdit"
+                                                                       id="comm_family3ForEdit"
                                                                        class="border rounded-md w-full px-3 py-2"
                                                                        placeholder="نام خانوادگی"></td>
-                                                            <td><input type="text" name="comm_national_code3ForEdit" id="comm_national_code3ForEdit"
+                                                            <td><input type="text" name="comm_national_code3ForEdit"
+                                                                       id="comm_national_code3ForEdit"
                                                                        class="border rounded-md w-full px-3 py-2"
                                                                        placeholder="کد ملی"></td>
-                                                            <td><input type="text" name="comm_percentage3ForEdit" id="comm_percentage3ForEdit"
+                                                            <td><input type="text" name="comm_percentage3ForEdit"
+                                                                       id="comm_percentage3ForEdit"
                                                                        class="border rounded-md w-16 px-3 py-2"
                                                                        placeholder="درصد همکاری"></td>
-                                                            <td><input type="text" name="comm_mobile3ForEdit" id="comm_mobile3ForEdit"
+                                                            <td><input type="text" name="comm_mobile3ForEdit"
+                                                                       id="comm_mobile3ForEdit"
                                                                        class="border rounded-md w-full px-3 py-2"
                                                                        placeholder="شماره همراه"></td>
                                                         </tr>
                                                         <tr>
-                                                            <td><input type="text" name="comm_name4ForEdit" id="comm_name4ForEdit"
+                                                            <td><input type="text" name="comm_name4ForEdit"
+                                                                       id="comm_name4ForEdit"
                                                                        class="border rounded-md w-full px-3 py-2"
                                                                        placeholder="نام"></td>
-                                                            <td><input type="text" name="comm_family4ForEdit" id="comm_family4ForEdit"
+                                                            <td><input type="text" name="comm_family4ForEdit"
+                                                                       id="comm_family4ForEdit"
                                                                        class="border rounded-md w-full px-3 py-2"
                                                                        placeholder="نام خانوادگی"></td>
-                                                            <td><input type="text" name="comm_national_code4ForEdit" id="comm_national_code4ForEdit"
+                                                            <td><input type="text" name="comm_national_code4ForEdit"
+                                                                       id="comm_national_code4ForEdit"
                                                                        class="border rounded-md w-full px-3 py-2"
                                                                        placeholder="کد ملی"></td>
-                                                            <td><input type="text" name="comm_percentage4ForEdit" id="comm_percentage4ForEdit"
+                                                            <td><input type="text" name="comm_percentage4ForEdit"
+                                                                       id="comm_percentage4ForEdit"
                                                                        class="border rounded-md w-16 px-3 py-2"
                                                                        placeholder="درصد همکاری"></td>
-                                                            <td><input type="text" name="comm_mobile4ForEdit" id="comm_mobile4ForEdit"
+                                                            <td><input type="text" name="comm_mobile4ForEdit"
+                                                                       id="comm_mobile4ForEdit"
                                                                        class="border rounded-md w-full px-3 py-2"
                                                                        placeholder="شماره همراه"></td>
                                                         </tr>
                                                         <tr>
-                                                            <td><input type="text" name="comm_name5ForEdit" id="comm_name5ForEdit"
+                                                            <td><input type="text" name="comm_name5ForEdit"
+                                                                       id="comm_name5ForEdit"
                                                                        class="border rounded-md w-full px-3 py-2"
                                                                        placeholder="نام"></td>
-                                                            <td><input type="text" name="comm_family5ForEdit" id="comm_family5ForEdit"
+                                                            <td><input type="text" name="comm_family5ForEdit"
+                                                                       id="comm_family5ForEdit"
                                                                        class="border rounded-md w-full px-3 py-2"
                                                                        placeholder="نام خانوادگی"></td>
-                                                            <td><input type="text" name="comm_national_code5ForEdit" id="comm_national_code5ForEdit"
+                                                            <td><input type="text" name="comm_national_code5ForEdit"
+                                                                       id="comm_national_code5ForEdit"
                                                                        class="border rounded-md w-full px-3 py-2"
                                                                        placeholder="کد ملی"></td>
-                                                            <td><input type="text" name="comm_percentage5ForEdit" id="comm_percentage5ForEdit"
+                                                            <td><input type="text" name="comm_percentage5ForEdit"
+                                                                       id="comm_percentage5ForEdit"
                                                                        class="border rounded-md w-16 px-3 py-2"
                                                                        placeholder="درصد همکاری"></td>
-                                                            <td><input type="text" name="comm_mobile5ForEdit" id="comm_mobile5ForEdit"
+                                                            <td><input type="text" name="comm_mobile5ForEdit"
+                                                                       id="comm_mobile5ForEdit"
                                                                        class="border rounded-md w-full px-3 py-2"
                                                                        placeholder="شماره همراه"></td>
                                                         </tr>
@@ -900,25 +940,31 @@
                                                     </select>
                                                 </div>
                                                 <div id="file_srcDIVForEdit" class="mb-4 hidden">
-                                                    <label for="file_src"
-                                                           class="text-gray-700 text-sm font-bold whitespace-nowrap">برای مشاهده فایل اثر
+                                                    <label for="file_srcForEdit"
+                                                           class="text-gray-700 text-sm font-bold whitespace-nowrap">برای
+                                                        مشاهده فایل اثر
                                                         <a id="postFile" target="_blank">
-                                                        اینجا
+                                                            اینجا
                                                         </a>
-                                                        را کلیک کرده و در صورت تمایل به تغییر فایل از کادر زیر اقدام نمایید:</label>
-                                                    <input id="file_src" name="file_src" type="file"
+                                                        را کلیک کرده و در صورت تمایل به تغییر فایل از کادر زیر اقدام
+                                                        نمایید:</label>
+                                                    <input id="file_srcForEdit" name="file_srcForEdit" type="file"
+                                                           accept=".pdf, .doc, .docx, .jpg, .jpeg, .bmp"
                                                            class="border border-gray-300 px-3 py-2 w-full rounded-lg focus:ring-blue-500 focus:border-blue-500">
 
                                                 </div>
                                                 <div id="thesis_proceedings_srcDIVForEdit" class="mb-4 hidden">
-                                                    <label for="file_src"
-                                                           class="text-gray-700 text-sm font-bold whitespace-nowrap">برای مشاهده فایل دفاعیه پایان نامه
+                                                    <label for="thesis_proceedings_srcForEdit"
+                                                           class="text-gray-700 text-sm font-bold whitespace-nowrap">برای
+                                                        مشاهده فایل دفاعیه پایان نامه
                                                         <a id="proceedingsFile" target="_blank">
                                                             اینجا
                                                         </a>
-                                                        را کلیک کرده و در صورت تمایل به تغییر فایل از کادر زیر اقدام نمایید:</label>
-                                                    <input id="thesis_proceedings_src" name="thesis_proceedings_src"
-                                                           type="file"
+                                                        را کلیک کرده و در صورت تمایل به تغییر فایل از کادر زیر اقدام
+                                                        نمایید:</label>
+                                                    <input id="thesis_proceedings_srcForEdit"
+                                                           name="thesis_proceedings_srcForEdit"
+                                                           type="file" accept=".pdf, .doc, .docx, .jpg, .jpeg, .bmp"
                                                            class="border border-gray-300 px-3 py-2 w-full rounded-lg focus:ring-blue-500 focus:border-blue-500">
                                                 </div>
                                             </div>
@@ -993,15 +1039,15 @@
                                 <td class="px-3 py-4">{{ $post->post_type }}</td>
                                 <td class="px-3 py-4">
                                     @php
-                                    $languageInfo=\App\Models\Catalogs\Language::find($post->language)
+                                        $languageInfo=\App\Models\Catalogs\Language::find($post->language)
                                     @endphp
                                     {{ $languageInfo->name }}
                                 </td>
                                 <td class="px-3 py-4">
-                                    @php
-                                        $sg1Info=\App\Models\Catalogs\ScientificGroup::find($post->scientific_group_v1)
-                                    @endphp
-                                    {{ $sg1Info->name }}
+                                @php
+                                    $sg1Info=\App\Models\Catalogs\ScientificGroup::find($post->scientific_group_v1)
+                                @endphp
+                                {{ $sg1Info->name }}
                                 <td class="px-3 py-4">
                                     @php
                                         $sg2Info=\App\Models\Catalogs\ScientificGroup::find($post->scientific_group_v2)

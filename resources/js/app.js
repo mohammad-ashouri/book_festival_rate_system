@@ -719,6 +719,10 @@ $(document).ready(function () {
                     bookDIV2.classList.remove('hidden');
                     thesisDIV1.classList.add('hidden');
                     thesisDIV2.classList.add('hidden');
+                    if (post_delivery_method.value == 'digital') {
+                        file_srcDIV.classList.remove('hidden');
+                        thesis_proceedings_srcDIV.classList.add('hidden');
+                    }
                 } else if (post_format.value == 'پایان نامه') {
                     bookDIV1.classList.add('hidden');
                     bookDIV2.classList.add('hidden');
@@ -726,9 +730,28 @@ $(document).ready(function () {
                     thesisDIV2.classList.remove('hidden');
                     if (post_delivery_method.value == 'digital') {
                         file_srcDIV.classList.remove('hidden');
-                        if (post_format.value == 'پایان نامه') {
-                            thesis_proceedings_srcDIV.classList.remove('hidden');
-                        }
+                        thesis_proceedings_srcDIV.classList.remove('hidden');
+                    }
+                }
+            });
+            $('#post_formatForEdit').on('change', function () {
+                if (post_formatForEdit.value == 'کتاب') {
+                    bookDIV1ForEdit.classList.remove('hidden');
+                    bookDIV2ForEdit.classList.remove('hidden');
+                    thesisDIV1ForEdit.classList.add('hidden');
+                    thesisDIV2ForEdit.classList.add('hidden');
+                    if (post_delivery_methodForEdit.value == 'digital') {
+                        file_srcDIVForEdit.classList.remove('hidden');
+                        thesis_proceedings_srcDIVForEdit.classList.add('hidden');
+                    }
+                } else if (post_formatForEdit.value == 'پایان نامه') {
+                    bookDIV1ForEdit.classList.add('hidden');
+                    bookDIV2ForEdit.classList.add('hidden');
+                    thesisDIV1ForEdit.classList.remove('hidden');
+                    thesisDIV2ForEdit.classList.remove('hidden');
+                    if (post_delivery_methodForEdit.value == 'digital') {
+                        file_srcDIVForEdit.classList.remove('hidden');
+                        thesis_proceedings_srcDIVForEdit.classList.remove('hidden');
                     }
                 }
             });
@@ -757,111 +780,127 @@ $(document).ready(function () {
                     }
                 }
             });
+            $('#post_delivery_methodForEdit').on('change', function () {
+                if (post_delivery_methodForEdit.value == 'physical') {
+                    file_srcDIVForEdit.classList.add('hidden');
+                    thesis_proceedings_srcDIVForEdit.classList.add('hidden');
+                } else if (post_delivery_methodForEdit.value == 'digital') {
+                    file_srcDIVForEdit.classList.remove('hidden');
+                    if (post_formatForEdit.value == 'پایان نامه') {
+                        thesis_proceedings_srcDIVForEdit.classList.remove('hidden');
+                    }
+                }
+            });
             $('#new-post-button,#cancel-new-post').on('click', function () {
                 toggleModal(newPostModal.id);
             });
             $('#new-post').on('submit', function (e) {
                 e.preventDefault();
-                Swal.fire({
-                    title: 'آیا مطمئن هستید؟',
-                    text: 'این اثر در سامانه اضافه خواهد شد.',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    cancelButtonText: 'خیر',
-                    confirmButtonText: 'بله',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        var form = $(this);
-                        var formData = new FormData(form[0]);
-                        $.ajax({
-                            type: 'POST',
-                            url: '/newPost',
-                            data: formData,
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                            },
-                            contentType: false,
-                            processData: false,
-                            success: function (response) {
-                                if (response.errors) {
-                                    if (response.errors.nullPerson) {
-                                        swalFire('خطا!', response.errors.nullPerson[0], 'error', 'تلاش مجدد');
+                if (scientific_group1.value === scientific_group2.value) {
+                    swalFire('خطا!', 'گروه اول و دوم با هم برابر می باشد.', 'error', 'تلاش مجدد');
+                } else {
+                    Swal.fire({
+                        title: 'آیا مطمئن هستید؟',
+                        text: 'این اثر در سامانه اضافه خواهد شد.',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        cancelButtonText: 'خیر',
+                        confirmButtonText: 'بله',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            var form = $(this);
+                            var formData = new FormData(form[0]);
+                            $.ajax({
+                                type: 'POST',
+                                url: '/newPost',
+                                data: formData,
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                                },
+                                contentType: false,
+                                processData: false,
+                                success: function (response) {
+                                    if (response.errors) {
+                                        if (response.errors.nullPerson) {
+                                            swalFire('خطا!', response.errors.nullPerson[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullName) {
+                                            swalFire('خطا!', response.errors.nullName[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullPostFormat) {
+                                            swalFire('خطا!', response.errors.nullPostFormat[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullPostType) {
+                                            swalFire('خطا!', response.errors.nullPostType[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullLanguage) {
+                                            swalFire('خطا!', response.errors.nullLanguage[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullPagesNumber) {
+                                            swalFire('خطا!', response.errors.nullPagesNumber[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullSG1) {
+                                            swalFire('خطا!', response.errors.nullSG1[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullActivityType) {
+                                            swalFire('خطا!', response.errors.nullActivityType[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullPostDeliveryMethod) {
+                                            swalFire('خطا!', response.errors.nullPostDeliveryMethod[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullPublisher) {
+                                            swalFire('خطا!', response.errors.nullPublisher[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullISSN) {
+                                            swalFire('خطا!', response.errors.nullISSN[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullNumberOfCovers) {
+                                            swalFire('خطا!', response.errors.nullNumberOfCovers[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullCirculation) {
+                                            swalFire('خطا!', response.errors.nullCirculation[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullBookSize) {
+                                            swalFire('خطا!', response.errors.nullBookSize[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullThesisCertificateNumber) {
+                                            swalFire('خطا!', response.errors.nullThesisCertificateNumber[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullThesisDefencePlace) {
+                                            swalFire('خطا!', response.errors.nullThesisDefencePlace[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullGrade) {
+                                            swalFire('خطا!', response.errors.nullGrade[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullSupervisor) {
+                                            swalFire('خطا!', response.errors.nullSupervisor[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullAdvisor) {
+                                            swalFire('خطا!', response.errors.nullAdvisor[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullReferee) {
+                                            swalFire('خطا!', response.errors.nullReferee[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullCooperatorInformation) {
+                                            swalFire('خطا!', response.errors.nullCooperatorInformation[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullPostFile) {
+                                            swalFire('خطا!', response.errors.nullPostFile[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullThesisFile) {
+                                            swalFire('خطا!', response.errors.nullThesisFile[0], 'error', 'تلاش مجدد');
+                                        }
+                                    } else if (response.success) {
+                                        // swalFire('ثبت اثر جدید موفقیت آمیز بود!', response.message.PostAdded[0], 'success', 'بستن');
+                                        // toggleModal(newPostModal.id);
+                                        resetFields();
+                                        location.reload();
                                     }
-                                    if (response.errors.nullName) {
-                                        swalFire('خطا!', response.errors.nullName[0], 'error', 'تلاش مجدد');
-                                    }
-                                    if (response.errors.nullPostFormat) {
-                                        swalFire('خطا!', response.errors.nullPostFormat[0], 'error', 'تلاش مجدد');
-                                    }
-                                    if (response.errors.nullPostType) {
-                                        swalFire('خطا!', response.errors.nullPostType[0], 'error', 'تلاش مجدد');
-                                    }
-                                    if (response.errors.nullLanguage) {
-                                        swalFire('خطا!', response.errors.nullLanguage[0], 'error', 'تلاش مجدد');
-                                    }
-                                    if (response.errors.nullPagesNumber) {
-                                        swalFire('خطا!', response.errors.nullPagesNumber[0], 'error', 'تلاش مجدد');
-                                    }
-                                    if (response.errors.nullSG1) {
-                                        swalFire('خطا!', response.errors.nullSG1[0], 'error', 'تلاش مجدد');
-                                    }
-                                    if (response.errors.nullActivityType) {
-                                        swalFire('خطا!', response.errors.nullActivityType[0], 'error', 'تلاش مجدد');
-                                    }
-                                    if (response.errors.nullPostDeliveryMethod) {
-                                        swalFire('خطا!', response.errors.nullPostDeliveryMethod[0], 'error', 'تلاش مجدد');
-                                    }
-                                    if (response.errors.nullPublisher) {
-                                        swalFire('خطا!', response.errors.nullPublisher[0], 'error', 'تلاش مجدد');
-                                    }
-                                    if (response.errors.nullISSN) {
-                                        swalFire('خطا!', response.errors.nullISSN[0], 'error', 'تلاش مجدد');
-                                    }
-                                    if (response.errors.nullNumberOfCovers) {
-                                        swalFire('خطا!', response.errors.nullNumberOfCovers[0], 'error', 'تلاش مجدد');
-                                    }
-                                    if (response.errors.nullCirculation) {
-                                        swalFire('خطا!', response.errors.nullCirculation[0], 'error', 'تلاش مجدد');
-                                    }
-                                    if (response.errors.nullBookSize) {
-                                        swalFire('خطا!', response.errors.nullBookSize[0], 'error', 'تلاش مجدد');
-                                    }
-                                    if (response.errors.nullThesisCertificateNumber) {
-                                        swalFire('خطا!', response.errors.nullThesisCertificateNumber[0], 'error', 'تلاش مجدد');
-                                    }
-                                    if (response.errors.nullThesisDefencePlace) {
-                                        swalFire('خطا!', response.errors.nullThesisDefencePlace[0], 'error', 'تلاش مجدد');
-                                    }
-                                    if (response.errors.nullGrade) {
-                                        swalFire('خطا!', response.errors.nullGrade[0], 'error', 'تلاش مجدد');
-                                    }
-                                    if (response.errors.nullSupervisor) {
-                                        swalFire('خطا!', response.errors.nullSupervisor[0], 'error', 'تلاش مجدد');
-                                    }
-                                    if (response.errors.nullAdvisor) {
-                                        swalFire('خطا!', response.errors.nullAdvisor[0], 'error', 'تلاش مجدد');
-                                    }
-                                    if (response.errors.nullReferee) {
-                                        swalFire('خطا!', response.errors.nullReferee[0], 'error', 'تلاش مجدد');
-                                    }
-                                    if (response.errors.nullCooperatorInformation) {
-                                        swalFire('خطا!', response.errors.nullCooperatorInformation[0], 'error', 'تلاش مجدد');
-                                    }
-                                    if (response.errors.nullPostFile) {
-                                        swalFire('خطا!', response.errors.nullPostFile[0], 'error', 'تلاش مجدد');
-                                    }
-                                    if (response.errors.nullThesisFile) {
-                                        swalFire('خطا!', response.errors.nullThesisFile[0], 'error', 'تلاش مجدد');
-                                    }
-                                } else if (response.success) {
-                                    swalFire('ثبت اثر جدید موفقیت آمیز بود!', response.message.PostAdded[0], 'success', 'بستن');
-                                    toggleModal(newPostModal.id);
-                                    resetFields();
                                 }
-                            }
-                        });
-                    }
-                });
+                            });
+                        }
+                    });
+                }
             });
             $('.PostControl,#cancel-edit-post').on('click', function () {
                 toggleModal(editPostModal.id);
@@ -875,7 +914,6 @@ $(document).ready(function () {
                     },
                     success: function (response) {
                         if (response) {
-                            console.log(response);
                             postIDForEdit.value = response.id;
                             personForEdit.value = response.person_id;
                             nameForEdit.value = response.title;
@@ -887,27 +925,27 @@ $(document).ready(function () {
                                 special_sectionForEdit.value = response.special_section;
                             }
 
-                            if (response.post_format=='کتاب'){
+                            if (response.post_format == 'کتاب') {
                                 bookDIV1ForEdit.classList.remove('hidden');
                                 bookDIV2ForEdit.classList.remove('hidden');
                                 thesisDIV1ForEdit.classList.add('hidden');
                                 thesisDIV2ForEdit.classList.add('hidden');
-                                publisherForEdit.value=response.publisher;
-                                ISSNForEdit.value=response.ISSN;
-                                number_of_coversForEdit.value=response.number_of_covers;
-                                circulationForEdit.value=response.circulation
-                                book_sizeForEdit.value=response.book_size
-                            }else if (response.post_format=='پایان نامه'){
+                                publisherForEdit.value = response.publisher;
+                                ISSNForEdit.value = response.ISSN;
+                                number_of_coversForEdit.value = response.number_of_covers;
+                                circulationForEdit.value = response.circulation
+                                book_sizeForEdit.value = response.book_size
+                            } else if (response.post_format == 'پایان نامه') {
                                 bookDIV1ForEdit.classList.add('hidden');
                                 bookDIV2ForEdit.classList.add('hidden');
                                 thesisDIV1ForEdit.classList.remove('hidden');
                                 thesisDIV2ForEdit.classList.remove('hidden');
-                                thesis_certificate_numberForEdit.value=response.thesis_certificate_number;
-                                thesis_defence_placeForEdit.value=response.thesis_defence_place;
-                                thesis_gradeForEdit.value=response.thesis_grade;
-                                thesis_supervisorForEdit.value=response.thesis_supervisor;
-                                thesis_advisorForEdit.value=response.thesis_advisor;
-                                thesis_refereeForEdit.value=response.thesis_referee;
+                                thesis_certificate_numberForEdit.value = response.thesis_certificate_number;
+                                thesis_defence_placeForEdit.value = response.thesis_defence_place;
+                                thesis_gradeForEdit.value = response.thesis_grade;
+                                thesis_supervisorForEdit.value = response.thesis_supervisor;
+                                thesis_advisorForEdit.value = response.thesis_advisor;
+                                thesis_refereeForEdit.value = response.thesis_referee;
                             }
 
 
@@ -917,9 +955,9 @@ $(document).ready(function () {
                             }
                             propertiesForEdit.value = response.properties;
                             activity_typeForEdit.value = response.activity_type;
-                            if (response.activity_type=='individual'){
+                            if (response.activity_type == 'individual') {
                                 commonDIVForEdit.classList.add('hidden');
-                            }else if (response.activity_type=='common'){
+                            } else if (response.activity_type == 'common') {
                                 $.ajax({
                                     type: 'GET',
                                     url: '/getParticipants',
@@ -927,40 +965,40 @@ $(document).ready(function () {
                                         id: response.id
                                     },
                                     success: function (response) {
-                                        if (response[0]){
-                                            comm_name1ForEdit.value=response[0].name;
-                                            comm_family1ForEdit.value=response[0].family;
-                                            comm_national_code1ForEdit.value=response[0].national_code;
-                                            comm_percentage1ForEdit.value=response[0].participation_percentage;
-                                            comm_mobile1ForEdit.value=response[0].mobile;
+                                        if (response[0]) {
+                                            comm_name1ForEdit.value = response[0].name;
+                                            comm_family1ForEdit.value = response[0].family;
+                                            comm_national_code1ForEdit.value = response[0].national_code;
+                                            comm_percentage1ForEdit.value = response[0].participation_percentage;
+                                            comm_mobile1ForEdit.value = response[0].mobile;
                                         }
-                                        if (response[1]){
-                                            comm_name2ForEdit.value=response[1].name;
-                                            comm_family2ForEdit.value=response[1].family;
-                                            comm_national_code2ForEdit.value=response[1].national_code;
-                                            comm_percentage2ForEdit.value=response[1].participation_percentage;
-                                            comm_mobile2ForEdit.value=response[1].mobile;
+                                        if (response[1]) {
+                                            comm_name2ForEdit.value = response[1].name;
+                                            comm_family2ForEdit.value = response[1].family;
+                                            comm_national_code2ForEdit.value = response[1].national_code;
+                                            comm_percentage2ForEdit.value = response[1].participation_percentage;
+                                            comm_mobile2ForEdit.value = response[1].mobile;
                                         }
-                                        if (response[2]){
-                                            comm_name3ForEdit.value=response[2].name;
-                                            comm_family3ForEdit.value=response[2].family;
-                                            comm_national_code3ForEdit.value=response[2].national_code;
-                                            comm_percentage3ForEdit.value=response[2].participation_percentage;
-                                            comm_mobile3ForEdit.value=response[2].mobile;
+                                        if (response[2]) {
+                                            comm_name3ForEdit.value = response[2].name;
+                                            comm_family3ForEdit.value = response[2].family;
+                                            comm_national_code3ForEdit.value = response[2].national_code;
+                                            comm_percentage3ForEdit.value = response[2].participation_percentage;
+                                            comm_mobile3ForEdit.value = response[2].mobile;
                                         }
-                                        if (response[3]){
-                                            comm_name4ForEdit.value=response[3].name;
-                                            comm_family4ForEdit.value=response[3].family;
-                                            comm_national_code4ForEdit.value=response[3].national_code;
-                                            comm_percentage4ForEdit.value=response[3].participation_percentage;
-                                            comm_mobile4ForEdit.value=response[3].mobile;
+                                        if (response[3]) {
+                                            comm_name4ForEdit.value = response[3].name;
+                                            comm_family4ForEdit.value = response[3].family;
+                                            comm_national_code4ForEdit.value = response[3].national_code;
+                                            comm_percentage4ForEdit.value = response[3].participation_percentage;
+                                            comm_mobile4ForEdit.value = response[3].mobile;
                                         }
-                                        if (response[4]){
-                                            comm_name5ForEdit.value=response[4].name;
-                                            comm_family5ForEdit.value=response[4].family;
-                                            comm_national_code5ForEdit.value=response[4].national_code;
-                                            comm_percentage5ForEdit.value=response[4].participation_percentage;
-                                            comm_mobile5ForEdit.value=response[4].mobile;
+                                        if (response[4]) {
+                                            comm_name5ForEdit.value = response[4].name;
+                                            comm_family5ForEdit.value = response[4].family;
+                                            comm_national_code5ForEdit.value = response[4].national_code;
+                                            comm_percentage5ForEdit.value = response[4].participation_percentage;
+                                            comm_mobile5ForEdit.value = response[4].mobile;
                                         }
 
                                     }
@@ -968,24 +1006,131 @@ $(document).ready(function () {
                                 commonDIVForEdit.classList.remove('hidden');
                             }
                             post_delivery_methodForEdit.value = response.post_delivery_method;
-                            if (response.post_delivery_method=='digital'){
+                            if (response.post_delivery_method == 'digital') {
                                 file_srcDIVForEdit.classList.remove('hidden');
-                                response.file_src=response.file_src.replace('public','storage');
-                                postFile.href=response.file_src;
-                                if (response.post_format=='پایان نامه'){
-                                    response.thesis_proceedings_src=response.thesis_proceedings_src.replace('public','storage');
-                                    proceedingsFile.href=response.thesis_proceedings_src;
+                                response.file_src = response.file_src.replace('public', 'storage');
+                                postFile.href = response.file_src;
+                                if (response.post_format == 'پایان نامه') {
+                                    response.thesis_proceedings_src = response.thesis_proceedings_src.replace('public', 'storage');
+                                    proceedingsFile.href = response.thesis_proceedings_src;
                                     thesis_proceedings_srcDIVForEdit.classList.remove('hidden');
-                                }else{
+                                } else {
                                     thesis_proceedings_srcDIVForEdit.classList.add('hidden');
                                 }
-                            }else{
+                            } else {
                                 file_srcDIVForEdit.classList.add('hidden');
                                 thesis_proceedings_src.classList.add('hidden');
                             }
                         }
                     }
                 });
+            });
+            $('#edit-post').on('submit', function (e) {
+                e.preventDefault();
+                if (scientific_group1ForEdit.value === scientific_group2ForEdit.value) {
+                    swalFire('خطا!', 'گروه اول و دوم با هم برابر می باشد.', 'error', 'تلاش مجدد');
+                } else {
+                    Swal.fire({
+                        title: 'آیا مطمئن هستید؟',
+                        text: 'این اثر ویرایش خواهد شد.',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        cancelButtonText: 'خیر',
+                        confirmButtonText: 'بله',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            var form = $(this);
+                            var formData = new FormData(form[0]);
+                            $.ajax({
+                                type: 'POST',
+                                url: '/editPost',
+                                data: formData,
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                                },
+                                contentType: false,
+                                processData: false,
+                                success: function (response) {
+                                    if (response.errors) {
+                                        if (response.errors.nullPerson) {
+                                            swalFire('خطا!', response.errors.nullPerson[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullName) {
+                                            swalFire('خطا!', response.errors.nullName[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullPostFormat) {
+                                            swalFire('خطا!', response.errors.nullPostFormat[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullPostType) {
+                                            swalFire('خطا!', response.errors.nullPostType[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullLanguage) {
+                                            swalFire('خطا!', response.errors.nullLanguage[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullPagesNumber) {
+                                            swalFire('خطا!', response.errors.nullPagesNumber[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullSG1) {
+                                            swalFire('خطا!', response.errors.nullSG1[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullActivityType) {
+                                            swalFire('خطا!', response.errors.nullActivityType[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullPostDeliveryMethod) {
+                                            swalFire('خطا!', response.errors.nullPostDeliveryMethod[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullPublisher) {
+                                            swalFire('خطا!', response.errors.nullPublisher[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullISSN) {
+                                            swalFire('خطا!', response.errors.nullISSN[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullNumberOfCovers) {
+                                            swalFire('خطا!', response.errors.nullNumberOfCovers[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullCirculation) {
+                                            swalFire('خطا!', response.errors.nullCirculation[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullBookSize) {
+                                            swalFire('خطا!', response.errors.nullBookSize[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullThesisCertificateNumber) {
+                                            swalFire('خطا!', response.errors.nullThesisCertificateNumber[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullThesisDefencePlace) {
+                                            swalFire('خطا!', response.errors.nullThesisDefencePlace[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullGrade) {
+                                            swalFire('خطا!', response.errors.nullGrade[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullSupervisor) {
+                                            swalFire('خطا!', response.errors.nullSupervisor[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullAdvisor) {
+                                            swalFire('خطا!', response.errors.nullAdvisor[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullReferee) {
+                                            swalFire('خطا!', response.errors.nullReferee[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullCooperatorInformation) {
+                                            swalFire('خطا!', response.errors.nullCooperatorInformation[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullPostFile) {
+                                            swalFire('خطا!', response.errors.nullPostFile[0], 'error', 'تلاش مجدد');
+                                        }
+                                        if (response.errors.nullThesisFile) {
+                                            swalFire('خطا!', response.errors.nullThesisFile[0], 'error', 'تلاش مجدد');
+                                        }
+                                    } else if (response.success) {
+                                        swalFire('ویرایش اثر موفقیت آمیز بود!', response.message.PostAdded[0], 'success', 'بستن');
+                                        toggleModal(editPostModal.id);
+                                        resetFields();
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
             });
             $('.DeletePost').on('click', function (e) {
                 e.preventDefault();
@@ -1016,6 +1161,7 @@ $(document).ready(function () {
             });
             break;
         case '/Classification':
+
         function bindChangeEvents() {
             $('.sg1').on('change', function () {
                 $.ajax({
@@ -1053,6 +1199,7 @@ $(document).ready(function () {
                 });
             });
         }
+
             bindChangeEvents();
             $('#classification-form').on('submit', function (e) {
                 e.preventDefault();
@@ -1108,6 +1255,7 @@ $(document).ready(function () {
                     success: function (data) {
                         var tableBody = $('.w-full.border-collapse.rounded-lg.overflow-hidden.text-center tbody');
                         tableBody.empty();
+
                         async function fetchDataAndPopulateTable() {
                             for (const classification of data) {
                                 try {
@@ -1147,7 +1295,7 @@ $(document).ready(function () {
                                     });
                                     let SG1Name = group1Response;
 
-                                    let SG2Name=null;
+                                    let SG2Name = null;
                                     let group2Response = await $.ajax({
                                         type: 'GET',
                                         url: '/getScientificGroupInfo',
@@ -1168,12 +1316,12 @@ $(document).ready(function () {
                                     selectSG1Element.id = 'sg1';
                                     selectSG1Element.name = 'sg1';
                                     selectSG1Element.setAttribute('data-postid', classification.id);
-                                    groups.forEach(function(currentValue) {
+                                    groups.forEach(function (currentValue) {
                                         const option = document.createElement('option');
                                         option.value = currentValue.id;
                                         option.text = currentValue.name;
-                                        if (currentValue.id == Number(classification.scientific_group_v1)){
-                                            option.setAttribute('selected','selected');
+                                        if (currentValue.id == Number(classification.scientific_group_v1)) {
+                                            option.setAttribute('selected', 'selected');
                                         }
                                         selectSG1Element.appendChild(option);
                                     });
@@ -1186,14 +1334,14 @@ $(document).ready(function () {
                                     const option = document.createElement('option');
                                     option.value = '';
                                     option.text = 'بدون گروه علمی دوم';
-                                    option.setAttribute('selected','selected');
+                                    option.setAttribute('selected', 'selected');
                                     selectSG2Element.appendChild(option);
-                                    groups.forEach(function(currentValue) {
+                                    groups.forEach(function (currentValue) {
                                         const option = document.createElement('option');
                                         option.value = currentValue.id;
                                         option.text = currentValue.name;
-                                        if (currentValue.id == Number(classification.scientific_group_v2)){
-                                            option.setAttribute('selected','selected');
+                                        if (currentValue.id == Number(classification.scientific_group_v2)) {
+                                            option.setAttribute('selected', 'selected');
                                         }
                                         selectSG2Element.appendChild(option);
                                     });
@@ -1209,7 +1357,7 @@ $(document).ready(function () {
                                         + '<td class="px-6 py-4">' + LanguageName + '</td>'
                                         + '<td class="px-6 py-4">' + selectSG1HTML + '</td>'
                                         + '<td class="px-6 py-4">' + selectSG2HTML + '</td>'
-                                        + '<td class="px-6 py-4">' + PersonName.name+ ' ' + PersonName.family + '</td>'
+                                        + '<td class="px-6 py-4">' + PersonName.name + ' ' + PersonName.family + '</td>'
                                         + '</tr>';
 
                                     tableBody.append(row);
@@ -1219,6 +1367,7 @@ $(document).ready(function () {
                             }
                             bindChangeEvents();
                         }
+
                         fetchDataAndPopulateTable();
 
                     },
@@ -1243,6 +1392,7 @@ $(document).ready(function () {
                     success: function (data) {
                         var tableBody = $('.w-full.border-collapse.rounded-lg.overflow-hidden.text-center tbody');
                         tableBody.empty();
+
                         async function fetchDataAndPopulateTable() {
                             for (const classification of data) {
                                 try {
@@ -1279,7 +1429,7 @@ $(document).ready(function () {
                                     });
                                     let SG1Name = group1Response;
 
-                                    let SG2Name=null;
+                                    let SG2Name = null;
                                     let group2Response = await $.ajax({
                                         type: 'GET',
                                         url: '/getScientificGroupInfo',
@@ -1296,12 +1446,12 @@ $(document).ready(function () {
                                     selectSG1Element.id = 'sg1';
                                     selectSG1Element.name = 'sg1';
                                     selectSG1Element.setAttribute('data-postid', classification.id);
-                                    groups.forEach(function(currentValue) {
+                                    groups.forEach(function (currentValue) {
                                         const option = document.createElement('option');
                                         option.value = currentValue.id;
                                         option.text = currentValue.name;
-                                        if (currentValue.id == Number(classification.scientific_group_v1)){
-                                            option.setAttribute('selected','selected');
+                                        if (currentValue.id == Number(classification.scientific_group_v1)) {
+                                            option.setAttribute('selected', 'selected');
                                         }
                                         selectSG1Element.appendChild(option);
                                     });
@@ -1314,14 +1464,14 @@ $(document).ready(function () {
                                     const option = document.createElement('option');
                                     option.value = '';
                                     option.text = 'بدون گروه علمی دوم';
-                                    option.setAttribute('selected','selected');
+                                    option.setAttribute('selected', 'selected');
                                     selectSG2Element.appendChild(option);
-                                    groups.forEach(function(currentValue) {
+                                    groups.forEach(function (currentValue) {
                                         const option = document.createElement('option');
                                         option.value = currentValue.id;
                                         option.text = currentValue.name;
-                                        if (currentValue.id == Number(classification.scientific_group_v2)){
-                                            option.setAttribute('selected','selected');
+                                        if (currentValue.id == Number(classification.scientific_group_v2)) {
+                                            option.setAttribute('selected', 'selected');
                                         }
                                         selectSG2Element.appendChild(option);
                                     });
@@ -1337,7 +1487,7 @@ $(document).ready(function () {
                                         + '<td class="px-6 py-4">' + LanguageName + '</td>'
                                         + '<td class="px-6 py-4">' + selectSG1HTML + '</td>'
                                         + '<td class="px-6 py-4">' + selectSG2HTML + '</td>'
-                                        + '<td class="px-6 py-4">' + PersonName.name+ ' ' + PersonName.family + '</td>'
+                                        + '<td class="px-6 py-4">' + PersonName.name + ' ' + PersonName.family + '</td>'
                                         + '</tr>';
 
                                     tableBody.append(row);
@@ -1347,6 +1497,7 @@ $(document).ready(function () {
                             }
                             bindChangeEvents();
                         }
+
                         fetchDataAndPopulateTable();
 
                     },
