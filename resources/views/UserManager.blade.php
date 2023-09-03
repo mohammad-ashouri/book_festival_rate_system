@@ -68,6 +68,7 @@
                                                     <option value="2">کارشناس سامانه</option>
                                                     <option value="3">مدیر گروه</option>
                                                     <option value="4">ارزیاب</option>
+                                                    <option value="5">کارشناس گونه بندی</option>
                                                 </select>
                                             </div>
                                             <div class="mb-4" id="scientific_groupDIV" hidden="hidden">
@@ -166,6 +167,7 @@
                                                     <option value="2">کارشناس سامانه</option>
                                                     <option value="3">مدیر گروه</option>
                                                     <option value="4">ارزیاب</option>
+                                                    <option value="5">کارشناس گونه بندی</option>
                                                 </select>
                                             </div>
                                             <div class="mb-4" id="editedscientific_groupDIV" hidden="hidden">
