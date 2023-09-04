@@ -74,7 +74,7 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
             //End Catalogs
 
             Route::get('/Person', [PersonController::class, 'index']);
-            Route::post('/newPerson', [PersonController::class, 'newPerson']);
+            Route::post('/newPerson', [PersonController::class, 'newPerson'])->name('newPerson');
             Route::get('/getPersonInfo', [PersonController::class, 'getPersonInfo']);
             Route::post('/editPerson', [PersonController::class, 'editPerson']);
 
@@ -91,6 +91,21 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
 
         });
         Route::middleware('roleAuthorization:2')->group(function () {
+//            Route::get('/Person', [PersonController::class, 'index']);
+//            Route::post('/newPerson', [PersonController::class, 'newPerson'])->name('newPerson');
+//            Route::get('/getPersonInfo', [PersonController::class, 'getPersonInfo']);
+//            Route::post('/editPerson', [PersonController::class, 'editPerson']);
+//
+//            Route::get('/Posts', [PostController::class, 'index']);
+//            Route::post('/newPost', [PostController::class, 'newPost']);
+//            Route::get('/getPostInfo', [PostController::class, 'getPostInfo']);
+//            Route::get('/getParticipants', [PostController::class, 'getParticipants']);
+//            Route::post('/editPost', [PostController::class, 'editPost']);
+//            Route::delete('/deletePost', [PostController::class, 'deletePost']);
+//
+//            Route::get('/Classification', [PostController::class, 'showClassification']);
+//            Route::post('/changeScientificGroup', [PostController::class, 'changeScientificGroup']);
+//            Route::post('/Classification', [PostController::class, 'Classification']);
         });
 
     });
