@@ -50,13 +50,6 @@ return new class extends Migration
             $table->string('scientific_group_v2')->nullable();
             $table->foreign('scientific_group_v2')->references('id')->on('scientific_groups');
 
-            //Sorting
-            $table->tinyInteger('sorted')->default(0);
-            $table->integer('sorter')->nullable();
-            $table->string('sorted_date')->nullable();
-            $table->integer('sorting_classification_id')->nullable();
-            $table->foreign('sorting_classification_id')->references('id')->on('users');
-
             //cooperation method
             $table->string('activity_type')->default('فردی');
             $table->integer('participation_percentage')->default(100);
@@ -65,6 +58,13 @@ return new class extends Migration
             $table->string('post_delivery_method');
             $table->text('file_src')->nullable();
             $table->text('thesis_proceedings_src')->nullable();
+
+            //Sorting
+            $table->tinyInteger('sorted')->default(0);
+            $table->integer('sorter')->nullable();
+            $table->string('sorted_date')->nullable();
+            $table->integer('sorting_classification_id')->nullable();
+            $table->foreign('sorting_classification_id')->references('id')->on('users');
 
             $table->timestamps();
             $table->softDeletes();
