@@ -632,9 +632,10 @@ $(document).ready(function () {
                                         swalFire('خطا!', response.errors.dupNationalCode[0], 'error', 'تلاش مجدد');
                                     }
                                 } else if (response.success) {
-                                    swalFire('ثبت اطلاعات صاحب اثر موفقیت آمیز بود!', response.message.PersonAdded[0], 'success', 'بستن');
-                                    toggleModal(newPersonModal.id);
+                                    // swalFire('ثبت اطلاعات صاحب اثر موفقیت آمیز بود!', response.message.PersonAdded[0], 'success', 'بستن');
+                                    // toggleModal(newPersonModal.id);
                                     resetFields();
+                                    location.reload();
                                 }
                             }
                         });
@@ -695,9 +696,10 @@ $(document).ready(function () {
                                         swalFire('خطا!', response.errors.wrongMobile[0], 'error', 'تلاش مجدد');
                                     }
                                 } else if (response.success) {
-                                    swalFire('ویرایش صاحب اثر موفقیت آمیز بود!', response.message.personEdited[0], 'success', 'بستن');
-                                    toggleModal(editPersonModal.id);
+                                    // swalFire('ویرایش صاحب اثر موفقیت آمیز بود!', response.message.personEdited[0], 'success', 'بستن');
+                                    // toggleModal(editPersonModal.id);
                                     resetFields();
+                                    location.reload();
                                 }
                             }
                         });
@@ -1019,7 +1021,7 @@ $(document).ready(function () {
                                 }
                             } else {
                                 file_srcDIVForEdit.classList.add('hidden');
-                                thesis_proceedings_src.classList.add('hidden');
+                                thesis_proceedings_srcDIVForEdit.classList.add('hidden');
                             }
                         }
                     }
@@ -1122,7 +1124,7 @@ $(document).ready(function () {
                                             swalFire('خطا!', response.errors.nullThesisFile[0], 'error', 'تلاش مجدد');
                                         }
                                     } else if (response.success) {
-                                        swalFire('ویرایش اثر موفقیت آمیز بود!', response.message.PostAdded[0], 'success', 'بستن');
+                                        swalFire('ویرایش اثر موفقیت آمیز بود!', response.message.PostEdited[0], 'success', 'بستن');
                                         toggleModal(editPostModal.id);
                                         resetFields();
                                     }
