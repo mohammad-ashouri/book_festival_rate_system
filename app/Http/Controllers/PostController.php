@@ -6,6 +6,7 @@ use App\Models\Catalogs\Festival;
 use App\Models\Participants;
 use App\Models\Person;
 use App\Models\Post;
+use App\Models\RateInfo;
 use App\Models\SortingClassification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -470,12 +471,13 @@ class PostController extends Controller
             if ($post_format == 'کتاب' and !$Post->file_src and !$request->file('file_srcForEdit')) {
                 return $this->alerts(false, 'nullPostFile', 'فایل اثر انتخاب نشده است.');
             }
-            if ($post_format == 'کتاب' and $Post->file_src) {
+            if ($post_format == 'کتاب' and $Post->file_src and $request->file('file_srcForEdit')) {
                 $file_src = $request->file('file_srcForEdit');
                 if ($file_src->getClientOriginalName()) {
                     $folderName = str_replace('/', '', bcrypt($file_src->getClientOriginalName()));
                     $folderName = str_replace('\\', '', $folderName);
                     $postFilePath = $file_src->storeAs('public/PostFiles/' . $folderName, $file_src->getClientOriginalName());
+                    $Post->file_src = $postFilePath;
                 }
             }
             if ($post_format == 'پایان نامه' and !$Post->file_src and !$request->file('file_srcForEdit')) {
@@ -494,6 +496,8 @@ class PostController extends Controller
                     $folderName = str_replace('/', '', bcrypt($thesis_proceedings_src->getClientOriginalName()));
                     $folderName = str_replace('\\', '', $folderName);
                     $thesisFilePath = $file_src->storeAs('public/ThesisFiles/' . $folderName, $thesis_proceedings_src->getClientOriginalName());
+                    $Post->file_src = $postFilePath;
+                    $Post->thesis_proceedings_src = $thesisFilePath;
                 }
             }
 
@@ -523,8 +527,6 @@ class PostController extends Controller
                 $Post->thesis_supervisor = $thesis_supervisor;
                 $Post->thesis_advisor = $thesis_advisor;
                 $Post->thesis_referee = $thesis_referee;
-                $Post->file_src = $postFilePath;
-                $Post->thesis_proceedings_src = $thesisFilePath;
                 break;
         }
         $Post->research_type = $research_type;
@@ -615,6 +617,14 @@ class PostController extends Controller
         $postList = Post::where('sorted', 0)->orderBy('festival_id', 'asc')->orderBy('title', 'asc')->get();
         return \view('Classification', ['postList' => $postList]);
     }
+    public function deletePost(Request $request)
+    {
+        $postID = $request->input('id');
+        if ($postID) {
+            $post = Post::find($postID);
+            $post->delete();
+        }
+    }
 
     public function changeScientificGroup(Request $request)
     {
@@ -637,15 +647,6 @@ class PostController extends Controller
                 $post->save();
                 $this->logActivity('Scientific Group 2 Changed From => ' . $oldSG2 . ' To => ' . $newSG2, \request()->ip(), \request()->userAgent(), \session('id'));
                 break;
-        }
-    }
-
-    public function deletePost(Request $request)
-    {
-        $postID = $request->input('id');
-        if ($postID) {
-            $post = Post::find($postID);
-            $post->delete();
         }
     }
 
@@ -675,6 +676,10 @@ class PostController extends Controller
                 $post->sorting_classification_id = $SCFile->id;
             }
             $post->save();
+
+            $rateInfo=new RateInfo();
+            $rateInfo->post_id=$post->id;
+            $rateInfo->save();
         }
 
         $this->logActivity('Classification Done ', \request()->ip(), \request()->userAgent(), \session('id'));
@@ -683,7 +688,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $postList = Post::orderBy('festival_id', 'asc')->paginate(10);
+        $postList = Post::orderBy('festival_id', 'asc')->orderBy('id', 'desc')->paginate(10);
         return \view('PostManager', ['postList' => $postList]);
     }
 }
