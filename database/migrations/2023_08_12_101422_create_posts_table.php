@@ -63,7 +63,7 @@ return new class extends Migration
             $table->tinyInteger('sorted')->default(0);
             $table->integer('sorter')->nullable();
             $table->string('sorted_date')->nullable();
-            $table->integer('sorting_classification_id')->nullable();
+            $table->unsignedBigInteger('sorting_classification_id')->nullable();
             $table->foreign('sorting_classification_id')->references('id')->on('users');
 
             $table->timestamps();
