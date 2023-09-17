@@ -17,11 +17,11 @@ return new class extends Migration
             $table->foreign('post_id')->references('id')->on('posts');
             $table->string('rate_status')->default('Summary');
 
-            $table->string('ej1g1rater')->nullable()->comment('Ejmali1 Group1 Rater');
+            $table->unsignedBigInteger('ej1g1rater')->nullable()->comment('Ejmali1 Group1 Rater');
             $table->foreign('ej1g1rater')->references('id')->on('users');
-            $table->string('ej2g1rater')->nullable()->comment('Ejmali2 Group1 Rater');
+            $table->unsignedBigInteger('ej2g1rater')->nullable()->comment('Ejmali2 Group1 Rater');
             $table->foreign('ej2g1rater')->references('id')->on('users');
-            $table->string('ej3g1rater')->nullable()->comment('Ejmali3 Group1 Rater');
+            $table->unsignedBigInteger('ej3g1rater')->nullable()->comment('Ejmali3 Group1 Rater');
             $table->foreign('ej3g1rater')->references('id')->on('users');
 
             $table->unsignedBigInteger('ej1g2rater')->nullable()->comment('Ejmali1 Group2 Rater');
