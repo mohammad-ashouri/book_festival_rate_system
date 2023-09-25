@@ -32,7 +32,10 @@ return new class extends Migration {
 
         $password = bcrypt(12345678);
         $query = "INSERT INTO users (name,family, username, password, type, subject, active, NTCP) VALUES
-  ('محمد', 'عاشوری', 'ashouri','$password',1,'ادمین کل',1,0)
+  ('محمد', 'عاشوری', 'ashouri','$password',1,'ادمین کل',1,0),
+  ('سید سجاد', 'واحدی', 'vahedi','$password',1,'ادمین کل',1,0),
+  ('حسین', 'زارعی', 'zarei','$password',1,'ادمین کل',1,0),
+  ('عباس', 'اکبرپور', 'akbarpour','$password',1,'ادمین کل',1,0)
 ";
         DB::statement($query);
 
