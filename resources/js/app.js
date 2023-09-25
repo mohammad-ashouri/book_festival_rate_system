@@ -1163,7 +1163,6 @@ $(document).ready(function () {
             });
             break;
         case '/Classification':
-
         function bindChangeEvents() {
             $('.sg1').on('change', function () {
                 $.ajax({
@@ -1228,7 +1227,6 @@ $(document).ready(function () {
                             contentType: false,
                             processData: false,
                             success: function (response) {
-                                console.log(response);
                                 if (response.errors) {
                                     if (response.errors.wrongFileType) {
                                         swalFire('خطا!', response.errors.wrongFileType[0], 'error', 'تلاش مجدد');
@@ -1505,6 +1503,29 @@ $(document).ready(function () {
                     },
                     error: function () {
                         console.log('خطا در ارتباط با سرور');
+                    }
+                });
+            });
+            break;
+        case '/SummaryAssessmentManager':
+            $('.SetSummaryRater').on('change', function (e) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/SetSummaryRater',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    data: {
+                        PostID: $(this).data('postid'),
+                        work: $(this).data('work'),
+                        username: $(this).val(),
+                    },
+                    success: function (response) {
+                        if (response.errors) {
+                            if (response.errors.UsersAreEqual) {
+                                swalFire('ثبت نشد!', response.errors.UsersAreEqual[0], 'error', 'تلاش مجدد');
+                            }
+                        }
                     }
                 });
             });

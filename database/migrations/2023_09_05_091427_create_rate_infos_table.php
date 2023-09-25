@@ -19,24 +19,33 @@ return new class extends Migration
 
             $table->unsignedBigInteger('ej1g1rater')->nullable()->comment('Ejmali1 Group1 Rater');
             $table->foreign('ej1g1rater')->references('id')->on('users');
+            $table->boolean('ej1g1_status')->default(0)->comment('0 => not submitted - 1 => submitted');
             $table->unsignedBigInteger('ej2g1rater')->nullable()->comment('Ejmali2 Group1 Rater');
             $table->foreign('ej2g1rater')->references('id')->on('users');
+            $table->boolean('ej2g1_status')->default(0)->comment('0 => not submitted - 1 => submitted');
             $table->unsignedBigInteger('ej3g1rater')->nullable()->comment('Ejmali3 Group1 Rater');
             $table->foreign('ej3g1rater')->references('id')->on('users');
+            $table->boolean('ej3g1_status')->default(0)->comment('0 => not submitted - 1 => submitted');
 
             $table->unsignedBigInteger('ej1g2rater')->nullable()->comment('Ejmali1 Group2 Rater');
             $table->foreign('ej1g2rater')->references('id')->on('users');
+            $table->boolean('ej1g2_status')->default(0)->comment('0 => not submitted - 1 => submitted');
             $table->unsignedBigInteger('ej2g2rater')->nullable()->comment('Ejmali2 Group2 Rater');
             $table->foreign('ej2g2rater')->references('id')->on('users');
+            $table->boolean('ej2g2_status')->default(0)->comment('0 => not submitted - 1 => submitted');
             $table->unsignedBigInteger('ej3g2rater')->nullable()->comment('Ejmali3 Group2 Rater');
             $table->foreign('ej3g2rater')->references('id')->on('users');
+            $table->boolean('ej3g2_status')->default(0)->comment('0 => not submitted - 1 => submitted');
 
             $table->unsignedBigInteger('t1rater')->nullable()->comment('Tafsili1 Rater');
             $table->foreign('t1rater')->references('id')->on('users');
+            $table->boolean('t1_status')->default(0)->comment('0 => not submitted - 1 => submitted');
             $table->unsignedBigInteger('t2rater')->nullable()->comment('Tafsili2 Rater');
             $table->foreign('t2rater')->references('id')->on('users');
+            $table->boolean('t2_status')->default(0)->comment('0 => not submitted - 1 => submitted');
             $table->unsignedBigInteger('t3rater')->nullable()->comment('Tafsili3 Rater');
             $table->foreign('t3rater')->references('id')->on('users');
+            $table->boolean('t3_status')->default(0)->comment('0 => not submitted - 1 => submitted');
 
             $table->unsignedBigInteger('trater')->nullable()->comment('Last Tafsili Rater');
             $table->foreign('trater')->references('id')->on('users');

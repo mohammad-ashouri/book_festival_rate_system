@@ -74,23 +74,30 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
             Route::get('/getAllGroups', [ScientificGroupController::class, 'getAllGroups']);
             //End Catalogs
 
+            //Person Management
             Route::get('/Person', [PersonController::class, 'index']);
             Route::post('/newPerson', [PersonController::class, 'newPerson'])->name('newPerson');
             Route::get('/getPersonInfo', [PersonController::class, 'getPersonInfo']);
             Route::post('/editPerson', [PersonController::class, 'editPerson']);
+            //End Person Management
 
+            //Post Management
             Route::get('/Posts', [PostController::class, 'index']);
             Route::post('/newPost', [PostController::class, 'newPost']);
             Route::get('/getPostInfo', [PostController::class, 'getPostInfo']);
             Route::get('/getParticipants', [PostController::class, 'getParticipants']);
             Route::post('/editPost', [PostController::class, 'editPost']);
             Route::delete('/deletePost', [PostController::class, 'deletePost']);
+            //End Post Management
 
+            //Classification Management
             Route::get('/Classification', [PostController::class, 'showClassification']);
             Route::post('/changeScientificGroup', [PostController::class, 'changeScientificGroup']);
             Route::post('/Classification', [PostController::class, 'Classification']);
+            //End Classification Management
 
             Route::get('/SummaryAssessmentManager', [AssessmentController::class, 'summaryAssessmentIndex']);
+            Route::post('/SetSummaryRater', [AssessmentController::class, 'setSummaryRater']);
 
 
 
