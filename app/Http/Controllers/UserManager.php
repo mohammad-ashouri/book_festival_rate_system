@@ -102,6 +102,9 @@ class UserManager extends Controller
             case 4:
                 $subject = 'ارزیاب';
                 break;
+            case 5:
+                $subject = 'کارشناس گونه بندی';
+                break;
         }
         $lastUserId=User::first()->orderBy('id','desc')->value('id');
         $user = new User();
@@ -123,15 +126,22 @@ class UserManager extends Controller
         $name = $request->input('editedName');
         $family = $request->input('editedFamily');
         $type = $request->input('editedType');
+        $scientific_group = $request->input('editedscientific_group');
         switch ($type) {
             case 1:
                 $subject = 'ادمین کل';
                 break;
             case 2:
-                $subject = 'کارشناس ستاد';
+                $subject = 'کارشناس سامانه';
                 break;
             case 3:
-                $subject = 'کارشناس فناوری استان';
+                $subject = 'مدیر گروه';
+                break;
+            case 4:
+                $subject = 'ارزیاب';
+                break;
+            case 5:
+                $subject = 'کارشناس گونه بندی';
                 break;
         }
 
@@ -140,6 +150,7 @@ class UserManager extends Controller
             $user->name = $name;
             $user->family = $family;
             $user->type = $type;
+            $user->scientific_group = $scientific_group;
             $user->subject = $subject;
             $user->save();
         }
