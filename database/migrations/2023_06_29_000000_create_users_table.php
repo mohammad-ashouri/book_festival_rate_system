@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('username')->unique();
             $table->string('password');
             $table->tinyInteger('type')->comment('
-            1 => SuperAdmin , 2 => Admin , 3 => Header , 4 => Rater
+            1 => SuperAdmin , 2 => Admin , 3 => Header , 4 => Rater , 5 => Classification expert
             ');
             $table->unsignedBigInteger('scientific_group')->nullable();
             $table->foreign('scientific_group')->references('id')->on('scientific_groups');

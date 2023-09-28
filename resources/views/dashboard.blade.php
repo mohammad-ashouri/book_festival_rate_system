@@ -1,15 +1,19 @@
 @extends('layouts.PanelMaster')
 
 @section('content')
-    <main class="flex-1 bg-cu-light py-6 px-8">
-        <div class="mx-auto lg:mr-72">
-            <h1 class="text-2xl font-bold mb-4">داشبورد</h1>
-            <div class="bg-white rounded shadow p-6">
-                <p>
-                    به پنل سامانه کتاب سال حوزه خوش آمدید.
-                </p>
-            </div>
-        </div>
-    </main>
+    @php
+        $userInfo=\App\Models\User::find(session('id'));
+    @endphp
+    @if($userInfo->type==1)
+        @include('Panels.Dashboards.SuperAdmin')
+    @elseif($userInfo->type==2)
+        @include('Panels.Dashboards.Admin')
+    @elseif($userInfo->type==3)
+        @include('Panels.Dashboards.Header')
+    @elseif($userInfo->type==4)
+        @include('Panels.Dashboards.Rater')
+    @elseif($userInfo->type==5)
+        @include('Panels.Dashboards.ClassificationExpert')
+    @endif
 @endsection
 
