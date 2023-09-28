@@ -57,7 +57,11 @@
                                 <td class="text-center">
                                     <div class="mb-3 mt-3">
                                         <label class="block text-gray-700 text-sm font-bold text-right mr-2">ارزیاب
-                                            اول</label>
+                                            اول
+                                            @if($rateInfo->ej1g1_status===1)
+                                                (تکمیل)
+                                            @endif
+                                        </label>
                                         <select data-postid="{{ $postInfo->id }}" data-work="ChangeRater1Group1"
                                                 @if($rateInfo->ej1g1_status===1) disabled @endif
                                                 class="border rounded-md w-full px-3 py-2 SetSummaryRater">
@@ -74,7 +78,11 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="block text-gray-700 text-sm font-bold text-right mr-2">ارزیاب
-                                            دوم</label>
+                                            دوم
+                                            @if($rateInfo->ej2g1_status===1)
+                                                (تکمیل)
+                                            @endif
+                                        </label>
                                         <select data-postid="{{ $postInfo->id }}" data-work="ChangeRater2Group1"
                                                 @if($rateInfo->ej2g1_status===1) disabled @endif
                                                 class="border rounded-md w-full px-3 py-2 SetSummaryRater">
@@ -91,7 +99,11 @@
                                     </div>
                                     <div>
                                         <label class="block text-gray-700 text-sm font-bold text-right mr-2">ارزیاب
-                                            سوم</label>
+                                            سوم
+                                            @if($rateInfo->ej3g1_status===1)
+                                                (تکمیل)
+                                            @endif
+                                        </label>
                                         <select data-postid="{{ $postInfo->id }}" data-work="ChangeRater3Group1"
                                                 @if($rateInfo->ej3g1_status===1) disabled @endif
                                                 class="border rounded-md w-full px-3 py-2 SetSummaryRater">
@@ -112,7 +124,11 @@
                                     @if($postInfo->scientific_group_v2)
                                         <div class="mb-3 mt-3">
                                             <label class="block text-gray-700 text-sm font-bold text-right mr-2">ارزیاب
-                                                اول</label>
+                                                اول
+                                                @if($rateInfo->ej1g2_status===1)
+                                                    (تکمیل)
+                                                @endif
+                                            </label>
                                             <select data-postid="{{ $postInfo->id }}" data-work="ChangeRater1Group2"
                                                     @if($rateInfo->ej1g2_status===1) disabled @endif
                                                     class="border rounded-md w-full px-3 py-2 SetSummaryRater">
@@ -129,7 +145,11 @@
                                         </div>
                                         <div class="mb-3">
                                             <label class="block text-gray-700 text-sm font-bold text-right mr-2">ارزیاب
-                                                دوم</label>
+                                                دوم
+                                                @if($rateInfo->ej2g2_status===1)
+                                                    (تکمیل)
+                                                @endif
+                                            </label>
                                             <select data-postid="{{ $postInfo->id }}" data-work="ChangeRater2Group2"
                                                     @if($rateInfo->ej2g2_status===1) disabled @endif
                                                     class="border rounded-md w-full px-3 py-2 SetSummaryRater">
@@ -146,7 +166,11 @@
                                         </div>
                                         <div>
                                             <label class="block text-gray-700 text-sm font-bold text-right mr-2">ارزیاب
-                                                سوم</label>
+                                                سوم
+                                                @if($rateInfo->ej3g2_status===1)
+                                                    (تکمیل)
+                                                @endif
+                                            </label>
                                             <select data-postid="{{ $postInfo->id }}" data-work="ChangeRater3Group2"
                                                     @if($rateInfo->ej3g2_status===1) disabled @endif
                                                     class="border rounded-md w-full px-3 py-2 SetSummaryRater">
