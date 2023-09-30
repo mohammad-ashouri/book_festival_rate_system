@@ -6,7 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ env('APP_PERSIAN_NAME') }}</title>
-    @vite(['resources/css/login.css','resources/css/app.css','resources/js/app.js'])
+    @vite(['resources/css/login.css','resources/css/app.css','resources/js/login.js'])
 </head>
 <body>
 
@@ -51,7 +51,7 @@
         </div>
     </div>
 </div>
-<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="./build/plugins/jquery/dist/jquery.js"></script>
 <script>
     function reloadCaptcha() {
         var captchaImg = document.getElementById('captchaImg');
