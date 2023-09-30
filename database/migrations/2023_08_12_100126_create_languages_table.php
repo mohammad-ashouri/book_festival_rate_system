@@ -18,6 +18,13 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+        DB::table('languages')->insert([
+            ['name' => 'فارسی', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'عربی', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'انگلیسی', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'اردو', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'فرانسوی', 'created_at' => now(), 'updated_at' => now()],
+        ]);
     }
 
     /**

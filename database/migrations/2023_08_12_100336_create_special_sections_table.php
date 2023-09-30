@@ -18,6 +18,20 @@ return new class extends Migration
             $table->tinyInteger('active')->default(1);
             $table->timestamps();
             $table->softDeletes();
+            DB::table('special_sections')->insert([
+                ['name' => 'جهاد تبیین', 'created_at' => now(), 'updated_at' => now()],
+                ['name' => 'فقه معاصر', 'created_at' => now(), 'updated_at' => now()],
+                ['name' => 'ابعاد علمی بیانیه گام دوم انقلاب', 'created_at' => now(), 'updated_at' => now()],
+                ['name' => 'زن و خانواده', 'created_at' => now(), 'updated_at' => now()],
+                ['name' => 'الگوی اسلامی ایرانی پیشرفت', 'created_at' => now(), 'updated_at' => now()],
+                ['name' => 'علوم انسانی اسلامی، فضای مجازی', 'created_at' => now(), 'updated_at' => now()],
+                ['name' => 'آسیب های اجتماعی', 'created_at' => now(), 'updated_at' => now()],
+                ['name' => 'جمعیت', 'created_at' => now(), 'updated_at' => now()],
+                ['name' => 'اقتصاد مقاومتی', 'created_at' => now(), 'updated_at' => now()],
+                ['name' => 'سبک زندگی اسلامی', 'created_at' => now(), 'updated_at' => now()],
+                ['name' => 'هنر (فلسفه هنر، هنر در اسلام)', 'created_at' => now(), 'updated_at' => now()],
+                ['name' => 'محیط زیست و منابع طبیعی', 'created_at' => now(), 'updated_at' => now()],
+            ]);
         });
 
     }

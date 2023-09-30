@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -24,6 +25,10 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        DB::table('festivals')->insert([
+            ['id'=>25,'name' => 'بیست و پنجم', 'start_date' => '1402/02/10', 'starter' => '1', 'finish_date' => '1402/05/10', 'finisher' => '1', 'created_at' => now(), 'updated_at' => now()]
+        ]);
     }
 
     /**
