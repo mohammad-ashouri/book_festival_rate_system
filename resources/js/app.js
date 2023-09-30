@@ -2,6 +2,7 @@ import './bootstrap';
 import '@fortawesome/fontawesome-free/css/all.css';
 import $ from 'jquery';
 import Swal from 'sweetalert2';
+window.Swal = Swal;
 
 function swalFire(title = null, text, icon, confirmButtonText) {
     Swal.fire({
