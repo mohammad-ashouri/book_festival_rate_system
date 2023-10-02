@@ -7,11 +7,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ env('APP_PERSIAN_NAME') }}</title>
     @vite(['resources/css/login.css','resources/css/app.css','resources/js/login.js'])
-    <link rel="stylesheet" href="https://bookrate.ismc.ir/build/assets/app-17579adb.css">
-    <link rel="stylesheet" href="https://bookrate.ismc.ir/build/assets/sweetalert2-d91b9007.css">
-    <link rel="stylesheet" href="https://bookrate.ismc.ir/build/assets/login-a6dd8940.css">
-    <script src="https://bookrate.ismc.ir/build/assets/login-27e72369.js"></script>
-    <script src="https://bookrate.ismc.ir/build/assets/sweetalert2.all-2c554df6.js"></script>
 
 </head>
 <body>
