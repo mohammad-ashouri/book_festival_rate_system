@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\RateInfo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -58,9 +59,9 @@ class DashboardController extends Controller
         if ($file_src) {
             $folderName = str_replace(array('/', '\\'), '', bcrypt($file_src->getClientOriginalName()));
             $postFilePath = $file_src->storeAs('public/UserImages/' . $folderName, $file_src->getClientOriginalName());
-            if ($postFilePath){
-                $user=User::find(session('id'));
-                $user->user_image=$postFilePath;
+            if ($postFilePath) {
+                $user = User::find(session('id'));
+                $user->user_image = $postFilePath;
                 $user->save();
                 return $this->alerts(true, 'imageChanged', 'رمز عبور با موفقیت تغییر کرد!');
             }
@@ -77,6 +78,60 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return view('dashboard');
+        $userInfo = User::find(session('id'));
+        switch ($userInfo->type) {
+            case 1:
+                return view('Panels.Dashboards.SuperAdmin');
+                break;
+            case 2:
+                return view('Panels.Dashboards.Admin');
+                break;
+            case 3:
+                return view('Panels.Dashboards.Header');
+                break;
+            case 4:
+                $summaryRates = RateInfo::where('rate_status', 'Summary')->with('postInfo')->with('personInfo')
+                    ->where(function ($query) {
+                        $query->where(function ($subquery) {
+                            $subquery
+                                ->where('s1g1rater', session('id'))
+                                ->where('s1g1_status', 0);
+                        })
+                            ->orWhere(function ($subquery) {
+                                $subquery
+                                    ->where('s2g1rater', session('id'))
+                                    ->where('s2g1_status', 0);
+                            })
+                            ->orWhere(function ($subquery) {
+                                $subquery
+                                    ->where('s3g1rater', session('id'))
+                                    ->where('s3g1_status', 0);
+                            })
+                            ->orWhere(function ($subquery) {
+                                $subquery
+                                    ->where('s1g2rater', session('id'))
+                                    ->where('s1g2_status', 0);
+                            })
+                            ->orWhere(function ($subquery) {
+                                $subquery
+                                    ->where('s2g2rater', session('id'))
+                                    ->where('s2g2_status', 0);
+                            })
+                            ->orWhere(function ($subquery) {
+                                $subquery
+                                    ->where('s3g2rater', session('id'))
+                                    ->where('s3g2_status', 0);
+                            });
+                    })
+                    ->get();
+
+
+                $detailedRates = RateInfo::where('rate_status', 'Detailed')->get();
+                return view('Panels.Dashboards.Rater', compact('summaryRates', 'detailedRates'));
+                break;
+            case 5:
+                return view('Panels.Dashboards.ClassificationExpert');
+                break;
+        }
     }
 }

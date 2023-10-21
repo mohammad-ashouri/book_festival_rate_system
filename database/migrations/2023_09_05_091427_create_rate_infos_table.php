@@ -17,44 +17,44 @@ return new class extends Migration
             $table->foreign('post_id')->references('id')->on('posts');
             $table->string('rate_status')->default('Summary');
 
-            $table->unsignedBigInteger('ej1g1rater')->nullable()->comment('Ejmali1 Group1 Rater');
-            $table->foreign('ej1g1rater')->references('id')->on('users');
-            $table->boolean('ej1g1_status')->default(0)->comment('0 => not submitted - 1 => submitted');
-            $table->unsignedBigInteger('ej2g1rater')->nullable()->comment('Ejmali2 Group1 Rater');
-            $table->foreign('ej2g1rater')->references('id')->on('users');
-            $table->boolean('ej2g1_status')->default(0)->comment('0 => not submitted - 1 => submitted');
-            $table->unsignedBigInteger('ej3g1rater')->nullable()->comment('Ejmali3 Group1 Rater');
-            $table->foreign('ej3g1rater')->references('id')->on('users');
-            $table->boolean('ej3g1_status')->default(0)->comment('0 => not submitted - 1 => submitted');
+            $table->unsignedBigInteger('s1g1rater')->nullable()->comment('Ejmali1 Group1 Rater');
+            $table->foreign('s1g1rater')->references('id')->on('users');
+            $table->boolean('s1g1_status')->default(0)->comment('0 => not submitted - 1 => submitted');
+            $table->unsignedBigInteger('s2g1rater')->nullable()->comment('Ejmali2 Group1 Rater');
+            $table->foreign('s2g1rater')->references('id')->on('users');
+            $table->boolean('s2g1_status')->default(0)->comment('0 => not submitted - 1 => submitted');
+            $table->unsignedBigInteger('s3g1rater')->nullable()->comment('Ejmali3 Group1 Rater');
+            $table->foreign('s3g1rater')->references('id')->on('users');
+            $table->boolean('s3g1_status')->default(0)->comment('0 => not submitted - 1 => submitted');
 
-            $table->unsignedBigInteger('ej1g2rater')->nullable()->comment('Ejmali1 Group2 Rater');
-            $table->foreign('ej1g2rater')->references('id')->on('users');
-            $table->boolean('ej1g2_status')->default(0)->comment('0 => not submitted - 1 => submitted');
-            $table->unsignedBigInteger('ej2g2rater')->nullable()->comment('Ejmali2 Group2 Rater');
-            $table->foreign('ej2g2rater')->references('id')->on('users');
-            $table->boolean('ej2g2_status')->default(0)->comment('0 => not submitted - 1 => submitted');
-            $table->unsignedBigInteger('ej3g2rater')->nullable()->comment('Ejmali3 Group2 Rater');
-            $table->foreign('ej3g2rater')->references('id')->on('users');
-            $table->boolean('ej3g2_status')->default(0)->comment('0 => not submitted - 1 => submitted');
+            $table->unsignedBigInteger('s1g2rater')->nullable()->comment('Ejmali1 Group2 Rater');
+            $table->foreign('s1g2rater')->references('id')->on('users');
+            $table->boolean('s1g2_status')->default(0)->comment('0 => not submitted - 1 => submitted');
+            $table->unsignedBigInteger('s2g2rater')->nullable()->comment('Ejmali2 Group2 Rater');
+            $table->foreign('s2g2rater')->references('id')->on('users');
+            $table->boolean('s2g2_status')->default(0)->comment('0 => not submitted - 1 => submitted');
+            $table->unsignedBigInteger('s3g2rater')->nullable()->comment('Ejmali3 Group2 Rater');
+            $table->foreign('s3g2rater')->references('id')->on('users');
+            $table->boolean('s3g2_status')->default(0)->comment('0 => not submitted - 1 => submitted');
 
-            $table->unsignedBigInteger('t1rater')->nullable()->comment('Tafsili1 Rater');
-            $table->foreign('t1rater')->references('id')->on('users');
-            $table->boolean('t1_status')->default(0)->comment('0 => not submitted - 1 => submitted');
-            $table->unsignedBigInteger('t2rater')->nullable()->comment('Tafsili2 Rater');
-            $table->foreign('t2rater')->references('id')->on('users');
-            $table->boolean('t2_status')->default(0)->comment('0 => not submitted - 1 => submitted');
-            $table->unsignedBigInteger('t3rater')->nullable()->comment('Tafsili3 Rater');
-            $table->foreign('t3rater')->references('id')->on('users');
-            $table->boolean('t3_status')->default(0)->comment('0 => not submitted - 1 => submitted');
+            $table->unsignedBigInteger('d1rater')->nullable()->comment('Tafsili1 Rater');
+            $table->foreign('d1rater')->references('id')->on('users');
+            $table->boolean('d1_status')->default(0)->comment('0 => not submitted - 1 => submitted');
 
-            $table->unsignedBigInteger('trater')->nullable()->comment('Last Tafsili Rater');
-            $table->foreign('trater')->references('id')->on('users');
+            $table->unsignedBigInteger('d2rater')->nullable()->comment('Tafsili2 Rater');
+            $table->foreign('d2rater')->references('id')->on('users');
+            $table->boolean('d2_status')->default(0)->comment('0 => not submitted - 1 => submitted');
 
             $table->unsignedBigInteger('formal_literary_rater')->nullable()->comment('Formal Literary Rater');
             $table->foreign('formal_literary_rater')->references('id')->on('users');
+            $table->boolean('formal_literary_rate_status')->default(0)->comment('0 => not submitted - 1 => submitted');
 
-            $table->float('avg_ejg1')->nullable()->comment('Ejmali Group1 Average');
-            $table->float('avg_ejg2')->nullable()->comment('Ejmali Group2 Average');
+            $table->unsignedBigInteger('d3rater')->nullable()->comment('Tafsili3 Rater');
+            $table->foreign('d3rater')->references('id')->on('users');
+            $table->boolean('d3_status')->default(0)->comment('0 => not submitted - 1 => submitted');
+
+            $table->float('avg_sg1')->nullable()->comment('Ejmali Group1 Average');
+            $table->float('avg_sg2')->nullable()->comment('Ejmali Group2 Average');
             $table->float('grade')->nullable()->comment('Rate Last Grade');
 
             $table->string('chosen_status')->nullable();

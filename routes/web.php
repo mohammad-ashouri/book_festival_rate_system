@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RateController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserManager;
 use App\Http\Middleware\CheckLoginMiddleware;
@@ -99,12 +100,15 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
 
             Route::get('/SummaryAssessmentManager', [AssessmentController::class, 'summaryAssessmentIndex']);
             Route::post('/SetSummaryRater', [AssessmentController::class, 'setSummaryRater']);
-
-
+        });
+        Route::middleware('roleAuthorization:4')->group(function () {
 
         });
-        Route::middleware('roleAuthorization:2')->group(function () {
 
+
+        Route::group(['prefix' => 'Rate'], static function () {
+            Route::get('/Summary/{id}', [RateController::class, 'summaryIndex']);
+            Route::post('/setRate', [RateController::class, 'setRate']);
         });
 
     });
