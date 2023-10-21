@@ -90,7 +90,7 @@ class DashboardController extends Controller
                 return view('Panels.Dashboards.Header');
                 break;
             case 4:
-                $summaryRates = RateInfo::where('rate_status', 'Summary')->with('postInfo')->with('personInfo')
+                $summaryRates = RateInfo::where('rate_status', 'Summary')->with('postInfo')
                     ->where(function ($query) {
                         $query->where(function ($subquery) {
                             $subquery

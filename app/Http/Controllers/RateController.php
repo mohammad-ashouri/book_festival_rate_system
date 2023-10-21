@@ -19,8 +19,6 @@ class RateController extends Controller
                 return view('Panels.Dashboards.Admin');
                 break;
             case 3:
-                return view('Panels.Dashboards.Header');
-                break;
             case 4:
                 $summaryRate = RateInfo::where('rate_status', 'Summary')->where('id',$id)->with('postInfo')
                     ->where(function ($query) {
