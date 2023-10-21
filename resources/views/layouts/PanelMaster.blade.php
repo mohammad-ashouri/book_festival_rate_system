@@ -22,6 +22,17 @@
     <div class="flex items-center lg:mx-2 mx-5">
         <div>
             <style>
+                ::-webkit-scrollbar {
+                    width: 12px;
+                }
+                ::-webkit-scrollbar-thumb {
+                    background-color: #4A90E2;
+                    border-radius: 6px;
+                }
+                ::-webkit-scrollbar-thumb:hover {
+                    background-color: #357ABD;
+                    border-radius: 10px;
+                }
                 li.active {
                     /* overflow: hidden; */
                     position: relative;
@@ -93,8 +104,6 @@
             </style>
 
             <aside data-theme="wireframe" class="bg-cu-light ">
-
-
                 <div class="drawer lg:drawer-open">
                     <input id="my-drawer-2" type="checkbox" class="drawer-toggle"/>
                     <div class="drawer-content flex flex-col items-center justify-center">
@@ -111,28 +120,43 @@
                     </div>
                     <div class="drawer-side">
                         <label for="my-drawer-2" class="drawer-overlay"></label>
-
+                        @php
+                            $userInfo=\Illuminate\Support\Facades\DB::table('users')
+                                    ->where('username', session('username'))
+                                    ->first();
+                        @endphp
                         <ul id="menu"
                             class="menu pr-8 pl-0 w-72 bg-cu-blue text-transparent pt-5 overflow-x-hidden rounded-se-3xl block">
 
                             <div class="ml-7 mb-6 text-center mt-5">
                                 <div class="avatar flex justify-center ">
-                                    <div id="user_icon" class="w-16 rounded-full">
-                                    </div>
+                                    @if($userInfo->user_image)
+                                        @php
+                                            $src=substr($userInfo->user_image,6);
+                                            $src='storage'.$src;
+                                        @endphp
+                                        <div style="background: url({{ $src }}) no-repeat; background-size: cover;" class="w-16 h-16 rounded-full">
+                                        </div>
+                                    @else
+                                        <div id="user_icon" class="w-16 h-16 rounded-full">
+                                        </div>
+                                    @endif
+
                                 </div>
                                 <p class="pt-2 text-cu-light">
-
-                                    @php
-                                        $userInfo=\Illuminate\Support\Facades\DB::table('users')
-                                                ->where('username', session('username'))
-                                                ->first();
-                                           echo $userInfo->username.' | '. $userInfo->name . ' '. $userInfo->family
-                                    @endphp
+                                    {{ $userInfo->username.' | '. $userInfo->name . ' '. $userInfo->family }}
+                                </p>
+                                <p class="pt-1 text-cu-light">
+                                    @if($userInfo->type===1)
+                                        {{ $userInfo->subject }}
+                                    @elseif($userInfo->type===2)
+                                        {{ $userInfo->subject . ' ' . $provinceInfo->name }}
+                                    @endif
                                 </p>
                             </div>
                             <li class="menu-item" id="dashboard">
                                 <a href="{{ route('dashboard') }}"
-                                   class="flex items-center p-3 my-2 text-cu-light rounded-s-full dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                   class="flex items-center p-3 my-1 text-cu-light rounded-s-full dark:text-white hover:bg-gray-100 light:hover:bg-gray-700 group">
                                     <svg
                                         class="w-5 h-5 dark:text-white transition duration-75 dark:group-hover:text-gray-700"
                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -140,19 +164,7 @@
                                         <path
                                             d="M23.121,9.069,15.536,1.483a5.008,5.008,0,0,0-7.072,0L.879,9.069A2.978,2.978,0,0,0,0,11.19v9.817a3,3,0,0,0,3,3H21a3,3,0,0,0,3-3V11.19A2.978,2.978,0,0,0,23.121,9.069ZM15,22.007H9V18.073a3,3,0,0,1,6,0Zm7-1a1,1,0,0,1-1,1H17V18.073a5,5,0,0,0-10,0v3.934H3a1,1,0,0,1-1-1V11.19a1.008,1.008,0,0,1,.293-.707L9.878,2.9a3.008,3.008,0,0,1,4.244,0l7.585,7.586A1.008,1.008,0,0,1,22,11.19Z"/>
                                     </svg>
-                                    <span class="mr-3">
-                                        @if($userInfo->type==1)
-                                            صفحه اصلی
-                                        @elseif($userInfo->type==2)
-                                            صفحه اصلی
-                                        @elseif($userInfo->type==3)
-                                            صفحه اصلی
-                                        @elseif($userInfo->type==4)
-                                            ارزیابی های انجام نشده
-                                        @elseif($userInfo->type==5)
-                                            آثار گونه بندی نشده
-                                        @endif
-                                    </span>
+                                    <span class="mr-3">داشبورد</span>
                                 </a>
                             </li>
                             @php
@@ -164,27 +176,44 @@
                                     @if (isset($menu['childs']) && count($menu['childs']) > 0)
                                         <details id="{{ 'details-' . $menu['title'] }}">
                                             <summary
-                                                class="flex items-center p-3 my-2 text-cu-light rounded-s-full dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                                class="flex items-center p-3 my-1 text-cu-light rounded-s-full dark:text-white hover:bg-gray-100 light:hover:bg-gray-700 group">
                                                 <svg
                                                     class="ml-3 flex-shrink-0 w-5 h-5  transition duration-75 text-cu-light group-hover:text-cu-light dark:group-hover:text-gray-700"
                                                     aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                    fill="currentColor" viewBox="0 0 20 20">
+                                                    fill="currentColor" viewBox="0 0 25 25">
                                                     @if(@$menu['path1'])
                                                         <path
                                                             d="{{ $menu['path1'] }}"></path>
+                                                    @endif
+                                                    @if(@$menu['path2'])
                                                         <path
                                                             d="{{ @$menu['path2'] }}"></path>
+                                                    @endif
+                                                    @if(@$menu['path3'])
+                                                        <path
+                                                            d="{{ @$menu['path3'] }}"></path>
+                                                    @endif
+                                                    @if(@$menu['path4'])
+                                                        <path
+                                                            d="{{ @$menu['path4'] }}"></path>
+                                                    @endif
+                                                    @if(@$menu['path5'])
+                                                        <path
+                                                            d="{{ @$menu['path5'] }}"></path>
+                                                    @endif
+                                                    @if(@$menu['path6'])
+                                                        <path
+                                                            d="{{ @$menu['path6'] }}"></path>
                                                     @endif
                                                 </svg>
                                                 {{ $menu['title'] }}
                                             </summary>
                                             <ul class="text-white w-full mr-2">
-
                                                 @foreach ($menu['childs'] as $child)
                                                     <li class="menu-item mr-8" id="{{ $child['title'] }}">
 
                                                         <a href="{{ $child['link'] }}"
-                                                           class="flex items-center p-3 my-2 text-cu-light rounded-s-full dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                                           class="flex items-center p-3 my-1 text-cu-light rounded-s-full dark:text-white hover:bg-gray-100 light:hover:bg-gray-700 group">
                                                             <svg
                                                                 class="w-5 h-5 dark:text-white transition duration-75 dark:group-hover:text-gray-700"
                                                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -201,10 +230,11 @@
                                                 @endforeach
 
                                             </ul>
+
                                             @else
                                                 <li class="menu-item" id="menu{{ $menu['link'] }}">
                                                     <a href="{{ $menu['link'] }}"
-                                                       class="flex items-center p-3 my-2 text-cu-light rounded-s-full dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                                       class="flex items-center p-3 my-1 text-cu-light rounded-s-full dark:text-white hover:bg-gray-100 light:hover:bg-gray-700 group">
                                                         @if(@$menu['path1'])
                                                             <svg
                                                                 class="w-5 h-5 dark:text-white transition duration-75 dark:group-hover:text-gray-700"
@@ -236,10 +266,9 @@
                                 </li>
                             @endforeach
 
-
-                            <li class="menu-item" id="changePassworld">
-                                <a href="{{ route('ChangePassword') }}"
-                                   class="flex items-center p-3 my-2 text-cu-light rounded-s-full dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <li class="menu-item" id="changePassword">
+                                <a href="{{ route('Profile') }}"
+                                   class="flex items-center p-3 my-1 text-cu-light rounded-s-full dark:text-white hover:bg-gray-100 light:hover:bg-gray-700 group">
                                     <svg
                                         class="w-5 h-5 text-cu-light transition duration-75  group-hover:text-cu-light dark:group-hover:text-gray-700"
                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -247,12 +276,12 @@
                                         <path
                                             d="M7.505,24A7.5,7.5,0,0,1,5.469,9.283,7.368,7.368,0,0,1,9.35,9.235l7.908-7.906A4.5,4.5,0,0,1,20.464,0h0A3.539,3.539,0,0,1,24,3.536a4.508,4.508,0,0,1-1.328,3.207L22,7.415A2.014,2.014,0,0,1,20.586,8H19V9a2,2,0,0,1-2,2H16v1.586A1.986,1.986,0,0,1,15.414,14l-.65.65a7.334,7.334,0,0,1-.047,3.88,7.529,7.529,0,0,1-6.428,5.429A7.654,7.654,0,0,1,7.505,24Zm0-13a5.5,5.5,0,1,0,5.289,6.99,5.4,5.4,0,0,0-.1-3.3,1,1,0,0,1,.238-1.035L14,12.586V11a2,2,0,0,1,2-2h1V8a2,2,0,0,1,2-2h1.586l.672-.672A2.519,2.519,0,0,0,22,3.536,1.537,1.537,0,0,0,20.465,2a2.52,2.52,0,0,0-1.793.743l-8.331,8.33a1,1,0,0,1-1.036.237A5.462,5.462,0,0,0,7.5,11ZM5,18a1,1,0,1,0,1-1A1,1,0,0,0,5,18Z"/>
                                     </svg>
-                                    <span class=" mr-3 ">تغییر رمز عبور</span>
+                                    <span class=" mr-3 ">پروفایل</span>
                                 </a>
                             </li>
                             <li class="menu-item logout" id="logout">
                                 <a href="{{ route('logout') }}"
-                                   class="flex items-center p-3 my-2 text-cu-light rounded-s-full dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                   class="flex items-center p-3 my-1 text-cu-light rounded-s-full dark:text-white hover:bg-gray-100 light:hover:bg-gray-700 group">
                                     <svg
                                         class="flex-shrink-0 w-5 h-5  transition duration-75 text-cu-light group-hover:text-cu-light dark:group-hover:text-gray-700"
                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"

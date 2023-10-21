@@ -25,6 +25,7 @@ return new class extends Migration {
             $table->string('subject');
             $table->tinyInteger('active')->default(1);
             $table->tinyInteger('NTCP')->default(0)->comment('Needs To Change Password');
+            $table->text('user_image')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
