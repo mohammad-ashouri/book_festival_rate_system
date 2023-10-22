@@ -58,19 +58,19 @@
                                     <div class="mb-3 mt-3">
                                         <label class="block text-gray-700 text-sm font-bold text-right mr-2">ارزیاب
                                             اول
-                                            @if($rateInfo->ej1g1_status===1)
+                                            @if($rateInfo->s1g1_status===1)
                                                 (تکمیل)
                                             @endif
                                         </label>
                                         <select data-postid="{{ $postInfo->id }}" data-work="ChangeRater1Group1"
-                                                @if($rateInfo->ej1g1_status===1) disabled @endif
+                                                @if($rateInfo->s1g1_status===1) disabled @endif
                                                 class="border rounded-md w-full px-3 py-2 SetSummaryRater">
-                                            <option value="" disabled selected>انتخاب کنید</option>
+                                            <option value="" selected>بدون ارزیاب</option>
                                             @php
                                                 $raters=\App\Models\User::where('type',4)->where('scientific_group',$postInfo->scientific_group_v1)->orderBy('name','asc')->get();
                                             @endphp
                                             @foreach($raters as $rater)
-                                                <option @if ( $rater->id==$rateInfo->ej1g1rater ) selected
+                                                <option @if ( $rater->id==$rateInfo->s1g1rater ) selected
                                                         @endif
                                                         value="{{ $rater->id }}">{{ $rater->name . ' ' . $rater->family }}</option>
                                             @endforeach
@@ -79,19 +79,19 @@
                                     <div class="mb-3">
                                         <label class="block text-gray-700 text-sm font-bold text-right mr-2">ارزیاب
                                             دوم
-                                            @if($rateInfo->ej2g1_status===1)
+                                            @if($rateInfo->s2g1_status===1)
                                                 (تکمیل)
                                             @endif
                                         </label>
                                         <select data-postid="{{ $postInfo->id }}" data-work="ChangeRater2Group1"
-                                                @if($rateInfo->ej2g1_status===1) disabled @endif
+                                                @if($rateInfo->s2g1_status===1) disabled @endif
                                                 class="border rounded-md w-full px-3 py-2 SetSummaryRater">
-                                            <option value="" disabled selected>انتخاب کنید</option>
+                                            <option value="" selected>بدون ارزیاب</option>
                                             @php
                                                 $raters=\App\Models\User::where('type',4)->where('scientific_group',$postInfo->scientific_group_v1)->orderBy('name','asc')->get();
                                             @endphp
                                             @foreach($raters as $rater)
-                                                <option @if ( $rater->id==$rateInfo->ej2g1rater ) selected
+                                                <option @if ( $rater->id==$rateInfo->s2g1rater ) selected
                                                         @endif
                                                         value="{{ $rater->id }}">{{ $rater->name . ' ' . $rater->family }}</option>
                                             @endforeach
@@ -100,19 +100,19 @@
                                     <div>
                                         <label class="block text-gray-700 text-sm font-bold text-right mr-2">ارزیاب
                                             سوم
-                                            @if($rateInfo->ej3g1_status===1)
+                                            @if($rateInfo->s3g1_status===1)
                                                 (تکمیل)
                                             @endif
                                         </label>
                                         <select data-postid="{{ $postInfo->id }}" data-work="ChangeRater3Group1"
-                                                @if($rateInfo->ej3g1_status===1) disabled @endif
+                                                @if($rateInfo->s3g1_status===1) disabled @endif
                                                 class="border rounded-md w-full px-3 py-2 SetSummaryRater">
-                                            <option value="" disabled selected>انتخاب کنید</option>
+                                            <option value="" selected>بدون ارزیاب</option>
                                             @php
                                                 $raters=\App\Models\User::where('type',4)->where('scientific_group',$postInfo->scientific_group_v1)->orderBy('name','asc')->get();
                                             @endphp
                                             @foreach($raters as $rater)
-                                                <option @if ( $rater->id==$rateInfo->ej3g1rater ) selected
+                                                <option @if ( $rater->id==$rateInfo->s3g1rater ) selected
                                                         @endif
                                                         value="{{ $rater->id }}">{{ $rater->name . ' ' . $rater->family }}</option>
                                             @endforeach
@@ -125,19 +125,19 @@
                                         <div class="mb-3 mt-3">
                                             <label class="block text-gray-700 text-sm font-bold text-right mr-2">ارزیاب
                                                 اول
-                                                @if($rateInfo->ej1g2_status===1)
+                                                @if($rateInfo->s1g2_status===1)
                                                     (تکمیل)
                                                 @endif
                                             </label>
                                             <select data-postid="{{ $postInfo->id }}" data-work="ChangeRater1Group2"
-                                                    @if($rateInfo->ej1g2_status===1) disabled @endif
+                                                    @if($rateInfo->s1g2_status===1) disabled @endif
                                                     class="border rounded-md w-full px-3 py-2 SetSummaryRater">
-                                                <option value="" disabled selected>انتخاب کنید</option>
+                                                <option value="" selected>بدون ارزیاب</option>
                                                 @php
                                                     $raters=\App\Models\User::where('type',4)->where('scientific_group',$postInfo->scientific_group_v2)->orderBy('name','asc')->get();
                                                 @endphp
                                                 @foreach($raters as $rater)
-                                                    <option @if ( $rater->id==$rateInfo->ej1g2rater ) selected
+                                                    <option @if ( $rater->id==$rateInfo->s1g2rater ) selected
                                                             @endif
                                                             value="{{ $rater->id }}">{{ $rater->name . ' ' . $rater->family }}</option>
                                                 @endforeach
@@ -146,19 +146,19 @@
                                         <div class="mb-3">
                                             <label class="block text-gray-700 text-sm font-bold text-right mr-2">ارزیاب
                                                 دوم
-                                                @if($rateInfo->ej2g2_status===1)
+                                                @if($rateInfo->s2g2_status===1)
                                                     (تکمیل)
                                                 @endif
                                             </label>
                                             <select data-postid="{{ $postInfo->id }}" data-work="ChangeRater2Group2"
-                                                    @if($rateInfo->ej2g2_status===1) disabled @endif
+                                                    @if($rateInfo->s2g2_status===1) disabled @endif
                                                     class="border rounded-md w-full px-3 py-2 SetSummaryRater">
-                                                <option value="" disabled selected>انتخاب کنید</option>
+                                                <option value="" selected>بدون ارزیاب</option>
                                                 @php
                                                     $raters=\App\Models\User::where('type',4)->where('scientific_group',$postInfo->scientific_group_v2)->orderBy('name','asc')->get();
                                                 @endphp
                                                 @foreach($raters as $rater)
-                                                    <option @if ( $rater->id==$rateInfo->ej2g2rater ) selected
+                                                    <option @if ( $rater->id==$rateInfo->s2g2rater ) selected
                                                             @endif
                                                             value="{{ $rater->id }}">{{ $rater->name . ' ' . $rater->family }}</option>
                                                 @endforeach
@@ -167,19 +167,19 @@
                                         <div>
                                             <label class="block text-gray-700 text-sm font-bold text-right mr-2">ارزیاب
                                                 سوم
-                                                @if($rateInfo->ej3g2_status===1)
+                                                @if($rateInfo->s3g2_status===1)
                                                     (تکمیل)
                                                 @endif
                                             </label>
                                             <select data-postid="{{ $postInfo->id }}" data-work="ChangeRater3Group2"
-                                                    @if($rateInfo->ej3g2_status===1) disabled @endif
+                                                    @if($rateInfo->s3g2_status===1) disabled @endif
                                                     class="border rounded-md w-full px-3 py-2 SetSummaryRater">
-                                                <option value="" disabled selected>انتخاب کنید</option>
+                                                <option value="" selected>بدون ارزیاب</option>
                                                 @php
                                                     $raters=\App\Models\User::where('type',4)->where('scientific_group',$postInfo->scientific_group_v2)->orderBy('name','asc')->get();
                                                 @endphp
                                                 @foreach($raters as $rater)
-                                                    <option @if ( $rater->id==$rateInfo->ej3g2rater ) selected
+                                                    <option @if ( $rater->id==$rateInfo->s3g2rater ) selected
                                                             @endif
                                                             value="{{ $rater->id }}">{{ $rater->name . ' ' . $rater->family }}</option>
                                                 @endforeach
