@@ -21,6 +21,7 @@ return new class extends Migration
             $table->float('r2');
             $table->float('r3');
             $table->float('r4')->nullable();
+            $table->float('sum');
             $table->string('rate_type');
             $table->unsignedBigInteger('rater');
             $table->foreign('rater')->references('id')->on('users');

@@ -36,6 +36,7 @@ return new class extends Migration {
   ('محمد', 'عاشوری', 'ashouri','$password',1,'ادمین کل',1,0),
   ('سید سجاد', 'واحدی', 'vahedi','$password',1,'ادمین کل',1,0),
   ('حسین', 'زارعی', 'zarei','$password',1,'ادمین کل',1,0),
+  ('ارزیاب', 'تست', 'test','$password',1,'ارزیاب',4,0),
   ('عباس', 'اکبرپور', 'akbarpour','$password',1,'ادمین کل',1,0)
 ";
         DB::statement($query);
