@@ -14,6 +14,16 @@
     <script src="/build/plugins/jquery/dist/jquery.js"></script>
     <link href="/build/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
     <script src="/build/plugins/select2/dist/js/select2.min.js"></script>
+    <script>
+        function swalFire(title = null, text, icon, confirmButtonText) {
+            Swal.fire({
+                title: title,
+                text: text,
+                icon: icon,
+                confirmButtonText: confirmButtonText,
+            });
+        }
+    </script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
