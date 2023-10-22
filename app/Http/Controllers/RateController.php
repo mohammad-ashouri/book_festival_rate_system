@@ -60,4 +60,9 @@ class RateController extends Controller
                 abort(403);
         }
     }
+
+    public function setSummaryRate(Request $request)
+    {
+        dd($request->all());
+    }
 }

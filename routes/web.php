@@ -108,7 +108,7 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
 
         Route::group(['prefix' => 'Rate'], static function () {
             Route::get('/Summary/{id}', [RateController::class, 'summaryIndex']);
-            Route::post('/setRate', [RateController::class, 'setRate']);
+            Route::post('/setSummaryRate', [RateController::class, 'setSummaryRate']);
         });
 
     });

@@ -68,7 +68,7 @@ function resetFields() {
 }
 
 $(document).ready(function () {
-    //Change Password
+    var pattern = /^\/Rate\/Summary\/\d+$/;
     switch (window.location.pathname) {
         case "/Profile":
             resetFields();
@@ -1500,5 +1500,6 @@ $(document).ready(function () {
                 });
             });
             break;
+
     }
 });
