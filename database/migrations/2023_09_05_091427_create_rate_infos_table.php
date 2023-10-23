@@ -16,6 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('post_id');
             $table->foreign('post_id')->references('id')->on('posts');
             $table->string('rate_status')->default('Summary');
+            $table->string('sg1_form_type')->nullable();
+            $table->string('sg2_form_type')->nullable();
 
             $table->unsignedBigInteger('s1g1rater')->nullable()->comment('Ejmali1 Group1 Rater');
             $table->foreign('s1g1rater')->references('id')->on('users');
