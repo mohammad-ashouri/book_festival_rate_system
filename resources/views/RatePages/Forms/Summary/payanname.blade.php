@@ -155,7 +155,21 @@
         </td>
     </tr>
 </table>
+
 <div id="submitRate" class="mt-3 text-center hidden">
+    <label class="font-bold">
+        محور ویژه را در صورت نیاز تعیین نمایید:
+    </label>
+    <select id="special_section" class="border rounded-md w-56 px-3 py-2"
+            name="special_section">
+        <option value="" selected>بدون محور ویژه</option>
+        @php
+            $specialSections=\App\Models\Catalogs\SpecialSection::where('active',1)->orderBy('name','asc')->get();
+        @endphp
+        @foreach($specialSections as $section)
+            <option value="{{ $section->id }}">{{ $section->name }}</option>
+        @endforeach
+    </select>
     <button type="submit"
             class="px-4 py-2 mr-3 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300">
         ثبت ارزیابی
@@ -172,7 +186,7 @@
         $('#c1Sum').text(r1 + r2 + r3 + r4);
     }
 
-    $('#r1, #r2, #r3, #r4').on('input', function() {
+    $('#r1, #r2, #r3, #r4').on('input', function () {
         if (!isNaN($(this).val())) {
             sumC1Rows();
         }
