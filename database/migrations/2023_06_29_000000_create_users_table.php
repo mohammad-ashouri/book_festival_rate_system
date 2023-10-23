@@ -37,9 +37,13 @@ return new class extends Migration {
                   ('سید سجاد', 'واحدی', 'vahedi','$password',1,'ادمین کل',1,0),
                   ('حسین', 'زارعی', 'zarei','$password',1,'ادمین کل',1,0),
                   ('ارزیاب', 'تست', 'test','$password',4,'ارزیاب',1,0),
+                  ('مدیر گروه', 'تست', 'htest','$password',3,'مدیر گروه',1,0),
                   ('عباس', 'اکبرپور', 'akbarpour','$password',1,'ادمین کل',1,0)
                 ";
         DB::statement($query);
+        $query="update users set scientific_group=3 where username='htest'";
+        DB::statement($query);
+
         $query="update users set scientific_group=3 where username='test'";
         DB::statement($query);
     }
