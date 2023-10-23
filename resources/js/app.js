@@ -1477,6 +1477,36 @@ $(document).ready(function () {
                 });
             });
             break;
+        case '/Approval':
+            $('#approve-rate-form').on('submit', function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'آیا مطمئن هستید؟',
+                    text: 'اثر ثبت شده  به مرحله اجمالی راه خواهند یافت.' ,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    cancelButtonText: 'خیر',
+                    confirmButtonText: 'بله',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var form = $(this);
+                        var data = form.serialize();
+                        $.ajax({
+                            type: 'POST',
+                            url: '/Approve',
+                            data: data,
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            },
+                            success: function (response) {
+                                console.log(response);
+                            }
+                        });
+                    }
+                });
+            });
+
+            break;
         case '/SummaryAssessmentManager':
             $('.SetSummaryRater').on('change', function (e) {
                 $.ajax({

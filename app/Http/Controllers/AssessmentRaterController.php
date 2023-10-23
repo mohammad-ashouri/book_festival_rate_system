@@ -8,6 +8,41 @@ use Illuminate\Http\Request;
 
 class AssessmentRaterController extends Controller
 {
+    public function headerApprovalIndex()
+    {
+        $userType=User::find(session('id'));
+        switch ($userType->type){
+            case 1:
+                $approvals=RateInfo::with('postInfo')->where('rate_status', 'Summary')->where('sg1_form_type','Waiting For Header')->orWhere('sg2_form_type','Waiting For Header')->paginate(10);
+                return view('HeaderApproval.HeaderApproval', compact('approvals'));
+                break;
+            case 3:
+                $approvals = RateInfo::with('postInfo')
+                    ->where('rate_status', 'Summary')
+                    ->where(function ($query) {
+                        $query->where('sg1_form_type', 'Waiting For Header')
+                            ->whereHas('postInfo', function ($subQuery) {
+                                $userType=User::find(session('id'));
+                                $subQuery->where('scientific_group_v1', $userType->scientific_group);
+                            });
+                    })
+                    ->orWhere(function ($query) {
+                        $query->where('sg2_form_type', 'Waiting For Header')
+                            ->whereHas('postInfo', function ($subQuery) {
+                                $userType=User::find(session('id'));
+                                $subQuery->where('scientific_group_v2', $userType->scientific_group);
+                            });
+                    })
+                    ->paginate(10);
+                return view('HeaderApproval.HeaderApproval', compact('approvals'));
+                break;
+        }
+    }
+
+    public function headerApprove(Request $request)
+    {
+        return $request->all();
+    }
     public function setSummaryRater(Request $request)
     {
         $rater = (integer)$request->username;
@@ -93,21 +128,6 @@ class AssessmentRaterController extends Controller
                     $this->logActivity('Rater3 Group2 Changed =>' . $rateInfo->id, \request()->ip(), \request()->userAgent(), \session('id'));
                     break;
             }
-        }
-    }
-
-    public function headerApprovalIndex()
-    {
-        $userType=User::find(session('id'));
-        switch ($userType->type){
-            case 1:
-                $approvals=RateInfo::with('postInfo')->where('rate_status', 'Summary')->where('sg1_form_type','Waiting For Header')->orWhere('sg2_form_type','Waiting For Header')->paginate(10);
-                return view('HeaderApproval.HeaderApprovalAdmin', compact('approvals'));
-                break;
-            case 3:
-                $approvals=RateInfo::with('postInfo')->where('rate_status', 'Summary')->where('sg1_form_type','Waiting For Header')->orWhere('sg2_form_type','Waiting For Header')->paginate(10);
-                return view('HeaderApproval.HeaderApprovalAdmin', compact('approvals'));
-                break;
         }
     }
     public function summaryAssessmentIndex()
