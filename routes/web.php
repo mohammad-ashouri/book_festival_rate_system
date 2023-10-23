@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AssessmentController;
+use App\Http\Controllers\AssessmentRaterController;
 use App\Http\Controllers\Catalogs\FestivalController;
 use App\Http\Controllers\Catalogs\LanguageController;
 use App\Http\Controllers\Catalogs\ScientificGroupController;
@@ -98,8 +98,8 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
             Route::post('/Classification', [PostController::class, 'Classification']);
             //End Classification Management
 
-            Route::get('/SummaryAssessmentManager', [AssessmentController::class, 'summaryAssessmentIndex']);
-            Route::post('/SetSummaryRater', [AssessmentController::class, 'setSummaryRater']);
+            Route::get('/SummaryAssessmentManager', [AssessmentRaterController::class, 'summaryAssessmentIndex']);
+            Route::post('/SetSummaryRater', [AssessmentRaterController::class, 'setSummaryRater']);
         });
         Route::middleware('roleAuthorization:4')->group(function () {
 
