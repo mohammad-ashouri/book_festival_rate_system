@@ -98,11 +98,12 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
             Route::post('/Classification', [PostController::class, 'Classification']);
             //End Classification Management
 
+            Route::get('/HeaderApproval', [AssessmentRaterController::class, 'headerApprovalIndex']);
             Route::get('/SummaryAssessmentManager', [AssessmentRaterController::class, 'summaryAssessmentIndex']);
             Route::post('/SetSummaryRater', [AssessmentRaterController::class, 'setSummaryRater']);
         });
-        Route::middleware('roleAuthorization:4')->group(function () {
-
+        Route::middleware('roleAuthorization:3')->group(function () {
+            Route::get('/Approval', [AssessmentRaterController::class, 'headerApprovalIndex']);
         });
 
 

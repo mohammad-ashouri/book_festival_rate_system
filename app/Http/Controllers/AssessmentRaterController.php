@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RateInfo;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AssessmentRaterController extends Controller
@@ -95,8 +96,23 @@ class AssessmentRaterController extends Controller
         }
     }
 
+    public function headerApprovalIndex()
+    {
+        $userType=User::find(session('id'));
+        switch ($userType->type){
+            case 1:
+                $approvals=RateInfo::with('postInfo')->where('rate_status', 'Summary')->where('sg1_form_type','Waiting For Header')->orWhere('sg2_form_type','Waiting For Header')->paginate(10);
+                return view('HeaderApproval.HeaderApprovalAdmin', compact('approvals'));
+                break;
+            case 3:
+                $approvals=RateInfo::with('postInfo')->where('rate_status', 'Summary')->where('sg1_form_type','Waiting For Header')->orWhere('sg2_form_type','Waiting For Header')->paginate(10);
+                return view('HeaderApproval.HeaderApprovalAdmin', compact('approvals'));
+                break;
+        }
+    }
     public function summaryAssessmentIndex()
     {
-        return view('SummaryAssessmentAdmin', ['summaries' => RateInfo::where('rate_status', 'Summary')->paginate(10)]);
+        $summaries=RateInfo::with('postInfo')->where('rate_status', 'Summary')->where('sg1_form_type','!=','Waiting For Header')->paginate(10);
+        return view('SummaryAssessmentAdmin', compact('summaries'));
     }
 }

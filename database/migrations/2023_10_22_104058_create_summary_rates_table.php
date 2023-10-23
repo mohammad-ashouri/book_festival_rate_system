@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('rate_info_id');
             $table->foreign('rate_info_id')->references('id')->on('rate_infos');
-            $table->string('post_type');
-            $table->string('connection_with_group');
             $table->float('r1');
             $table->float('r2');
             $table->float('r3');
@@ -24,7 +22,6 @@ return new class extends Migration
             $table->float('sum');
             $table->unsignedBigInteger('special_section');
             $table->foreign('special_section')->references('id')->on('special_sections');
-            $table->string('rate_type');
             $table->unsignedBigInteger('rater');
             $table->foreign('rater')->references('id')->on('users');
             $table->timestamps();

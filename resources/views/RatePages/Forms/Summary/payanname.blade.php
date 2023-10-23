@@ -1,32 +1,4 @@
-<table class="w-full border-collapse rounded-lg overflow-hidden text-center mt-3">
-    <tr class="items-center bg-gradient-to-r from-blue-400 to-purple-500 text-white text-center border-b-2">
-        <th class="px-6 py-1 w-5 font-bold ">ارتباط اثر با گروه حاضر</th>
-        <th class="px-6 py-1 w-5 font-bold ">تعیین نوع اثر</th>
-    </tr>
-    <tr class="items-center text-center w-80">
-        <td class="px-6 py-1 bg-gray-300">
-            <select id="connectionWithGroup" class="border rounded-md w-80 px-3 py-2"
-                    name="connectionWithGroup">
-                <option value="" disabled selected>انتخاب کنید</option>
-                <option value="اثر مربوط به گروه حاضر است">اثر مربوط به گروه حاضر است</option>
-                <option value="اثر میان رشته ای است">اثر میان رشته ای است (گروه مرتبط تعیین شود)
-                </option>
-                <option value="اثر مربوط به گروه حاضر نیست">اثر مربوط به گروه حاضر نیست (گروه مرتبط
-                    تعیین شود)
-                </option>
-            </select>
-        </td>
-        <td class="px-6 py-1 bg-gray-300">
-            <select id="type" class="border rounded-md w-56 px-3 py-2"
-                    name="type">
-                <option value="" disabled selected>انتخاب کنید</option>
-                <option value="علمی پژوهشی">علمی پژوهشی</option>
-                <option value="علمی ترویجی">علمی ترویجی</option>
-                <option value="فرهنگی تبلیغی">فرهنگی تبلیغی</option>
-            </select>
-        </td>
-    </tr>
-</table>
+
 
 <table id="rateForm" class="w-full border-collapse rounded-lg overflow-hidden text-center mt-3 hidden">
     <tr class="items-center bg-gradient-to-r from-blue-400 to-purple-500 text-white text-center border-b-2">
@@ -192,41 +164,6 @@
         }
     });
 
-    $('#connectionWithGroup').on('change', function () {
-        if (this.value === 'اثر مربوط به گروه حاضر است' && type.value !== '') {
-            rateForm.classList.remove('hidden');
-            submitRate.classList.remove('hidden');
-        } else if (this.value === 'اثر میان رشته ای است') {
-            rateForm.classList.add('hidden');
-            submitRate.classList.add('hidden');
-        } else if (this.value === 'اثر مربوط به گروه حاضر نیست') {
-            rateForm.classList.add('hidden');
-            submitRate.classList.add('hidden');
-        }
-    });
-    $('#type').on('change', function () {
-        if (connectionWithGroup.value === 'اثر مربوط به گروه حاضر است') {
-            rateForm.classList.remove('hidden');
-            submitRate.classList.remove('hidden');
-        } else if (connectionWithGroup.value === 'اثر میان رشته ای است') {
-            rateForm.classList.add('hidden');
-            submitRate.classList.add('hidden');
-        } else if (connectionWithGroup.value === 'اثر مربوط به گروه حاضر نیست') {
-            rateForm.classList.add('hidden');
-            submitRate.classList.add('hidden');
-        }
-        if (this.value === 'علمی پژوهشی' || this.value === 'علمی ترویجی') {
-            r1Title.textContent = 'اهمیت موضوع';
-            r2Title.textContent = 'ارزش علمی';
-            r3Title.textContent = 'اثربخشی';
-            r4Title.textContent = 'استفاده مناسب از منابع معتبر';
-        } else if (this.value === 'فرهنگی تبلیغی') {
-            r1Title.textContent = 'میزان ارتباط موضوع با عناصر فرهنگ و تبلیغ';
-            r2Title.textContent = 'ارزش و اهمیت موضوع در عرصه فرهنگ و تبلیغ';
-            r3Title.textContent = 'تناسب موضوع با نیازها و اولویت های فرهنگی - تبلیغی جامعه';
-            r4Title.textContent = 'اثربخشی برای مخاطبان اثر';
-        }
-    });
     $('#SummaryAssessmentSet').on('submit', function (e) {
         e.preventDefault();
         if (r1.value === '') {

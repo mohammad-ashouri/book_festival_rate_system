@@ -61,13 +61,11 @@ class RateController extends Controller
                 abort(403);
         }
     }
-
     public function setSummaryRate(Request $request)
     {
         $rate_info_id = $request->input('rateInfoID');
         $type = $request->input('type');
         $rateType = $request->input('rateType');
-        $connectionWithGroup = $request->input('connectionWithGroup');
         $special_section = $request->input('special_section');
         $r1 = $request->input('r1');
         $r2 = $request->input('r2');
@@ -83,7 +81,6 @@ class RateController extends Controller
         $summaryRate = new SummaryRates();
         $summaryRate->rate_info_id = $rate_info_id;
         $summaryRate->post_type = $type;
-        $summaryRate->connection_with_group = $connectionWithGroup;
         $summaryRate->r1 = $r1;
         $summaryRate->r2 = $r2;
         $summaryRate->r3 = $r3;

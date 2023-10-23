@@ -674,6 +674,9 @@ class PostController extends Controller
 
             $rateInfo=new RateInfo();
             $rateInfo->post_id=$post->id;
+            if ($post->scientific_group_v2===null){
+                $rateInfo->sg2_form_type=null;
+            }
             $rateInfo->save();
         }
 
