@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Catalogs\ScientificGroup;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -47,4 +48,9 @@ class User extends Authenticatable
     ];
 
     protected $primaryKey='id';
+
+    public function scientificGroup()
+    {
+        return $this->belongsTo(ScientificGroup::class, 'scientific_group', 'id');
+    }
 }

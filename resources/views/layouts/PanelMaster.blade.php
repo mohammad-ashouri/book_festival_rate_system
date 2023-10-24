@@ -9,10 +9,10 @@
         {{ env('APP_PERSIAN_NAME') }}
     </title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-{{--    <link href="http://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">--}}
-{{--    <script src="http://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>--}}
+    {{--    <link href="http://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">--}}
+    {{--    <script src="http://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>--}}
     <script src="/build/plugins/jquery/dist/jquery.js"></script>
-    <link href="/build/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="/build/plugins/select2/dist/css/select2.min.css" rel="stylesheet"/>
     <script src="/build/plugins/select2/dist/js/select2.min.js"></script>
     <script>
         function swalFire(title = null, text, icon, confirmButtonText) {
@@ -35,14 +35,17 @@
                 ::-webkit-scrollbar {
                     width: 12px;
                 }
+
                 ::-webkit-scrollbar-thumb {
                     background-color: #4A90E2;
                     border-radius: 6px;
                 }
+
                 ::-webkit-scrollbar-thumb:hover {
                     background-color: #357ABD;
                     border-radius: 10px;
                 }
+
                 li.active {
                     /* overflow: hidden; */
                     position: relative;
@@ -131,9 +134,9 @@
                     <div class="drawer-side">
                         <label for="my-drawer-2" class="drawer-overlay"></label>
                         @php
-                            $userInfo=\Illuminate\Support\Facades\DB::table('users')
-                                    ->where('username', session('username'))
-                                    ->first();
+                            $userInfo = \App\Models\User::where('username', session('username'))
+                                        ->with('scientificGroup')
+                                        ->first();
                         @endphp
                         <ul id="menu"
                             class="menu pr-8 pl-0 w-72 bg-cu-blue text-transparent pt-5 overflow-x-hidden rounded-se-3xl block">
@@ -145,7 +148,8 @@
                                             $src=substr($userInfo->user_image,6);
                                             $src='storage'.$src;
                                         @endphp
-                                        <div style="background: url({{ $src }}) no-repeat; background-size: cover;" class="w-16 h-16 rounded-full">
+                                        <div style="background: url({{ $src }}) no-repeat; background-size: cover;"
+                                             class="w-16 h-16 rounded-full">
                                         </div>
                                     @else
                                         <div id="user_icon" class="w-16 h-16 rounded-full">
@@ -157,10 +161,10 @@
                                     {{ $userInfo->username.' | '. $userInfo->name . ' '. $userInfo->family }}
                                 </p>
                                 <p class="pt-1 text-cu-light">
-                                    @if($userInfo->type===1)
+                                    @if($userInfo->type===1 or $userInfo->type===2 or $userInfo->type===5)
                                         {{ $userInfo->subject }}
-                                    @elseif($userInfo->type===2)
-                                        {{ $userInfo->subject . ' ' . $provinceInfo->name }}
+                                    @elseif($userInfo->type===3 or $userInfo->type===4)
+                                        {{ $userInfo->subject . ' ' . $userInfo->scientificGroup->name }}
                                     @endif
                                 </p>
                             </div>
