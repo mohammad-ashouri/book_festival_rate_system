@@ -109,11 +109,15 @@
                                                 <select
                                                     class="border rounded-md w-full px-3 py-2 "
                                                     name="summary_form_type">
-                                                    <option value="" selected disabled>انتخاب کنید</option>
-                                                    <option value="علمی پژوهشی">علمی پژوهشی</option>
-                                                    <option value="علمی ترویجی">علمی ترویجی</option>
-                                                    <option value="فرهنگی تبلیغی">فرهنگی تبلیغی</option>
-                                                    <option value="تقریر">تقریر</option>
+                                                    @if($post->postInfo->post_format==='پایان نامه')
+                                                        <option selected value="پایان نامه">پایان نامه</option>
+                                                    @else
+                                                        <option value="" selected disabled>انتخاب کنید</option>
+                                                        <option value="علمی پژوهشی">علمی پژوهشی</option>
+                                                        <option value="علمی ترویجی">علمی ترویجی</option>
+                                                        <option value="فرهنگی تبلیغی">فرهنگی تبلیغی</option>
+                                                        <option value="تقریر">تقریر</option>
+                                                    @endif
                                                 </select>
                                             </div>
                                             <div data-row="{{$loop->iteration}}" class="hidden mt-2 SetScientificGroupDIV">
