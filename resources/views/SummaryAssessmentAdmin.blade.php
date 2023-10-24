@@ -51,69 +51,74 @@
                                 @php $personInfo=\App\Models\Person::find($post->postInfo->person_id) @endphp
                                 <td class="px-6 py-4">{{ $personInfo->name . ' ' . $personInfo->family  }}</td>
                                 <td class="text-center">
-                                    <div class="mb-3 mt-3">
-                                        <label class="block text-gray-700 text-sm font-bold text-right mr-2">ارزیاب
-                                            اول
-                                            @if($post->s1g1_status===1)
-                                                (تکمیل)
-                                            @endif
-                                        </label>
-                                        <select data-postid="{{ $post->postInfo->id }}" data-work="ChangeRater1Group1"
-                                                @if($post->s1g1_status===1) disabled @endif
-                                                class="border rounded-md w-full px-3 py-2 SetSummaryRater">
-                                            <option value="" selected>بدون ارزیاب</option>
-                                            @php
-                                                $raters=\App\Models\User::where('type',4)->where('scientific_group',$post->postInfo->scientific_group_v1)->orderBy('name','asc')->get();
-                                            @endphp
-                                            @foreach($raters as $rater)
-                                                <option @if ( $rater->id==$post->s1g1rater ) selected
-                                                        @endif
-                                                        value="{{ $rater->id }}">{{ $rater->name . ' ' . $rater->family }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="block text-gray-700 text-sm font-bold text-right mr-2">ارزیاب
-                                            دوم
-                                            @if($post->s2g1_status===1)
-                                                (تکمیل)
-                                            @endif
-                                        </label>
-                                        <select data-postid="{{ $post->postInfo->id }}" data-work="ChangeRater2Group1"
-                                                @if($post->s2g1_status===1) disabled @endif
-                                                class="border rounded-md w-full px-3 py-2 SetSummaryRater">
-                                            <option value="" selected>بدون ارزیاب</option>
-                                            @php
-                                                $raters=\App\Models\User::where('type',4)->where('scientific_group',$post->postInfo->scientific_group_v1)->orderBy('name','asc')->get();
-                                            @endphp
-                                            @foreach($raters as $rater)
-                                                <option @if ( $rater->id==$post->s2g1rater ) selected
-                                                        @endif
-                                                        value="{{ $rater->id }}">{{ $rater->name . ' ' . $rater->family }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label class="block text-gray-700 text-sm font-bold text-right mr-2">ارزیاب
-                                            سوم
-                                            @if($post->s3g1_status===1)
-                                                (تکمیل)
-                                            @endif
-                                        </label>
-                                        <select data-postid="{{ $post->postInfo->id }}" data-work="ChangeRater3Group1"
-                                                @if($post->s3g1_status===1) disabled @endif
-                                                class="border rounded-md w-full px-3 py-2 SetSummaryRater">
-                                            <option value="" selected>بدون ارزیاب</option>
-                                            @php
-                                                $raters=\App\Models\User::where('type',4)->where('scientific_group',$post->postInfo->scientific_group_v1)->orderBy('name','asc')->get();
-                                            @endphp
-                                            @foreach($raters as $rater)
-                                                <option @if ( $rater->id==$post->s3g1rater ) selected
-                                                        @endif
-                                                        value="{{ $rater->id }}">{{ $rater->name . ' ' . $rater->family }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                    @if($post->sg1_form_type!=='Waiting For Header')
+                                        <div class="mb-3 mt-3">
+                                            <label class="block text-gray-700 text-sm font-bold text-right mr-2">ارزیاب
+                                                اول
+                                                @if($post->s1g1_status===1)
+                                                    (تکمیل)
+                                                @endif
+                                            </label>
+                                            <select data-postid="{{ $post->postInfo->id }}"
+                                                    data-work="ChangeRater1Group1"
+                                                    @if($post->s1g1_status===1) disabled @endif
+                                                    class="border rounded-md w-full px-3 py-2 SetSummaryRater">
+                                                <option value="" selected>بدون ارزیاب</option>
+                                                @php
+                                                    $raters=\App\Models\User::where('type',4)->where('scientific_group',$post->postInfo->scientific_group_v1)->orderBy('name','asc')->get();
+                                                @endphp
+                                                @foreach($raters as $rater)
+                                                    <option @if ( $rater->id==$post->s1g1rater ) selected
+                                                            @endif
+                                                            value="{{ $rater->id }}">{{ $rater->name . ' ' . $rater->family }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="block text-gray-700 text-sm font-bold text-right mr-2">ارزیاب
+                                                دوم
+                                                @if($post->s2g1_status===1)
+                                                    (تکمیل)
+                                                @endif
+                                            </label>
+                                            <select data-postid="{{ $post->postInfo->id }}"
+                                                    data-work="ChangeRater2Group1"
+                                                    @if($post->s2g1_status===1) disabled @endif
+                                                    class="border rounded-md w-full px-3 py-2 SetSummaryRater">
+                                                <option value="" selected>بدون ارزیاب</option>
+                                                @php
+                                                    $raters=\App\Models\User::where('type',4)->where('scientific_group',$post->postInfo->scientific_group_v1)->orderBy('name','asc')->get();
+                                                @endphp
+                                                @foreach($raters as $rater)
+                                                    <option @if ( $rater->id==$post->s2g1rater ) selected
+                                                            @endif
+                                                            value="{{ $rater->id }}">{{ $rater->name . ' ' . $rater->family }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="block text-gray-700 text-sm font-bold text-right mr-2">ارزیاب
+                                                سوم
+                                                @if($post->s3g1_status===1)
+                                                    (تکمیل)
+                                                @endif
+                                            </label>
+                                            <select data-postid="{{ $post->postInfo->id }}"
+                                                    data-work="ChangeRater3Group1"
+                                                    @if($post->s3g1_status===1) disabled @endif
+                                                    class="border rounded-md w-full px-3 py-2 SetSummaryRater">
+                                                <option value="" selected>بدون ارزیاب</option>
+                                                @php
+                                                    $raters=\App\Models\User::where('type',4)->where('scientific_group',$post->postInfo->scientific_group_v1)->orderBy('name','asc')->get();
+                                                @endphp
+                                                @foreach($raters as $rater)
+                                                    <option @if ( $rater->id==$post->s3g1rater ) selected
+                                                            @endif
+                                                            value="{{ $rater->id }}">{{ $rater->name . ' ' . $rater->family }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    @endif
                                 </td>
 
                                 <td>
@@ -125,7 +130,8 @@
                                                     (تکمیل)
                                                 @endif
                                             </label>
-                                            <select data-postid="{{ $post->postInfo->id }}" data-work="ChangeRater1Group2"
+                                            <select data-postid="{{ $post->postInfo->id }}"
+                                                    data-work="ChangeRater1Group2"
                                                     @if($post->s1g2_status===1) disabled @endif
                                                     class="border rounded-md w-full px-3 py-2 SetSummaryRater">
                                                 <option value="" selected>بدون ارزیاب</option>
@@ -146,7 +152,8 @@
                                                     (تکمیل)
                                                 @endif
                                             </label>
-                                            <select data-postid="{{ $post->postInfo->id }}" data-work="ChangeRater2Group2"
+                                            <select data-postid="{{ $post->postInfo->id }}"
+                                                    data-work="ChangeRater2Group2"
                                                     @if($post->s2g2_status===1) disabled @endif
                                                     class="border rounded-md w-full px-3 py-2 SetSummaryRater">
                                                 <option value="" selected>بدون ارزیاب</option>
@@ -167,7 +174,8 @@
                                                     (تکمیل)
                                                 @endif
                                             </label>
-                                            <select data-postid="{{ $post->postInfo->id }}" data-work="ChangeRater3Group2"
+                                            <select data-postid="{{ $post->postInfo->id }}"
+                                                    data-work="ChangeRater3Group2"
                                                     @if($post->s3g2_status===1) disabled @endif
                                                     class="border rounded-md w-full px-3 py-2 SetSummaryRater">
                                                 <option value="" selected>بدون ارزیاب</option>
