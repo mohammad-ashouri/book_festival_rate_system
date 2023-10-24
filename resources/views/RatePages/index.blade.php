@@ -4,7 +4,6 @@
     use App\Models\Person;
 @endphp
 @extends('layouts.PanelMaster')
-
 @section('content')
     <main class="flex-1 bg-cu-light py-6 px-8">
         <form id="SummaryAssessmentSet">
@@ -82,8 +81,16 @@
                     </span>
                         ارائه فرمایید.
                     </p>
-                    @if($summaryRate->postInfo->post_format==='پایان نامه')
-                        @include('RatePages.Forms.Summary.payanname')
+                    @if($summaryRate->s1g1rater===$me or $summaryRate->s2g1rater===$me or $summaryRate->s3g1rater===$me)
+                            @php
+                                $rater1=\App\Models\User::find($summaryRate->s1g1rater);
+                                $rater2=\App\Models\User::find($summaryRate->s2g1rater);
+                                $rater3=\App\Models\User::find($summaryRate->s3g1rater);
+                            @endphp
+                        @switch($summaryRate->sg1_form_type)
+                            @case('پایان نامه')
+                            @include('RatePages.Forms.Summary.payanname')
+                        @endswitch
                     @endif
                 </div>
             </div>

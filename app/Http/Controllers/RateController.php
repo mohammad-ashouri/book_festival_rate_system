@@ -21,7 +21,7 @@ class RateController extends Controller
                 break;
             case 3:
             case 4:
-                $summaryRate = RateInfo::where('rate_status', 'Summary')->where('id', $id)->with('postInfo')
+                $summaryRate = RateInfo::with('postInfo')->where('rate_status', 'Summary')->where('id', $id)
                     ->where(function ($query) {
                         $query->where(function ($subquery) {
                             $subquery

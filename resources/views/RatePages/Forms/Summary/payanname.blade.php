@@ -1,24 +1,36 @@
-
-
-<table id="rateForm" class="w-full border-collapse rounded-lg overflow-hidden text-center mt-3 hidden">
+<table id="rateForm" class="w-full border-collapse rounded-lg overflow-hidden text-center mt-3">
     <tr class="items-center bg-gradient-to-r from-blue-400 to-purple-500 text-white text-center border-b-2">
         <th class="px-6 py-1 w-5 font-bold ">ردیف</th>
         <th class="px-6 py-1 w-80 font-bold ">شاخص های موثر</th>
-        <th class="px-6 py-1 w-5 font-bold ">ارزیاب 1</th>
-        <th class="px-6 py-1 w-5 font-bold ">ارزیاب 2</th>
-        <th class="px-6 py-1 w-5 font-bold ">ارزیاب 3</th>
+        <th class="px-6 py-1 w-5 font-bold ">
+            @if($rater1)
+                {{ $rater1->name . ' ' . $rater1->family }}
+            @endif
+        </th>
+        <th class="px-6 py-1 w-5 font-bold ">
+            @if($rater2)
+                {{ $rater2->name . ' ' . $rater2->family }}
+            @endif
+        </th>
+        <th class="px-6 py-1 w-5 font-bold ">
+            @if($rater3)
+                {{ $rater3->name . ' ' . $rater3->family }}
+            @endif
+        </th>
     </tr>
     <tr class="items-center text-center ">
         <td class="px-6 py-1 bg-gray-300">
             1
         </td>
         <td class="px-6 py-1 bg-gray-300">
-            <p id="r1Title"></p>
+            <p id="r1Title">اهمیت موضوع</p>
         </td>
         <td class="px-6 py-1 bg-gray-300">
             <input
                 class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2"
-                @if($summaryRate->s1g1rater==$me or $summaryRate->s1g2rater==$me) id="r1" name="r1" @else disabled
+                @if($summaryRate->s1g1rater==$me or $summaryRate->s1g2rater==$me) id="r1" name="r1"
+                @else disabled
+
                 @endif step="0.25" type="text">
         </td>
         <td class="px-6 py-1 bg-gray-300">
@@ -39,7 +51,7 @@
             2
         </td>
         <td class="px-6 py-1 bg-gray-300">
-            <p id="r2Title"></p>
+            <p id="r2Title">ارزش علمی</p>
         </td>
         <td class="px-6 py-1 bg-gray-300">
             <input
@@ -65,7 +77,7 @@
             3
         </td>
         <td class="px-6 py-1 bg-gray-300">
-            <p id="r3Title"></p>
+            <p id="r3Title">اثربخشی</p>
         </td>
         <td class="px-6 py-1 bg-gray-300">
             <input
@@ -91,7 +103,7 @@
             4
         </td>
         <td class="px-6 py-1 bg-gray-300">
-            <p id="r4Title"></p>
+            <p id="r4Title">استفاده مناسب از منابع معتبر</p>
         </td>
         <td class="px-6 py-1 bg-gray-300">
             <input
@@ -114,7 +126,7 @@
     </tr>
     <tr class="items-center text-center ">
         <td colspan="2" class="px-6 py-1 text-left bg-gray-300">
-            <p class="font-bold">جمع ردیف</p>
+            <p class="font-bold">جمع امتیازات</p>
         </td>
         <td class="px-6 py-1 text-center bg-gray-300">
             <p id="c1Sum" class="font-bold"></p>
@@ -128,7 +140,7 @@
     </tr>
 </table>
 
-<div id="submitRate" class="mt-3 text-center hidden">
+<div id="submitRate" class="mt-3 text-center">
     <label class="font-bold">
         محور ویژه را در صورت نیاز تعیین نمایید:
     </label>
