@@ -80,41 +80,61 @@
                                         @endif
                                     </td>
                                     <td class="px-3 py-4 text-right">
-                                        <form id="approve-rate-form">
-                                            <label class="mr-2">ارتباط اثر با گروه حاضر</label>
-                                            <select data-postid="{{ $post->id }}"
-                                                    class="border rounded-md w-full px-3 py-2 fsg1 mb-3"
-                                                    name="fsg1">
-                                                <option value="" selected disabled>انتخاب کنید</option>
-                                                <option value="اثر مربوط به گروه حاضر است">
-                                                    اثر مربوط به گروه حاضر است
-                                                </option>
-                                                @if(!$post->postInfo->scientific_group_v2)
-                                                    <option value="اثر میان رشته ای است">
-                                                        اثر میان رشته ای است
+                                        <form class="approve-rate-form">
+                                            <input type="hidden" name="id" value="{{ $post->id }}">
+
+                                            <div>
+                                                <label class="mr-2">ارتباط اثر با گروه حاضر</label>
+                                                <select
+                                                    class="border rounded-md w-full px-3 py-2 mb-3 relation-with-summary-group"
+                                                    name="relation_with_summary_group" data-row="{{$loop->iteration}}">
+                                                    <option value="" selected disabled>انتخاب کنید</option>
+                                                    <option value="اثر مربوط به گروه حاضر است">
+                                                        اثر مربوط به گروه حاضر است
+                                                    </option>
+                                                    @if(!$post->postInfo->scientific_group_v2)
+                                                        <option value="اثر میان رشته ای است">
+                                                            اثر میان رشته ای است
+                                                            (گروه علمی را مشخص کنید)
+                                                        </option>
+                                                    @endif
+                                                    <option value="اثر مربوط به گروه حاضر نیست">
+                                                        اثر مربوط به گروه حاضر نیست
                                                         (گروه علمی را مشخص کنید)
                                                     </option>
-                                                @endif
-                                                <option value="اثر مربوط به گروه حاضر نیست">
-                                                    اثر مربوط به گروه حاضر نیست
-                                                    (گروه علمی را مشخص کنید)
-                                                </option>
-                                            </select>
-                                            <label class="mr-2">تعیین نوع اثر</label>
-                                            <select data-postid="{{ $post->id }}"
-                                                    class="border rounded-md w-full px-3 py-2 fsg1"
-                                                    name="fsg1">
-                                                <option value="" selected disabled>انتخاب کنید</option>
-                                                <option value="علمی پژوهشی">علمی پژوهشی</option>
-                                                <option value="علمی ترویجی">علمی ترویجی</option>
-                                                <option value="فرهنگی تبلیغی">فرهنگی تبلیغی</option>
-                                                <option value="تقریر">تقریر</option>
-                                            </select>
+                                                </select>
+                                            </div>
+                                            <div data-row="{{$loop->iteration}}" class="hidden mt-2 SetFormTypeDIV">
+                                                <label class="mr-2">تعیین نوع اثر</label>
+                                                <select
+                                                    class="border rounded-md w-full px-3 py-2 "
+                                                    name="summary_form_type">
+                                                    <option value="" selected disabled>انتخاب کنید</option>
+                                                    <option value="علمی پژوهشی">علمی پژوهشی</option>
+                                                    <option value="علمی ترویجی">علمی ترویجی</option>
+                                                    <option value="فرهنگی تبلیغی">فرهنگی تبلیغی</option>
+                                                    <option value="تقریر">تقریر</option>
+                                                </select>
+                                            </div>
+                                            <div data-row="{{$loop->iteration}}" class="hidden mt-2 SetScientificGroupDIV">
+                                                <label class="mr-2">تعیین گروه علمی پیشنهادی</label>
+                                                <select
+                                                    class="border rounded-md w-full px-3 py-2 "
+                                                    name="scientific_group">
+                                                    <option value="" selected disabled>انتخاب کنید</option>
+                                                @php
+                                                $scientificGroups=\App\Models\Catalogs\ScientificGroup::where('active',1)->where('id','!=',$post->postInfo->scientific_group_v1)->orderBy('name','asc')->get();
+                                                @endphp
+                                                    @foreach($scientificGroups as $scientificGroup)
+                                                        <option value="{{ $scientificGroup->id }}">{{ $scientificGroup->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                             <div class="text-center mt-2">
-                                            <button
-                                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full md:w-auto"
-                                                type="submit">ثبت تاییدیه
-                                            </button>
+                                                <button
+                                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full md:w-auto"
+                                                    type="submit">ثبت تاییدیه
+                                                </button>
                                             </div>
                                         </form>
                                     </td>

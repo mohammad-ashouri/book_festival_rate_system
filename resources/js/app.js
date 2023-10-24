@@ -1477,8 +1477,32 @@ $(document).ready(function () {
                 });
             });
             break;
+        case '/HeaderApproval':
         case '/Approval':
-            $('#approve-rate-form').on('submit', function (e) {
+            const selectors = document.querySelectorAll('select');
+            selectors.forEach(select => select.value = "");
+
+            $('.relation-with-summary-group').on('change', function () {
+                var row = $(this).data('row');
+                var SetScientificGroupDIV = $('.SetScientificGroupDIV[data-row="' + row + '"]');
+                var SetFormTypeDIV = $('.SetFormTypeDIV[data-row="' + row + '"]');
+                switch (this.value){
+                    case 'اثر مربوط به گروه حاضر است':
+                        SetScientificGroupDIV.addClass('hidden');
+                        SetFormTypeDIV.removeClass('hidden');
+                        break;
+                    case 'اثر میان رشته ای است':
+                        SetScientificGroupDIV.removeClass('hidden');
+                        SetFormTypeDIV.removeClass('hidden');
+                        break;
+                    case 'اثر مربوط به گروه حاضر نیست':
+                        SetScientificGroupDIV.removeClass('hidden');
+                        SetFormTypeDIV.addClass('hidden');
+                        break;
+                }
+            });
+
+            $('.approve-rate-form').on('submit', function (e) {
                 e.preventDefault();
                 Swal.fire({
                     title: 'آیا مطمئن هستید؟',
@@ -1500,6 +1524,19 @@ $(document).ready(function () {
                             },
                             success: function (response) {
                                 console.log(response);
+                                if (response.errors){
+                                    if (response.errors.nullRelation){
+                                        swalFire('خطا!', response.errors.nullRelation[0], 'error', 'تلاش مجدد');
+                                    }else if (response.errors.wrongGroup){
+                                        swalFire('خطا!', response.errors.wrongGroup[0], 'error', 'تلاش مجدد');
+                                    }else if (response.errors.nullScientificGroup){
+                                        swalFire('خطا!', response.errors.nullScientificGroup[0], 'error', 'تلاش مجدد');
+                                    }else if (response.errors.nullFormType){
+                                        swalFire('خطا!', response.errors.nullFormType[0], 'error', 'تلاش مجدد');
+                                    }
+                                }else{
+                                    location.reload();
+                                }
                             }
                         });
                     }
