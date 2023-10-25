@@ -7,19 +7,19 @@
 @section('content')
     <main class="flex-1 bg-cu-light py-6 px-8">
         <form id="SummaryAssessmentSet">
-            <input type="hidden" name="rateInfoID" value="{{ $summaryRate->id }}">
+            <input type="hidden" name="rateInfoID" value="{{ $rateInfo->id }}">
             <input type="hidden" name="rateType" value="
-                @if($summaryRate->s1g1rater===$me)
+                @if($rateInfo->s1g1rater===$me)
                 s1g1
-                @elseif($summaryRate->s2g1rater===$me)
+                @elseif($rateInfo->s2g1rater===$me)
                 s2g1
-                @elseif($summaryRate->s3g1rater===$me)
+                @elseif($rateInfo->s3g1rater===$me)
                 s3g1
-                @elseif($summaryRate->s1g2rater===$me)
+                @elseif($rateInfo->s1g2rater===$me)
                 s1g2
-                @elseif($summaryRate->s2g2rater===$me)
+                @elseif($rateInfo->s2g2rater===$me)
                 s2g2
-                @elseif($summaryRate->s3g2rater===$me)
+                @elseif($rateInfo->s3g2rater===$me)
                 s3g2
                 @endif
             ">
@@ -37,22 +37,22 @@
                         </thead>
                         <tbody class="divide-y divide-gray-300">
                         <tr class="bg-white">
-                            <td class="px-6 py-4">{{ $summaryRate->postInfo->title  }}</td>
+                            <td class="px-6 py-4">{{ $rateInfo->postInfo->title  }}</td>
                             <td class="px-6 py-4">
                                 @php
-                                    $personInfo=Person::find($summaryRate->postInfo->person_id)
+                                    $personInfo=Person::find($rateInfo->postInfo->person_id)
                                 @endphp
                                 {{ $personInfo->name . ' ' . $personInfo->family  }}
                             </td>
                             <td class="px-6 py-4">
                                 @php
-                                    $group1Info=ScientificGroup::find($summaryRate->postInfo->scientific_group_v1)
+                                    $group1Info=ScientificGroup::find($rateInfo->postInfo->scientific_group_v1)
                                 @endphp
                                 {{ $group1Info->name }}
                             </td>
                             <td class="px-6 py-4">
                                 @php
-                                    $group2Info=ScientificGroup::find($summaryRate->postInfo->scientific_group_v2)
+                                    $group2Info=ScientificGroup::find($rateInfo->postInfo->scientific_group_v2)
                                 @endphp
                                 {{ @$group2Info->name }}
                             </td>
@@ -81,15 +81,27 @@
                     </span>
                         ارائه فرمایید.
                     </p>
-                    @if($summaryRate->s1g1rater===$me or $summaryRate->s2g1rater===$me or $summaryRate->s3g1rater===$me)
-                            @php
-                                $rater1=\App\Models\User::find($summaryRate->s1g1rater);
-                                $rater2=\App\Models\User::find($summaryRate->s2g1rater);
-                                $rater3=\App\Models\User::find($summaryRate->s3g1rater);
-                            @endphp
-                        @switch($summaryRate->sg1_form_type)
+                    @if($rateInfo->s1g1rater===$me or $rateInfo->s2g1rater===$me or $rateInfo->s3g1rater===$me)
+                        @php
+                            $summary1Info=null;
+                            $summary2Info=null;
+                            $summary3Info=null;
+                            $rater1=\App\Models\User::find($rateInfo->s1g1rater);
+                            $rater2=\App\Models\User::find($rateInfo->s2g1rater);
+                            $rater3=\App\Models\User::find($rateInfo->s3g1rater);
+                            if ($rater1){
+                            $summary1Info=\App\Models\Rates\SummaryRates::with('rateInfo')->where('rater',$rater1->id)->first();
+                            }
+                            if ($rater2){
+                            $summary2Info=\App\Models\Rates\SummaryRates::with('rateInfo')->where('rater',$rater2->id)->first();
+                            }
+                            if ($rater3){
+                            $summary3Info=\App\Models\Rates\SummaryRates::with('rateInfo')->where('rater',$rater3->id)->first();
+                            }
+                        @endphp
+                        @switch($rateInfo->sg1_form_type)
                             @case('پایان نامه')
-                            @include('RatePages.Forms.Summary.payanname')
+                                @include('RatePages.Forms.Summary.payanname')
                         @endswitch
                     @endif
                 </div>

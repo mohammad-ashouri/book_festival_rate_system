@@ -27,22 +27,30 @@
         </td>
         <td class="px-6 py-1 bg-gray-300">
             <input
-                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2"
-                @if($summaryRate->s1g1rater==$me or $summaryRate->s1g2rater==$me) id="r1" name="r1"
+                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2 text-center"
+                @if($rateInfo->s1g1rater==$me or $rateInfo->s1g2rater==$me) id="r1" name="r1"
                 @else disabled
-
+                @if($summary1Info)
+                    value="{{ $summary1Info->r1 }}"
+                @endif
                 @endif step="0.25" type="text">
         </td>
         <td class="px-6 py-1 bg-gray-300">
             <input
-                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2"
-                @if($summaryRate->s2g1rater==$me or $summaryRate->s2g2rater==$me) id="r1" name="r1" @else disabled
+                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2 text-center"
+                @if($rateInfo->s2g1rater==$me or $rateInfo->s2g2rater==$me) id="r1" name="r1" @else disabled
+                @if($summary2Info)
+                    value="{{ $summary2Info->r1 }}"
+                @endif
                 @endif step="0.25" type="text">
         </td>
         <td class="px-6 py-1 bg-gray-300">
             <input
-                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2"
-                @if($summaryRate->s3g1rater==$me or $summaryRate->s3g2rater==$me) id="r1" name="r1" @else disabled
+                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2 text-center"
+                @if($rateInfo->s3g1rater==$me or $rateInfo->s3g2rater==$me) id="r1" name="r1" @else disabled
+                @if($summary3Info)
+                    value="{{ $summary3Info->r1 }}"
+                @endif
                 @endif step="0.25" type="text">
         </td>
     </tr>
@@ -55,20 +63,29 @@
         </td>
         <td class="px-6 py-1 bg-gray-300">
             <input
-                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2"
-                @if($summaryRate->s1g1rater==$me or $summaryRate->s1g2rater==$me) id="r2" name="r2" @else disabled
+                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2 text-center"
+                @if($rateInfo->s1g1rater==$me or $rateInfo->s1g2rater==$me) id="r2" name="r2" @else disabled
+                @if($summary1Info)
+                    value="{{ $summary1Info->r2 }}"
+                @endif
                 @endif step="0.25" type="text">
         </td>
         <td class="px-6 py-1 bg-gray-300">
             <input
-                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2"
-                @if($summaryRate->s2g1rater==$me or $summaryRate->s2g2rater==$me) id="r2" name="r2" @else disabled
+                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2 text-center"
+                @if($rateInfo->s2g1rater==$me or $rateInfo->s2g2rater==$me) id="r2" name="r2" @else disabled
+                @if($summary2Info)
+                    value="{{ $summary2Info->r2 }}"
+                @endif
                 @endif step="0.25" type="text">
         </td>
         <td class="px-6 py-1 bg-gray-300">
             <input
-                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2"
-                @if($summaryRate->s3g1rater==$me or $summaryRate->s3g2rater==$me) id="r2" name="r2" @else disabled
+                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2 text-center"
+                @if($rateInfo->s3g1rater==$me or $rateInfo->s3g2rater==$me) id="r2" name="r2" @else disabled
+                @if($summary3Info)
+                    value="{{ $summary3Info->r2 }}"
+                @endif
                 @endif step="0.25" type="text">
         </td>
     </tr>
@@ -81,20 +98,29 @@
         </td>
         <td class="px-6 py-1 bg-gray-300">
             <input
-                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2"
-                @if($summaryRate->s1g1rater==$me or $summaryRate->s1g2rater==$me) id="r3" name="r3" @else disabled
+                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2 text-center"
+                @if($rateInfo->s1g1rater==$me or $rateInfo->s1g2rater==$me) id="r3" name="r3" @else disabled
+                @if($summary1Info)
+                    value="{{ $summary1Info->r3 }}"
+                @endif
                 @endif step="0.25" type="text">
         </td>
         <td class="px-6 py-1 bg-gray-300">
             <input
-                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2"
-                @if($summaryRate->s2g1rater==$me or $summaryRate->s2g2rater==$me) id="r3" name="r3" @else disabled
+                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2 text-center"
+                @if($rateInfo->s2g1rater==$me or $rateInfo->s2g2rater==$me) id="r3" name="r3" @else disabled
+                @if($summary2Info)
+                    value="{{ $summary2Info->r3 }}"
+                @endif
                 @endif step="0.25" type="text">
         </td>
         <td class="px-6 py-1 bg-gray-300">
             <input
-                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2"
-                @if($summaryRate->s3g1rater==$me or $summaryRate->s3g2rater==$me) id="r3" name="r3" @else disabled
+                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2 text-center"
+                @if($rateInfo->s3g1rater==$me or $rateInfo->s3g2rater==$me) id="r3" name="r3" @else disabled
+                @if($summary3Info)
+                    value="{{ $summary3Info->r3 }}"
+                @endif
                 @endif step="0.25" type="text">
         </td>
     </tr>
@@ -107,20 +133,29 @@
         </td>
         <td class="px-6 py-1 bg-gray-300">
             <input
-                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2"
-                @if($summaryRate->s1g1rater==$me or $summaryRate->s1g2rater==$me) id="r4" name="r4" @else disabled
+                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2 text-center"
+                @if($rateInfo->s1g1rater==$me or $rateInfo->s1g2rater==$me) id="r4" name="r4" @else disabled
+                @if($summary1Info)
+                    value="{{ $summary1Info->r4 }}"
+                @endif
                 @endif step="0.25" type="text">
         </td>
         <td class="px-6 py-1 bg-gray-300">
             <input
-                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2"
-                @if($summaryRate->s2g1rater==$me or $summaryRate->s2g2rater==$me) id="r4" name="r4" @else disabled
+                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2 text-center"
+                @if($rateInfo->s2g1rater==$me or $rateInfo->s2g2rater==$me) id="r4" name="r4" @else disabled
+                @if($summary2Info)
+                    value="{{ $summary2Info->r4 }}"
+                @endif
                 @endif step="0.25" type="text">
         </td>
         <td class="px-6 py-1 bg-gray-300">
             <input
-                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2"
-                @if($summaryRate->s3g1rater==$me or $summaryRate->s3g2rater==$me) id="r4" name="r4" @else disabled
+                class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-blue-500 focus:border-blue-500 w-20 mt-2 text-center"
+                @if($rateInfo->s3g1rater==$me or $rateInfo->s3g2rater==$me) id="r4" name="r4" @else disabled
+                @if($summary3Info)
+                    value="{{ $summary3Info->r4 }}"
+                @endif
                 @endif step="0.25" type="text">
         </td>
     </tr>
@@ -129,13 +164,24 @@
             <p class="font-bold">جمع امتیازات</p>
         </td>
         <td class="px-6 py-1 text-center bg-gray-300">
-            <p id="c1Sum" class="font-bold"></p>
+            <p id="c1Sum" class="font-bold">
+            @if($summary1Info and $summary1Info->count()>0)
+                {{ $summary1Info->sum }}
+            @endif
         </td>
         <td class="px-6 py-1 text-center bg-gray-300">
-            <p id="c2Sum" class="font-bold"></p>
+            <p id="c2Sum" class="font-bold">
+                @if($summary2Info and $summary2Info->count()>0)
+                    {{ $summary2Info->sum }}
+                @endif
+            </p>
         </td>
         <td class="px-6 py-1 text-center bg-gray-300">
-            <p id="c3Sum" class="font-bold"></p>
+            <p id="c3Sum" class="font-bold">
+                @if($summary3Info and $summary3Info->count()>0)
+                    {{ $summary3Info->sum }}
+                @endif
+            </p>
         </td>
     </tr>
 </table>
@@ -161,18 +207,24 @@
 </div>
 
 <script>
-    function sumC1Rows() {
+    function sumRows() {
         let r1 = parseFloat($('#r1').val()) || 0;
         let r2 = parseFloat($('#r2').val()) || 0;
         let r3 = parseFloat($('#r3').val()) || 0;
         let r4 = parseFloat($('#r4').val()) || 0;
 
+        @if($rateInfo->s1g1rater==$me or $rateInfo->s1g2rater==$me)
         $('#c1Sum').text(r1 + r2 + r3 + r4);
+        @elseif($rateInfo->s2g1rater==$me or $rateInfo->s2g2rater==$me)
+        $('#c2Sum').text(r1 + r2 + r3 + r4);
+        @elseif($rateInfo->s3g1rater==$me or $rateInfo->s3g2rater==$me)
+        $('#c3Sum').text(r1 + r2 + r3 + r4);
+        @endif
     }
 
     $('#r1, #r2, #r3, #r4').on('input', function () {
         if (!isNaN($(this).val())) {
-            sumC1Rows();
+            sumRows();
         }
     });
 

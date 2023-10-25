@@ -20,8 +20,9 @@ return new class extends Migration
             $table->float('r3');
             $table->float('r4')->nullable();
             $table->float('sum');
-            $table->unsignedBigInteger('special_section');
+            $table->unsignedBigInteger('special_section')->nullable();
             $table->foreign('special_section')->references('id')->on('special_sections');
+            $table->string('rate_type');
             $table->unsignedBigInteger('rater');
             $table->foreign('rater')->references('id')->on('users');
             $table->timestamps();

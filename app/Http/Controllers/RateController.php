@@ -21,7 +21,7 @@ class RateController extends Controller
                 break;
             case 3:
             case 4:
-                $summaryRate = RateInfo::with('postInfo')->where('rate_status', 'Summary')->where('id', $id)
+                $rateInfo = RateInfo::with('postInfo')->where('rate_status', 'Summary')->where('id', $id)
                     ->where(function ($query) {
                         $query->where(function ($subquery) {
                             $subquery
@@ -55,8 +55,8 @@ class RateController extends Controller
                             });
                     })
                     ->first();
-                if ($summaryRate->count() > 0) {
-                    return view('RatePages.index', compact('summaryRate'));
+                if ($rateInfo->count() > 0) {
+                    return view('RatePages.index', compact('rateInfo'));
                 }
                 abort(403);
         }
@@ -64,7 +64,6 @@ class RateController extends Controller
     public function setSummaryRate(Request $request)
     {
         $rate_info_id = $request->input('rateInfoID');
-        $type = $request->input('type');
         $rateType = $request->input('rateType');
         $special_section = $request->input('special_section');
         $r1 = $request->input('r1');
@@ -80,7 +79,6 @@ class RateController extends Controller
 
         $summaryRate = new SummaryRates();
         $summaryRate->rate_info_id = $rate_info_id;
-        $summaryRate->post_type = $type;
         $summaryRate->r1 = $r1;
         $summaryRate->r2 = $r2;
         $summaryRate->r3 = $r3;
