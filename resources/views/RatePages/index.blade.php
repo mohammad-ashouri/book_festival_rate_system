@@ -113,11 +113,12 @@
                             @case('فرهنگی تبلیغی')
                                 @include('RatePages.Forms.Summary.tablighi')
                                 @break
-                            @case('ادبیات و هنر')
+                            @case('ادبیات و هنر علمی پژوهشی')
+                            @case('ادبیات و هنر علمی ترویجی')
                                 @include('RatePages.Forms.Summary.adabiat-honar.pazhuheshi-tarviji')
                                 @break
-                            @case('ادبیات و هنر')
-                                @include('RatePages.Forms.Summary.enghelab-eslami.pazhuheshi-tarviji')
+                            @case('ادبیات و هنر فرهنگی تبلیغی')
+                                @include('RatePages.Forms.Summary.enghelab-eslami.tablighi')
                                 @break
                             @case('کتب مرجع')
                                 @include('RatePages.Forms.Summary.marja')
@@ -130,6 +131,72 @@
                                 @break
                             @case('تکنولوژی و آموزشی')
                                 @include('RatePages.Forms.Summary.technology')
+                                @break
+                            @case('انقلاب اسلامی علمی پژوهشی')
+                            @case('انقلاب اسلامی علمی ترویجی')
+                                @include('RatePages.Forms.Summary.enghelab-eslami.pazhuheshi-tarviji')
+                                @break
+                            @case('انقلاب اسلامی فرهنگی تبلیغی')
+                                @include('RatePages.Forms.Summary.enghelab-eslami.tablighi')
+                                @break
+                        @endswitch
+                    @elseif($rateInfo->s1g2rater===$me or $rateInfo->s2g2rater===$me or $rateInfo->s3g2rater===$me)
+                        @php
+                            $summary1Info=null;
+                            $summary2Info=null;
+                            $summary3Info=null;
+                            $rater1=\App\Models\User::find($rateInfo->s1g2rater);
+                            $rater2=\App\Models\User::find($rateInfo->s2g2rater);
+                            $rater3=\App\Models\User::find($rateInfo->s3g2rater);
+                            if ($rater1){
+                            $summary1Info=\App\Models\Rates\SummaryRates::with('rateInfo')->where('rater',$rater1->id)->first();
+                            }
+                            if ($rater2){
+                            $summary2Info=\App\Models\Rates\SummaryRates::with('rateInfo')->where('rater',$rater2->id)->first();
+                            }
+                            if ($rater3){
+                            $summary3Info=\App\Models\Rates\SummaryRates::with('rateInfo')->where('rater',$rater3->id)->first();
+                            }
+                        @endphp
+                        @switch($rateInfo->sg2_form_type)
+                            @case('پایان نامه')
+                                @include('RatePages.Forms.Summary.payanname')
+                                @break
+                            @case('تقریر')
+                                @include('RatePages.Forms.Summary.taghrir')
+                                @break
+                            @case('علمی پژوهشی')
+                            @case('علمی ترویجی')
+                                @include('RatePages.Forms.Summary.pazhuheshi-tarviji')
+                                @break
+                            @case('فرهنگی تبلیغی')
+                                @include('RatePages.Forms.Summary.tablighi')
+                                @break
+                            @case('ادبیات و هنر علمی پژوهشی')
+                            @case('ادبیات و هنر علمی ترویجی')
+                                @include('RatePages.Forms.Summary.adabiat-honar.pazhuheshi-tarviji')
+                                @break
+                            @case('ادبیات و هنر فرهنگی تبلیغی')
+                                @include('RatePages.Forms.Summary.enghelab-eslami.tablighi')
+                                @break
+                            @case('کتب مرجع')
+                                @include('RatePages.Forms.Summary.marja')
+                                @break
+                            @case('ترجمه')
+                                @include('RatePages.Forms.Summary.tarjome')
+                                @break
+                            @case('تصحیح و تحقیق')
+                                @include('RatePages.Forms.Summary.tashih')
+                                @break
+                            @case('تکنولوژی و آموزشی')
+                                @include('RatePages.Forms.Summary.technology')
+                                @break
+                            @case('انقلاب اسلامی علمی پژوهشی')
+                            @case('انقلاب اسلامی علمی ترویجی')
+                                @include('RatePages.Forms.Summary.enghelab-eslami.pazhuheshi-tarviji')
+                                @break
+                            @case('انقلاب اسلامی فرهنگی تبلیغی')
+                                @include('RatePages.Forms.Summary.enghelab-eslami.tablighi')
                                 @break
                         @endswitch
                     @endif
