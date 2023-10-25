@@ -106,6 +106,31 @@
                             @case('تقریر')
                                 @include('RatePages.Forms.Summary.taghrir')
                                 @break
+                            @case('علمی پژوهشی')
+                            @case('علمی ترویجی')
+                                @include('RatePages.Forms.Summary.pazhuheshi-tarviji')
+                                @break
+                            @case('فرهنگی تبلیغی')
+                                @include('RatePages.Forms.Summary.tablighi')
+                                @break
+                            @case('ادبیات و هنر')
+                                @include('RatePages.Forms.Summary.adabiat-honar.pazhuheshi-tarviji')
+                                @break
+                            @case('ادبیات و هنر')
+                                @include('RatePages.Forms.Summary.enghelab-eslami.pazhuheshi-tarviji')
+                                @break
+                            @case('کتب مرجع')
+                                @include('RatePages.Forms.Summary.marja')
+                                @break
+                            @case('ترجمه')
+                                @include('RatePages.Forms.Summary.tarjome')
+                                @break
+                            @case('تصحیح و تحقیق')
+                                @include('RatePages.Forms.Summary.tashih')
+                                @break
+                            @case('تکنولوژی و آموزشی')
+                                @include('RatePages.Forms.Summary.technology')
+                                @break
                         @endswitch
                     @endif
                 </div>
