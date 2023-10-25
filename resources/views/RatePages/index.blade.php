@@ -104,7 +104,7 @@
                                 @include('RatePages.Forms.Summary.payanname')
                                 @break
                             @case('تقریر')
-                                @include('RatePages.Forms.Summary.taghrirat')
+                                @include('RatePages.Forms.Summary.taghrir')
                                 @break
                         @endswitch
                     @endif

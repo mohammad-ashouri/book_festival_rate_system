@@ -100,13 +100,13 @@ class RateController extends Controller
                     $rateInfo->avg_sg1 = $sum + $summaryS2G1->sum + $summaryS3G1->sum;
                     if ($rateInfo->postInfo->scientific_group_v2 != null and $rateInfo->avg_sg2 != null) {
                         if ($rateInfo->avg_sg2 >= 34 or $sum >= 34) {
-                            $rateInfo->rate_status = 'Detailed';
+                            $rateInfo->rate_status = 'Pre Detailed';
                         } else {
                             $rateInfo->rate_status = 'RejectedSummary';
                         }
                     } elseif ($rateInfo->postInfo->scientific_group_v2 == null) {
                         if ($sum >= 34) {
-                            $rateInfo->rate_status = 'Detailed';
+                            $rateInfo->rate_status = 'Pre Detailed';
                         } else {
                             $rateInfo->rate_status = 'RejectedSummary';
                         }
