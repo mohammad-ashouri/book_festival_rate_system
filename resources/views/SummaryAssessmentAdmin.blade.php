@@ -122,7 +122,7 @@
                                 </td>
 
                                 <td>
-                                    @if($post->postInfo->scientific_group_v2)
+                                    @if($post->postInfo->scientific_group_v2 and $post->sg2_form_type!=='Waiting For Header')
                                         <div class="mb-3 mt-3">
                                             <label class="block text-gray-700 text-sm font-bold text-right mr-2">ارزیاب
                                                 اول

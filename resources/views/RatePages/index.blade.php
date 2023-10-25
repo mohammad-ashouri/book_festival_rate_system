@@ -102,6 +102,10 @@
                         @switch($rateInfo->sg1_form_type)
                             @case('پایان نامه')
                                 @include('RatePages.Forms.Summary.payanname')
+                                @break
+                            @case('تقریر')
+                                @include('RatePages.Forms.Summary.taghrirat')
+                                @break
                         @endswitch
                     @endif
                 </div>

@@ -85,8 +85,9 @@ class AssessmentRaterController extends Controller
                         if ($postInfo->scientific_group_v2 === null) {
                             $postInfo->scientific_group_v2 = $request->input('scientific_group');
                             $rateInfo->sg1_form_type = $request->input('summary_form_type');
-                            $rateInfo->sg2_form_type = null;
+                            $rateInfo->sg2_form_type = 'Waiting For Header';
                             $postInfo->save();
+                            $rateInfo->save();
                         }
                         $headerComment->body = json_encode([$rateInfo->id, "The work is interdisciplinary", $request->input('relation_with_summary_group'), $request->input('scientific_group')]);
                 }
