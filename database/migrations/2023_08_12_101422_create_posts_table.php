@@ -74,7 +74,7 @@ return new class extends Migration
         $query="INSERT INTO `posts` (`id`, `person_id`, `festival_id`, `title`, `post_format`, `post_type`, `language`, `pages_number`, `special_section`, `properties`, `publisher`, `ISSN`, `publish_status`, `number_of_covers`, `book_size`, `circulation`, `thesis_certificate_number`, `thesis_defence_place`, `thesis_grade`, `thesis_supervisor`, `thesis_advisor`, `thesis_referee`, `research_type`, `scientific_group_v1`, `scientific_group_v2`, `activity_type`, `participation_percentage`, `post_delivery_method`, `file_src`, `thesis_proceedings_src`, `sorted`, `sorter`, `sorted_date`, `sorting_classification_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
                 (1, 1, 25, 'کتاب تست', 'کتاب', 'تصحیح و تحقیق', '3', '150', NULL, NULL, '75', '165484', 'منتشر شده', 1500, 'رقعی', 3200, NULL, NULL, NULL, NULL, NULL, NULL, '2', 3, 8, 'individual', 100, 'physical', NULL, NULL, 0, NULL, NULL, NULL, '2023-09-26 06:43:37', '2023-09-26 06:43:37', NULL),
                 (2, 1, 25, 'پایان نامه تست', 'پایان نامه', 'تالیف', '3', '60', 9, NULL, NULL, NULL, 'منتشر شده', NULL, NULL, NULL, '1654215', 4, 18, 'علی رضوی نیا', 'مجید طرقی منش', 'حسین امامی', '1', 3, NULL, 'individual', 100, 'physical', NULL, NULL, 0, NULL, NULL, NULL, '2023-09-26 10:15:52', '2023-09-26 10:15:52', NULL);";
-//        DB::statement($query);
+        DB::statement($query);
     }
 
     /**

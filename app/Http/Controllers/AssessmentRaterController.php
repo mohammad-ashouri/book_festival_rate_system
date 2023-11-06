@@ -17,7 +17,6 @@ class AssessmentRaterController extends Controller
         switch ($userType->type) {
             case 1:
                 $approvals = RateInfo::with('postInfo')->where('rate_status', 'Summary')->where('sg1_form_type', 'Waiting For Header')->orWhere('sg2_form_type', 'Waiting For Header')->paginate(10);
-                return view('HeaderApproval.HeaderApproval', compact('approvals'));
                 break;
             case 3:
                 $approvals = RateInfo::with('postInfo')
@@ -37,9 +36,11 @@ class AssessmentRaterController extends Controller
                             });
                     })
                     ->paginate(10);
-                return view('HeaderApproval.HeaderApproval', compact('approvals'));
                 break;
         }
+        $userType=$userType->type;
+        return view('AssessmentFormApproval.HeaderApproval', compact('approvals','userType'));
+
     }
 
     public function headerApprove(Request $request)

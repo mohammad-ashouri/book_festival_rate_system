@@ -1477,7 +1477,7 @@ $(document).ready(function () {
                 });
             });
             break;
-        case '/HeaderApproval':
+        case '/AssessmentFormApproval':
         case '/Approval':
             const selectors = document.querySelectorAll('select');
             selectors.forEach(select => select.value = "");
@@ -1517,7 +1517,7 @@ $(document).ready(function () {
                         var data = form.serialize();
                         $.ajax({
                             type: 'POST',
-                            url: '/Approve',
+                            url: $(this).attr("action"),
                             data: data,
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -1534,7 +1534,7 @@ $(document).ready(function () {
                                     }else if (response.errors.nullFormType){
                                         swalFire('خطا!', response.errors.nullFormType[0], 'error', 'تلاش مجدد');
                                     }
-                                }else{
+                                } else {
                                     location.reload();
                                 }
                             }
