@@ -207,8 +207,15 @@ class PostController extends Controller
             }
 
         }
-
         $Post = new Post();
+        $lastPost = Post::orderBy('id', 'desc')->first();
+        if (!$lastPost) {
+            $Post->id = $festival . '00001';
+        } elseif (substr($lastPost->id, 0, 2) == $festival) {
+            $Post->id = $lastPost->id + 1;
+        } else {
+            $Post->id = $festival . '00001';
+        }
         $Post->person_id = $person;
         $Post->festival_id = $festival;
         $Post->title = $name;
@@ -304,6 +311,7 @@ class PostController extends Controller
         $this->logActivity('Post Added =>' . $Post->id, \request()->ip(), \request()->userAgent(), \session('id'));
         return $this->success(true, 'PostAdded', 'برای نمایش اطلاعات جدید، لطفا صفحه را رفرش نمایید.');
     }
+
     public function editPost(Request $request)
     {
         $Post = Post::find($request->input('postIDForEdit'));
@@ -594,6 +602,7 @@ class PostController extends Controller
         $this->logActivity('Post Edited =>' . $Post->id, \request()->ip(), \request()->userAgent(), \session('id'));
         return $this->success(true, 'PostEdited', 'برای نمایش اطلاعات جدید، لطفا صفحه را رفرش نمایید.');
     }
+
     public function getPostInfo(Request $request)
     {
         $postID = $request->input('id');
@@ -601,6 +610,7 @@ class PostController extends Controller
             return Post::find($postID);
         }
     }
+
     public function getParticipants(Request $request)
     {
         $postID = $request->input('id');
@@ -608,11 +618,13 @@ class PostController extends Controller
             return Participants::where('post_id', $postID)->get();
         }
     }
+
     public function showClassification()
     {
         $postList = Post::where('sorted', 0)->orderBy('festival_id', 'asc')->orderBy('title', 'asc')->get();
         return \view('Classification', ['postList' => $postList]);
     }
+
     public function deletePost(Request $request)
     {
         $postID = $request->input('id');
@@ -622,6 +634,7 @@ class PostController extends Controller
             $this->logActivity('Post Deleted =>' . $post->id, \request()->ip(), \request()->userAgent(), \session('id'));
         }
     }
+
     public function changeScientificGroup(Request $request)
     {
         $work = $request->input('work');
@@ -645,6 +658,7 @@ class PostController extends Controller
                 break;
         }
     }
+
     public function Classification(Request $request)
     {
         if ($request->hasFile('file_src')) {
@@ -672,10 +686,10 @@ class PostController extends Controller
             }
             $post->save();
 
-            $rateInfo=new RateInfo();
-            $rateInfo->post_id=$post->id;
-            if ($post->scientific_group_v2===null){
-                $rateInfo->sg2_form_type=null;
+            $rateInfo = new RateInfo();
+            $rateInfo->post_id = $post->id;
+            if ($post->scientific_group_v2 === null) {
+                $rateInfo->sg2_form_type = null;
             }
             $rateInfo->save();
         }
@@ -683,6 +697,7 @@ class PostController extends Controller
         $this->logActivity('Classification Done ', \request()->ip(), \request()->userAgent(), \session('id'));
         return $this->success(true, 'classificationSuccessful', 'برای نمایش اطلاعات جدید، لطفا صفحه را رفرش نمایید.');
     }
+
     public function index()
     {
         $postList = Post::orderBy('festival_id', 'asc')->orderBy('id', 'desc')->paginate(10);

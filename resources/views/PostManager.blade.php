@@ -1013,6 +1013,7 @@
                         <thead>
                         <tr class="bg-gradient-to-r from-blue-400 to-purple-500 items-center text-center text-white">
                             <th class=" px-6 py-3  font-bold ">ردیف</th>
+                            <th class=" px-6 py-3  font-bold ">کد اثر</th>
                             <th class=" px-6 py-3  font-bold ">جشنواره</th>
                             <th class=" px-6 py-3  font-bold ">نام اثر</th>
                             <th class=" px-3 py-3  font-bold ">قالب اثر</th>
@@ -1028,6 +1029,9 @@
                         @foreach ($postList as $post)
                             <tr class="bg-white">
                                 <td class="px-6 py-4">{{ $loop->iteration  }}</td>
+                                <td class="px-6 py-4">
+                                    {{ $post-> id }}
+                                </td>
                                 <td class="px-6 py-4">
                                     @php
                                         $festivalInfo=\App\Models\Catalogs\Festival::find($post->festival_id)
