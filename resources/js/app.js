@@ -1210,14 +1210,14 @@ $(document).ready(function () {
                 });
             });
             $('#search-title-Classification').on('input', function () {
-                var inputTitle = $('#search-title-Classification').val();
+                var Title = $('#search-title-Classification').val();
                 var SG1 = $('#search-SG1-Classification').val();
                 var SG2 = $('#search-SG2-Classification').val();
                 $.ajax({
                     url: '/Search',
                     type: 'GET',
                     data: {
-                        Title: inputTitle,
+                        Title: Title,
                         SG1: SG1,
                         SG2: SG2,
                         work: 'ClassificationSearch'
