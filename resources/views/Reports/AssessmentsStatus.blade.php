@@ -71,6 +71,8 @@
                                                     انتظار برای تایید انتقال به تفصیلی
                                                 @elseif( $rateInfo->rate_status=='RejectedSummary')
                                                     اجمالی ردی
+                                                @elseif( $rateInfo->rate_status=='Detailed')
+                                                    تفصیلی
                                                 @endif
                                             @endif
                                             @if($post->scientific_group_v2)
@@ -85,6 +87,8 @@
                                                         انتظار برای تایید انتقال به تفصیلی
                                                     @elseif( $rateInfo->rate_status=='RejectedSummary')
                                                         اجمالی ردی
+                                                    @elseif( $rateInfo->rate_status=='Detailed')
+                                                        تفصیلی
                                                     @endif
                                                 @endif
                                             @endif
