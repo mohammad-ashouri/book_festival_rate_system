@@ -52,6 +52,7 @@
                             <thead>
                             <tr class="bg-gradient-to-r from-blue-400 to-purple-500 items-center text-center text-white">
                                 <th class=" px-6 py-3  font-bold ">ردیف</th>
+                                <th class=" px-6 py-3  font-bold ">کد اثر</th>
                                 <th class=" px-6 py-3  font-bold ">نام اثر</th>
                                 <th class=" px-3 py-3  font-bold ">قالب اثر</th>
                                 <th class=" px-3 py-3  font-bold ">گروه علمی اول</th>
@@ -74,6 +75,7 @@
                             @foreach ($approvals as $post)
                                 <tr class="bg-white">
                                     <td class="px-6 py-4">{{ $loop->iteration  }}</td>
+                                    <td class="px-6 py-4">{{ $post->postInfo->id  }}</td>
                                     <td class="px-6 py-4">{{ $post->postInfo->title  }}</td>
                                     <td class="px-6 py-4">{{$post->postInfo->post_format  }}</td>
                                     <td class="px-3 py-4">
