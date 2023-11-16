@@ -137,19 +137,19 @@ class RateController extends Controller
                 $this->logActivity('S2G1 Rate Successfully Submitted =>' . $rateInfo->id, \request()->ip(), \request()->userAgent(), \session('id'));
                 break;
             case 's3g1':
-                $rateInfo->s3g1_status = 1;
+//                $rateInfo->s3g1_status = 1;
                 if ($rateInfo->s1g1_status == 1 and $rateInfo->s2g1_status == 1) {
                     $summaryS1G1 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's1g1')->first();
                     $summaryS2G1 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's2g1')->first();
                     $rateInfo->avg_sg1 = $sum + $summaryS1G1->sum + $summaryS2G1->sum;
                     if ($rateInfo->postInfo->scientific_group_v2 != null and $rateInfo->avg_sg2 != null) {
-                        if ($rateInfo->avg_sg2 >= 34 or $sum >= 34) {
+                        if ($rateInfo->avg_sg2 >= 34 or $rateInfo->avg_sg1 >= 34) {
                             $rateInfo->rate_status = 'Detailed';
                         } else {
                             $rateInfo->rate_status = 'RejectedSummary';
                         }
                     } elseif ($rateInfo->postInfo->scientific_group_v2 == null) {
-                        if ($sum >= 34) {
+                        if ($rateInfo->avg_sg1 >= 34) {
                             $rateInfo->rate_status = 'Detailed';
                         } else {
                             $rateInfo->rate_status = 'RejectedSummary';
@@ -208,9 +208,9 @@ class RateController extends Controller
                 break;
         }
         $rateInfo->save();
-        return response()->json([
-            'success' => true,
-            'redirect' => route('dashboard')
-        ]);
+//        return response()->json([
+//            'success' => true,
+//            'redirect' => route('dashboard')
+//        ]);
     }
 }
