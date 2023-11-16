@@ -106,6 +106,7 @@ class LoginController extends Controller
 
     public function logout()
     {
+        $this->logActivity('Logout With This Username => ' . \session('id'), request()->ip(), request()->userAgent());
         Auth::logout();
         return redirect()->route('login');
     }
