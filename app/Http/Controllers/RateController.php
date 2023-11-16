@@ -61,6 +61,7 @@ class RateController extends Controller
                 abort(403);
         }
     }
+
     public function setSummaryRate(Request $request)
     {
         $rate_info_id = $request->input('rateInfoID');
@@ -99,14 +100,14 @@ class RateController extends Controller
                     $summaryS3G1 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g1')->first();
                     $rateInfo->avg_sg1 = $sum + $summaryS2G1->sum + $summaryS3G1->sum;
                     if ($rateInfo->postInfo->scientific_group_v2 != null and $rateInfo->avg_sg2 != null) {
-                        if ($rateInfo->avg_sg2 >= 34 or $sum >= 34) {
-                            $rateInfo->rate_status = 'Pre Detailed';
+                        if ($rateInfo->avg_sg2 >= 34 or $rateInfo->avg_sg1 >= 34) {
+                            $rateInfo->rate_status = 'Detailed';
                         } else {
                             $rateInfo->rate_status = 'RejectedSummary';
                         }
                     } elseif ($rateInfo->postInfo->scientific_group_v2 == null) {
-                        if ($sum >= 34) {
-                            $rateInfo->rate_status = 'Pre Detailed';
+                        if ($rateInfo->avg_sg1 >= 34) {
+                            $rateInfo->rate_status = 'Detailed';
                         } else {
                             $rateInfo->rate_status = 'RejectedSummary';
                         }
@@ -121,13 +122,13 @@ class RateController extends Controller
                     $summaryS3G1 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g1')->first();
                     $rateInfo->avg_sg1 = $sum + $summaryS1G1->sum + $summaryS3G1->sum;
                     if ($rateInfo->postInfo->scientific_group_v2 != null and $rateInfo->avg_sg2 != null) {
-                        if ($rateInfo->avg_sg2 >= 34 or $sum >= 34) {
+                        if ($rateInfo->avg_sg2 >= 34 or $rateInfo->avg_sg1 >= 34) {
                             $rateInfo->rate_status = 'Detailed';
                         } else {
                             $rateInfo->rate_status = 'RejectedSummary';
                         }
                     } elseif ($rateInfo->postInfo->scientific_group_v2 == null) {
-                        if ($sum >= 34) {
+                        if ($rateInfo->avg_sg1 >= 34) {
                             $rateInfo->rate_status = 'Detailed';
                         } else {
                             $rateInfo->rate_status = 'RejectedSummary';
@@ -165,7 +166,7 @@ class RateController extends Controller
                     $summaryS3G2 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g2')->first();
                     $rateInfo->avg_sg2 = $sum + $summaryS2G2->sum + $summaryS3G2->sum;
                     if ($rateInfo->postInfo->scientific_group_v1 != null and $rateInfo->avg_sg1 != null) {
-                        if ($rateInfo->avg_sg1 >= 34 or $sum >= 34) {
+                        if ($rateInfo->avg_sg1 >= 34 or $rateInfo->avg_sg2 >= 34) {
                             $rateInfo->rate_status = 'Detailed';
                         } else {
                             $rateInfo->rate_status = 'RejectedSummary';
@@ -181,7 +182,7 @@ class RateController extends Controller
                     $summaryS3G2 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g2')->first();
                     $rateInfo->avg_sg2 = $sum + $summaryS1G2->sum + $summaryS3G2->sum;
                     if ($rateInfo->postInfo->scientific_group_v1 != null and $rateInfo->avg_sg1 != null) {
-                        if ($rateInfo->avg_sg1 >= 34 or $sum >= 34) {
+                        if ($rateInfo->avg_sg1 >= 34 or $rateInfo->avg_sg2 >= 34) {
                             $rateInfo->rate_status = 'Detailed';
                         } else {
                             $rateInfo->rate_status = 'RejectedSummary';
@@ -197,7 +198,7 @@ class RateController extends Controller
                     $summaryS2G2 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's2g2')->first();
                     $rateInfo->avg_sg2 = $sum + $summaryS1G2->sum + $summaryS2G2->sum;
                     if ($rateInfo->postInfo->scientific_group_v1 != null and $rateInfo->avg_sg1 != null) {
-                        if ($rateInfo->avg_sg1 >= 34 or $sum >= 34) {
+                        if ($rateInfo->avg_sg1 >= 34 or $rateInfo->avg_sg2 >= 34) {
                             $rateInfo->rate_status = 'Detailed';
                         } else {
                             $rateInfo->rate_status = 'RejectedSummary';
@@ -208,9 +209,9 @@ class RateController extends Controller
                 break;
         }
         $rateInfo->save();
-//        return response()->json([
-//            'success' => true,
-//            'redirect' => route('dashboard')
-//        ]);
+        return response()->json([
+            'success' => true,
+            'redirect' => route('dashboard')
+        ]);
     }
 }
