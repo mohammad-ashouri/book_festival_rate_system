@@ -90,13 +90,13 @@
                             $rater2=\App\Models\User::find($rateInfo->s2g1rater);
                             $rater3=\App\Models\User::find($rateInfo->s3g1rater);
                             if ($rater1){
-                            $summary1Info=\App\Models\Rates\SummaryRates::with('rateInfo')->where('rater',$rater1->id)->first();
+                            $summary1Info=\App\Models\Rates\SummaryRates::with('rateInfo')->where('rate_info_id',$rateInfo->id)->where('rater',$rater1->id)->first();
                             }
                             if ($rater2){
-                            $summary2Info=\App\Models\Rates\SummaryRates::with('rateInfo')->where('rater',$rater2->id)->first();
+                            $summary2Info=\App\Models\Rates\SummaryRates::with('rateInfo')->where('rate_info_id',$rateInfo->id)->where('rater',$rater2->id)->first();
                             }
                             if ($rater3){
-                            $summary3Info=\App\Models\Rates\SummaryRates::with('rateInfo')->where('rater',$rater3->id)->first();
+                            $summary3Info=\App\Models\Rates\SummaryRates::with('rateInfo')->where('rate_info_id',$rateInfo->id)->where('rater',$rater3->id)->first();
                             }
                         @endphp
                         @switch($rateInfo->sg1_form_type)
