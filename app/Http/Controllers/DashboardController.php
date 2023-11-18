@@ -126,7 +126,25 @@ class DashboardController extends Controller
                     ->get();
 
 
-                $detailedRates = RateInfo::where('rate_status', 'Detailed')->get();
+                $detailedRates = RateInfo::where('rate_status', 'Detailed')->with('postInfo')
+                    ->where(function ($query) {
+                        $query->where(function ($subquery) {
+                            $subquery
+                                ->where('d1rater', session('id'))
+                                ->where('d1_status', 0);
+                        })
+                            ->orWhere(function ($subquery) {
+                                $subquery
+                                    ->where('d2rater', session('id'))
+                                    ->where('d2_status', 0);
+                            })
+                            ->orWhere(function ($subquery) {
+                                $subquery
+                                    ->where('d3rater', session('id'))
+                                    ->where('d3_status', 0);
+                            });
+                    })
+                    ->get();
                 return view('Panels.Dashboards.Rater', compact('summaryRates', 'detailedRates'));
                 break;
             case 5:

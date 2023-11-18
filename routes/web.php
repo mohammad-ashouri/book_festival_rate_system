@@ -106,6 +106,8 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
             //Assessment Management
             Route::get('/SummaryAssessmentManager', [AssessmentRaterController::class, 'summaryAssessmentIndex']);
             Route::post('/SetSummaryRater', [AssessmentRaterController::class, 'setSummaryRater']);
+            Route::get('/DetailedAssessmentManager', [AssessmentRaterController::class, 'detailedAssessmentIndex']);
+            Route::post('/SetDetailedRater', [AssessmentRaterController::class, 'setDetailedRater']);
 
 
             //Reports Management
@@ -122,6 +124,8 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
         Route::group(['prefix' => 'Rate'], static function () {
             Route::get('/Summary/{id}', [RateController::class, 'summaryIndex']);
             Route::post('/setSummaryRate', [RateController::class, 'setSummaryRate']);
+            Route::get('/Detailed/{id}', [RateController::class, 'detailedIndex']);
+            Route::post('/setDetailedRate', [RateController::class, 'setDetailedRate']);
         });
 
     });

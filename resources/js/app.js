@@ -1566,6 +1566,29 @@ $(document).ready(function () {
                 });
             });
             break;
+        case '/DetailedAssessmentManager':
+            $('.SetDetailedRater').on('change', function (e) {
+                $.ajax({
+                    type: 'POST',
+                    url: '/SetDetailedRater',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    data: {
+                        PostID: $(this).data('postid'),
+                        work: $(this).data('work'),
+                        username: $(this).val(),
+                    },
+                    success: function (response) {
+                        if (response.errors) {
+                            if (response.errors.UsersAreEqual) {
+                                swalFire('ثبت نشد!', response.errors.UsersAreEqual[0], 'error', 'تلاش مجدد');
+                            }
+                        }
+                    }
+                });
+            });
+            break;
 
     }
 });

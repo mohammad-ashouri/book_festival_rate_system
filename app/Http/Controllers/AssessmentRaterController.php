@@ -38,8 +38,8 @@ class AssessmentRaterController extends Controller
                     ->paginate(10);
                 break;
         }
-        $userType=$userType->type;
-        return view('AssessmentFormApproval.HeaderApproval', compact('approvals','userType'));
+        $userType = $userType->type;
+        return view('AssessmentFormApproval.HeaderApproval', compact('approvals', 'userType'));
 
     }
 
@@ -73,7 +73,7 @@ class AssessmentRaterController extends Controller
                     case 'ترجمه':
                     case 'تصحیح و تحقیق':
                     case 'کتب مرجع':
-                        return $this->alerts(false, 'wrongGroup', 'گروه دوم این اثر نمی تواند '.$scientificGroupInfo->name.' باشد.');
+                        return $this->alerts(false, 'wrongGroup', 'گروه دوم این اثر نمی تواند ' . $scientificGroupInfo->name . ' باشد.');
                         break;
                     default:
                         if (!$request->input('scientific_group')) {
@@ -210,5 +210,60 @@ class AssessmentRaterController extends Controller
     {
         $summaries = RateInfo::with('postInfo')->where('rate_status', 'Summary')->where('sg1_form_type', '!=', 'Waiting For Header')->paginate(10);
         return view('SummaryAssessmentAdmin', compact('summaries'));
+    }
+
+    public function setDetailedRater(Request $request)
+    {
+        $rater = (integer)$request->username;
+        $PostID = (integer)$request->PostID;
+        if ($request->work) {
+            switch ($request->work) {
+                case 'ChangeRater1':
+                    $rateInfo = RateInfo::where('post_id', $PostID)->first();
+                    if (($rateInfo->d2rater == $rater and $rateInfo->d2rater != null) or ($rateInfo->d3rater == $rater and $rateInfo->d3rater != null)) {
+                        return $this->alerts(false, 'UsersAreEqual', 'ارزیابان نمی توانند با هم برابر باشند.');
+                    }
+                    if (!$rater) {
+                        $rater = null;
+                    }
+                    $rateInfo->d1rater = $rater;
+                    $rateInfo->d1_rater_set_date = now();
+                    $rateInfo->save();
+                    $this->logActivity('Detailed Rater1 Changed =>' . $rateInfo->id, \request()->ip(), \request()->userAgent(), \session('id'));
+                    break;
+                case 'ChangeRater2':
+                    $rateInfo = RateInfo::where('post_id', $PostID)->first();
+                    if (($rateInfo->d1rater == $rater and $rateInfo->d1rater != null) or ($rateInfo->d3rater == $rater and $rateInfo->d3rater != null)) {
+                        return $this->alerts(false, 'UsersAreEqual', 'ارزیابان نمی توانند با هم برابر باشند.');
+                    }
+                    if (!$rater) {
+                        $rater = null;
+                    }
+                    $rateInfo->d2rater = $rater;
+                    $rateInfo->d2_rater_set_date = now();
+                    $rateInfo->save();
+                    $this->logActivity('Detailed Rater2 Changed =>' . $rateInfo->id, \request()->ip(), \request()->userAgent(), \session('id'));
+                    break;
+                case 'ChangeRater3':
+                    $rateInfo = RateInfo::where('post_id', $PostID)->first();
+                    if (($rateInfo->d1rater == $rater and $rateInfo->d1rater != null) or ($rateInfo->d2rater == $rater and $rateInfo->d2rater != null)) {
+                        return $this->alerts(false, 'UsersAreEqual', 'ارزیابان نمی توانند با هم برابر باشند.');
+                    }
+                    if (!$rater) {
+                        $rater = null;
+                    }
+                    $rateInfo->d3rater = $rater;
+                    $rateInfo->d3_rater_set_date = now();
+                    $rateInfo->save();
+                    $this->logActivity('Detailed Rater3 Changed =>' . $rateInfo->id, \request()->ip(), \request()->userAgent(), \session('id'));
+                    break;
+            }
+        }
+    }
+
+    public function detailedAssessmentIndex()
+    {
+        $detailed = RateInfo::with('postInfo')->where('rate_status', 'Detailed')->paginate(10);
+        return view('DetailedAssessmentAdmin', compact('detailed'));
     }
 }

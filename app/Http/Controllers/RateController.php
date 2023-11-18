@@ -61,7 +61,6 @@ class RateController extends Controller
                 abort(403);
         }
     }
-
     public function setSummaryRate(Request $request)
     {
         $rate_info_id = $request->input('rateInfoID');
@@ -138,7 +137,7 @@ class RateController extends Controller
                 $this->logActivity('S2G1 Rate Successfully Submitted =>' . $rateInfo->id, \request()->ip(), \request()->userAgent(), \session('id'));
                 break;
             case 's3g1':
-//                $rateInfo->s3g1_status = 1;
+                $rateInfo->s3g1_status = 1;
                 if ($rateInfo->s1g1_status == 1 and $rateInfo->s2g1_status == 1) {
                     $summaryS1G1 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's1g1')->first();
                     $summaryS2G1 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's2g1')->first();
