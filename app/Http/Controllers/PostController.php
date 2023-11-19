@@ -308,7 +308,7 @@ class PostController extends Controller
             $participant->save();
         }
 
-        $this->logActivity('Post Added =>' . $Post->id, \request()->ip(), \request()->userAgent(), \session('id'));
+        $this->logActivity('Post Added', \request()->ip(), \request()->userAgent(), \session('id'), $Post->id);
         return $this->success(true, 'PostAdded', 'برای نمایش اطلاعات جدید، لطفا صفحه را رفرش نمایید.');
     }
 
@@ -599,7 +599,7 @@ class PostController extends Controller
             $participant->save();
         }
 
-        $this->logActivity('Post Edited =>' . $Post->id, \request()->ip(), \request()->userAgent(), \session('id'));
+        $this->logActivity('Post Edited', \request()->ip(), \request()->userAgent(), \session('id'), $Post->id);
         return $this->success(true, 'PostEdited', 'برای نمایش اطلاعات جدید، لطفا صفحه را رفرش نمایید.');
     }
 
@@ -607,6 +607,7 @@ class PostController extends Controller
     {
         $postID = $request->input('id');
         if ($postID) {
+            $this->logActivity('Getting Info', \request()->ip(), \request()->userAgent(), \session('id'), $postID);
             return Post::find($postID);
         }
     }
@@ -615,6 +616,7 @@ class PostController extends Controller
     {
         $postID = $request->input('id');
         if ($postID) {
+            $this->logActivity('Getting Participants', \request()->ip(), \request()->userAgent(), \session('id'), $postID);
             return Participants::where('post_id', $postID)->get();
         }
     }
@@ -622,6 +624,7 @@ class PostController extends Controller
     public function showClassification()
     {
         $postList = Post::where('sorted', 0)->orderBy('festival_id', 'asc')->orderBy('title', 'asc')->get();
+        $this->logActivity('Getting Classification Posts', \request()->ip(), \request()->userAgent(), \session('id'));
         return \view('Classification', ['postList' => $postList]);
     }
 
@@ -631,7 +634,7 @@ class PostController extends Controller
         if ($postID) {
             $post = Post::find($postID);
             $post->delete();
-            $this->logActivity('Post Deleted =>' . $post->id, \request()->ip(), \request()->userAgent(), \session('id'));
+            $this->logActivity('Post Deleted', \request()->ip(), \request()->userAgent(), \session('id'), $post->id);
         }
     }
 
@@ -646,7 +649,7 @@ class PostController extends Controller
                 $oldSG1 = $post->scientific_group_v1;
                 $post->scientific_group_v1 = $newSG1;
                 $post->save();
-                $this->logActivity('Scientific Group 1 Changed From => ' . $oldSG1 . ' To => ' . $newSG1, \request()->ip(), \request()->userAgent(), \session('id'));
+                $this->logActivity('Scientific Group 1 Changed From => ' . $oldSG1 . ' To => ' . $newSG1, \request()->ip(), \request()->userAgent(), \session('id'), $post->id);
                 break;
             case 'ChangeScientificGroup2':
                 $newSG2 = $request->input('newSG2');
@@ -654,7 +657,7 @@ class PostController extends Controller
                 $oldSG2 = $post->scientific_group_v2;
                 $post->scientific_group_v2 = $newSG2;
                 $post->save();
-                $this->logActivity('Scientific Group 2 Changed From => ' . $oldSG2 . ' To => ' . $newSG2, \request()->ip(), \request()->userAgent(), \session('id'));
+                $this->logActivity('Scientific Group 2 Changed From => ' . $oldSG2 . ' To => ' . $newSG2, \request()->ip(), \request()->userAgent(), \session('id'), $post->id);
                 break;
         }
     }
@@ -685,6 +688,7 @@ class PostController extends Controller
                 $post->sorting_classification_id = $SCFile->id;
             }
             $post->save();
+            $this->logActivity('Classification Done', \request()->ip(), \request()->userAgent(), \session('id'), $post->id);
 
             $rateInfo = new RateInfo();
             $rateInfo->post_id = $post->id;
@@ -692,9 +696,11 @@ class PostController extends Controller
                 $rateInfo->sg2_form_type = null;
             }
             $rateInfo->save();
+            $this->logActivity('Added To Rate Info Table', \request()->ip(), \request()->userAgent(), \session('id'), $post->id);
+
         }
 
-        $this->logActivity('Classification Done ', \request()->ip(), \request()->userAgent(), \session('id'));
+        $this->logActivity('Classification For All Posts Done', \request()->ip(), \request()->userAgent(), \session('id'));
         return $this->success(true, 'classificationSuccessful', 'برای نمایش اطلاعات جدید، لطفا صفحه را رفرش نمایید.');
     }
 

@@ -12,11 +12,12 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function logActivity($activity, $ip_address, $user_agent, $user_id = null)
+    public function logActivity($activity, $ip_address, $user_agent, $user_id = null, $post_id = null)
     {
         $agent = new Agent();
         ActivityLog::create([
             'user_id' => $user_id,
+            'post_id' => $post_id,
             'activity' => $activity,
             'ip_address' => $ip_address,
             'user_agent' => $user_agent,
@@ -24,7 +25,7 @@ class Controller extends BaseController
         ]);
     }
 
-    public function alerts($state,$errorVariable,$errorText)
+    public function alerts($state, $errorVariable, $errorText)
     {
         return response()->json([
             'success' => $state,
@@ -34,7 +35,7 @@ class Controller extends BaseController
         ]);
     }
 
-    public function success($state,$messageVariable,$messageText)
+    public function success($state, $messageVariable, $messageText)
     {
         return response()->json([
             'success' => $state,

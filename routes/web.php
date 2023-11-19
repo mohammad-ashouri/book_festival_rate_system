@@ -99,16 +99,16 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
             Route::post('/Classification', [PostController::class, 'Classification']);
             //End Classification Management
 
-            Route::get('/AssessmentFormApproval', [AssessmentRaterController::class, 'headerApprovalIndex']);
+            Route::get('/SummaryAssessmentFormApproval', [AssessmentRaterController::class, 'headerApprovalIndex']);
             Route::post('/ApprovePost', [AssessmentRaterController::class, 'headerApprove']);
-
+            Route::get('/DetailedAssessmentFormApproval', [AssessmentRaterController::class, 'detailedAssessmentFormApprovalIndex']);
+            Route::post('/DetailedAssessmentFormApproval', [AssessmentRaterController::class, 'detailedAssessmentFormApproval']);
 
             //Assessment Management
             Route::get('/SummaryAssessmentManager', [AssessmentRaterController::class, 'summaryAssessmentIndex']);
             Route::post('/SetSummaryRater', [AssessmentRaterController::class, 'setSummaryRater']);
             Route::get('/DetailedAssessmentManager', [AssessmentRaterController::class, 'detailedAssessmentIndex']);
             Route::post('/SetDetailedRater', [AssessmentRaterController::class, 'setDetailedRater']);
-
 
             //Reports Management
             Route::get('/AssessmentsStatus', [AssessmentsReport::class, 'allAssessmentReportIndex']);

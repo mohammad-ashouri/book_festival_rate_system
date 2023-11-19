@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('rate_status')->default('Summary');
             $table->string('sg1_form_type')->default('Waiting For Header');
             $table->string('sg2_form_type')->default('Waiting For Header')->nullable();
+            $table->string('d1_form_type')->default('Waiting For Admin')->nullable();
 
             $table->unsignedBigInteger('s1g1rater')->nullable()->comment('Ejmali1 Group1 Rater');
             $table->foreign('s1g1rater')->references('id')->on('users');

@@ -115,6 +115,7 @@ class AssessmentRaterController extends Controller
                 $headerComment->body = json_encode([$rateInfo->id, "The work related to the group is not present", $request->input('relation_with_summary_group'), $request->input('scientific_group')]);
                 break;
         }
+        $this->logActivity('Summary Assessment Approval Done', \request()->ip(), \request()->userAgent(), \session('id'), $rateInfo->post_id);
         $headerComment->save();
     }
 
@@ -135,7 +136,7 @@ class AssessmentRaterController extends Controller
                     $rateInfo->s1g1rater = $rater;
                     $rateInfo->s1g1_rater_set_date = now();
                     $rateInfo->save();
-                    $this->logActivity('Rater1 Group1 Changed =>' . $rateInfo->id, \request()->ip(), \request()->userAgent(), \session('id'));
+                    $this->logActivity('Rater1 Group1 Changed =>' . $rater, \request()->ip(), \request()->userAgent(), \session('id'), $PostID);
                     break;
                 case 'ChangeRater2Group1':
                     $rateInfo = RateInfo::where('post_id', $PostID)->first();
@@ -148,7 +149,7 @@ class AssessmentRaterController extends Controller
                     $rateInfo->s2g1rater = $rater;
                     $rateInfo->s2g1_rater_set_date = now();
                     $rateInfo->save();
-                    $this->logActivity('Rater2 Group1 Changed =>' . $rateInfo->id, \request()->ip(), \request()->userAgent(), \session('id'));
+                    $this->logActivity('Rater2 Group1 Changed =>' . $rater, \request()->ip(), \request()->userAgent(), \session('id'), $PostID);
                     break;
                 case 'ChangeRater3Group1':
                     $rateInfo = RateInfo::where('post_id', $PostID)->first();
@@ -161,7 +162,7 @@ class AssessmentRaterController extends Controller
                     $rateInfo->s3g1rater = $rater;
                     $rateInfo->s3g1_rater_set_date = now();
                     $rateInfo->save();
-                    $this->logActivity('Rater3 Group1 Changed =>' . $rateInfo->id, \request()->ip(), \request()->userAgent(), \session('id'));
+                    $this->logActivity('Rater3 Group1 Changed =>' . $rater, \request()->ip(), \request()->userAgent(), \session('id'), $PostID);
                     break;
                 case 'ChangeRater1Group2':
                     $rateInfo = RateInfo::where('post_id', $PostID)->first();
@@ -174,7 +175,7 @@ class AssessmentRaterController extends Controller
                     $rateInfo->s1g2rater = $rater;
                     $rateInfo->s1g2_rater_set_date = now();
                     $rateInfo->save();
-                    $this->logActivity('Rater1 Group2 Changed =>' . $rateInfo->id, \request()->ip(), \request()->userAgent(), \session('id'));
+                    $this->logActivity('Rater1 Group2 Changed =>' . $rater, \request()->ip(), \request()->userAgent(), \session('id'), $PostID);
                     break;
                 case 'ChangeRater2Group2':
                     $rateInfo = RateInfo::where('post_id', $PostID)->first();
@@ -187,7 +188,7 @@ class AssessmentRaterController extends Controller
                     $rateInfo->s2g2rater = $rater;
                     $rateInfo->s2g2_rater_set_date = now();
                     $rateInfo->save();
-                    $this->logActivity('Rater2 Group2 Changed =>' . $rateInfo->id, \request()->ip(), \request()->userAgent(), \session('id'));
+                    $this->logActivity('Rater2 Group2 Changed =>' . $rater, \request()->ip(), \request()->userAgent(), \session('id'), $PostID);
                     break;
                 case 'ChangeRater3Group2':
                     $rateInfo = RateInfo::where('post_id', $PostID)->first();
@@ -200,7 +201,7 @@ class AssessmentRaterController extends Controller
                     $rateInfo->s3g2rater = $rater;
                     $rateInfo->s3g2_rater_set_date = now();
                     $rateInfo->save();
-                    $this->logActivity('Rater3 Group2 Changed =>' . $rateInfo->id, \request()->ip(), \request()->userAgent(), \session('id'));
+                    $this->logActivity('Rater3 Group2 Changed =>' . $rater, \request()->ip(), \request()->userAgent(), \session('id'), $PostID);
                     break;
             }
         }
@@ -210,6 +211,32 @@ class AssessmentRaterController extends Controller
     {
         $summaries = RateInfo::with('postInfo')->where('rate_status', 'Summary')->where('sg1_form_type', '!=', 'Waiting For Header')->paginate(10);
         return view('SummaryAssessmentAdmin', compact('summaries'));
+    }
+
+    public function detailedAssessmentFormApprovalIndex()
+    {
+        $detailedAssessments = RateInfo::where('rate_status', 'Pre Detailed')->where('d1_form_type', 'Waiting For Admin')->with('postInfo')->get();
+        return view('AssessmentFormApproval.DetailedAssessmentFormApproval', compact('detailedAssessments'));
+    }
+
+    public function detailedAssessmentFormApproval(Request $request)
+    {
+        $postID = $request->input('PostID');
+        $form = $request->input('Form');
+        if (!$postID) {
+            return $this->alerts(false, 'NullPostID', 'کد اثر انتخاب نشده است.');
+        }
+        if (!$form) {
+            return $this->alerts(false, 'NullForm', 'فرم انتخاب نشده است.');
+        }
+        $rateInfo = RateInfo::find($postID);
+        $rateInfo->d1_form_type = $form;
+        $rateInfo->rate_status = 'Detailed';
+        if ($rateInfo->save()) {
+            $this->logActivity('Detailed Form Set =>' . $form . ' For Post By ID => ' . $postID, \request()->ip(), \request()->userAgent(), \session('id'), $rateInfo->post_id);
+        } else {
+            return $this->alerts(false, 'Error', 'خطای ناشناخته.');
+        }
     }
 
     public function setDetailedRater(Request $request)
@@ -229,7 +256,7 @@ class AssessmentRaterController extends Controller
                     $rateInfo->d1rater = $rater;
                     $rateInfo->d1_rater_set_date = now();
                     $rateInfo->save();
-                    $this->logActivity('Detailed Rater1 Changed =>' . $rateInfo->id, \request()->ip(), \request()->userAgent(), \session('id'));
+                    $this->logActivity('Detailed Rater1 Changed =>' . $rater, \request()->ip(), \request()->userAgent(), \session('id'), $rateInfo->post_id);
                     break;
                 case 'ChangeRater2':
                     $rateInfo = RateInfo::where('post_id', $PostID)->first();
@@ -242,7 +269,7 @@ class AssessmentRaterController extends Controller
                     $rateInfo->d2rater = $rater;
                     $rateInfo->d2_rater_set_date = now();
                     $rateInfo->save();
-                    $this->logActivity('Detailed Rater2 Changed =>' . $rateInfo->id, \request()->ip(), \request()->userAgent(), \session('id'));
+                    $this->logActivity('Detailed Rater2 Changed =>' . $rater, \request()->ip(), \request()->userAgent(), \session('id'), $rateInfo->post_id);
                     break;
                 case 'ChangeRater3':
                     $rateInfo = RateInfo::where('post_id', $PostID)->first();
@@ -255,7 +282,7 @@ class AssessmentRaterController extends Controller
                     $rateInfo->d3rater = $rater;
                     $rateInfo->d3_rater_set_date = now();
                     $rateInfo->save();
-                    $this->logActivity('Detailed Rater3 Changed =>' . $rateInfo->id, \request()->ip(), \request()->userAgent(), \session('id'));
+                    $this->logActivity('Detailed Rater3 Changed =>' . $rater, \request()->ip(), \request()->userAgent(), \session('id'), $rateInfo->post_id);
                     break;
             }
         }

@@ -14,6 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('post_id')->nullable();
+            $table->foreign('post_id')->references('id')->on('posts');
             $table->string('activity');
             $table->string('ip_address');
             $table->string('user_agent');
