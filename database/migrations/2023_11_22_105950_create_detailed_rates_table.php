@@ -16,8 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('rate_info_id');
             $table->foreign('rate_info_id')->references('id')->on('rate_infos');
             $table->json('points_info');
-            $table->unsignedBigInteger('special_section')->nullable();
-            $table->foreign('special_section')->references('id')->on('special_sections');
+            $table->string('special_section')->nullable();
             $table->unsignedBigInteger('rater');
             $table->string('rate_type');
             $table->foreign('rater')->references('id')->on('users');

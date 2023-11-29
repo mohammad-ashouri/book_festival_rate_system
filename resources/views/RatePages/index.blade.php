@@ -432,7 +432,7 @@
                                     محور ویژه را در صورت نیاز تعیین نمایید:
                                 </label>
                                 <select id="special_section" class="border rounded-md w-56 px-3 py-2 text-right"
-                                        name="special_section">
+                                        name="special_section[]">
                                     @foreach($specialSections as $section)
                                         <option value="{{ $section->id }}">{{ $section->name }}</option>
                                     @endforeach

@@ -91,7 +91,7 @@
     </tr>
     <tr class="items-center text-center ">
         <td class="px-6 py-1 bg-gray-300" colspan="4">
-            <textarea name="r2_description" id="r1_description"
+            <textarea name="r2_description" id="r2_description"
                       placeholder="توضیحات و دلایل خود را در مورد موضوع بالا قید کنید."
                       class="border rounded-md w-full px-3 py-2"></textarea>
         </td>
@@ -758,7 +758,7 @@
             swalFire('خطا!', 'امتیاز ردیف اول وارد نشده است.', 'error', 'تلاش مجدد');
         } else if (r1_point.value < 0 || r1_point.value > 6) {
             swalFire('خطا!', 'امتیاز ردیف اول اشتباه وارد شده است.', 'error', 'تلاش مجدد');
-        } else if (r1_description.value == null || r1_description.value == '') {
+        } else if (r1_description.value == null) {
             swalFire('خطا!', 'توضیحات ردیف اول وارد نشده است.', 'error', 'تلاش مجدد');
         } else if (r2_point.value === '') {
             swalFire('خطا!', 'امتیاز ردیف دوم وارد نشده است.', 'error', 'تلاش مجدد');
