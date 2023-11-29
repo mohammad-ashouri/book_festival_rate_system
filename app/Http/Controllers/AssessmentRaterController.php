@@ -215,7 +215,7 @@ class AssessmentRaterController extends Controller
 
     public function detailedAssessmentFormApprovalIndex()
     {
-        $detailedAssessments = RateInfo::where('rate_status', 'Pre Detailed')->where('d1_form_type', 'Waiting For Admin')->with('postInfo')->get();
+        $detailedAssessments = RateInfo::where('rate_status', 'Pre Detailed')->where('d_form_type', 'Waiting For Admin')->with('postInfo')->get();
         return view('AssessmentFormApproval.DetailedAssessmentFormApproval', compact('detailedAssessments'));
     }
 
@@ -230,7 +230,7 @@ class AssessmentRaterController extends Controller
             return $this->alerts(false, 'NullForm', 'فرم انتخاب نشده است.');
         }
         $rateInfo = RateInfo::find($postID);
-        $rateInfo->d1_form_type = $form;
+        $rateInfo->d_form_type = $form;
         $rateInfo->rate_status = 'Detailed';
         if ($rateInfo->save()) {
             $this->logActivity('Detailed Form Set =>' . $form . ' For Post By ID => ' . $postID, \request()->ip(), \request()->userAgent(), \session('id'), $rateInfo->post_id);

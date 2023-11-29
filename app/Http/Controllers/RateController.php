@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RateInfo;
-use App\Models\Rates\SummaryRates;
+use App\Models\Rates\SummaryRate;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -79,7 +79,7 @@ class RateController extends Controller
             $r4 = 0;
         }
 
-        $summaryRate = new SummaryRates();
+        $summaryRate = new SummaryRate();
         $summaryRate->rate_info_id = $rate_info_id;
         $summaryRate->r1 = $r1;
         $summaryRate->r2 = $r2;
@@ -97,8 +97,8 @@ class RateController extends Controller
             case 's1g1':
                 $rateInfo->s1g1_status = 1;
                 if ($rateInfo->s2g1_status == 1 and $rateInfo->s3g1_status == 1) {
-                    $summaryS2G1 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's2g1')->first();
-                    $summaryS3G1 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g1')->first();
+                    $summaryS2G1 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's2g1')->first();
+                    $summaryS3G1 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g1')->first();
                     $rateInfo->avg_sg1 = $sum + $summaryS2G1->sum + $summaryS3G1->sum;
                     if ($rateInfo->postInfo->scientific_group_v2 != null and $rateInfo->avg_sg2 != null) {
                         if ($rateInfo->avg_sg2 >= 34 or $rateInfo->avg_sg1 >= 34) {
@@ -119,8 +119,8 @@ class RateController extends Controller
             case 's2g1':
                 $rateInfo->s2g1_status = 1;
                 if ($rateInfo->s1g1_status == 1 and $rateInfo->s3g1_status == 1) {
-                    $summaryS1G1 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's1g1')->first();
-                    $summaryS3G1 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g1')->first();
+                    $summaryS1G1 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's1g1')->first();
+                    $summaryS3G1 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g1')->first();
                     $rateInfo->avg_sg1 = $sum + $summaryS1G1->sum + $summaryS3G1->sum;
                     if ($rateInfo->postInfo->scientific_group_v2 != null and $rateInfo->avg_sg2 != null) {
                         if ($rateInfo->avg_sg2 >= 34 or $rateInfo->avg_sg1 >= 34) {
@@ -141,8 +141,8 @@ class RateController extends Controller
             case 's3g1':
                 $rateInfo->s3g1_status = 1;
                 if ($rateInfo->s1g1_status == 1 and $rateInfo->s2g1_status == 1) {
-                    $summaryS1G1 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's1g1')->first();
-                    $summaryS2G1 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's2g1')->first();
+                    $summaryS1G1 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's1g1')->first();
+                    $summaryS2G1 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's2g1')->first();
                     $rateInfo->avg_sg1 = $sum + $summaryS1G1->sum + $summaryS2G1->sum;
                     if ($rateInfo->postInfo->scientific_group_v2 != null and $rateInfo->avg_sg2 != null) {
                         if ($rateInfo->avg_sg2 >= 34 or $rateInfo->avg_sg1 >= 34) {
@@ -163,8 +163,8 @@ class RateController extends Controller
             case 's1g2':
                 $rateInfo->s1g2_status = 1;
                 if ($rateInfo->s2g2_status == 1 and $rateInfo->s3g2_status == 1) {
-                    $summaryS2G2 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's2g2')->first();
-                    $summaryS3G2 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g2')->first();
+                    $summaryS2G2 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's2g2')->first();
+                    $summaryS3G2 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g2')->first();
                     $rateInfo->avg_sg2 = $sum + $summaryS2G2->sum + $summaryS3G2->sum;
                     if ($rateInfo->postInfo->scientific_group_v1 != null and $rateInfo->avg_sg1 != null) {
                         if ($rateInfo->avg_sg1 != null) {
@@ -181,8 +181,8 @@ class RateController extends Controller
             case 's2g2':
                 $rateInfo->s2g2_status = 1;
                 if ($rateInfo->s1g2_status == 1 and $rateInfo->s3g2_status == 1) {
-                    $summaryS1G2 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's1g2')->first();
-                    $summaryS3G2 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g2')->first();
+                    $summaryS1G2 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's1g2')->first();
+                    $summaryS3G2 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g2')->first();
                     $rateInfo->avg_sg2 = $sum + $summaryS1G2->sum + $summaryS3G2->sum;
                     if ($rateInfo->postInfo->scientific_group_v1 != null and $rateInfo->avg_sg1 != null) {
                         if ($rateInfo->avg_sg1 != null) {
@@ -199,8 +199,8 @@ class RateController extends Controller
             case 's3g2':
                 $rateInfo->s3g2_status = 1;
                 if ($rateInfo->s1g2_status == 1 and $rateInfo->s2g2_status == 1) {
-                    $summaryS1G2 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's1g2')->first();
-                    $summaryS2G2 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's2g2')->first();
+                    $summaryS1G2 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's1g2')->first();
+                    $summaryS2G2 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's2g2')->first();
                     $rateInfo->avg_sg2 = $sum + $summaryS1G2->sum + $summaryS2G2->sum;
                     if ($rateInfo->postInfo->scientific_group_v1 != null and $rateInfo->avg_sg1 != null) {
                         if ($rateInfo->avg_sg1 != null) {
@@ -255,7 +255,8 @@ class RateController extends Controller
                     ->first();
                 if ($rateInfo->count() > 0) {
                     $assessmentStatus = 'Detailed';
-                    return view('RatePages.index', compact('rateInfo', 'assessmentStatus'));
+                    $specialSections=\App\Models\Catalogs\SpecialSection::where('active',1)->orderBy('name','asc')->get();
+                    return view('RatePages.index', compact('rateInfo', 'assessmentStatus','specialSections'));
                 }
                 abort(403);
         }
@@ -277,7 +278,7 @@ class RateController extends Controller
             $r4 = 0;
         }
 
-        $summaryRate = new SummaryRates();
+        $summaryRate = new SummaryRate();
         $summaryRate->rate_info_id = $rate_info_id;
         $summaryRate->r1 = $r1;
         $summaryRate->r2 = $r2;
@@ -295,8 +296,8 @@ class RateController extends Controller
             case 's1g1':
                 $rateInfo->s1g1_status = 1;
                 if ($rateInfo->s2g1_status == 1 and $rateInfo->s3g1_status == 1) {
-                    $summaryS2G1 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's2g1')->first();
-                    $summaryS3G1 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g1')->first();
+                    $summaryS2G1 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's2g1')->first();
+                    $summaryS3G1 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g1')->first();
                     $rateInfo->avg_sg1 = $sum + $summaryS2G1->sum + $summaryS3G1->sum;
                     if ($rateInfo->postInfo->scientific_group_v2 != null and $rateInfo->avg_sg2 != null) {
                         if ($rateInfo->avg_sg2 >= 34 or $rateInfo->avg_sg1 >= 34) {
@@ -317,8 +318,8 @@ class RateController extends Controller
             case 's2g1':
                 $rateInfo->s2g1_status = 1;
                 if ($rateInfo->s1g1_status == 1 and $rateInfo->s3g1_status == 1) {
-                    $summaryS1G1 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's1g1')->first();
-                    $summaryS3G1 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g1')->first();
+                    $summaryS1G1 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's1g1')->first();
+                    $summaryS3G1 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g1')->first();
                     $rateInfo->avg_sg1 = $sum + $summaryS1G1->sum + $summaryS3G1->sum;
                     if ($rateInfo->postInfo->scientific_group_v2 != null and $rateInfo->avg_sg2 != null) {
                         if ($rateInfo->avg_sg2 >= 34 or $rateInfo->avg_sg1 >= 34) {
@@ -339,8 +340,8 @@ class RateController extends Controller
             case 's3g1':
                 $rateInfo->s3g1_status = 1;
                 if ($rateInfo->s1g1_status == 1 and $rateInfo->s2g1_status == 1) {
-                    $summaryS1G1 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's1g1')->first();
-                    $summaryS2G1 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's2g1')->first();
+                    $summaryS1G1 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's1g1')->first();
+                    $summaryS2G1 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's2g1')->first();
                     $rateInfo->avg_sg1 = $sum + $summaryS1G1->sum + $summaryS2G1->sum;
                     if ($rateInfo->postInfo->scientific_group_v2 != null and $rateInfo->avg_sg2 != null) {
                         if ($rateInfo->avg_sg2 >= 34 or $rateInfo->avg_sg1 >= 34) {
@@ -361,8 +362,8 @@ class RateController extends Controller
             case 's1g2':
                 $rateInfo->s1g2_status = 1;
                 if ($rateInfo->s2g2_status == 1 and $rateInfo->s3g2_status == 1) {
-                    $summaryS2G2 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's2g2')->first();
-                    $summaryS3G2 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g2')->first();
+                    $summaryS2G2 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's2g2')->first();
+                    $summaryS3G2 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g2')->first();
                     $rateInfo->avg_sg2 = $sum + $summaryS2G2->sum + $summaryS3G2->sum;
                     if ($rateInfo->postInfo->scientific_group_v1 != null and $rateInfo->avg_sg1 != null) {
                         if ($rateInfo->avg_sg1 >= 34 or $rateInfo->avg_sg2 >= 34) {
@@ -377,8 +378,8 @@ class RateController extends Controller
             case 's2g2':
                 $rateInfo->s2g2_status = 1;
                 if ($rateInfo->s1g2_status == 1 and $rateInfo->s3g2_status == 1) {
-                    $summaryS1G2 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's1g2')->first();
-                    $summaryS3G2 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g2')->first();
+                    $summaryS1G2 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's1g2')->first();
+                    $summaryS3G2 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g2')->first();
                     $rateInfo->avg_sg2 = $sum + $summaryS1G2->sum + $summaryS3G2->sum;
                     if ($rateInfo->postInfo->scientific_group_v1 != null and $rateInfo->avg_sg1 != null) {
                         if ($rateInfo->avg_sg1 >= 34 or $rateInfo->avg_sg2 >= 34) {
@@ -393,8 +394,8 @@ class RateController extends Controller
             case 's3g2':
                 $rateInfo->s3g2_status = 1;
                 if ($rateInfo->s1g2_status == 1 and $rateInfo->s2g2_status == 1) {
-                    $summaryS1G2 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's1g2')->first();
-                    $summaryS2G2 = SummaryRates::where('rate_info_id', $rate_info_id)->where('rate_type', 's2g2')->first();
+                    $summaryS1G2 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's1g2')->first();
+                    $summaryS2G2 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's2g2')->first();
                     $rateInfo->avg_sg2 = $sum + $summaryS1G2->sum + $summaryS2G2->sum;
                     if ($rateInfo->postInfo->scientific_group_v1 != null and $rateInfo->avg_sg1 != null) {
                         if ($rateInfo->avg_sg1 >= 34 or $rateInfo->avg_sg2 >= 34) {

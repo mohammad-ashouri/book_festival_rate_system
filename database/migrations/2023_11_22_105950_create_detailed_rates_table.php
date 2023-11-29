@@ -11,19 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('summary_rates', function (Blueprint $table) {
+        Schema::create('detailed_rates', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('rate_info_id');
             $table->foreign('rate_info_id')->references('id')->on('rate_infos');
-            $table->float('r1');
-            $table->float('r2');
-            $table->float('r3');
-            $table->float('r4')->nullable();
-            $table->float('sum');
+            $table->json('points_info');
             $table->unsignedBigInteger('special_section')->nullable();
             $table->foreign('special_section')->references('id')->on('special_sections');
-            $table->string('rate_type');
             $table->unsignedBigInteger('rater');
+            $table->string('rate_type');
             $table->foreign('rater')->references('id')->on('users');
             $table->unsignedBigInteger('editor')->nullable();
             $table->foreign('editor')->references('id')->on('users');
@@ -37,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('summary_rates');
+        Schema::dropIfExists('detailed_rates');
     }
 };

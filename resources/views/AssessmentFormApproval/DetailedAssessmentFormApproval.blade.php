@@ -99,7 +99,6 @@
                                                         <option value="کتابشناسی و فهرست نگاری">کتابشناسی و فهرست نگاری</option>
                                                         <option value="داستان جوان">داستان جوان</option>
                                                         <option value="ادبیات کودک و نوجوان">ادبیات کودک و نوجوان</option>
-                                                        <option value="ادبیات کودک و نوجوان">ادبیات کودک و نوجوان</option>
                                                     @endif
                                                     <option value="ترجمه">ترجمه</option>
                                                 </select>
