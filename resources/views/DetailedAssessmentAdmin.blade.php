@@ -93,7 +93,7 @@
                                                 ->get();
                                             @endphp
                                             @foreach($raters as $rater)
-                                                <option @if ( $rater->id==$post->r2rater ) selected
+                                                <option @if ( $rater->id==$post->d2rater ) selected
                                                         @endif
                                                         value="{{ $rater->id }}">{{ $rater->name . ' ' . $rater->family }}</option>
                                             @endforeach
@@ -118,7 +118,7 @@
                                                 ->get();
                                             @endphp
                                             @foreach($raters as $rater)
-                                                <option @if ( $rater->id==$post->r3rater ) selected
+                                                <option @if ( $rater->id==$post->d3rater ) selected
                                                         @endif
                                                         value="{{ $rater->id }}">{{ $rater->name . ' ' . $rater->family }}</option>
                                             @endforeach

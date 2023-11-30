@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('rate_info_id')->references('id')->on('rate_infos');
             $table->json('points_info');
             $table->string('special_section')->nullable();
+            $table->float('sum');
             $table->unsignedBigInteger('rater');
             $table->string('rate_type');
             $table->foreign('rater')->references('id')->on('users');

@@ -73,6 +73,12 @@
                                                     اجمالی ردی
                                                 @elseif( $rateInfo->rate_status=='Detailed')
                                                     تفصیلی
+                                                @elseif( $rateInfo->rate_status=='Detailed rejected')
+                                                    تفصیلی ردی
+                                                @elseif( $rateInfo->rate_status=='Formal literary')
+                                                    ادبی صوری
+                                                @elseif( $rateInfo->rate_status=='Committee')
+                                                    ارسال شده به هیئت داوری
                                                 @endif
                                             @endif
                                             @if($post->scientific_group_v2)
@@ -89,6 +95,12 @@
                                                         اجمالی ردی
                                                     @elseif( $rateInfo->rate_status=='Detailed')
                                                         تفصیلی
+                                                    @elseif( $rateInfo->rate_status=='Detailed rejected')
+                                                        تفصیلی ردی
+                                                    @elseif( $rateInfo->rate_status=='Formal literary')
+                                                        ادبی صوری
+                                                    @elseif( $rateInfo->rate_status=='Committee')
+                                                        ارسال شده به هیئت داوری
                                                     @endif
                                                 @endif
                                             @endif

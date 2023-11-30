@@ -876,7 +876,6 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                         },
                         success: function (response) {
-                            console.log(response);
                             if (response.errors) {
                                 if (response.errors.nullID) {
                                     swalFire('خطا!', response.errors.nullID[0], 'error', 'تلاش مجدد');

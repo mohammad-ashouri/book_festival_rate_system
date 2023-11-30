@@ -265,27 +265,179 @@ class RateController extends Controller
 
     public function setDetailedRate(Request $request)
     {
+        $sum = 0;
+        $inputData = $request->all();
         $detailedForm = new DetailedRate();
         $detailedForm->rate_info_id = $request->input('rateInfoID');
         $detailedForm->rate_type = $request->input('rateType');
         $detailedForm->rater = session('id');
-        $detailedForm->points_info = json_encode($request->all());
+        $detailedForm->points_info = json_encode($inputData);
         $detailedForm->special_section = implode('|', $request->input('special_section'));
-        $detailedForm->save();
 
-        $rateInfo=RateInfo::find($detailedForm->post_id);
-        switch ($detailedForm->rate_info_id){
+        $keysWithPoints = array_filter(array_keys($inputData), function ($key) {
+            return strpos($key, 'point') !== false;
+        });
+        foreach ($keysWithPoints as $keys) {
+            $sum = $request->input($keys) + $sum;
+        }
+        $detailedForm->sum = $sum;
+
+        $rateInfo = RateInfo::find($detailedForm->rate_info_id);
+        switch ($rateInfo->postInfo->personInfo->gender) {
+            case 'مرد':
+                $maxPoint = 75;
+                break;
+            case 'زن':
+                $maxPoint = 70;
+                break;
+        }
+        switch ($detailedForm->rate_type) {
             case 'd1':
-                $rateInfo->d1_status=1;
+                $rateInfo->d1_status = 1;
+                if ($rateInfo->d2_status == 1) {
+                    $detailedRate2 = DetailedRate::where('rate_type', 'd2')->pluck('sum')->first();
+                    $avg = ($sum + $detailedRate2) / 2;
+                    switch ($rateInfo->postInfo->personInfo->gender) {
+                        case 'مرد':
+                            if ($avg >= $maxPoint) {
+                                $status = 'Third detailed';
+                            } elseif ($avg >= 75 and $avg < $maxPoint) {
+                                if (abs($sum - $detailedRate2) >= 12) {
+                                    $status = 'Third detailed';
+                                } else {
+                                    $status = 'Detailed rejected';
+                                }
+                            } else {
+                                $status = 'Detailed rejected';
+                            }
+
+                            if ($status === 'Detailed rejected') {
+                                $rateInfo->grade = $avg;
+                                $rateInfo->rate_status = $status;
+                            } else {
+                                $rateInfo->rate_status = $status;
+                            }
+                            break;
+                        case 'زن':
+                            if ($avg >= $maxPoint) {
+                                $status = 'Third detailed';
+                            } elseif ($avg >= 70 and $avg < $maxPoint) {
+                                if (abs($sum - $detailedRate2) >= 12) {
+                                    $status = 'Third detailed';
+                                } else {
+                                    $status = 'Detailed rejected';
+                                }
+                            } else {
+                                $status = 'Detailed rejected';
+                            }
+
+                            if ($status === 'Detailed rejected') {
+                                $rateInfo->grade = $avg;
+                                $rateInfo->rate_status = $status;
+                            } else {
+                                $rateInfo->rate_status = $status;
+                            }
+                            break;
+                    }
+                }
                 break;
             case 'd2':
-                $rateInfo->d2_status=1;
+                $rateInfo->d2_status = 1;
+                if ($rateInfo->d1_status == 1) {
+                    $detailedRate1 = DetailedRate::where('rate_type', 'd1')->pluck('sum')->first();
+                    $avg = ($sum + $detailedRate1) / 2;
+                    switch ($rateInfo->postInfo->personInfo->gender) {
+                        case 'مرد':
+                            if ($avg >= $maxPoint) {
+                                $status = 'Third detailed';
+                            } elseif ($avg >= 75 and $avg < $maxPoint) {
+                                if (abs($sum - $detailedRate1) >= 12) {
+                                    $status = 'Third detailed';
+                                } else {
+                                    $status = 'Detailed rejected';
+                                }
+                            } else {
+                                $status = 'Detailed rejected';
+                            }
+
+                            if ($status === 'Detailed rejected') {
+                                $rateInfo->grade = $avg;
+                                $rateInfo->rate_status = $status;
+                            } else {
+                                $rateInfo->rate_status = $status;
+                            }
+                            break;
+                        case 'زن':
+                            if ($avg >= $maxPoint) {
+                                $status = 'Third detailed';
+                            } elseif ($avg >= 70 and $avg < $maxPoint) {
+                                if (abs($sum - $detailedRate1) >= 12) {
+                                    $status = 'Third detailed';
+                                } else {
+                                    $status = 'Detailed rejected';
+                                }
+                            } else {
+                                $status = 'Detailed rejected';
+                            }
+
+                            if ($status === 'Detailed rejected') {
+                                $rateInfo->grade = $avg;
+                                $rateInfo->rate_status = $status;
+                            } else {
+                                $rateInfo->rate_status = $status;
+                            }
+                            break;
+                    }
+                }
                 break;
             case 'd3':
-                $rateInfo->d3_status=1;
+                $rateInfo->d3_status = 1;
+                $detailedRate1 = DetailedRate::where('rate_type', 'd1')->pluck('sum')->first();
+                $detailedRate2 = DetailedRate::where('rate_type', 'd2')->pluck('sum')->first();
+                if ($detailedRate1 >= $maxPoint and $detailedRate2 >= $maxPoint and $sum >= $maxPoint) {
+                    $finalAVG = ($sum + $detailedRate1 + $detailedRate2) / 3;
+                } elseif ((abs($sum - $detailedRate1) >= 12) and (abs($sum - $detailedRate2) >= 12) and (abs($detailedRate1 - $detailedRate2) >= 12)) {
+                    $finalAVG = ($sum + $detailedRate1 + $detailedRate2) / 3;
+                } elseif ((abs($sum - $detailedRate1) >= 12) or (abs($sum - $detailedRate2) >= 12)) {
+                    $difference3v1 = abs($sum - $detailedRate1);
+                    $difference3v2 = abs($sum - $detailedRate2);
+                    $difference1v2 = abs($detailedRate1 - $detailedRate2);
+                    if ($difference1v2 < 12 and ($detailedRate1 + $detailedRate2 / 2) >= $maxPoint) {
+                        $finalAVG = ($detailedRate1 + $detailedRate2) / 2;
+                    } else {
+                        if ($difference3v1 > $difference3v2) {
+                            $finalAVG = ($sum + $detailedRate2) / 2;
+                        } elseif ($difference3v1 < $difference3v2) {
+                            $finalAVG = ($sum + $detailedRate1) / 2;
+                        } elseif ($difference3v1 == $difference3v2) {
+                            $finalAVG = ($sum + $detailedRate1) / 2;
+                        }
+                    }
+                } elseif ((abs($sum - $detailedRate1) < 12) or (abs($sum - $detailedRate2) < 12)) {
+                    $finalAVG = ($sum + $detailedRate1 + $detailedRate2) / 3;
+                }
+
+                switch ($rateInfo->d_form_type) {
+                    case 'پایان نامه':
+                    case 'ترجمه':
+                    case 'تصحیح و تحقیق':
+                    case 'کتابشناسی و فهرست نگاری':
+                    case 'داستان جوان':
+                    case 'ادبیات کودک و نوجوان':
+                        if ($finalAVG >= $maxPoint) {
+                            $rateInfo->rate_status = 'Committee';
+                            $rateInfo->grade = $finalAVG;
+                        } elseif ($finalAVG < $maxPoint) {
+                            $rateInfo->rate_status = 'Detailed rejected';
+                        }
+                        break;
+                    default:
+                        $rateInfo->rate_status = 'Formal literary';
+                }
                 break;
         }
         $rateInfo->save();
+        $detailedForm->save();
         return response()->json([
             'success' => true,
             'redirect' => route('dashboard')
