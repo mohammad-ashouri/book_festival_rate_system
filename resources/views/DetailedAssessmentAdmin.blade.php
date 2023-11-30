@@ -5,7 +5,7 @@
         <div class="mx-auto lg:mr-72">
             <h1 class="text-2xl font-bold mb-4">اختصاص اثر به ارزیاب تفصیلی</h1>
             <div class="bg-white rounded shadow p-6">
-                @if($detailed)
+                @if($detailed->count()>0)
                     <table class="w-full border-collapse rounded-lg overflow-hidden text-center">
                         <thead>
                         <tr class="bg-gradient-to-r from-blue-400 to-purple-500 items-center text-center text-white">
@@ -130,7 +130,7 @@
                         </tbody>
                     </table>
                 @else
-                    nothing to show
+                    اثری برای ارزیابی وجود ندارد
                 @endif
             </div>
             <div dir="ltr" class="mt-4 flex justify-center" id="laravel-next-prev">
