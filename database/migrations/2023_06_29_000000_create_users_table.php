@@ -40,6 +40,7 @@ return new class extends Migration {
                   ('ارزیاب', 'دوم', 'test2','$password',4,'ارزیاب',1,0),
                   ('ارزیاب', 'سوم', 'test3','$password',4,'ارزیاب',1,0),
                   ('مدیر گروه', 'تست', 'htest','$password',3,'مدیر گروه',1,0),
+                  ('علی', 'مرادی', 'moradi','$password',5,'کارشناس گونه بندی',1,0),
                   ('عباس', 'اکبرپور', 'akbarpour','$password',1,'ادمین کل',1,0)
                 ";
         DB::statement($query);
