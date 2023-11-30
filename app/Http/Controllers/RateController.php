@@ -438,6 +438,7 @@ class RateController extends Controller
         }
         $rateInfo->save();
         $detailedForm->save();
+        $this->logActivity('Detailed rate set', \request()->ip(), \request()->userAgent(), \session('id'), $rateInfo->postInfo->post_id);
         return response()->json([
             'success' => true,
             'redirect' => route('dashboard')
