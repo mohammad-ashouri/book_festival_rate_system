@@ -88,7 +88,7 @@
     </tr>
     <tr class="items-center text-center ">
         <td class="px-6 py-1 bg-gray-300" colspan="4">
-            <textarea name="r2_description" id="r1_description"
+            <textarea name="r2_description" id="r2_description"
                       placeholder="توضیحات و دلایل خود را در مورد موضوع بالا قید کنید."
                       class="border rounded-md w-full px-3 py-2"></textarea>
         </td>
