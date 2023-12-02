@@ -15,19 +15,27 @@ class ClassificationController extends Controller
     {
         $postList = Post::where('sorted', 0)->orderBy('festival_id', 'asc')->orderBy('title', 'asc')->get();
         $this->logActivity('Getting Classification Posts', \request()->ip(), \request()->userAgent(), \session('id'));
-        $type=User::where('id',session('id'))->pluck('type')->first();
-        return \view('Classification', ['postList' => $postList, 'type'=>$type]);
+        $type = User::where('id', session('id'))->pluck('type')->first();
+        return \view('Classification', ['postList' => $postList, 'type' => $type]);
     }
+
     public function changeScientificGroup(Request $request)
     {
         $work = $request->input('work');
         $postID = $request->input('PostID');
+        $me = User::find(session('id'));
         switch ($work) {
             case 'ChangeScientificGroup1':
                 $newSG1 = $request->input('newSG1');
                 $post = Post::find($postID);
+                if ($post->scientific_group_v2==$newSG1){
+                    return $this->alerts(false, 'sameWithSG2', 'گروه علمی انتخاب شده با گروه علمی دوم برابر می باشد.');
+                }
                 $oldSG1 = $post->scientific_group_v1;
                 $post->scientific_group_v1 = $newSG1;
+                if ($me->type != 2 and $me->type != 1) {
+                    $post->sorter = session('id');
+                }
                 $post->save();
                 $this->logActivity('Scientific Group 1 Changed From => ' . $oldSG1 . ' To => ' . $newSG1, \request()->ip(), \request()->userAgent(), \session('id'), $post->id);
                 break;
@@ -35,7 +43,13 @@ class ClassificationController extends Controller
                 $newSG2 = $request->input('newSG2');
                 $post = Post::find($postID);
                 $oldSG2 = $post->scientific_group_v2;
+                if ($post->scientific_group_v1==$newSG2){
+                    return $this->alerts(false, 'sameWithSG1', 'گروه علمی انتخاب شده با گروه علمی اول برابر می باشد.');
+                }
                 $post->scientific_group_v2 = $newSG2;
+                if ($me->type != 2 and $me->type != 1) {
+                    $post->sorter = session('id');
+                }
                 $post->save();
                 $this->logActivity('Scientific Group 2 Changed From => ' . $oldSG2 . ' To => ' . $newSG2, \request()->ip(), \request()->userAgent(), \session('id'), $post->id);
                 break;
@@ -62,7 +76,7 @@ class ClassificationController extends Controller
         $posts = Post::where('sorted', 0)->get();
         foreach ($posts as $post) {
             $post->sorted = 1;
-            $post->sorter = session('id');
+//            $post->sorter = session('id');
             $post->sorted_date = now();
             if ($request->hasFile('file_src')) {
                 $post->sorting_classification_id = $SCFile->id;

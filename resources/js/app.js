@@ -1154,7 +1154,9 @@ $(document).ready(function () {
                                 newSG1: $(this).val(),
                             },
                             success: function (response) {
-                                console.log(response)
+                                if (response.success===false){
+                                    swalFire('خطا!', response.errors.sameWithSG2[0], 'error', 'تلاش مجدد');
+                                }
                             }
                         });
                     });
@@ -1172,7 +1174,9 @@ $(document).ready(function () {
                                 newSG2: $(this).val(),
                             },
                             success: function (response) {
-                                // console.log(response)
+                                if (response.success===false){
+                                    swalFire('خطا!', response.errors.sameWithSG1[0], 'error', 'تلاش مجدد');
+                                }
                             }
                         });
                     });
