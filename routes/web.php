@@ -4,6 +4,7 @@ use App\Http\Controllers\AssessmentRaterController;
 use App\Http\Controllers\Catalogs\FestivalController;
 use App\Http\Controllers\Catalogs\LanguageController;
 use App\Http\Controllers\Catalogs\ScientificGroupController;
+use App\Http\Controllers\ClassificationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PersonController;
@@ -94,9 +95,9 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
             //End Post Management
 
             //Classification Management
-            Route::get('/Classification', [PostController::class, 'showClassification']);
-            Route::post('/changeScientificGroup', [PostController::class, 'changeScientificGroup']);
-            Route::post('/Classification', [PostController::class, 'Classification']);
+            Route::get('/Classification', [ClassificationController::class, 'showClassification']);
+            Route::post('/changeScientificGroup', [ClassificationController::class, 'changeScientificGroup']);
+            Route::post('/Classification', [ClassificationController::class, 'Classification']);
             //End Classification Management
 
             Route::get('/SummaryAssessmentFormApproval', [AssessmentRaterController::class, 'headerApprovalIndex']);
@@ -119,7 +120,11 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
             Route::get('/Approval', [AssessmentRaterController::class, 'headerApprovalIndex']);
             Route::post('/Approve', [AssessmentRaterController::class, 'headerApprove']);
         });
-
+        Route::middleware('roleAuthorization:5')->group(function () {
+            Route::get('/MyClassification', [ClassificationController::class, 'showClassification']);
+            Route::post('/changeMyScientificGroup', [ClassificationController::class, 'changeScientificGroup']);
+            Route::post('/MyClassification', [ClassificationController::class, 'Classification']);
+        });
 
         Route::group(['prefix' => 'Rate'], static function () {
             Route::get('/Summary/{id}', [RateController::class, 'summaryIndex']);

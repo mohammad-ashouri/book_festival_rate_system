@@ -14,15 +14,15 @@
             @else
                 <div class="bg-white rounded shadow p-6 flex flex-col items-center">
                     <div class=" mb-4 flex w-full">
-{{--                        <div>--}}
-{{--                            <label for="search-Name-Classification" class="block mt-3 text-sm font-bold text-gray-700">جستجو--}}
-{{--                                در--}}
-{{--                                نام اثر:</label>--}}
-{{--                            <input id="search-title-Classification" autocomplete="off"--}}
-{{--                                   placeholder="لطفا نام اثر را وارد نمایید."--}}
-{{--                                   type="text" name="search-Name-Classification"--}}
-{{--                                   class="ml-4 mt-1 px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"/>--}}
-{{--                        </div>--}}
+                        {{--                        <div>--}}
+                        {{--                            <label for="search-Name-Classification" class="block mt-3 text-sm font-bold text-gray-700">جستجو--}}
+                        {{--                                در--}}
+                        {{--                                نام اثر:</label>--}}
+                        {{--                            <input id="search-title-Classification" autocomplete="off"--}}
+                        {{--                                   placeholder="لطفا نام اثر را وارد نمایید."--}}
+                        {{--                                   type="text" name="search-Name-Classification"--}}
+                        {{--                                   class="ml-4 mt-1 px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"/>--}}
+                        {{--                        </div>--}}
                         <div>
                             <label for="search-SG1-Classification"
                                    class="block mt-3 text-sm font-bold text-gray-700 ">جستجو در گروه علمی اول:</label>
@@ -69,21 +69,11 @@
                             @foreach ($postList as $post)
                                 <tr class="bg-white">
                                     <td class="px-6 py-4">{{ $loop->iteration  }}</td>
-                                    <td class="px-6 py-4">
-                                        @php
-                                            $festivalInfo=\App\Models\Catalogs\Festival::find($post->festival_id)
-                                        @endphp
-                                        {{ $festivalInfo->name }}
-                                    </td>
+                                    <td class="px-6 py-4">{{ $post->festivalInfo->name }}</td>
                                     <td class="px-6 py-4">{{ $post->title  }}</td>
                                     <td class="px-6 py-4">{{$post->post_format  }}</td>
                                     <td class="px-3 py-4">{{ $post->post_type }}</td>
-                                    <td class="px-3 py-4">
-                                        @php
-                                            $languageInfo=\App\Models\Catalogs\Language::find($post->language)
-                                        @endphp
-                                        {{ $languageInfo->name }}
-                                    </td>
+                                    <td class="px-3 py-4">{{ $post->languageInfo->name }}</td>
                                     <td class="px-3 py-4">
                                         <select data-postid="{{ $post->id }}"
                                                 class="border rounded-md w-full px-3 py-2 sg1"
@@ -118,34 +108,32 @@
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td class="px-3 py-4">
-                                        @php
-                                            $personInfo=\App\Models\Person::find($post->person_id)
-                                        @endphp
-                                        {{ @$personInfo->name .' ' . @$personInfo->family }}
-                                    </td>
+                                    <td class="px-3 py-4">{{ $post->personInfo->name .' ' . $post->personInfo->family }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <form id="classification-form">
-                    <div class=" bg-white rounded shadow p-4 flex flex-col ">
-                        <div id="file_src" class="mb-4 ">
-                            <label for="file_src"
-                                   class="text-gray-700 text-sm font-bold whitespace-nowrap">در صورت نیاز می توانید فایل
-                                صورتجلسه گونه بندی را نیز پیوست نمایید:</label>
-                            <input id="file_src" name="file_src" type="file"
-                                   accept="application/zip, .rar, .jpg, .jpeg, .pdf"
-                                   class="border border-gray-300 px-3 py-2 w-72 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                            <button type="submit"
-                                    class="px-4 py-2 mr-3 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300">
-                                ثبت نهایی گونه بندی
-                            </button>
+                @if($type==1 or $type==2)
+                    <form id="classification-form">
+                        <div class=" bg-white rounded shadow p-4 flex flex-col ">
+                            <div id="file_src" class="mb-4 ">
+                                <label for="file_src"
+                                       class="text-gray-700 text-sm font-bold whitespace-nowrap">در صورت نیاز می توانید
+                                    فایل
+                                    صورتجلسه گونه بندی را نیز پیوست نمایید:</label>
+                                <input id="file_src" name="file_src" type="file"
+                                       accept="application/zip, .rar, .jpg, .jpeg, .pdf"
+                                       class="border border-gray-300 px-3 py-2 w-72 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                                <button type="submit"
+                                        class="px-4 py-2 mr-3 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300">
+                                    ثبت نهایی گونه بندی
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                @endif
             @endif
         </div>
     </main>
