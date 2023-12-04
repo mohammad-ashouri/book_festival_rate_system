@@ -99,7 +99,11 @@
                         <td style="text-align: center">{{ $post->post_format }}</td>
                         <td style="text-align: center">{{ $post->post_type }}</td>
                         <td style="text-align: center">{{ $post->scientificGroup1Info->name }}</td>
-                        <td style="text-align: center">{{ $post->scientificGroup2Info->name }}</td>
+                        <td style="text-align: center">
+                            @if($post->scientific_group_v2)
+                                {{ $post->scientificGroup2Info->name }}
+                            @endif
+                        </td>
                         <td style="text-align: center">{{ $post->personInfo->name . ' ' . $post->personInfo->family }}</td>
                         <td style="text-align: center">
                             @if($post->sorter)
