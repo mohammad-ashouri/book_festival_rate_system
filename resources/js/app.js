@@ -1154,7 +1154,7 @@ $(document).ready(function () {
                                 newSG1: $(this).val(),
                             },
                             success: function (response) {
-                                if (response.success===false){
+                                if (response.success === false) {
                                     swalFire('خطا!', response.errors.sameWithSG2[0], 'error', 'تلاش مجدد');
                                 }
                             }
@@ -1174,7 +1174,7 @@ $(document).ready(function () {
                                 newSG2: $(this).val(),
                             },
                             success: function (response) {
-                                if (response.success===false){
+                                if (response.success === false) {
                                     swalFire('خطا!', response.errors.sameWithSG1[0], 'error', 'تلاش مجدد');
                                 }
                             }
@@ -1183,43 +1183,6 @@ $(document).ready(function () {
                 }
 
                     bindChangeEvents1();
-                    $('#classification-form').on('submit', function (e) {
-                        e.preventDefault();
-                        Swal.fire({
-                            title: 'آیا مطمئن هستید؟',
-                            text: 'کلیه آثار، گونه بندی شده و به مرحله اجمالی راه خواهند یافت.' +
-                                '\n' +
-                                'این عملیات برگشت پذیر نیست.',
-                            icon: 'warning',
-                            showCancelButton: true,
-                            cancelButtonText: 'خیر',
-                            confirmButtonText: 'بله',
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                var form = $(this);
-                                var formData = new FormData(form[0]);
-                                $.ajax({
-                                    type: 'POST',
-                                    url: '/MyClassification',
-                                    data: formData,
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                                    },
-                                    contentType: false,
-                                    processData: false,
-                                    success: function (response) {
-                                        if (response.errors) {
-                                            if (response.errors.wrongFileType) {
-                                                swalFire('خطا!', response.errors.wrongFileType[0], 'error', 'تلاش مجدد');
-                                            }
-                                        } else if (response.success) {
-                                            location.reload();
-                                        }
-                                    }
-                                });
-                            }
-                        });
-                    });
                     $('#search-title-Classification').on('input', function () {
                         var Title = $('#search-title-Classification').val();
                         var SG1 = $('#search-SG1-Classification').val();
@@ -1487,6 +1450,7 @@ $(document).ready(function () {
                             }
                         });
                     });
+
                     break;
                 case '/Classification':
 
@@ -1504,7 +1468,9 @@ $(document).ready(function () {
                                 newSG1: $(this).val(),
                             },
                             success: function (response) {
-                                // console.log(response)
+                                if (response.success === false) {
+                                    swalFire('خطا!', response.errors.sameWithSG2[0], 'error', 'تلاش مجدد');
+                                }
                             }
                         });
                     });
@@ -1522,13 +1488,31 @@ $(document).ready(function () {
                                 newSG2: $(this).val(),
                             },
                             success: function (response) {
-                                // console.log(response)
+                                if (response.success === false) {
+                                    swalFire('خطا!', response.errors.sameWithSG1[0], 'error', 'تلاش مجدد');
+                                }
                             }
                         });
                     });
                 }
 
                     bindChangeEvents();
+                    // $('#pdf-report').on('submit', function (e) {
+                    //     e.preventDefault();
+                    //     $.ajax({
+                    //         type: 'POST',
+                    //         url: '/GeneratePDF',
+                    //         data: {
+                    //             'work': 'GetAllClassifications'
+                    //         },
+                    //         headers: {
+                    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    //         },
+                    //         success: function (response) {
+                    //             // this.submit();
+                    //         }
+                    //     });
+                    // });
                     $('#classification-form').on('submit', function (e) {
                         e.preventDefault();
                         Swal.fire({
@@ -1833,6 +1817,7 @@ $(document).ready(function () {
                             }
                         });
                     });
+
                     break;
                 case '/AssessmentFormApproval':
                 case '/Approval':

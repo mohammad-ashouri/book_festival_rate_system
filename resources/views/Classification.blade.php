@@ -49,6 +49,17 @@
                                 @endforeach
                             </select>
                         </div>
+                        <form id="pdf-report" target="_blank" action="/GeneratePDF" method="post" class="flex flex-row-reverse mt-8 w-full text-left">
+                            @csrf
+                            <div>
+                                <input type="hidden" name="work" value="GetAllClassifications">
+                                <button type="submit"
+                                        class="px-4 py-2 mr-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
+                                    خروجی
+                                </button>
+                            </div>
+                        </form>
+
                     </div>
                     <div class="max-w-full overflow-x-auto">
                         <table class="w-full border-collapse rounded-lg overflow-hidden text-center">

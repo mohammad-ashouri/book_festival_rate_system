@@ -26,4 +26,16 @@ class Post extends Model
     {
         return $this->belongsTo(Language::class, 'language', 'id');
     }
+    public function scientificGroup1Info()
+    {
+        return $this->belongsTo(ScientificGroup::class, 'scientific_group_v1', 'id');
+    }
+    public function scientificGroup2Info()
+    {
+        return $this->belongsTo(ScientificGroup::class, 'scientific_group_v2', 'id');
+    }
+    public function sorterInfo()
+    {
+        return $this->belongsTo(User::class, 'sorter', 'id');
+    }
 }

@@ -11,6 +11,8 @@ use App\Http\Controllers\PersonController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RateController;
 use App\Http\Controllers\Reports\AssessmentsReport;
+use App\Http\Controllers\Reports\PDFController;
+use App\Http\Controllers\Reports\PDFReportController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserManager;
 use App\Http\Middleware\CheckLoginMiddleware;
@@ -114,6 +116,8 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
             //Reports Management
             Route::get('/AssessmentsStatus', [AssessmentsReport::class, 'allAssessmentReportIndex']);
             Route::post('/AssessmentsStatus', [AssessmentsReport::class, 'reportAssessments']);
+
+            Route::post('/GeneratePDF', [PDFController::class, 'generatePDF']);
         });
 
         Route::middleware('roleAuthorization:3')->group(function () {
