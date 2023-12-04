@@ -14,15 +14,15 @@
             @else
                 <div class="bg-white rounded shadow p-6 flex flex-col items-center">
                     <div class=" mb-4 flex w-full">
-                        {{--                        <div>--}}
-                        {{--                            <label for="search-Name-Classification" class="block mt-3 text-sm font-bold text-gray-700">جستجو--}}
-                        {{--                                در--}}
-                        {{--                                نام اثر:</label>--}}
-                        {{--                            <input id="search-title-Classification" autocomplete="off"--}}
-                        {{--                                   placeholder="لطفا نام اثر را وارد نمایید."--}}
-                        {{--                                   type="text" name="search-Name-Classification"--}}
-                        {{--                                   class="ml-4 mt-1 px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"/>--}}
-                        {{--                        </div>--}}
+                        <div>
+                            <label for="search-Name-Classification" class="block mt-3 text-sm font-bold text-gray-700">جستجو
+                                در
+                                نام اثر:</label>
+                            <input id="search-title-Classification" autocomplete="off"
+                                   placeholder="لطفا نام اثر را وارد نمایید."
+                                   type="text" name="search-Name-Classification"
+                                   class="ml-4 mt-1 px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"/>
+                        </div>
                         <div>
                             <label for="search-SG1-Classification"
                                    class="block mt-3 text-sm font-bold text-gray-700 ">جستجو در گروه علمی اول:</label>
@@ -49,7 +49,8 @@
                                 @endforeach
                             </select>
                         </div>
-                        <form id="pdf-report" target="_blank" action="/GeneratePDF" method="post" class="flex flex-row-reverse mt-8 w-full text-left">
+                        <form id="pdf-report" target="_blank" action="/GeneratePDF" method="post"
+                              class="flex flex-row-reverse mt-8 w-full text-left">
                             @csrf
                             <div>
                                 <input type="hidden" name="work" value="GetAllClassifications">
@@ -66,7 +67,7 @@
                             <thead>
                             <tr class="bg-gradient-to-r from-blue-400 to-purple-500 items-center text-center text-white">
                                 <th class=" px-6 py-3  font-bold ">ردیف</th>
-                                <th class=" px-6 py-3  font-bold ">جشنواره</th>
+                                <th class=" px-6 py-3  font-bold ">کد اثر</th>
                                 <th class=" px-6 py-3  font-bold ">نام اثر</th>
                                 <th class=" px-3 py-3  font-bold ">قالب اثر</th>
                                 <th class=" px-3 py-3  font-bold ">نوع اثر</th>
@@ -80,8 +81,12 @@
                             @foreach ($postList as $post)
                                 <tr class="bg-white">
                                     <td class="px-6 py-4">{{ $loop->iteration  }}</td>
-                                    <td class="px-6 py-4">{{ $post->festivalInfo->name }}</td>
-                                    <td class="px-6 py-4">{{ $post->title  }}</td>
+                                    <td class="px-6 py-4">{{ $post->id }}</td>
+                                    <td class="px-6 py-4">
+                                        <p class="title">
+                                            {{ $post->title  }}
+                                        </p>
+                                    </td>
                                     <td class="px-6 py-4">{{$post->post_format  }}</td>
                                     <td class="px-3 py-4">{{ $post->post_type }}</td>
                                     <td class="px-3 py-4">{{ $post->languageInfo->name }}</td>
