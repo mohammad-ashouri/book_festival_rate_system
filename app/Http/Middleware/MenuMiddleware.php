@@ -95,6 +95,12 @@ class MenuMiddleware
                                     'path1' => 'M8 3a5 5 0 100 10A5 5 0 008 3z',
                                     'childs' => []
                                 ],
+                                2 => [
+                                    'title' => 'وضعیت تحویل اثر',
+                                    'link' => '/DeliveryStatus',
+                                    'path1' => 'M8 3a5 5 0 100 10A5 5 0 008 3z',
+                                    'childs' => []
+                                ],
                             ]
                         ],
                         7 => [

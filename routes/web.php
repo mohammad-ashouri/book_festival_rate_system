@@ -11,6 +11,7 @@ use App\Http\Controllers\PersonController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RateController;
 use App\Http\Controllers\Reports\AssessmentsReport;
+use App\Http\Controllers\Reports\DeliveryReportController;
 use App\Http\Controllers\Reports\PDFController;
 use App\Http\Controllers\Reports\PDFReportController;
 use App\Http\Controllers\SearchController;
@@ -114,8 +115,17 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
             Route::post('/SetDetailedRater', [AssessmentRaterController::class, 'setDetailedRater']);
 
             //Reports Management
-            Route::get('/AssessmentsStatus', [AssessmentsReport::class, 'allAssessmentReportIndex']);
-            Route::post('/AssessmentsStatus', [AssessmentsReport::class, 'reportAssessments']);
+            Route::group(['prefix' => 'AssessmentsStatus'], static function () {
+                Route::get('/', [AssessmentsReport::class, 'allAssessmentReportIndex']);
+                Route::post('/', [AssessmentsReport::class, 'reportAssessments']);
+            });
+            Route::group(['prefix' => 'DeliveryStatus'], static function () {
+                Route::get('/', [DeliveryReportController::class, 'deliveryStatusIndex']);
+                Route::get('/{post_id}', [DeliveryReportController::class, 'show']);
+                Route::post('/', [DeliveryReportController::class, 'new']);
+                Route::post('/Edit', [DeliveryReportController::class, 'edit']);
+                Route::post('/Delete', [DeliveryReportController::class, 'delete']);
+            });
 
             Route::post('/GeneratePDF', [PDFController::class, 'generatePDF']);
         });
