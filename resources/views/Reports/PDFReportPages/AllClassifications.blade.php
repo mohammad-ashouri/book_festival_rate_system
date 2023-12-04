@@ -101,7 +101,11 @@
                         <td style="text-align: center">{{ $post->scientificGroup1Info->name }}</td>
                         <td style="text-align: center">{{ $post->scientificGroup2Info->name }}</td>
                         <td style="text-align: center">{{ $post->personInfo->name . ' ' . $post->personInfo->family }}</td>
-                        <td style="text-align: center">{{ $post->sorterInfo->name . ' ' . $post->sorterInfo->family }}</td>
+                        <td style="text-align: center">
+                            @if($post->sorter)
+                                {{ $post->sorterInfo->name . ' ' . $post->sorterInfo->family }}
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
