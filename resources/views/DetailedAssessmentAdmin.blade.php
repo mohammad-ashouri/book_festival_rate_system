@@ -63,7 +63,7 @@
                                             <option value="" selected>بدون ارزیاب</option>
                                             @php
                                                 $raters=\App\Models\User::
-                                                where('type',4)
+                                                whereIn('type', [3, 4])
                                                 ->orderBy('name','asc')
                                                 ->get();
                                             @endphp
@@ -88,7 +88,7 @@
                                             <option value="" selected>بدون ارزیاب</option>
                                             @php
                                                 $raters=\App\Models\User::
-                                                where('type',4)
+                                                whereIn('type', [3, 4])
                                                 ->orderBy('name','asc')
                                                 ->get();
                                             @endphp
@@ -113,7 +113,7 @@
                                             <option value="" selected>بدون ارزیاب</option>
                                             @php
                                                 $raters=\App\Models\User::
-                                                where('type',4)
+                                                whereIn('type', [3, 4])
                                                 ->orderBy('name','asc')
                                                 ->get();
                                             @endphp
