@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('delivery_statuses', function (Blueprint $table) {
+        Schema::create('delivery_report_comments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('post_id')->nullable();
-            $table->foreign('post_id')->references('id')->on('posts');
-            $table->unsignedBigInteger('rater_id')->nullable();
-            $table->foreign('rater_id')->references('id')->on('users');
+            $table->unsignedBigInteger('status_id')->nullable();
+            $table->foreign('status_id')->references('id')->on('delivery_statuses');
+            $table->text('description');
             $table->unsignedBigInteger('registrar')->nullable();
             $table->foreign('registrar')->references('id')->on('users');
+            $table->text('jalali_date');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('delivery_reports');
+        Schema::dropIfExists('delivery_report_comments');
     }
 };

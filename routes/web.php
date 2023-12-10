@@ -120,11 +120,17 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
                 Route::post('/', [AssessmentsReport::class, 'reportAssessments']);
             });
             Route::group(['prefix' => 'DeliveryStatus'], static function () {
-                Route::get('/', [DeliveryReportController::class, 'deliveryStatusIndex']);
-                Route::get('/{post_id}', [DeliveryReportController::class, 'show']);
+                Route::get('/', [DeliveryReportController::class, 'index']);
+                Route::get('/Show', [DeliveryReportController::class, 'show']);
                 Route::post('/', [DeliveryReportController::class, 'new']);
                 Route::post('/Edit', [DeliveryReportController::class, 'edit']);
                 Route::post('/Delete', [DeliveryReportController::class, 'delete']);
+            });
+            Route::group(['prefix' => 'ReportComment'], static function () {
+                Route::post('/', [DeliveryReportController::class, 'newComment']);
+                Route::get('/', [DeliveryReportController::class, 'getComments']);
+                Route::post('/Edit', [DeliveryReportController::class, 'edit']);
+                Route::post('/Delete', [DeliveryReportController::class, 'deleteComment']);
             });
 
             Route::post('/GeneratePDF', [PDFController::class, 'generatePDF']);

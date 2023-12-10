@@ -13,7 +13,7 @@ class DeliveryStatus extends Model
     protected $table = 'delivery_statuses';
     protected $fillable = [
         'post_id',
-        'description',
+        'rater_id',
         'registrar'
     ];
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
@@ -21,5 +21,13 @@ class DeliveryStatus extends Model
     public function postInfo()
     {
         return $this->belongsTo(Post::class, 'post_id', 'id');
+    }
+    public function raterInfo()
+    {
+        return $this->belongsTo(User::class, 'rater_id', 'id');
+    }
+    public function registrarInfo()
+    {
+        return $this->belongsTo(User::class, 'registrar', 'id');
     }
 }

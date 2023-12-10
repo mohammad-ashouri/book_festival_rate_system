@@ -73,6 +73,159 @@ $(document).ready(function () {
         let pathname = window.location.pathname;
         if (pathname.includes("Rate/Detailed")) {
 
+        } else if (pathname.includes("DeliveryStatus")) {
+
+            $('#post_id').on('input', function () {
+                var originalValue = $(this).val();
+                var trimmedValue = originalValue.replace(/\s/g, ''); // استفاده از عبارت منظم برای جایگزینی همه فضاها با رشته خالی
+                $(this).val(trimmedValue);
+            });
+
+            $('#delivery-status').on('submit', function (e) {
+                e.preventDefault();
+                var postID = $('#post_id').val();
+                $.ajax({
+                    type: 'GET',
+                    url: '/DeliveryStatus/Show',
+                    data: {
+                        PostID: $.trim(postID),
+                    },
+                    success: function (response) {
+                        if (response.errors) {
+                            if (response.errors.wrongID) {
+                                swalFire('خطا!', response.errors.wrongID[0], 'error', 'تلاش مجدد');
+                            } else if (response.errors.nullID) {
+                                swalFire('خطا!', response.errors.nullID[0], 'error', 'تلاش مجدد');
+                            } else if (response.errors.digitalPost) {
+                                swalFire('خطا!', response.errors.digitalPost[0], 'error', 'تلاش مجدد');
+                            }
+                        } else {
+                            window.location = '/DeliveryStatus/Show?PostID=' + postID;
+                        }
+                    }
+                });
+            });
+            $('#newDelivery, #cancel-new-delivery').on('click', function () {
+                toggleModal(newDeliveryModal.id);
+            });
+            $('.absolute.inset-0.bg-gray-500.opacity-75.adddelivery').on('click', function () {
+                toggleModal(newDeliveryModal.id)
+            });
+            $('#new-delivery').on('submit', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: '/DeliveryStatus',
+                    data: {
+                        PostID: $('#post_id').val(),
+                        rater: $('#rater').val(),
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    success: function (response) {
+                        if (response.errors) {
+                            if (response.errors.wrongRater) {
+                                swalFire('خطا!', response.errors.wrongRater[0], 'error', 'تلاش مجدد');
+                            } else if (response.errors.wrongRaterID) {
+                                swalFire('خطا!', response.errors.wrongRaterID[0], 'error', 'تلاش مجدد');
+                            } else if (response.errors.wrongPostID) {
+                                swalFire('خطا!', response.errors.wrongPostID[0], 'error', 'تلاش مجدد');
+                            } else if (response.errors.duplicateStatus) {
+                                swalFire('خطا!', response.errors.duplicateStatus[0], 'error', 'تلاش مجدد');
+                            }
+                        } else {
+                            location.reload();
+                        }
+                    }
+                });
+            });
+
+            $('.AddComment, #cancel-new-comment').on('click', function () {
+                $('#status_id').val($(this).data('status-id'));
+                toggleModal(newCommentModal.id);
+            });
+            $('.absolute.inset-0.bg-gray-500.opacity-75.addcomment').on('click', function () {
+                toggleModal(newCommentModal.id)
+            });
+            $('#new-comment').on('submit', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: '/ReportComment',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    data: {
+                        StatusID: $('#status_id').val(),
+                        description: $('#description').val(),
+                    },
+                    success: function (response) {
+                        if (response.errors) {
+                            if (response.errors.nullStatusID) {
+                                swalFire('خطا!', response.errors.nullStatusID[0], 'error', 'تلاش مجدد');
+                            } else if (response.errors.wrongStatusID) {
+                                swalFire('خطا!', response.errors.wrongStatusID[0], 'error', 'تلاش مجدد');
+                            } else if (response.errors.wrongDescription) {
+                                swalFire('خطا!', response.errors.wrongDescription[0], 'error', 'تلاش مجدد');
+                            }
+                        } else {
+                            location.reload();
+                        }
+                    }
+                });
+            });
+
+            $('.History, #cancel-history').on('click', function () {
+                $.ajax({
+                    type: 'GET',
+                    url: '/ReportComment',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    data: {
+                        StatusID: $(this).data('status-id'),
+                    },
+                    success: function (response) {
+                        if (response.errors) {
+                            location.reload();
+                        } else {
+                            displayComments(response.comments);
+                        }
+                    }
+                });
+                function displayComments(comments) {
+                    var table = $('.CommentsTable tbody');
+                    table.empty();
+                    let raterInfo=null;
+                    $.each(comments, function (index, comment) {
+                        var row = $('<tr class="comments-table-row-spacing">');
+                        row.append($('<td>').text(index + 1)); // افزودن ردیف
+                        row.append($('<td>').text(comment.description)); // افزودن توضیحات
+                        row.append($('<td>').text(comment.jalali_date)); // افزودن تاریخ ثبت
+                        row.append($('<td>').text(comment.registrar_info.name + ' ' + comment.registrar_info.family)); // افزودن ثبت کننده
+                        table.append(row);
+                        raterInfo=comment.status_info.rater_id;
+                    });
+                    $.ajax({
+                        type: 'GET',
+                        url: '/GetUserInfo',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                        },
+                        data: {
+                            userID: raterInfo,
+                        },
+                        success: function (response) {
+                            $('.HistoryTitle').text('تاریخچه ارسال به ارزیاب با مشخصات: ' + response.name + ' ' + response.family);
+                        }
+                    });
+                }
+                toggleModal(HistoryModal.id);
+            });
+            $('.absolute.inset-0.bg-gray-500.opacity-75.history').on('click', function () {
+                toggleModal(HistoryModal.id)
+            });
         } else {
             switch (pathname) {
                 case "/Profile":
@@ -1429,7 +1582,6 @@ $(document).ready(function () {
                         });
                     });
                     break;
-
             }
         }
 
