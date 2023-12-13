@@ -125,7 +125,6 @@ class DashboardController extends Controller
                     })
                     ->get();
 
-
                 $detailedRates = RateInfo::where('rate_status', 'Detailed')->with('postInfo')
                     ->where(function ($query) {
                         $query->where(function ($subquery) {
@@ -145,7 +144,11 @@ class DashboardController extends Controller
                             });
                     })
                     ->get();
-                return view('Panels.Dashboards.Rater', compact('summaryRates', 'detailedRates'));
+
+                $formalLiteraryRates = RateInfo::where('rate_status', 'Formal literary')->with('postInfo')
+                    ->where('formal_literary_rater',session('id'))
+                    ->get();
+                return view('Panels.Dashboards.Rater', compact('summaryRates', 'detailedRates', 'formalLiteraryRates'));
                 break;
             case 5:
                 return view('Panels.Dashboards.ClassificationExpert');

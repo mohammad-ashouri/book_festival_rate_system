@@ -7,17 +7,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class DetailedRate extends Model
+class FormalLiteraryRate extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $table='detailed_rates';
+    protected $table='formal_literary_rates';
     protected $fillable=[
         'rate_info_id',
         'points_info',
-        'special_section',
         'sum',
         'rater',
-        'rate_type',
         'editor',
     ];
     protected $hidden=[

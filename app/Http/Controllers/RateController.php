@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\RateInfo;
 use App\Models\Rates\DetailedRate;
+use App\Models\Rates\FormalLiteraryRate;
 use App\Models\Rates\SummaryRate;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -103,7 +105,7 @@ class RateController extends Controller
                     $rateInfo->avg_sg1 = $sum + $summaryS2G1->sum + $summaryS3G1->sum;
                     if ($rateInfo->postInfo->scientific_group_v2 != null and $rateInfo->avg_sg2 != null) {
                         if ($rateInfo->avg_sg2 >= 34 or $rateInfo->avg_sg1 >= 34) {
-                            $rateInfo->rate_status = 'Summary';
+                            $rateInfo->rate_status = 'Pre Detailed';
                         } else {
                             $rateInfo->rate_status = 'RejectedSummary';
                         }
@@ -125,13 +127,13 @@ class RateController extends Controller
                     $rateInfo->avg_sg1 = $sum + $summaryS1G1->sum + $summaryS3G1->sum;
                     if ($rateInfo->postInfo->scientific_group_v2 != null and $rateInfo->avg_sg2 != null) {
                         if ($rateInfo->avg_sg2 >= 34 or $rateInfo->avg_sg1 >= 34) {
-                            $rateInfo->rate_status = 'Summary';
+                            $rateInfo->rate_status = 'Pre Detailed';
                         } else {
                             $rateInfo->rate_status = 'RejectedSummary';
                         }
                     } elseif ($rateInfo->postInfo->scientific_group_v2 == null) {
                         if ($rateInfo->avg_sg1 >= 34) {
-                            $rateInfo->rate_status = 'Detailed';
+                            $rateInfo->rate_status = 'Pre Detailed';
                         } else {
                             $rateInfo->rate_status = 'RejectedSummary';
                         }
@@ -147,13 +149,13 @@ class RateController extends Controller
                     $rateInfo->avg_sg1 = $sum + $summaryS1G1->sum + $summaryS2G1->sum;
                     if ($rateInfo->postInfo->scientific_group_v2 != null and $rateInfo->avg_sg2 != null) {
                         if ($rateInfo->avg_sg2 >= 34 or $rateInfo->avg_sg1 >= 34) {
-                            $rateInfo->rate_status = 'Summary';
+                            $rateInfo->rate_status = 'Pre Detailed';
                         } else {
                             $rateInfo->rate_status = 'RejectedSummary';
                         }
                     } elseif ($rateInfo->postInfo->scientific_group_v2 == null) {
                         if ($rateInfo->avg_sg1 >= 34) {
-                            $rateInfo->rate_status = 'Detailed';
+                            $rateInfo->rate_status = 'Pre Detailed';
                         } else {
                             $rateInfo->rate_status = 'RejectedSummary';
                         }
@@ -217,6 +219,78 @@ class RateController extends Controller
                 break;
         }
         $rateInfo->save();
+        return response()->json([
+            'success' => true,
+            'redirect' => route('dashboard')
+        ]);
+    }
+
+    public function formalLiteraryIndex($id)
+    {
+        $userInfo = User::find(session('id'));
+        switch ($userInfo->type) {
+            case 1:
+                return view('Panels.Dashboards.SuperAdmin');
+                break;
+            case 2:
+                return view('Panels.Dashboards.Admin');
+                break;
+            case 3:
+            case 4:
+                $rateInfo = RateInfo::with('postInfo')->where('rate_status', 'Formal literary')->where('id', $id)
+                    ->where('formal_literary_rater', session('id'))
+                    ->first();
+                if ($rateInfo->count() > 0) {
+                    $assessmentStatus = 'Formal literary';
+                    return view('RatePages.index', compact('rateInfo', 'assessmentStatus'));
+                }
+                abort(403);
+        }
+    }
+
+    public function setFormalLiteraryRate(Request $request)
+    {
+        $sum = 0;
+        $inputData = $request->all();
+        $formalLiteraryForm = new FormalLiteraryRate();
+        $formalLiteraryForm->rate_info_id = $request->input('rateInfoID');
+        $formalLiteraryForm->rater = session('id');
+        $formalLiteraryForm->points_info = json_encode($inputData);
+
+        $keysWithPoints = array_filter(array_keys($inputData), function ($key) {
+            return strpos($key, 'point') !== false;
+        });
+        foreach ($keysWithPoints as $keys) {
+            $sum = $request->input($keys) + $sum;
+        }
+        $formalLiteraryForm->sum = $sum / 10;
+        $formalLiteraryForm->save();
+
+        $rateInfo = RateInfo::with('postInfo')->find($formalLiteraryForm->rate_info_id);
+        $postInfo = Post::with('personInfo')->find($rateInfo->post_id);
+        $detailed1 = DetailedRate::where('rate_info_id', $formalLiteraryForm->rate_info_id)->where('rate_type', 'd1')->pluck('sum')->first();
+        $detailed2 = DetailedRate::where('rate_info_id', $formalLiteraryForm->rate_info_id)->where('rate_type', 'd2')->pluck('sum')->first();
+        $sumDetailed = $detailed1 + $detailed2 + $sum;
+        switch ($postInfo->personInfo->gender) {
+            case 'مرد':
+                if ($sumDetailed >= 75) {
+                    $rateInfo->rate_status = 'Detailed';
+                } else {
+                    $rateInfo->rate_status = 'Detailed rejected';
+                }
+                break;
+            case 'زن':
+                if ($sumDetailed >= 70) {
+                    $rateInfo->rate_status = 'Detailed';
+                } else {
+                    $rateInfo->rate_status = 'Detailed rejected';
+                }
+                break;
+            default:
+                abort(403);
+        }
+        $rateInfo->save();
+        $this->logActivity('Formal literary rate set', \request()->ip(), \request()->userAgent(), \session('id'), $rateInfo->postInfo->post_id);
         return response()->json([
             'success' => true,
             'redirect' => route('dashboard')
@@ -297,47 +371,10 @@ class RateController extends Controller
                 if ($rateInfo->d2_status == 1) {
                     $detailedRate2 = DetailedRate::where('rate_type', 'd2')->pluck('sum')->first();
                     $avg = ($sum + $detailedRate2) / 2;
-                    switch ($rateInfo->postInfo->personInfo->gender) {
-                        case 'مرد':
-                            if ($avg >= $maxPoint) {
-                                $status = 'Third detailed';
-                            } elseif ($avg >= 75 and $avg < $maxPoint) {
-                                if (abs($sum - $detailedRate2) >= 12) {
-                                    $status = 'Third detailed';
-                                } else {
-                                    $status = 'Detailed rejected';
-                                }
-                            } else {
-                                $status = 'Detailed rejected';
-                            }
-
-                            if ($status === 'Detailed rejected') {
-                                $rateInfo->grade = $avg;
-                                $rateInfo->rate_status = $status;
-                            } else {
-                                $rateInfo->rate_status = $status;
-                            }
-                            break;
-                        case 'زن':
-                            if ($avg >= $maxPoint) {
-                                $status = 'Third detailed';
-                            } elseif ($avg >= 70 and $avg < $maxPoint) {
-                                if (abs($sum - $detailedRate2) >= 12) {
-                                    $status = 'Third detailed';
-                                } else {
-                                    $status = 'Detailed rejected';
-                                }
-                            } else {
-                                $status = 'Detailed rejected';
-                            }
-
-                            if ($status === 'Detailed rejected') {
-                                $rateInfo->grade = $avg;
-                                $rateInfo->rate_status = $status;
-                            } else {
-                                $rateInfo->rate_status = $status;
-                            }
-                            break;
+                    if ($avg >= 64) {
+                        $status = 'Formal literary';
+                    } else {
+                        $status = 'Detailed rejected';
                     }
                 }
                 break;
@@ -346,47 +383,10 @@ class RateController extends Controller
                 if ($rateInfo->d1_status == 1) {
                     $detailedRate1 = DetailedRate::where('rate_type', 'd1')->pluck('sum')->first();
                     $avg = ($sum + $detailedRate1) / 2;
-                    switch ($rateInfo->postInfo->personInfo->gender) {
-                        case 'مرد':
-                            if ($avg >= $maxPoint) {
-                                $status = 'Third detailed';
-                            } elseif ($avg >= 75 and $avg < $maxPoint) {
-                                if (abs($sum - $detailedRate1) >= 12) {
-                                    $status = 'Third detailed';
-                                } else {
-                                    $status = 'Detailed rejected';
-                                }
-                            } else {
-                                $status = 'Detailed rejected';
-                            }
-
-                            if ($status === 'Detailed rejected') {
-                                $rateInfo->grade = $avg;
-                                $rateInfo->rate_status = $status;
-                            } else {
-                                $rateInfo->rate_status = $status;
-                            }
-                            break;
-                        case 'زن':
-                            if ($avg >= $maxPoint) {
-                                $status = 'Third detailed';
-                            } elseif ($avg >= 70 and $avg < $maxPoint) {
-                                if (abs($sum - $detailedRate1) >= 12) {
-                                    $status = 'Third detailed';
-                                } else {
-                                    $status = 'Detailed rejected';
-                                }
-                            } else {
-                                $status = 'Detailed rejected';
-                            }
-
-                            if ($status === 'Detailed rejected') {
-                                $rateInfo->grade = $avg;
-                                $rateInfo->rate_status = $status;
-                            } else {
-                                $rateInfo->rate_status = $status;
-                            }
-                            break;
+                    if ($avg >= 64) {
+                        $status = 'Formal literary';
+                    } else {
+                        $status = 'Detailed rejected';
                     }
                 }
                 break;
@@ -425,17 +425,18 @@ class RateController extends Controller
                     case 'داستان جوان':
                     case 'ادبیات کودک و نوجوان':
                         if ($finalAVG >= $maxPoint) {
-                            $rateInfo->rate_status = 'Committee';
+                            $status = 'Committee';
                             $rateInfo->grade = $finalAVG;
                         } elseif ($finalAVG < $maxPoint) {
-                            $rateInfo->rate_status = 'Detailed rejected';
+                            $status = 'Detailed rejected';
                         }
                         break;
                     default:
-                        $rateInfo->rate_status = 'Formal literary';
+                        $status = 'Formal literary';
                 }
                 break;
         }
+        $rateInfo->rate_status = $status;
         $rateInfo->save();
         $detailedForm->save();
         $this->logActivity('Detailed rate set', \request()->ip(), \request()->userAgent(), \session('id'), $rateInfo->postInfo->post_id);
