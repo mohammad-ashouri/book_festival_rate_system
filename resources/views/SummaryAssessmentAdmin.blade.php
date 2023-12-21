@@ -67,7 +67,7 @@
                                                     class="border rounded-md w-full px-3 py-2 SetSummaryRater">
                                                 <option value="" selected>بدون ارزیاب</option>
                                                 @php
-                                                    $raters=\App\Models\User::where('type',4)->where('scientific_group',$post->postInfo->scientific_group_v1)->orderBy('name','asc')->get();
+                                                    $raters=\App\Models\User::whereIn('type', [3, 4])->where('scientific_group',$post->postInfo->scientific_group_v1)->orderBy('name','asc')->get();
                                                 @endphp
                                                 @foreach($raters as $rater)
                                                     <option @if ( $rater->id==$post->s1g1rater ) selected

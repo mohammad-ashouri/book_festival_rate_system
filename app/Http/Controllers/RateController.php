@@ -170,7 +170,7 @@ class RateController extends Controller
                     if ($rateInfo->postInfo->scientific_group_v1 != null and $rateInfo->avg_sg1 != null) {
                         if ($rateInfo->avg_sg1 != null) {
                             if ($rateInfo->avg_sg1 >= 34 or $rateInfo->avg_sg2 >= 34) {
-                                $rateInfo->rate_status = 'Detailed';
+                                $rateInfo->rate_status = 'Pre Detailed';
                             } else {
                                 $rateInfo->rate_status = 'RejectedSummary';
                             }
@@ -188,7 +188,7 @@ class RateController extends Controller
                     if ($rateInfo->postInfo->scientific_group_v1 != null and $rateInfo->avg_sg1 != null) {
                         if ($rateInfo->avg_sg1 != null) {
                             if ($rateInfo->avg_sg1 >= 34 or $rateInfo->avg_sg2 >= 34) {
-                                $rateInfo->rate_status = 'Detailed';
+                                $rateInfo->rate_status = 'Pre Detailed';
                             } else {
                                 $rateInfo->rate_status = 'RejectedSummary';
                             }
@@ -206,7 +206,7 @@ class RateController extends Controller
                     if ($rateInfo->postInfo->scientific_group_v1 != null and $rateInfo->avg_sg1 != null) {
                         if ($rateInfo->avg_sg1 != null) {
                             if ($rateInfo->avg_sg1 >= 34 or $rateInfo->avg_sg2 >= 34) {
-                                $rateInfo->rate_status = 'Detailed';
+                                $rateInfo->rate_status = 'Pre Detailed';
                             } else {
                                 $rateInfo->rate_status = 'RejectedSummary';
                             }
