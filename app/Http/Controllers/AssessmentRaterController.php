@@ -218,7 +218,18 @@ class AssessmentRaterController extends Controller
 
     public function summaryAssessmentIndex()
     {
-        $summaries = RateInfo::with('postInfo')->where('rate_status', 'Summary')->where('sg1_form_type', '!=', 'Waiting For Header')->paginate(10);
+        $summaries = RateInfo::with('postInfo')
+            ->where('rate_status', 'Summary')
+            ->where(function ($query) {
+                $query->whereNull('sg2_form_type')
+                    ->where('sg1_form_type', '!=', 'Waiting For Header');
+            })
+            ->orWhere(function ($query) {
+                $query->whereNotNull('sg2_form_type')
+                    ->where('sg1_form_type', '!=', 'Waiting For Header')
+                    ->where('sg2_form_type', '!=', 'Waiting For Header');
+            })
+            ->paginate(20);
         return view('SummaryAssessmentAdmin', compact('summaries'));
     }
 
