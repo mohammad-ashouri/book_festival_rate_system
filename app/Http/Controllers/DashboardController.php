@@ -82,13 +82,9 @@ class DashboardController extends Controller
         switch ($userInfo->type) {
             case 1:
                 return view('Panels.Dashboards.SuperAdmin');
-                break;
             case 2:
                 return view('Panels.Dashboards.Admin');
-                break;
             case 3:
-                return view('Panels.Dashboards.Header');
-                break;
             case 4:
                 $summaryRates = RateInfo::where('rate_status', 'Summary')->with('postInfo')
                     ->where(function ($query) {
@@ -146,13 +142,11 @@ class DashboardController extends Controller
                     ->get();
 
                 $formalLiteraryRates = RateInfo::where('rate_status', 'Formal literary')->with('postInfo')
-                    ->where('formal_literary_rater',session('id'))
+                    ->where('formal_literary_rater', session('id'))
                     ->get();
                 return view('Panels.Dashboards.Rater', compact('summaryRates', 'detailedRates', 'formalLiteraryRates'));
-                break;
             case 5:
                 return view('Panels.Dashboards.ClassificationExpert');
-                break;
         }
     }
 }

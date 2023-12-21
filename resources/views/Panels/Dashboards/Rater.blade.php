@@ -53,6 +53,7 @@
                     </table>
                 </div>
             </div>
+
         @elseif( count($detailedRates) > 0 )
             <div class="mx-auto lg:mr-72">
                 <h1 class="text-2xl font-bold mb-4">فهرست آثار در حال ارزیابی تفصیلی</h1>

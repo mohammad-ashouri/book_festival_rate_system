@@ -18,10 +18,8 @@ class RateController extends Controller
         switch ($userInfo->type) {
             case 1:
                 return view('Panels.Dashboards.SuperAdmin');
-                break;
             case 2:
                 return view('Panels.Dashboards.Admin');
-                break;
             case 3:
             case 4:
                 $rateInfo = RateInfo::with('postInfo')->where('rate_status', 'Summary')->where('id', $id)
