@@ -11,6 +11,10 @@ function swalFire(title = null, text, icon, confirmButtonText) {
     });
 }
 
+$('.reloadCaptcha').click(function () {
+    captchaImg.src = '/captcha?' + Date.now();
+});
+
 //problem logging in paragraph
 $('.helpme').click(function () {
     swalFire('تماس با ما', '' +
