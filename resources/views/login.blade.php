@@ -13,7 +13,7 @@
 
 <div class="login-wrap">
     <div class="login-html text-center">
-        <input  type="checkbox" name="tab" class="sign-in cursor-none" checked><label class="tab cursor-default">
+        <input type="checkbox" name="tab" class="sign-in cursor-none" checked><label class="tab cursor-default">
             {{ env('APP_PERSIAN_NAME') }}
         </label>
         <div class="login-form text-right">
@@ -23,7 +23,8 @@
                 <div class="sign-in-htm">
                     <div class="group">
                         <label for="username" class="label mb-1">نام کاربری</label>
-                        <input name="username" autocomplete="off" id="username" type="text" placeholder="نام کاربری را وارد کنید" class="input">
+                        <input name="username" autocomplete="off" id="username" type="text"
+                               placeholder="نام کاربری را وارد کنید" class="input">
                     </div>
                     <div class="group">
                         <label for="password" class="label mb-1">رمز عبور</label>
@@ -46,6 +47,9 @@
 
                     <div class="group">
                         <button class="button" type="submit">ورود</button>
+                    </div>
+                    <div class="text-left">
+                        <p class="text-white underline text-sm cursor-help helpme">در ورود به سامانه مشکل دارم</p>
                     </div>
                 </div>
             </form>

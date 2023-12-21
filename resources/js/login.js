@@ -2,6 +2,7 @@ import './bootstrap';
 import '@fortawesome/fontawesome-free/css/all.css';
 import $ from 'jquery';
 import Swal from 'sweetalert2';
+
 window.Swal = Swal;
 
 function swalFire(title = null, text, icon, confirmButtonText) {
@@ -10,6 +11,13 @@ function swalFire(title = null, text, icon, confirmButtonText) {
     });
 }
 
+//problem logging in paragraph
+$('.helpme').click(function () {
+    swalFire('تماس با ما', '' +
+        'شماره ثابت 025333133604' +
+        '\t' +
+        'ایتا 09123456789', 'success', 'تلاش مجدد');
+});
 
 //Check Login Form
 $('#loginForm').submit(function (e) {
