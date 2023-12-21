@@ -371,10 +371,33 @@ class RateController extends Controller
                 if ($rateInfo->d2_status == 1) {
                     $detailedRate2 = DetailedRate::where('rate_type', 'd2')->pluck('sum')->first();
                     $avg = ($sum + $detailedRate2) / 2;
-                    if ($avg >= 64) {
-                        $status = 'Formal literary';
-                    } else {
-                        $status = 'Detailed rejected';
+                    switch ($rateInfo->d_form_type) {
+                        case 'تصحیح و تحقیق':
+                        case 'پایان نامه':
+                        case 'کتابشناسی و فهرست نگاری':
+                        case 'داستان جوان':
+                        case 'ادبیات کودک و نوجوان':
+                        case 'ترجمه':
+                            switch ($rateInfo->postInfo->personInfo->gender) {
+                                case 'مرد':
+                                    $maxPoint = 75;
+                                    break;
+                                case 'زن':
+                                    $maxPoint = 70;
+                                    break;
+                            }
+                            if ($avg >= $maxPoint) {
+                                $status = 'Detailed';
+                            } else {
+                                $status = 'Detailed rejected';
+                            }
+                            break;
+                        default:
+                            if ($avg >= 64) {
+                                $status = 'Formal literary';
+                            } else {
+                                $status = 'Detailed rejected';
+                            }
                     }
                 }
                 break;
@@ -383,10 +406,33 @@ class RateController extends Controller
                 if ($rateInfo->d1_status == 1) {
                     $detailedRate1 = DetailedRate::where('rate_type', 'd1')->pluck('sum')->first();
                     $avg = ($sum + $detailedRate1) / 2;
-                    if ($avg >= 64) {
-                        $status = 'Formal literary';
-                    } else {
-                        $status = 'Detailed rejected';
+                    switch ($rateInfo->d_form_type) {
+                        case 'تصحیح و تحقیق':
+                        case 'پایان نامه':
+                        case 'کتابشناسی و فهرست نگاری':
+                        case 'داستان جوان':
+                        case 'ادبیات کودک و نوجوان':
+                        case 'ترجمه':
+                            switch ($rateInfo->postInfo->personInfo->gender) {
+                                case 'مرد':
+                                    $maxPoint = 75;
+                                    break;
+                                case 'زن':
+                                    $maxPoint = 70;
+                                    break;
+                            }
+                            if ($avg >= $maxPoint) {
+                                $status = 'Detailed';
+                            } else {
+                                $status = 'Detailed rejected';
+                            }
+                            break;
+                        default:
+                            if ($avg >= 64) {
+                                $status = 'Formal literary';
+                            } else {
+                                $status = 'Detailed rejected';
+                            }
                     }
                 }
                 break;

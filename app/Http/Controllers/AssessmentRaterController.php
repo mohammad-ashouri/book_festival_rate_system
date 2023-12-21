@@ -74,7 +74,6 @@ class AssessmentRaterController extends Controller
                     case 'تصحیح و تحقیق':
                     case 'کتب مرجع':
                         return $this->alerts(false, 'wrongGroup', 'گروه دوم این اثر نمی تواند ' . $scientificGroupInfo->name . ' باشد.');
-                        break;
                     default:
                         if (!$request->input('scientific_group')) {
                             return $this->alerts(false, 'nullScientificGroup', 'گروه علمی انتخاب نشده است.');
@@ -97,22 +96,32 @@ class AssessmentRaterController extends Controller
                 if (!$request->input('scientific_group')) {
                     return $this->alerts(false, 'nullScientificGroup', 'گروه علمی انتخاب نشده است.');
                 }
+                $chosenScientificGroup=(int)$request->input('scientific_group');
                 $postInfo = Post::find($rateInfo->postInfo->id);
-                if ($postInfo->scientific_group_v1 and $postInfo->scientific_group_v2) {
-                    if ($userInfo->scientific_group === $postInfo->scientific_group_v1) {
-                        $postInfo->scientific_group_v1 = $postInfo->scientific_group_v2;
-                        $rateInfo->sg1_form_type = null;
-                        $rateInfo->sg2_form_type = null;
-                    } elseif ($userInfo->scientific_group === $postInfo->scientific_group_v2) {
-                        $postInfo->scientific_group_v2 = null;
-                        $rateInfo->sg2_form_type = null;
+                if ($postInfo->scientific_group_v1 != null and $postInfo->scientific_group_v2 != null) {
+                    if ($chosenScientificGroup == $postInfo->scientific_group_v1 or $chosenScientificGroup == $postInfo->scientific_group_v2) {
+                        return $this->alerts(false, 'dupScientificGroup', 'گروه علمی انتخاب شده با یکی از گروه ها برابر می باشد.');
+                    } else {
+                        if ($userInfo->scientific_group === $postInfo->scientific_group_v1) {
+                            $postInfo->scientific_group_v1 = $chosenScientificGroup;
+                        } elseif ($userInfo->scientific_group === $postInfo->scientific_group_v2) {
+                            $scientificGroupInfo = ScientificGroup::find($chosenScientificGroup);
+                            switch ($scientificGroupInfo->name) {
+                                case 'ترجمه':
+                                case 'تصحیح و تحقیق':
+                                case 'کتب مرجع':
+                                    return $this->alerts(false, 'wrongGroup', 'گروه دوم این اثر نمی تواند ' . $scientificGroupInfo->name . ' باشد.');
+                                default:
+                                    $postInfo->scientific_group_v2 = $chosenScientificGroup;
+                            }
+                        }
                     }
                 } elseif ($postInfo->scientific_group_v2 === null) {
-                    $rateInfo->sg1_form_type = null;
-                    $postInfo->scientific_group_v1 = $request->input('scientific_group');
+                    $postInfo->scientific_group_v1 = $chosenScientificGroup;
                 }
-                $postInfo->save();
                 $headerComment->body = json_encode([$rateInfo->id, "The work related to the group is not present", $request->input('relation_with_summary_group'), $request->input('scientific_group')]);
+                $postInfo->save();
+                $rateInfo->save();
                 break;
         }
         $this->logActivity('Summary Assessment Approval Done', \request()->ip(), \request()->userAgent(), \session('id'), $rateInfo->post_id);

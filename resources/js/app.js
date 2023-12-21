@@ -194,10 +194,11 @@ $(document).ready(function () {
                         }
                     }
                 });
+
                 function displayComments(comments) {
                     var table = $('.CommentsTable tbody');
                     table.empty();
-                    let raterInfo=null;
+                    let raterInfo = null;
                     $.each(comments, function (index, comment) {
                         var row = $('<tr class="comments-table-row-spacing">');
                         row.append($('<td>').text(index + 1)); // افزودن ردیف
@@ -205,7 +206,7 @@ $(document).ready(function () {
                         row.append($('<td>').text(comment.jalali_date)); // افزودن تاریخ ثبت
                         row.append($('<td>').text(comment.registrar_info.name + ' ' + comment.registrar_info.family)); // افزودن ثبت کننده
                         table.append(row);
-                        raterInfo=comment.status_info.rater_id;
+                        raterInfo = comment.status_info.rater_id;
                     });
                     $.ajax({
                         type: 'GET',
@@ -221,6 +222,7 @@ $(document).ready(function () {
                         }
                     });
                 }
+
                 toggleModal(HistoryModal.id);
             });
             $('.absolute.inset-0.bg-gray-500.opacity-75.history').on('click', function () {
@@ -1469,7 +1471,7 @@ $(document).ready(function () {
                         e.preventDefault();
                         Swal.fire({
                             title: 'آیا مطمئن هستید؟',
-                            text: 'اثر ثبت شده  به مرحله اجمالی راه خواهند یافت.',
+                            text: 'اثر ثبت شده  به مرحله اجمالی راه خواهد یافت.',
                             icon: 'warning',
                             showCancelButton: true,
                             cancelButtonText: 'خیر',
@@ -1495,6 +1497,8 @@ $(document).ready(function () {
                                                 swalFire('خطا!', response.errors.nullScientificGroup[0], 'error', 'تلاش مجدد');
                                             } else if (response.errors.nullFormType) {
                                                 swalFire('خطا!', response.errors.nullFormType[0], 'error', 'تلاش مجدد');
+                                            } else if (response.errors.dupScientificGroup) {
+                                                swalFire('خطا!', response.errors.dupScientificGroup[0], 'error', 'تلاش مجدد');
                                             }
                                         } else {
                                             location.reload();

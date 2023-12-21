@@ -207,7 +207,7 @@
 
 
 
-        @elseif($assessmentStatus==='Detailed')
+        @elseif($assessmentStatus==='Detailed' or $assessmentStatus==='Third detailed')
             <form id="DetailedAssessmentSet">
                 <input type="hidden" name="rateInfoID" value="{{ $rateInfo->id }}">
                 <input type="hidden" name="rateType" value="
