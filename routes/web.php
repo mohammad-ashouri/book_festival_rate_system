@@ -113,6 +113,8 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
             Route::post('/SetSummaryRater', [AssessmentRaterController::class, 'setSummaryRater']);
             Route::get('/DetailedAssessmentManager', [AssessmentRaterController::class, 'detailedAssessmentIndex']);
             Route::post('/SetDetailedRater', [AssessmentRaterController::class, 'setDetailedRater']);
+            Route::get('/FormalLiteraryAssessmentManager', [AssessmentRaterController::class, 'formalLiteraryAssessmentIndex']);
+            Route::post('/SetFormalLiteraryRater', [AssessmentRaterController::class, 'setFormalLiteraryRater']);
 
             //Reports Management
             Route::group(['prefix' => 'AssessmentsStatus'], static function () {

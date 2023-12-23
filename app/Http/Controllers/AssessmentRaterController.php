@@ -96,7 +96,7 @@ class AssessmentRaterController extends Controller
                 if (!$request->input('scientific_group')) {
                     return $this->alerts(false, 'nullScientificGroup', 'گروه علمی انتخاب نشده است.');
                 }
-                $chosenScientificGroup=(int)$request->input('scientific_group');
+                $chosenScientificGroup = (int)$request->input('scientific_group');
                 $postInfo = Post::find($rateInfo->postInfo->id);
                 if ($postInfo->scientific_group_v1 != null and $postInfo->scientific_group_v2 != null) {
                     if ($chosenScientificGroup == $postInfo->scientific_group_v1 or $chosenScientificGroup == $postInfo->scientific_group_v2) {
@@ -263,6 +263,12 @@ class AssessmentRaterController extends Controller
         }
     }
 
+    public function detailedAssessmentIndex()
+    {
+        $detailed = RateInfo::with('postInfo')->where('rate_status', 'Detailed')->paginate(10);
+        return view('DetailedAssessmentAdmin', compact('detailed'));
+    }
+
     public function setDetailedRater(Request $request)
     {
         $rater = (integer)$request->username;
@@ -312,9 +318,24 @@ class AssessmentRaterController extends Controller
         }
     }
 
-    public function detailedAssessmentIndex()
+    public function formalLiteraryAssessmentIndex()
     {
-        $detailed = RateInfo::with('postInfo')->where('rate_status', 'Detailed')->paginate(10);
-        return view('DetailedAssessmentAdmin', compact('detailed'));
+        $formalLiterary = RateInfo::with('postInfo')->where('rate_status', 'Formal literary')->paginate(10);
+        return view('FormalLiteraryAssessmentAdmin', compact('formalLiterary'));
     }
+
+    public function setFormalLiteraryRater(Request $request)
+    {
+        $rater = (integer)$request->username;
+        $PostID = (integer)$request->PostID;
+        $rateInfo = RateInfo::where('post_id', $PostID)->first();
+        if (!$rater) {
+            $rater = null;
+        }
+        $rateInfo->formal_literary_rater = $rater;
+        $rateInfo->formal_literary_rater_set_date = now();
+        $rateInfo->save();
+        $this->logActivity('Formal Literary Rater Changed =>' . $rater, \request()->ip(), \request()->userAgent(), \session('id'), $rateInfo->post_id);
+    }
+
 }

@@ -139,7 +139,7 @@
                                         ->first();
                         @endphp
                         <ul id="menu"
-                            class="menu pr-8 pl-0 w-72 bg-cu-blue text-transparent pt-5 overflow-x-hidden rounded-se-3xl block">
+                            class="menu pr-4 pl-0 w-72 bg-cu-blue text-transparent pt-5 overflow-x-hidden rounded-se-3xl block">
 
                             <div class="ml-7 mb-6 text-center mt-5">
                                 <div class="avatar flex justify-center ">

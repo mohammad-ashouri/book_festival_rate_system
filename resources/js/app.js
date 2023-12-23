@@ -73,7 +73,8 @@ $(document).ready(function () {
         let pathname = window.location.pathname;
         if (pathname.includes("Rate/Detailed")) {
 
-        } else if (pathname.includes("DeliveryStatus")) {
+        }
+        else if (pathname.includes("DeliveryStatus")) {
 
             $('#post_id').on('input', function () {
                 var originalValue = $(this).val();
@@ -333,6 +334,9 @@ $(document).ready(function () {
                                         case 4:
                                             type = 'ارزیاب';
                                             break;
+                                        case 5:
+                                            type = 'کارشناس گونه بندی';
+                                            break;
                                     }
                                     var row = '<tr class="bg-white"><td class="px-6 py-4">' + user.username + '</td><td class="px-6 py-4">' + user.name + ' ' + user.family + '</td><td class="px-6 py-4">' + type + '</td>';
                                     if (user.active == 1) {
@@ -387,6 +391,9 @@ $(document).ready(function () {
                                             break;
                                         case 4:
                                             type = 'ارزیاب';
+                                            break;
+                                        case 5:
+                                            type = 'کارشناس گونه بندی';
                                             break;
                                     }
                                     var row = '<tr class="bg-white"><td class="px-6 py-4">' + user.username + '</td><td class="px-6 py-4">' + user.name + ' ' + user.family + '</td><td class="px-6 py-4">' + type + '</td>';
@@ -1574,6 +1581,28 @@ $(document).ready(function () {
                             data: {
                                 PostID: $(this).data('postid'),
                                 work: $(this).data('work'),
+                                username: $(this).val(),
+                            },
+                            success: function (response) {
+                                if (response.errors) {
+                                    if (response.errors.UsersAreEqual) {
+                                        swalFire('ثبت نشد!', response.errors.UsersAreEqual[0], 'error', 'تلاش مجدد');
+                                    }
+                                }
+                            }
+                        });
+                    });
+                    break;
+                case '/FormalLiteraryAssessmentManager':
+                    $('.SetFormalLiteraryRater').on('change', function (e) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '/SetFormalLiteraryRater',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            },
+                            data: {
+                                PostID: $(this).data('postid'),
                                 username: $(this).val(),
                             },
                             success: function (response) {
