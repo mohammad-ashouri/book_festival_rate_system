@@ -158,13 +158,13 @@ class RateController extends Controller
             case 's1g1':
             case 's2g1':
             case 's3g1':
-                if ($rateInfo->postInfo->scientific_group_v2 != null and $rateInfo->avg_sg2 != null) {
+                if ($rateInfo->postInfo->scientific_group_v2 != null and $rateInfo->avg_sg2 != null and $rateInfo->avg_sg2 != null) {
                     if ($rateInfo->avg_sg2 >= 34 or $rateInfo->avg_sg1 >= 34) {
                         $rateInfo->rate_status = 'Pre Detailed';
                     } else {
                         $rateInfo->rate_status = 'RejectedSummary';
                     }
-                } elseif ($rateInfo->postInfo->scientific_group_v2 == null) {
+                } elseif ($rateInfo->postInfo->scientific_group_v2 == null and $rateInfo->s1g1_status == 1 and $rateInfo->s2g1_status == 1 and $rateInfo->s3g1_status == 1) {
                     if ($rateInfo->avg_sg1 >= 34) {
                         $rateInfo->rate_status = 'Pre Detailed';
                     } else {
@@ -175,7 +175,7 @@ class RateController extends Controller
             case 's1g2':
             case 's2g2':
             case 's3g2':
-                if ($rateInfo->postInfo->scientific_group_v1 != null and $rateInfo->avg_sg1 != null) {
+                if ($rateInfo->postInfo->scientific_group_v1 != null and $rateInfo->avg_sg1 != null and $rateInfo->avg_sg1 != null and $rateInfo->s1g1_status == 1 and $rateInfo->s2g1_status == 1 and $rateInfo->s3g1_status == 1) {
                     if ($rateInfo->avg_sg1 != null) {
                         if ($rateInfo->avg_sg1 >= 34 or $rateInfo->avg_sg2 >= 34) {
                             $rateInfo->rate_status = 'Pre Detailed';

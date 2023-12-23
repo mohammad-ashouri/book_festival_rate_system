@@ -99,6 +99,7 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    @if(($post->postInfo->post_format=='کتاب' and $post->formal_literary_rate_status==1 and $post->d1_status==1 and $post->d2_status==1) or ($post->postInfo->post_format=='پایان نامه' and $post->rate_status=='Detailed' and $post->d1_status==1 and $post->d2_status==1))
                                     <div>
                                         <label class="block text-gray-700 text-sm font-bold text-right mr-2">ارزیاب
                                             سوم
@@ -124,6 +125,7 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
