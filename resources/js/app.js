@@ -1016,6 +1016,9 @@ $(document).ready(function () {
                                                 if (response.errors.nullPostDeliveryMethod) {
                                                     swalFire('خطا!', response.errors.nullPostDeliveryMethod[0], 'error', 'تلاش مجدد');
                                                 }
+                                                if (response.errors.nullNumberOfReceived) {
+                                                    swalFire('خطا!', response.errors.nullNumberOfReceived[0], 'error', 'تلاش مجدد');
+                                                }
                                                 if (response.errors.nullPublisher) {
                                                     swalFire('خطا!', response.errors.nullPublisher[0], 'error', 'تلاش مجدد');
                                                 }
@@ -1174,6 +1177,7 @@ $(document).ready(function () {
                                         commonDIVForEdit.classList.remove('hidden');
                                     }
                                     post_delivery_methodForEdit.value = response.post_delivery_method;
+                                    number_of_receivedForEdit.value = response.number_of_received;
                                     if (response.post_delivery_method == 'digital') {
                                         file_srcDIVForEdit.classList.remove('hidden');
                                         response.file_src = response.file_src.replace('public', 'storage');
@@ -1248,6 +1252,9 @@ $(document).ready(function () {
                                                 }
                                                 if (response.errors.nullPostDeliveryMethod) {
                                                     swalFire('خطا!', response.errors.nullPostDeliveryMethod[0], 'error', 'تلاش مجدد');
+                                                }
+                                                if (response.errors.nullNumberOfReceived) {
+                                                    swalFire('خطا!', response.errors.nullNumberOfReceived[0], 'error', 'تلاش مجدد');
                                                 }
                                                 if (response.errors.nullPublisher) {
                                                     swalFire('خطا!', response.errors.nullPublisher[0], 'error', 'تلاش مجدد');

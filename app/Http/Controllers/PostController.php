@@ -30,6 +30,7 @@ class PostController extends Controller
         $activity_type = $request->input('activity_type');
         $participation_percentage = 100;
         $post_delivery_method = $request->input('post_delivery_method');
+        $number_of_received = $request->input('number_of_received');
         $postFilePath = null;
         $thesisFilePath = null;
         if (!$person) {
@@ -58,6 +59,9 @@ class PostController extends Controller
         }
         if (!$post_delivery_method) {
             return $this->alerts(false, 'nullPostDeliveryMethod', 'نحوه تحویل اثر انتخاب نشده است');
+        }
+        if (!$number_of_received) {
+            return $this->alerts(false, 'nullNumberOfReceived', 'نحوه تحویل اثر انتخاب نشده است');
         }
 
         //cooperators
@@ -251,6 +255,7 @@ class PostController extends Controller
         $Post->activity_type = $activity_type;
         $Post->participation_percentage = $participation_percentage;
         $Post->post_delivery_method = $post_delivery_method;
+        $Post->number_of_received = $number_of_received;
         $Post->save();
 
         if (@$comm_name1) {
@@ -328,6 +333,7 @@ class PostController extends Controller
         $activity_type = $request->input('activity_typeForEdit');
         $participation_percentage = 100;
         $post_delivery_method = $request->input('post_delivery_methodForEdit');
+        $number_of_received = $request->input('number_of_receivedForEdit');
         $postFilePath = null;
         $thesisFilePath = null;
         if (!$person) {
@@ -356,6 +362,9 @@ class PostController extends Controller
         }
         if (!$post_delivery_method) {
             return $this->alerts(false, 'nullPostDeliveryMethod', 'نحوه تحویل اثر انتخاب نشده است');
+        }
+        if (!$number_of_received) {
+            return $this->alerts(false, 'nullNumberOfReceived', 'نحوه تحویل اثر انتخاب نشده است');
         }
 
         //cooperators
@@ -542,6 +551,7 @@ class PostController extends Controller
         $Post->activity_type = $activity_type;
         $Post->participation_percentage = $participation_percentage;
         $Post->post_delivery_method = $post_delivery_method;
+        $Post->number_of_received = $number_of_received;
         $Post->save();
 
         if (@$comm_name1) {

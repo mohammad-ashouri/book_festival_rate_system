@@ -431,7 +431,7 @@
                                                 </div>
                                             </div>
                                             <div class="flex flex-col items-right mb-4">
-                                                <div class="mb-4">
+                                                <div class="flex mb-4">
                                                     <label for="post_delivery_method"
                                                            class="text-gray-700 text-sm font-bold whitespace-nowrap">نحوه
                                                         تحویل اثر:</label>
@@ -442,6 +442,12 @@
                                                         <option value="physical">فیزیکی</option>
                                                         <option value="digital">دیجیتال</option>
                                                     </select>
+                                                    <label for="number_of_received"
+                                                           class="text-gray-700 text-sm font-bold whitespace-nowrap">تعداد نسخ واصله به دبیرخانه:</label>
+                                                    <input type="number" name="number_of_received"
+                                                           id="number_of_received"
+                                                           class="border rounded-md w-full px-3 py-2"
+                                                           placeholder="تعداد نسخ واصله به دبیرخانه را وارد نمایید">
                                                 </div>
                                                 <div id="file_srcDIV" class="mb-4 hidden">
                                                     <label for="file_src"
@@ -931,7 +937,7 @@
                                                 </div>
                                             </div>
                                             <div class="flex flex-col items-right mb-4">
-                                                <div class="mb-4">
+                                                <div class="flex mb-4">
                                                     <label for="post_delivery_methodForEdit"
                                                            class="text-gray-700 text-sm font-bold whitespace-nowrap">نحوه
                                                         تحویل اثر:</label>
@@ -942,6 +948,12 @@
                                                         <option value="physical">فیزیکی</option>
                                                         <option value="digital">دیجیتال</option>
                                                     </select>
+                                                    <label for="number_of_receivedForEdit"
+                                                           class="text-gray-700 text-sm font-bold whitespace-nowrap">تعداد نسخ واصله به دبیرخانه:</label>
+                                                    <input type="number" name="number_of_receivedForEdit"
+                                                           id="number_of_receivedForEdit"
+                                                           class="border rounded-md w-full px-3 py-2"
+                                                           placeholder="تعداد نسخ واصله به دبیرخانه را وارد نمایید">
                                                 </div>
                                                 <div id="file_srcDIVForEdit" class="mb-4 hidden">
                                                     <label for="file_srcForEdit"

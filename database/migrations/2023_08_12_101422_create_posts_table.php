@@ -57,6 +57,7 @@ return new class extends Migration
 
             //delivery to festival
             $table->string('post_delivery_method');
+            $table->integer('number_of_received')->default(0);
             $table->text('file_src')->nullable();
             $table->text('thesis_proceedings_src')->nullable();
 
