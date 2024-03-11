@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AssessmentRaterController;
+use App\Http\Controllers\BranchInfo\InterviewController;
 use App\Http\Controllers\Catalogs\FestivalController;
 use App\Http\Controllers\Catalogs\LanguageController;
+use App\Http\Controllers\Catalogs\PublisherController;
 use App\Http\Controllers\Catalogs\ScientificGroupController;
 use App\Http\Controllers\ClassificationController;
 use App\Http\Controllers\DashboardController;
@@ -13,7 +15,6 @@ use App\Http\Controllers\RateController;
 use App\Http\Controllers\Reports\AssessmentsReport;
 use App\Http\Controllers\Reports\DeliveryReportController;
 use App\Http\Controllers\Reports\PDFController;
-use App\Http\Controllers\Reports\PDFReportController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserManager;
 use App\Http\Middleware\CheckLoginMiddleware;
@@ -79,6 +80,8 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
             Route::get('/getScientificGroupInfo', [ScientificGroupController::class, 'getScientificGroupInfo']);
             Route::get('/getFestivalInfo', [FestivalController::class, 'getFestivalInfo']);
             Route::get('/getAllGroups', [ScientificGroupController::class, 'getAllGroups']);
+            Route::resource('Publishers', PublisherController::class);
+
             //End Catalogs
 
             //Person Management

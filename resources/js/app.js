@@ -71,8 +71,37 @@ function resetFields() {
 $(document).ready(function () {
         var pattern = /^\/Rate\/Summary\/\d+$/;
         let pathname = window.location.pathname;
-        if (pathname.includes("Rate/Detailed")) {
-
+        if (pathname.includes("Publishers")) {
+            $('#new-publisher').submit(function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'آیا مطمئن هستید؟',
+                    text: 'ناشر اضافه خواهد شد.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    cancelButtonText: 'خیر',
+                    confirmButtonText: 'بله',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#new-publisher').off('submit').submit();
+                    }
+                });
+            });
+            $('#edit-publisher').submit(function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'آیا مطمئن هستید؟',
+                    text: 'ناشر ویرایش خواهد شد.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    cancelButtonText: 'خیر',
+                    confirmButtonText: 'بله',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#edit-publisher').off('submit').submit();
+                    }
+                });
+            });
         }
         else if (pathname.includes("DeliveryStatus")) {
 
@@ -229,7 +258,8 @@ $(document).ready(function () {
             $('.absolute.inset-0.bg-gray-500.opacity-75.history').on('click', function () {
                 toggleModal(HistoryModal.id)
             });
-        } else {
+        }
+        else {
             switch (pathname) {
                 case "/Profile":
                     resetFields();
