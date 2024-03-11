@@ -81,6 +81,7 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
             Route::get('/getFestivalInfo', [FestivalController::class, 'getFestivalInfo']);
             Route::get('/getAllGroups', [ScientificGroupController::class, 'getAllGroups']);
             Route::resource('Publishers', PublisherController::class);
+            Route::resource('Festivals', FestivalController::class);
 
             //End Catalogs
 
