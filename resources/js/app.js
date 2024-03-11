@@ -989,15 +989,15 @@ $(document).ready(function () {
                                                 if (response.errors.nullPublisher) {
                                                     swalFire('خطا!', response.errors.nullPublisher[0], 'error', 'تلاش مجدد');
                                                 }
-                                                if (response.errors.nullISSN) {
-                                                    swalFire('خطا!', response.errors.nullISSN[0], 'error', 'تلاش مجدد');
-                                                }
+                                                // if (response.errors.nullISSN) {
+                                                //     swalFire('خطا!', response.errors.nullISSN[0], 'error', 'تلاش مجدد');
+                                                // }
                                                 if (response.errors.nullNumberOfCovers) {
                                                     swalFire('خطا!', response.errors.nullNumberOfCovers[0], 'error', 'تلاش مجدد');
                                                 }
-                                                if (response.errors.nullCirculation) {
-                                                    swalFire('خطا!', response.errors.nullCirculation[0], 'error', 'تلاش مجدد');
-                                                }
+                                                // if (response.errors.nullCirculation) {
+                                                //     swalFire('خطا!', response.errors.nullCirculation[0], 'error', 'تلاش مجدد');
+                                                // }
                                                 if (response.errors.nullBookSize) {
                                                     swalFire('خطا!', response.errors.nullBookSize[0], 'error', 'تلاش مجدد');
                                                 }
@@ -1222,15 +1222,15 @@ $(document).ready(function () {
                                                 if (response.errors.nullPublisher) {
                                                     swalFire('خطا!', response.errors.nullPublisher[0], 'error', 'تلاش مجدد');
                                                 }
-                                                if (response.errors.nullISSN) {
-                                                    swalFire('خطا!', response.errors.nullISSN[0], 'error', 'تلاش مجدد');
-                                                }
+                                                // if (response.errors.nullISSN) {
+                                                //     swalFire('خطا!', response.errors.nullISSN[0], 'error', 'تلاش مجدد');
+                                                // }
                                                 if (response.errors.nullNumberOfCovers) {
                                                     swalFire('خطا!', response.errors.nullNumberOfCovers[0], 'error', 'تلاش مجدد');
                                                 }
-                                                if (response.errors.nullCirculation) {
-                                                    swalFire('خطا!', response.errors.nullCirculation[0], 'error', 'تلاش مجدد');
-                                                }
+                                                // if (response.errors.nullCirculation) {
+                                                //     swalFire('خطا!', response.errors.nullCirculation[0], 'error', 'تلاش مجدد');
+                                                // }
                                                 if (response.errors.nullBookSize) {
                                                     swalFire('خطا!', response.errors.nullBookSize[0], 'error', 'تلاش مجدد');
                                                 }

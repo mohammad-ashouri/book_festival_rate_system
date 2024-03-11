@@ -144,7 +144,7 @@
                                                 </div>
                                                 <div class="w-1/3 ml-3">
                                                     <label for="ISSN"
-                                                           class="block text-gray-700 text-sm font-bold mb-2">شابک*:</label>
+                                                           class="block text-gray-700 text-sm font-bold mb-2">شابک:</label>
                                                     <input type="text" id="ISSN" name="ISSN"
                                                            autocomplete="off"
                                                            class="border rounded-md w-full px-3 py-2 "
@@ -163,7 +163,7 @@
                                                 </div>
                                                 <div class="w-1/3 ml-3">
                                                     <label for="circulation"
-                                                           class="block text-gray-700 text-sm font-bold mb-2">تیراژ*:</label>
+                                                           class="block text-gray-700 text-sm font-bold mb-2">تیراژ:</label>
                                                     <input type="text" id="circulation" name="circulation"
                                                            autocomplete="off"
                                                            class="border rounded-md w-full px-3 py-2 "
@@ -171,7 +171,7 @@
                                                 </div>
                                                 <div class="w-1/3 ml-3">
                                                     <label for="book_size"
-                                                           class="block text-gray-700 text-sm font-bold mb-2">قطع</label>
+                                                           class="block text-gray-700 text-sm font-bold mb-2">قطع*</label>
                                                     <select id="book_size"
                                                             class="border rounded-md w-full px-3 py-2 mb-2"
                                                             name="book_size">
@@ -196,7 +196,8 @@
                                                            name="thesis_certificate_number"
                                                            autocomplete="off"
                                                            class="border rounded-md w-full px-3 py-2 "
-                                                           placeholder="شابک را وارد کنید">
+                                                           placeholder="شماره
+                                                        گواهی دفاع پایان نامه را وارد کنید">
                                                 </div>
                                                 <div class="w-1/3 ml-3">
                                                     <label for="thesis_defence_place"
@@ -222,7 +223,8 @@
                                                     <input type="text" id="thesis_grade" name="thesis_grade"
                                                            autocomplete="off"
                                                            class="border rounded-md w-full px-3 py-2 "
-                                                           placeholder="شابک را وارد کنید">
+                                                           placeholder="امتیاز
+                                                        پایان نامه را وارد کنید">
                                                 </div>
                                             </div>
                                             <div id="thesisDIV2" class="flex justify-right mb-4 hidden">
@@ -612,7 +614,7 @@
                                                 </div>
                                                 <div class="w-1/3 ml-3">
                                                     <label for="ISSNForEdit"
-                                                           class="block text-gray-700 text-sm font-bold mb-2">شابک*:</label>
+                                                           class="block text-gray-700 text-sm font-bold mb-2">شابک:</label>
                                                     <input type="text" id="ISSNForEdit" name="ISSNForEdit"
                                                            autocomplete="off"
                                                            class="border rounded-md w-full px-3 py-2 "
@@ -632,7 +634,7 @@
                                                 </div>
                                                 <div class="w-1/3 ml-3">
                                                     <label for="circulationForEdit"
-                                                           class="block text-gray-700 text-sm font-bold mb-2">تیراژ*:</label>
+                                                           class="block text-gray-700 text-sm font-bold mb-2">تیراژ:</label>
                                                     <input type="text" id="circulationForEdit" name="circulationForEdit"
                                                            autocomplete="off"
                                                            class="border rounded-md w-full px-3 py-2 "
@@ -640,7 +642,7 @@
                                                 </div>
                                                 <div class="w-1/3 ml-3">
                                                     <label for="book_sizeForEdit"
-                                                           class="block text-gray-700 text-sm font-bold mb-2">قطع</label>
+                                                           class="block text-gray-700 text-sm font-bold mb-2">قطع*</label>
                                                     <select id="book_sizeForEdit"
                                                             class="border rounded-md w-full px-3 py-2 mb-2"
                                                             name="book_sizeForEdit">
@@ -665,7 +667,8 @@
                                                            name="thesis_certificate_numberForEdit"
                                                            autocomplete="off"
                                                            class="border rounded-md w-full px-3 py-2 "
-                                                           placeholder="شابک را وارد کنید">
+                                                           placeholder="شماره
+                                                        گواهی دفاع پایان نامه را وارد کنید">
                                                 </div>
                                                 <div class="w-1/3 ml-3">
                                                     <label for="thesis_defence_placeForEdit"
@@ -692,7 +695,8 @@
                                                            name="thesis_gradeForEdit"
                                                            autocomplete="off"
                                                            class="border rounded-md w-full px-3 py-2 "
-                                                           placeholder="شابک را وارد کنید">
+                                                           placeholder="امتیاز
+                                                        پایان نامه را وارد کنید">
                                                 </div>
                                             </div>
                                             <div id="thesisDIV2ForEdit" class="flex justify-right mb-4 hidden ">

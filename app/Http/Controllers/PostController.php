@@ -126,9 +126,9 @@ class PostController extends Controller
                     return $this->alerts(false, 'nullPublisher', 'ناشر انتخاب نشده است');
                 }
                 $ISSN = $request->input('ISSN');
-                if (!$ISSN) {
-                    return $this->alerts(false, 'nullISSN', 'شابک وارد نشده است');
-                }
+//                if (!$ISSN) {
+//                    return $this->alerts(false, 'nullISSN', 'شابک وارد نشده است');
+//                }
                 $number_of_covers = $request->input('number_of_covers');
                 if (!$number_of_covers) {
                     return $this->alerts(false, 'nullNumberOfCovers', 'تعداد جلد انتخاب نشده است');
@@ -424,9 +424,9 @@ class PostController extends Controller
                     return $this->alerts(false, 'nullPublisher', 'ناشر انتخاب نشده است');
                 }
                 $ISSN = $request->input('ISSNForEdit');
-                if (!$ISSN) {
-                    return $this->alerts(false, 'nullISSN', 'شابک وارد نشده است');
-                }
+//                if (!$ISSN) {
+//                    return $this->alerts(false, 'nullISSN', 'شابک وارد نشده است');
+//                }
                 $number_of_covers = $request->input('number_of_coversForEdit');
                 if (!$number_of_covers) {
                     return $this->alerts(false, 'nullNumberOfCovers', 'تعداد جلد انتخاب نشده است');
