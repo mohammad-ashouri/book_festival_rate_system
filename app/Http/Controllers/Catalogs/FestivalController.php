@@ -10,6 +10,9 @@ class FestivalController extends Controller
 {
     public function getFestivalInfo(Request $request)
     {
-        return Festival::find($request->input('id'));
+        if ($request->id) {
+            return Festival::find($request->input('id'));
+        }
+        abort(403);
     }
 }

@@ -14,5 +14,6 @@ class LanguageController extends Controller
         if ($id){
             return Language::find($id)->value('name');
         }
+        abort(403);
     }
 }

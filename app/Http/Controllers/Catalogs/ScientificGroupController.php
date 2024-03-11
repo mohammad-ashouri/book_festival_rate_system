@@ -14,6 +14,7 @@ class ScientificGroupController extends Controller
         if ($id) {
             return ScientificGroup::find($id);
         }
+        abort(403);
     }
 
     public function getAllGroups()
