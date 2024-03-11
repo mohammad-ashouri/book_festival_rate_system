@@ -1068,7 +1068,7 @@
                                     @endphp
                                     {{ @$personInfo->name .' ' . @$personInfo->family }}
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="flex px-6 py-4">
                                     <button type="submit" data-id="{{ $post->id }}"
                                             class="px-4 py-2 mr-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300 PostControl">
                                         ویرایش
