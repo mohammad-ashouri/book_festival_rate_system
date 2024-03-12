@@ -1,3 +1,4 @@
+@php use Morilog\Jalali\Jalalian; @endphp
 @extends('layouts.PanelMaster')
 
 @section('content')
@@ -57,8 +58,16 @@
                             <td class="px-6 py-4">{{ $loop->iteration }}</td>
                             <td class="px-6 py-4">{{ $festival->id }}</td>
                             <td class="px-6 py-4">{{ $festival->name }}</td>
-                            <td class="px-6 py-4">{{ $festival->start_date }}</td>
-                            <td class="px-6 py-4">{{ $festival->end_date }}</td>
+                            <td class="px-6 py-4">
+                                {{ Jalalian::fromCarbon(\Carbon\Carbon::parse($festival->start_date))->format('%Y/%m/%d') }}
+                            </td>
+                            <td class="px-6 py-4">
+                                @if($festival->finish_date)
+                                {{ Jalalian::fromCarbon(\Carbon\Carbon::parse($festival->finish_date))->format('%Y/%m/%d') }}
+                                @else
+                                    در حال برگزاری
+                                @endif
+                            </td>
                             <td class="px-6 py-4">
                                 @if($festival->active==1)
                                     فعال

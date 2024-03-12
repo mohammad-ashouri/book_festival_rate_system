@@ -103,6 +103,38 @@ $(document).ready(function () {
                 });
             });
         }
+        else if (pathname.includes("Festivals")) {
+            $('#new-festival').submit(function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'آیا مطمئن هستید؟',
+                    text: 'دوره تعریف خواهد شد.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    cancelButtonText: 'خیر',
+                    confirmButtonText: 'بله',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#new-festival').off('submit').submit();
+                    }
+                });
+            });
+            $('#edit-festival').submit(function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'آیا مطمئن هستید؟',
+                    text: 'ناشر ویرایش خواهد شد.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    cancelButtonText: 'خیر',
+                    confirmButtonText: 'بله',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#edit-festival').off('submit').submit();
+                    }
+                });
+            });
+        }
         else if (pathname.includes("DeliveryStatus")) {
 
             $('#post_id').on('input', function () {

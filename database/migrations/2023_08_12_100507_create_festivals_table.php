@@ -15,11 +15,11 @@ return new class extends Migration
         Schema::create('festivals', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('start_date',25);
+            $table->date('start_date');
             $table->unsignedBigInteger('starter');
             $table->foreign('starter')->references('id')->on('users');
-            $table->string('finish_date',25);
-            $table->unsignedBigInteger('finisher');
+            $table->date('finish_date')->nullable();
+            $table->unsignedBigInteger('finisher')->nullable();
             $table->foreign('finisher')->references('id')->on('users');
             $table->tinyInteger('active')->default(1);
             $table->timestamps();
@@ -27,7 +27,7 @@ return new class extends Migration
         });
 
         DB::table('festivals')->insert([
-            ['id'=>25,'name' => 'بیست و پنجم', 'start_date' => '1402/02/10', 'starter' => '1', 'finish_date' => '1402/05/10', 'finisher' => '1', 'created_at' => now(), 'updated_at' => now()]
+            ['id'=>25,'name' => 'بیست و پنجم', 'start_date' => '2023/05/20', 'starter' => '1', 'finish_date' => '2023/08/20', 'finisher' => '1', 'created_at' => now(), 'updated_at' => now()]
         ]);
     }
 

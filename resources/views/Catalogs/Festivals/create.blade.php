@@ -25,13 +25,13 @@
             @endif
 
             <div class="bg-white rounded shadow flex flex-col ">
-                <form id="new-publisher" method="post" action="{{route('Publishers.store')}}">
+                <form id="new-festival" method="post" action="{{route('Festivals.store')}}">
                     @csrf
                     <div class="bg-white px-4 pb-4 sm:p-6 sm:pb-4">
                         <div class="flex mt-4">
                             <div class="flex-1 flex-col items-right ml-3">
                                 <label
-                                       class="block text-gray-700 text-sm font-bold mb-2">کد همایش:</label>
+                                    class="block text-gray-700 text-sm font-bold mb-2">کد همایش:</label>
                                 <input type="text" disabled
                                        class="border rounded-md w-full mb-2 px-3 py-2 text-right bg-gray-200"
                                        value="{{$lastFestival->id+1}}">
@@ -43,55 +43,25 @@
                                        class="border rounded-md w-full mb-2 px-3 py-2 text-right"
                                        placeholder="عنوان همایش را وارد کنید">
                             </div>
-                        </div>
-                    </div>
-                    <div class="bg-white px-4 pb-4 sm:p-6 sm:pb-4">
-                        <div class="flex">
                             <div class="flex-1 flex-col items-right mb-2 ml-3">
                                 <label class="block text-gray-700 text-sm font-bold mb-2">تاریخ شروع*:</label>
                                 <div class="flex-1 flex-col items-right mb-2 ml-3">
                                     <select id="start_day" class="border rounded-md px-3 py-2"
                                             name="start_day">
                                         <option value="" disabled selected>روز</option>
-                                        @for($a=1;$a<=31;$a++)
+                                        @for($a=01;$a<=31;$a++)
                                             <option value="{{ $a }}">{{ $a }}</option>
                                         @endfor
                                     </select>
                                     <select id="start_month" class="border rounded-md px-3 py-2"
                                             name="start_month">
                                         <option value="" disabled selected>ماه</option>
-                                        @for($a=1;$a<=12;$a++)
+                                        @for($a=01;$a<=12;$a++)
                                             <option value="{{ $a }}">{{ $a }}</option>
                                         @endfor
                                     </select>
                                     <select id="start_year" class="border rounded-md px-3 py-2"
                                             name="start_year">
-                                        <option value="" disabled selected>سال</option>
-                                        @for($a=1402;$a<=1420;$a++)
-                                            <option value="{{ $a }}">{{ $a }}</option>
-                                        @endfor
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="flex-1 flex-col items-right mb-2 ml-3">
-                                <label class="block text-gray-700 text-sm font-bold mb-2">تاریخ پایان*:</label>
-                                <div class="flex-1 flex-col items-right mb-2 ml-3">
-                                    <select id="end_day" class="border rounded-md px-3 py-2"
-                                            name="end_day">
-                                        <option value="" disabled selected>روز</option>
-                                        @for($a=1;$a<=31;$a++)
-                                            <option value="{{ $a }}">{{ $a }}</option>
-                                        @endfor
-                                    </select>
-                                    <select id="end_month" class="border rounded-md px-3 py-2"
-                                            name="end_month">
-                                        <option value="" disabled selected>ماه</option>
-                                        @for($a=1;$a<=12;$a++)
-                                            <option value="{{ $a }}">{{ $a }}</option>
-                                        @endfor
-                                    </select>
-                                    <select id="end_year" class="border rounded-md px-3 py-2"
-                                            name="end_year">
                                         <option value="" disabled selected>سال</option>
                                         @for($a=1402;$a<=1420;$a++)
                                             <option value="{{ $a }}">{{ $a }}</option>
