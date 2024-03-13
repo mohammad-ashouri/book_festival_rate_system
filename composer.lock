@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cbe9105ebee05715fc75b64c086ceab7",
+    "content-hash": "8f44fd208c2c501f354b3b17379a4111",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -4501,20 +4501,20 @@
         },
         {
             "name": "realrashid/sweet-alert",
-            "version": "v7.1.0",
+            "version": "v7.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/realrashid/sweet-alert.git",
-                "reference": "769f951053cd3363fd7fb7a1dd30f9828b619b44"
+                "reference": "2d38720644fb30ff6db4e2a5ee013c09057b1f3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/realrashid/sweet-alert/zipball/769f951053cd3363fd7fb7a1dd30f9828b619b44",
-                "reference": "769f951053cd3363fd7fb7a1dd30f9828b619b44",
+                "url": "https://api.github.com/repos/realrashid/sweet-alert/zipball/2d38720644fb30ff6db4e2a5ee013c09057b1f3b",
+                "reference": "2d38720644fb30ff6db4e2a5ee013c09057b1f3b",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "^5.6|^6.0|^7.0|^8.0|^9.0|^9.11|9.14.*|^10.0",
+                "laravel/framework": "^5.6|^6.0|^7.0|^8.0|^9.0|^9.11|9.14.*|^10.0|^11.0",
                 "php": "^7.2|^8.0|^8.1"
             },
             "require-dev": {
@@ -4587,7 +4587,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-08-07T19:23:17+00:00"
+            "time": "2024-03-02T08:59:25+00:00"
         },
         {
             "name": "setasign/fpdi",
@@ -9518,7 +9518,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.3"
+        "php": "^8.2"
     },
     "platform-dev": [],
     "plugin-api-version": "2.6.0"
