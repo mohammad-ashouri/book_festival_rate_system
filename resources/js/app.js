@@ -135,6 +135,38 @@ $(document).ready(function () {
                 });
             });
         }
+        else if (pathname.includes("DefencePlaces")) {
+            $('#new-defence-place').submit(function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'آیا مطمئن هستید؟',
+                    text: 'محل دفاع تعریف خواهد شد.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    cancelButtonText: 'خیر',
+                    confirmButtonText: 'بله',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#new-defence-place').off('submit').submit();
+                    }
+                });
+            });
+            $('#edit-defence-place').submit(function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'آیا مطمئن هستید؟',
+                    text: 'محل دفاع ویرایش خواهد شد.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    cancelButtonText: 'خیر',
+                    confirmButtonText: 'بله',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#edit-defence-place').off('submit').submit();
+                    }
+                });
+            });
+        }
         else if (pathname.includes("DeliveryStatus")) {
 
             $('#post_id').on('input', function () {

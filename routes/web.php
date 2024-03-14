@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AssessmentRaterController;
 use App\Http\Controllers\BranchInfo\InterviewController;
+use App\Http\Controllers\Catalogs\DefencePlaceController;
 use App\Http\Controllers\Catalogs\FestivalController;
 use App\Http\Controllers\Catalogs\LanguageController;
 use App\Http\Controllers\Catalogs\PublisherController;
@@ -82,6 +83,7 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
             Route::get('/getAllGroups', [ScientificGroupController::class, 'getAllGroups']);
             Route::resource('Publishers', PublisherController::class);
             Route::resource('Festivals', FestivalController::class);
+            Route::resource('DefencePlaces', DefencePlaceController::class);
 
             //End Catalogs
 
