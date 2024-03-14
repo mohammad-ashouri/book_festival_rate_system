@@ -25,7 +25,7 @@
             <div class="bg-white rounded shadow p-6 flex flex-col ">
                 <a href="{{route('DefencePlaces.create')}}">
                     <button type="button"
-                            class="px-4 py-2 bg-green-500 w-32 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300">
+                            class="px-4 py-2 bg-green-500  text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300">
                         محل دفاع جدید
                     </button>
                 </a>
