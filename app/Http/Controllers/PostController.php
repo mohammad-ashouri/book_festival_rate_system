@@ -138,9 +138,9 @@ class PostController extends Controller
                     return $this->alerts(false, 'nullNumberOfCovers', 'تعداد جلد انتخاب نشده است');
                 }
                 $circulation = $request->input('circulation');
-                if (!$circulation) {
-                    return $this->alerts(false, 'nullCirculation', 'تیراژ وارد نشده است');
-                }
+//                if (!$circulation) {
+//                    return $this->alerts(false, 'nullCirculation', 'تیراژ وارد نشده است');
+//                }
                 $book_size = $request->input('book_size');
                 if (!$book_size) {
                     return $this->alerts(false, 'nullBookSize', 'قطع انتخاب نشده است');
@@ -441,9 +441,9 @@ class PostController extends Controller
                     return $this->alerts(false, 'nullNumberOfCovers', 'تعداد جلد انتخاب نشده است');
                 }
                 $circulation = $request->input('circulationForEdit');
-                if (!$circulation) {
-                    return $this->alerts(false, 'nullCirculation', 'تیراژ وارد نشده است');
-                }
+//                if (!$circulation) {
+//                    return $this->alerts(false, 'nullCirculation', 'تیراژ وارد نشده است');
+//                }
                 $book_size = $request->input('book_sizeForEdit');
                 if (!$book_size) {
                     return $this->alerts(false, 'nullBookSize', 'قطع انتخاب نشده است');
