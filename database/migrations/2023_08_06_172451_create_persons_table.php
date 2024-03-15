@@ -14,6 +14,8 @@ return new class extends Migration
     {
         Schema::create('persons', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('name',100);
             $table->string('family',150);
             $table->string('national_code',20)->unique();
@@ -23,9 +25,6 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
-        $query="INSERT INTO `persons` (`id`, `name`, `family`, `national_code`, `howzah_code`, `mobile`, `gender`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'علی', 'زمانی', '0356365956', '21154', '09145246352', 'مرد', '2023-09-09 05:16:07', '2023-09-09 05:16:07', NULL);";
-        DB::statement($query);
     }
 
     /**

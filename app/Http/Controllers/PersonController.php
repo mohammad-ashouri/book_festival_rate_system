@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Person;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PersonController extends Controller
 {
-    public function newPerson(Request $request)
+    public function store(Request $request)
     {
         $name = $request->input('name');
         $family = $request->input('family');
@@ -88,8 +89,18 @@ class PersonController extends Controller
             return $this->alerts(false, 'personExists', 'کد ملی/پاسپورت تکراری وارد شده است.');
         }
 
+        $user = User::firstOrCreate([
+            'name' => $name,
+            'family' => $family,
+            'username' => $nationalCode,
+            'password' => bcrypt('ketabesal402')
+        ]);
+        if ($user) {
+            $this->logActivity('User Added =>' . $user->id, \request()->ip(), \request()->userAgent(), \session('id'));
+        }
         $Person = Person::find($PersonID);
         $Person->fill([
+            'user_id' => $user->id,
             'name' => $name,
             'family' => $family,
             'mobile' => $mobile,
@@ -98,6 +109,7 @@ class PersonController extends Controller
             'gender' => $gender,
         ]);
         $Person->save();
+
         $this->logActivity('Person Edited =>' . $PersonID, \request()->ip(), \request()->userAgent(), \session('id'));
         return $this->success(true, 'personEdited', 'برای نمایش اطلاعات جدید، لطفا صفحه را رفرش نمایید.');
     }
