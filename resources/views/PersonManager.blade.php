@@ -132,11 +132,11 @@
                                             <div class="flex flex-col items-right mb-4">
                                                 <label for="national_codeForEdit"
                                                        class="block text-gray-700 text-sm font-bold mb-2">کد
-                                                    ملی*:</label>
+                                                    ملی/پاسپورت*:</label>
                                                 <input type="text" id="national_codeForEdit" name="national_codeForEdit"
-                                                       autocomplete="off" disabled
-                                                       class="border rounded-md bg-gray-300 w-full mb-4 px-3 py-2 text-right"
-                                                       placeholder="کد ملی را وارد کنید">
+                                                       autocomplete="off" minlength="1" maxlength="20"
+                                                       class="border rounded-md  w-full mb-4 px-3 py-2 text-right"
+                                                       placeholder="کد ملی/پاسپورت را وارد کنید">
                                             </div>
                                             <div class="flex flex-col items-right mb-2">
                                                 <label for="mobileForEdit"

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('name',100);
             $table->string('family',150);
-            $table->string('national_code',10)->unique();
+            $table->string('national_code',20)->unique();
             $table->string('howzah_code')->nullable();
             $table->string('mobile',11);
             $table->string('gender',10);
