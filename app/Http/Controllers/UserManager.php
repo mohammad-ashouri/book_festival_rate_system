@@ -70,46 +70,6 @@ class UserManager extends Controller
             ->with('success', 'کاربر با موفقیت ویرایش شد');
     }
 
-    public function ChangeUserNTCP(Request $request)
-    {
-        $username = $request->input('username');
-        $user = User::where('username', $username)->first();
-        if ($username and $user) {
-            $userNTCP = User::where('username', $username)->value('NTCP');
-            if ($userNTCP == 1) {
-                $status = 0;
-                $subject = 'NTCP';
-            } elseif ($userNTCP == 0) {
-                $status = 1;
-                $subject = 'NNTCP';
-            }
-
-            $user->NTCP = $status;
-            $user->save();
-            $this->logActivity('User => ' . $username . ' ' . $subject, request()->ip(), request()->userAgent(), session('id'));
-            return $this->success(true, 'changedUserNTCP', 'عملیات با موفقیت انجام شد.');
-        } else {
-            return $this->alerts(false, 'changedUserNTCPFailed', 'خطا در انجام عملیات');
-        }
-    }
-
-    public function ResetPassword(Request $request)
-    {
-        $username = $request->input('username');
-        $user = User::where('username', $username)->first();
-        if ($username and $user) {
-            $user->password = bcrypt(12345678);
-            $user->NTCP = 1;
-            $user->save();
-            $subject = 'Password Resetted';
-            $this->logActivity('User => ' . $username . ' ' . $subject, request()->ip(), request()->userAgent(), session('id'));
-            return $this->success(true, 'passwordResetted', 'عملیات با موفقیت انجام شد.');
-        } else {
-            $this->logActivity('Reset Password Failed', request()->ip(), request()->userAgent(), session('id'));
-            return $this->alerts(false, 'resetPasswordFailed', 'خطا در انجام عملیات');
-        }
-    }
-
     public function newUser(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -157,7 +117,6 @@ class UserManager extends Controller
         $this->logActivity('Added User With Name => ' . $username, request()->ip(), request()->userAgent(), session('id'));
         return $this->success(true, 'userAdded', 'کاربر با موفقیت تعریف شد. برای نمایش اطلاعات جدید، لطفا صفحه را رفرش نمایید.');
     }
-
 
     public function getUserInfo(Request $request)
     {

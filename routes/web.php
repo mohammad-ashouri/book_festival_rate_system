@@ -70,10 +70,6 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
             Route::resource('Users', UserManager::class);
             Route::get('/GetUserInfo', [UserManager::class, 'getUserInfo'])->name('GetUserInfo');
             Route::Post('/NewUser', [UserManager::class, 'newUser'])->name('NewUser');
-            Route::Post('/EditUser', [UserManager::class, 'editUser'])->name('EditUser');
-            Route::Post('/ChangeUserActivationStatus', [UserManager::class, 'changeUserActivationStatus'])->name('ChangeUserActivationStatus');
-            Route::Post('/ChangeUserNTCP', [UserManager::class, 'ChangeUserNTCP'])->name('ChangeUserNTCP');
-            Route::Post('/ResetPassword', [UserManager::class, 'ResetPassword'])->name('ResetPassword');
             //End User Manager
 
             //Catalogs
