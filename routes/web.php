@@ -67,7 +67,7 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
         Route::middleware('roleAuthorization:1')->group(function () {
             Route::get('/Search', [SearchController::class, 'search'])->name('Search');
             //User Manager
-            Route::get('/UserManager', [UserManager::class, 'index'])->name('UserManager');
+            Route::resource('Users', UserManager::class);
             Route::get('/GetUserInfo', [UserManager::class, 'getUserInfo'])->name('GetUserInfo');
             Route::Post('/NewUser', [UserManager::class, 'newUser'])->name('NewUser');
             Route::Post('/EditUser', [UserManager::class, 'editUser'])->name('EditUser');

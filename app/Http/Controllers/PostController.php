@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
+    public function index()
+    {
+        $postList = Post::orderBy('festival_id', 'asc')->orderBy('id', 'desc')->paginate(10);
+        $festival=Festival::orderByDesc('id')->first();
+        $persons=Person::orderBy('family','asc')->get();
+        return \view('PostManager', compact('postList','festival','persons'));
+    }
+
     public function newPost(Request $request)
     {
         $person = $request->input('person');
@@ -641,9 +649,5 @@ class PostController extends Controller
         }
     }
 
-    public function index()
-    {
-        $postList = Post::orderBy('festival_id', 'asc')->orderBy('id', 'desc')->paginate(10);
-        return \view('PostManager', ['postList' => $postList]);
-    }
+
 }

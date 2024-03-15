@@ -4,39 +4,74 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UserManager extends Controller
 {
-
-    public function ChangeUserActivationStatus(Request $request)
+    public function index()
     {
-        $username = $request->input('username');
-        $user = User::where('username', $username)->first();
-        if ($username and $user) {
-            $userStatus = User::where('username', $username)->value('active');
-            if ($userStatus == 1) {
-                $status = 0;
-                $subject = 'Deactivated';
-                $subject2 = 'غیرفعال';
-            } elseif ($userStatus == 0) {
-                $status = 1;
-                $subject = 'Activated';
-                $subject2 = 'فعال';
-            }
+        $userList = User::orderByDesc('id')->paginate(20);
+        return view('Users.index', compact('userList'));
+    }
 
-            $user->active = $status;
-            $user->save();
-            $this->logActivity('User => ' . $username . ' ' . $subject, request()->ip(), request()->userAgent(), session('id'));
-            return $this->success(true, 'changedUserActivation', 'کاربر با موفقیت ' . $subject2 . ' شد.');
-        } else {
-            return $this->alerts(false, 'changedUserActivationFailed', 'خطا در انجام عملیات');
+    public function edit($id)
+    {
+        $user = User::find($id);
+        return view('Users.edit', compact('user'));
+    }
+
+    public function update(Request $request)
+    {
+        $userID = $request->input('id');
+        $name = $request->input('name');
+        $family = $request->input('family');
+        $type = $request->input('type');
+        $scientific_group = $request->input('scientific_group');
+        $status = $request->status;
+        $ntcp = $request->ntcp;
+        switch ($type) {
+            case 1:
+                $subject = 'ادمین کل';
+                break;
+            case 2:
+                $subject = 'کارشناس سامانه';
+                break;
+            case 3:
+                $subject = 'مدیر گروه';
+                break;
+            case 4:
+                $subject = 'ارزیاب';
+                break;
+            case 5:
+                $subject = 'کارشناس گونه بندی';
+                break;
+            case 6:
+                $subject = 'نویسنده';
+                break;
         }
+
+        $user = User::find($userID);
+        if ($user) {
+            $user->name = $name;
+            $user->family = $family;
+            $user->type = $type;
+            if ($request->password){
+                $user->password=Hash::make($request->password);
+            }
+            $user->scientific_group = $scientific_group;
+            $user->subject = $subject;
+            $user->active = $status;
+            $user->NTCP = $ntcp;
+            $user->save();
+        }
+        $this->logActivity('Edited User With ID => ' . $userID, request()->ip(), request()->userAgent(), session('id'));
+        return redirect()->route('Users.index')
+            ->with('success', 'کاربر با موفقیت ویرایش شد');
     }
 
     public function ChangeUserNTCP(Request $request)
     {
-
         $username = $request->input('username');
         $user = User::where('username', $username)->first();
         if ($username and $user) {
@@ -63,10 +98,10 @@ class UserManager extends Controller
         $username = $request->input('username');
         $user = User::where('username', $username)->first();
         if ($username and $user) {
-            $user->password=bcrypt(12345678);
+            $user->password = bcrypt(12345678);
             $user->NTCP = 1;
             $user->save();
-            $subject='Password Resetted';
+            $subject = 'Password Resetted';
             $this->logActivity('User => ' . $username . ' ' . $subject, request()->ip(), request()->userAgent(), session('id'));
             return $this->success(true, 'passwordResetted', 'عملیات با موفقیت انجام شد.');
         } else {
@@ -105,8 +140,11 @@ class UserManager extends Controller
             case 5:
                 $subject = 'کارشناس گونه بندی';
                 break;
+            case 6:
+                $subject = 'نویسنده';
+                break;
         }
-        $lastUserId=User::first()->orderBy('id','desc')->value('id');
+        $lastUserId = User::first()->orderBy('id', 'desc')->value('id');
         $user = new User();
         $user->name = $name;
         $user->family = $family;
@@ -120,43 +158,6 @@ class UserManager extends Controller
         return $this->success(true, 'userAdded', 'کاربر با موفقیت تعریف شد. برای نمایش اطلاعات جدید، لطفا صفحه را رفرش نمایید.');
     }
 
-    public function editUser(Request $request)
-    {
-        $userID = $request->input('userIdForEdit');
-        $name = $request->input('editedName');
-        $family = $request->input('editedFamily');
-        $type = $request->input('editedType');
-        $scientific_group = $request->input('editedscientific_group');
-        switch ($type) {
-            case 1:
-                $subject = 'ادمین کل';
-                break;
-            case 2:
-                $subject = 'کارشناس سامانه';
-                break;
-            case 3:
-                $subject = 'مدیر گروه';
-                break;
-            case 4:
-                $subject = 'ارزیاب';
-                break;
-            case 5:
-                $subject = 'کارشناس گونه بندی';
-                break;
-        }
-
-        $user = User::find($userID);
-        if ($user) {
-            $user->name = $name;
-            $user->family = $family;
-            $user->type = $type;
-            $user->scientific_group = $scientific_group;
-            $user->subject = $subject;
-            $user->save();
-        }
-        $this->logActivity('Edited User With ID => ' . $userID, request()->ip(), request()->userAgent(), session('id'));
-        return $this->success(true, 'userEdited', 'کاربر با موفقیت ویرایش شد. برای نمایش اطلاعات ویرایش شده، صفحه را رفرش نمایید.');
-    }
 
     public function getUserInfo(Request $request)
     {
@@ -165,10 +166,5 @@ class UserManager extends Controller
         return $user;
     }
 
-    public function index()
-    {
-        $userList = User::orderBy('id', 'asc')->paginate(10);
-        return view('UserManager', ['userList' => $userList]);
-    }
 
 }

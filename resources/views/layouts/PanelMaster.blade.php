@@ -23,6 +23,11 @@
                 confirmButtonText: confirmButtonText,
             });
         }
+        $(document).ready(function () {
+            $('.select2').select2({
+                placeholder: 'انتخاب کنید',
+            });
+        });
     </script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
@@ -148,7 +153,7 @@
                                             $src=substr($userInfo->user_image,6);
                                             $src='storage'.$src;
                                         @endphp
-                                        <div style="background: url({{ $src }}) no-repeat; background-size: cover;"
+                                        <div style="background: url({{ env('APP_URL').'/'.$src }}) no-repeat; background-size: cover;"
                                              class="w-16 h-16 rounded-full">
                                         </div>
                                     @else

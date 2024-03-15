@@ -25,10 +25,7 @@
                                     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                         <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
                                             تعریف اثر جدید در جشنواره
-                                            @php
-                                                $festival=\App\Models\Catalogs\Festival::orderBy('id','desc')->first();
-                                                echo $festival->name;
-                                            @endphp
+                                            {{ $festival->name }}
                                         </h3>
                                         <div class="mt-4">
                                             <div class="flex flex-col items-right mb-4">
@@ -38,9 +35,6 @@
                                                 <select id="person" class="border rounded-md w-full px-3 py-2 "
                                                         name="person">
                                                     <option value="" disabled selected>انتخاب کنید</option>
-                                                    @php
-                                                        $persons=\App\Models\Person::orderBy('family','asc')->get();
-                                                    @endphp
                                                     @foreach($persons as $person)
                                                         <option
                                                             value="{{ $person->id }}">{{ $person->name . ' ' . $person->family . ' - ' . $person->national_code }}</option>
@@ -509,9 +503,6 @@
                                                 <select id="personForEdit" class="border rounded-md w-full px-3 py-2 "
                                                         name="personForEdit">
                                                     <option value="" disabled selected>انتخاب کنید</option>
-                                                    @php
-                                                        $persons=\App\Models\Person::orderBy('family','asc')->get();
-                                                    @endphp
                                                     @foreach($persons as $person)
                                                         <option
                                                             value="{{ $person->id }}">{{ $person->name . ' ' . $person->family . ' - ' .$person->national_code }}</option>
