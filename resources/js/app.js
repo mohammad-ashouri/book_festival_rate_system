@@ -102,8 +102,7 @@ $(document).ready(function () {
                     }
                 });
             });
-        }
-        else if (pathname.includes("Festivals")) {
+        } else if (pathname.includes("Festivals")) {
             $('#new-festival').submit(function (e) {
                 e.preventDefault();
                 Swal.fire({
@@ -134,8 +133,38 @@ $(document).ready(function () {
                     }
                 });
             });
-        }
-        else if (pathname.includes("DefencePlaces")) {
+        } else if (pathname.includes("Languages")) {
+            $('#new-language').submit(function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'آیا مطمئن هستید؟',
+                    text: 'زبان تعریف خواهد شد.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    cancelButtonText: 'خیر',
+                    confirmButtonText: 'بله',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#new-language').off('submit').submit();
+                    }
+                });
+            });
+            $('#edit-language').submit(function (e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'آیا مطمئن هستید؟',
+                    text: 'زبان ویرایش خواهد شد.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    cancelButtonText: 'خیر',
+                    confirmButtonText: 'بله',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#edit-language').off('submit').submit();
+                    }
+                });
+            });
+        } else if (pathname.includes("DefencePlaces")) {
             $('#new-defence-place').submit(function (e) {
                 e.preventDefault();
                 Swal.fire({
@@ -166,8 +195,7 @@ $(document).ready(function () {
                     }
                 });
             });
-        }
-        else if (pathname.includes("DeliveryStatus")) {
+        } else if (pathname.includes("DeliveryStatus")) {
 
             $('#post_id').on('input', function () {
                 var originalValue = $(this).val();
@@ -322,8 +350,7 @@ $(document).ready(function () {
             $('.absolute.inset-0.bg-gray-500.opacity-75.history').on('click', function () {
                 toggleModal(HistoryModal.id)
             });
-        }
-        else {
+        } else {
             switch (pathname) {
                 case "/Profile":
                     resetFields();

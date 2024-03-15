@@ -84,6 +84,7 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
             Route::resource('Publishers', PublisherController::class);
             Route::resource('Festivals', FestivalController::class);
             Route::resource('DefencePlaces', DefencePlaceController::class);
+            Route::resource('Languages', LanguageController::class);
 
             //End Catalogs
 
