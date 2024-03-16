@@ -39,6 +39,7 @@ return new class extends Migration
             $table->string('thesis_certificate_number')->nullable();
             $table->unsignedBigInteger('thesis_defence_place')->nullable();
             $table->foreign('thesis_defence_place')->references('id')->on('defence_places');
+            $table->string('thesis_defence_date')->nullable();
             $table->integer('thesis_grade')->nullable();
             $table->string('thesis_supervisor')->nullable();
             $table->string('thesis_advisor')->nullable();
