@@ -19,9 +19,14 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
+        'username',
         'password',
+        'NTCP',
+        'active',
+        'type',
+        'scientific_group',
+        'subject',
+        'user_image',
     ];
 
     /**
@@ -52,5 +57,9 @@ class User extends Authenticatable
     public function scientificGroup()
     {
         return $this->belongsTo(ScientificGroup::class, 'scientific_group', 'id');
+    }
+    public function generalInformationInfo()
+    {
+        return $this->belongsTo(GeneralInformation::class, 'id', 'user_id');
     }
 }

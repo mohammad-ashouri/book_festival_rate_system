@@ -29,22 +29,32 @@
                 @csrf
                 <div class="flex bg-white px-6 py-2 mt-4">
                     <div class="flex-1 flex-col items-right ml-3">
-                        <label for="name" class="block text-gray-700 text-sm font-bold mb-2">نام*:</label>
-                        <input type="text" autocomplete="off" required id="name" name="name" value="{{$user->name}}" class="border rounded-md w-full mb-2 px-3 py-2 text-right" placeholder="نام را وارد کنید">
+                        <label for="first_name" class="block text-gray-700 text-sm font-bold mb-2">نام*:</label>
+                        <input type="text" autocomplete="off" required id="first_name" name="first_name"
+                               value="{{$user->generalInformationInfo->first_name}}"
+                               class="border rounded-md w-full mb-2 px-3 py-2 text-right"
+                               placeholder="نام را وارد کنید">
                     </div>
                     <div class="flex-1 flex-col items-right">
-                        <label for="family" class="block text-gray-700 text-sm font-bold mb-2">نام خانوادگی*:</label>
-                        <input type="text" autocomplete="off" required id="family" name="family" value="{{$user->family}}" class="border rounded-md w-full mb-2 px-3 py-2 text-right" placeholder="نام خانوادگی را وارد کنید">
+                        <label for="last_name" class="block text-gray-700 text-sm font-bold mb-2">نام خانوادگی*:</label>
+                        <input type="text" autocomplete="off" required id="last_name" name="last_name"
+                               value="{{$user->generalInformationInfo->last_name}}"
+                               class="border rounded-md w-full mb-2 px-3 py-2 text-right"
+                               placeholder="نام خانوادگی را وارد کنید">
                     </div>
                 </div>
                 <div class="flex bg-white px-6 py-2">
                     <div class="flex-1 flex-col items-right ml-3">
                         <label for="username" class="block text-gray-700 text-sm font-bold mb-2">نام کاربری*:</label>
-                        <input type="text" autocomplete="off" required id="username" name="username" disabled value="{{$user->username}}" class="border rounded-md w-full mb-2 px-3 py-2 text-right" placeholder="نام را وارد کنید">
+                        <input type="text" autocomplete="off" required id="username" name="username"
+                               value="{{$user->username}}" class="border rounded-md w-full mb-2 px-3 py-2 text-right"
+                               placeholder="نام را وارد کنید">
                     </div>
                     <div class="flex-1 flex-col items-right">
                         <label for="password" class="block text-gray-700 text-sm font-bold mb-2">رمز عبور*:</label>
-                        <input type="text" minlength="8" maxlength="24" autocomplete="off" id="password" name="password" class="border rounded-md w-full mb-2 px-3 py-2 text-right" placeholder="در صورت نیاز به تغییر، فیلد را وارد کنید در غیر اینصورت خالی بگذارید">
+                        <input type="text" minlength="8" maxlength="24" autocomplete="off" id="password" name="password"
+                               class="border rounded-md w-full mb-2 px-3 py-2 text-right"
+                               placeholder="در صورت نیاز به تغییر، فیلد را وارد کنید در غیر اینصورت خالی بگذارید">
                     </div>
                 </div>
                 <div class="flex bg-white px-6 py-2">
@@ -76,7 +86,8 @@
                 <div class="flex bg-white px-6 py-2">
                     <div class="flex-1 flex-col items-right ml-3">
                         <label for="ntcp"
-                               class="text-gray-700 text-sm font-bold whitespace-nowrap">نیازمند تغییر رمز عبور*:</label>
+                               class="text-gray-700 text-sm font-bold whitespace-nowrap">نیازمند تغییر رمز
+                            عبور*:</label>
                         <select id="ntcp"
                                 class="border rounded-md w-full px-3 py-2"
                                 name="ntcp">
@@ -92,13 +103,14 @@
                                 $src=substr($user->user_image,6);
                                 $src='storage'.$src;
                             @endphp
-                        <div class="text-center w-full">
-                            <a href="{{ env('APP_URL').'/'.$src }}" target="_blank">
-                            <div style="background: url({{ env('APP_URL').'/'.$src }}) no-repeat; background-size: cover;"
-                                 class="w-32 h-32 ">
+                            <div class="text-center w-full">
+                                <a href="{{ env('APP_URL').'/'.$src }}" target="_blank">
+                                    <div
+                                        style="background: url({{ env('APP_URL').'/'.$src }}) no-repeat; background-size: cover;"
+                                        class="w-32 h-32 ">
+                                    </div>
+                                </a>
                             </div>
-                            </a>
-                        </div>
                         @else
                             <div id="user_icon" class="w-32 h-32 rounded-full">
                             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GeneralInformation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -17,15 +18,16 @@ class UserManager extends Controller
 
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = User::with('generalInformationInfo')->find($id);
         return view('Users.edit', compact('user'));
     }
 
     public function update(Request $request)
     {
         $userID = $request->input('id');
-        $name = $request->input('name');
-        $family = $request->input('family');
+        $username = $request->input('username');
+        $first_name = $request->input('first_name');
+        $last_name = $request->input('last_name');
         $type = $request->input('type');
         $scientific_group = $request->input('scientific_group');
         $status = $request->status;
@@ -53,11 +55,14 @@ class UserManager extends Controller
 
         $user = User::find($userID);
         if ($user) {
-            $user->name = $name;
-            $user->family = $family;
+            GeneralInformation::find($userID)->update([
+                'first_name' => $first_name,
+                'last_name' => $last_name
+            ]);
             $user->type = $type;
-            if ($request->password){
-                $user->password=Hash::make($request->password);
+            $user->username = $username;
+            if ($request->password) {
+                $user->password = Hash::make($request->password);
             }
             $user->scientific_group = $scientific_group;
             $user->subject = $subject;
@@ -78,8 +83,8 @@ class UserManager extends Controller
         if ($validator->fails()) {
             return $this->alerts(false, 'userFounded', 'نام کاربری تکراری وارد شده است.');
         }
-        $name = $request->input('name');
-        $family = $request->input('family');
+        $first_name = $request->input('first_name');
+        $last_name = $request->input('last_name');
         $username = $request->input('username');
         $password = $request->input('password');
         $type = $request->input('type');
@@ -104,16 +109,20 @@ class UserManager extends Controller
                 $subject = 'نویسنده';
                 break;
         }
-        $lastUserId = User::first()->orderBy('id', 'desc')->value('id');
         $user = new User();
-        $user->name = $name;
-        $user->family = $family;
         $user->username = $username;
         $user->password = bcrypt($password);
         $user->scientific_group = $scientific_group;
         $user->type = $type;
         $user->subject = $subject;
         $user->save();
+
+        $generalInformation = new GeneralInformation();
+        $generalInformation->user_id = $user->id;
+        $generalInformation->first_name = $first_name;
+        $generalInformation->last_name = $last_name;
+        $generalInformation->save();
+
         $this->logActivity('Added User With Name => ' . $username, request()->ip(), request()->userAgent(), session('id'));
         return $this->success(true, 'userAdded', 'کاربر با موفقیت تعریف شد. برای نمایش اطلاعات جدید، لطفا صفحه را رفرش نمایید.');
     }

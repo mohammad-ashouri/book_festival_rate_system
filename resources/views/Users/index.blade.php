@@ -44,15 +44,15 @@
                                         </h3>
                                         <div class="mt-4">
                                             <div class="flex flex-col items-right mb-4">
-                                                <label for="name"
+                                                <label for="first_name"
                                                        class="block text-gray-700 text-sm font-bold mb-2">نام*:</label>
-                                                <input type="text" id="name" name="name" autocomplete="off"
+                                                <input type="text" id="first_name" name="first_name" autocomplete="off"
                                                        class="border rounded-md w-full mb-4 px-3 py-2 text-right"
                                                        placeholder="نام کاربر">
-                                                <label for="family"
+                                                <label for="last_name"
                                                        class="block text-gray-700 text-sm font-bold mb-2">نام
                                                     خانوادگی*:</label>
-                                                <input type="text" id="family" name="family" autocomplete="off"
+                                                <input type="text" id="last_name" name="last_name" autocomplete="off"
                                                        class="border rounded-md w-full mb-4 px-3 py-2 text-right"
                                                        placeholder="نام خانوادگی کاربر">
                                             </div>
@@ -159,14 +159,19 @@
                         @foreach ($userList as $user)
                             <tr class="bg-white">
                                 <td class="px-6 py-4">{{ $user->username }}</td>
-                                <td class="px-6 py-4">{{ $user->name . ' ' . $user->family  }}</td>
+                                <td class="px-6 py-4">{{ $user->generalInformationInfo->first_name . ' ' . $user->generalInformationInfo->last_name  }}</td>
                                 <td class="px-3 py-4">{{ $user->subject }}</td>
                                 <td class="px-3 py-4">
-                                    @if($user->active==1)  فعال  @else  غیر فعال @endif
+                                    @if($user->active==1)
+                                        فعال
+                                    @else
+                                        غیر فعال
+                                    @endif
                                 </td>
                                 <td class="px-3 py-4">
                                     <a href="{{ route('Users.edit',$user->id) }}">
-                                        <button class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300">
+                                        <button
+                                            class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300">
                                             ویرایش
                                         </button>
                                     </a>

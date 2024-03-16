@@ -85,10 +85,7 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
             //End Catalogs
 
             //Person Management
-            Route::get('/Person', [PersonController::class, 'index']);
-            Route::post('/newPerson', [PersonController::class, 'newPerson'])->name('newPerson');
-            Route::get('/getPersonInfo', [PersonController::class, 'getPersonInfo']);
-            Route::post('/editPerson', [PersonController::class, 'editPerson']);
+            Route::resource('Person', PersonController::class);
             //End Person Management
 
             //Post Management
