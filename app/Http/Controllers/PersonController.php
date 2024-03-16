@@ -122,7 +122,7 @@ class PersonController extends Controller
 
     public function index()
     {
-        $personList = Person::orderBy('national_code', 'asc')->paginate(20);
+        $personList = GeneralInformation::orderBy('id')->paginate(20);
         return \view('PersonManager', ['personList' => $personList]);
     }
 }

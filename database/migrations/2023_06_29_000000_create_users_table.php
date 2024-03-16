@@ -13,8 +13,6 @@ return new class extends Migration {
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('family');
             $table->string('username')->unique();
             $table->string('password');
             $table->tinyInteger('type')->comment('
@@ -30,31 +28,6 @@ return new class extends Migration {
             $table->timestamps();
             $table->softDeletes();
         });
-
-        $password = bcrypt(12345678);
-        $query = "INSERT INTO users (name,family, username, password, type, subject, active, NTCP) VALUES
-                  ('محمد', 'عاشوری', 'ashouri','$password',1,'ادمین کل',1,0),
-                  ('سید سجاد', 'واحدی', 'vahedi','$password',1,'ادمین کل',1,0),
-                  ('حسین', 'زارعی', 'zarei','$password',1,'ادمین کل',1,0),
-                  ('ارزیاب', 'اول', 'test1','$password',4,'ارزیاب',1,0),
-                  ('ارزیاب', 'دوم', 'test2','$password',4,'ارزیاب',1,0),
-                  ('ارزیاب', 'سوم', 'test3','$password',4,'ارزیاب',1,0),
-                  ('مدیر گروه', 'تست', 'htest','$password',3,'مدیر گروه',1,0),
-                  ('علی', 'مرادی', 'moradi','$password',5,'کارشناس گونه بندی',1,0),
-                  ('عباس', 'اکبرپور', 'akbarpour','$password',1,'ادمین کل',1,0)
-                ";
-        DB::statement($query);
-        $query="update users set scientific_group=3 where username='htest'";
-        DB::statement($query);
-
-        $query="update users set scientific_group=3 where username='test1'";
-        DB::statement($query);
-
-        $query="update users set scientific_group=3 where username='test2'";
-        DB::statement($query);
-
-        $query="update users set scientific_group=3 where username='test3'";
-        DB::statement($query);
     }
 
     /**

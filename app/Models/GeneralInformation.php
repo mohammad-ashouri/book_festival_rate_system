@@ -10,7 +10,7 @@ class GeneralInformation extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'persons';
+    protected $table = 'general_informations';
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
     protected $fillable = [
         'user_id',

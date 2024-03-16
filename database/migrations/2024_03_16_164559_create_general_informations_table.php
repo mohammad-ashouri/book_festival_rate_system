@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('general_information', function (Blueprint $table) {
+        Schema::create('general_informations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
@@ -20,8 +20,9 @@ return new class extends Migration
             $table->string('national_code',20)->unique()->nullable();
             $table->string('howzah_code')->nullable();
             $table->string('mobile',11);
-            $table->string('gender',10);
+            $table->string('gender',5);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('general_information');
+        Schema::dropIfExists('general_informations');
     }
 };
