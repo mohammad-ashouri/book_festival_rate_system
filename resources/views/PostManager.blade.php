@@ -73,6 +73,7 @@
                                                         <option value="تصحیح و تحقیق">تصحیح و تحقیق</option>
                                                         <option value="شرح و تلخیص">شرح و تلخیص</option>
                                                         <option value="تقریر">تقریر</option>
+                                                        <option value="ترجمه">ترجمه</option>
                                                     </select>
                                                 </div>
                                                 <div class="w-1/3 ml-3">
@@ -543,6 +544,7 @@
                                                         <option value="تصحیح و تحقیق">تصحیح و تحقیق</option>
                                                         <option value="شرح و تلخیص">شرح و تلخیص</option>
                                                         <option value="تقریر">تقریر</option>
+                                                        <option value="ترجمه">ترجمه</option>
                                                     </select>
                                                 </div>
                                                 <div class="w-1/3 ml-3">
