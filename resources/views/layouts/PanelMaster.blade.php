@@ -141,6 +141,7 @@
                         @php
                             $userInfo = \App\Models\User::where('username', session('username'))
                                         ->with('scientificGroup')
+                                        ->with('generalInformationInfo')
                                         ->first();
                         @endphp
                         <ul id="menu"
@@ -163,7 +164,7 @@
 
                                 </div>
                                 <p class="pt-2 text-cu-light">
-                                    {{ $userInfo->username.' | '. $userInfo->name . ' '. $userInfo->family }}
+                                    {{ $userInfo->username.' | '. $userInfo->generalInformationInfo->first_name . ' '. $userInfo->generalInformationInfo->last_name }}
                                 </p>
                                 <p class="pt-1 text-cu-light">
                                     @if($userInfo->type===1 or $userInfo->type===2 or $userInfo->type===5)
