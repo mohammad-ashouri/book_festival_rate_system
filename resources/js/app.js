@@ -558,7 +558,7 @@ $(document).ready(function () {
                     text: 'این صاحب اثر ویرایش خواهد شد.',
                     icon: 'warning',
                     showCancelButton: true,
-                    cancelButtonText: 'خی1ر',
+                    cancelButtonText: 'خیر',
                     confirmButtonText: 'بله',
                 }).then((result) => {
                     if (result.isConfirmed) {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Catalogs\Festival;
+use App\Models\Catalogs\Publisher;
 use App\Models\GeneralInformation;
 use App\Models\Participants;
 use App\Models\Post;
@@ -17,11 +18,12 @@ class PostController extends Controller
     public function index()
     {
         $postList = Post::orderBy('festival_id', 'asc')->orderBy('id', 'desc')->paginate(10);
-        $festival=Festival::orderByDesc('id')->first();
-        $persons=User::with('generalInformationInfo')
+        $festival = Festival::orderByDesc('id')->first();
+        $persons = User::with('generalInformationInfo')
             ->join('general_informations', 'users.id', '=', 'general_informations.user_id')
-            ->orderBy('general_informations.last_name','asc')->get();
-        return \view('PostManager', compact('postList','festival','persons'));
+            ->orderBy('general_informations.last_name', 'asc')->get();
+        $publishers = Publisher::orderBy('name', 'asc')->where('status', 1)->get();
+        return \view('PostManager', compact('postList', 'festival', 'persons', 'publishers'));
     }
 
     public function newPost(Request $request)

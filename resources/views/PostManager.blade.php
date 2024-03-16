@@ -121,16 +121,13 @@
                                                 </div>
                                             </div>
                                             <div id="bookDIV1" class="flex justify-right mb-4 hidden">
-                                                <div class="w-1/3 ml-3">
+                                                <div class="w-1/3 ml-3 overflow-x-auto">
                                                     <label for="publisher"
                                                            class="block text-gray-700 text-sm font-bold mb-2">ناشر:</label>
                                                     <select id="publisher"
-                                                            class="border rounded-md w-full px-3 py-2"
+                                                            class="select2 border rounded-md w-72 px-3 py-2"
                                                             name="publisher">
                                                         <option value="" disabled selected>انتخاب کنید</option>
-                                                        @php
-                                                            $publishers=\App\Models\Catalogs\Publisher::orderBy('name','asc')->get();
-                                                        @endphp
                                                         @foreach($publishers as $publisher)
                                                             <option
                                                                 value="{{ $publisher->id }}">{{ $publisher->name }}</option>
@@ -595,16 +592,13 @@
                                                 </div>
                                             </div>
                                             <div id="bookDIV1ForEdit" class="flex justify-right mb-4 hidden">
-                                                <div class="w-1/3 ml-3">
+                                                <div class="w-1/3 ml-3 overflow-x-auto">
                                                     <label for="publisherForEdit"
                                                            class="block text-gray-700 text-sm font-bold mb-2">ناشر:</label>
                                                     <select id="publisherForEdit"
-                                                            class="border rounded-md w-full px-3 py-2"
+                                                            class="select2 border rounded-md w-72 px-3 py-2"
                                                             name="publisherForEdit">
                                                         <option value="" disabled selected>انتخاب کنید</option>
-                                                        @php
-                                                            $publishers=\App\Models\Catalogs\Publisher::orderBy('name','asc')->get();
-                                                        @endphp
                                                         @foreach($publishers as $publisher)
                                                             <option
                                                                 value="{{ $publisher->id }}">{{ $publisher->name }}</option>
