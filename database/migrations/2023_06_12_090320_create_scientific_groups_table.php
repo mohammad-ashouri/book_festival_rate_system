@@ -39,6 +39,7 @@ return new class extends Migration {
             ['name' => 'کلام', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'کتب مرجع', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'انقلاب اسلامی', 'created_at' => now(), 'updated_at' => now()],
+            ['name' => 'فلسفه', 'created_at' => now(), 'updated_at' => now()],
         ]);
 
     }
