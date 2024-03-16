@@ -32,12 +32,12 @@
                                                 <label for="person"
                                                        class="block text-gray-700 text-sm font-bold mb-2">مشخصات صاحب
                                                     اثر*:</label>
-                                                <select id="person" class="border rounded-md w-full px-3 py-2 "
+                                                <select id="person" class="select2 border rounded-md w-full px-3 py-2 "
                                                         name="person">
                                                     <option value="" disabled selected>انتخاب کنید</option>
                                                     @foreach($persons as $person)
                                                         <option
-                                                            value="{{ $person->id }}">{{ $person->name . ' ' . $person->family . ' - ' . $person->national_code }}</option>
+                                                            value="{{ $person->id }}">{{ $person->generalInformationInfo->first_name . ' ' . $person->generalInformationInfo->last_name . ' - ' . $person->generalInformationInfo->national_code }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

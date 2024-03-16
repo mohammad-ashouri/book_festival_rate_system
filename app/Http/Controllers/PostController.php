@@ -8,6 +8,7 @@ use App\Models\Participants;
 use App\Models\Post;
 use App\Models\RateInfo;
 use App\Models\SortingClassification;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,7 +18,9 @@ class PostController extends Controller
     {
         $postList = Post::orderBy('festival_id', 'asc')->orderBy('id', 'desc')->paginate(10);
         $festival=Festival::orderByDesc('id')->first();
-        $persons=GeneralInformation::orderBy('last_name','asc')->get();
+        $persons=User::with('generalInformationInfo')
+            ->join('general_informations', 'users.id', '=', 'general_informations.user_id')
+            ->orderBy('general_informations.last_name','asc')->get();
         return \view('PostManager', compact('postList','festival','persons'));
     }
 
