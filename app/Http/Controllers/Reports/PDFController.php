@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Reports;
 
 use App\Http\Controllers\Controller;
 use App\Models\Catalogs\Festival;
-use App\Models\EquipmentLog;
-use App\Models\Person;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;

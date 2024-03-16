@@ -16,7 +16,7 @@ class Post extends Model
     protected $hidden=['created_at','updated_at','deleted_at'];
     public function personInfo()
     {
-        return $this->belongsTo(Person::class, 'person_id', 'id');
+        return $this->belongsTo(GeneralInformation::class, 'user_id', 'id');
     }
     public function festivalInfo()
     {

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Person;
+use App\Models\GeneralInformation;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -38,21 +38,21 @@ class PersonController extends Controller
             return $this->alerts(false, 'nullGender', 'جنسیت وارد نشده است');
         }
 
-        $check = Person::where('national_code', $national_code)->first();
+        $check = GeneralInformation::where('national_code', $national_code)->exists();
         if ($check) {
             return $this->alerts(false, 'dupNationalCode', 'کد ملی تکراری وارد شده است');
         }
 
-        $Person = new Person();
-        $Person->name = $name;
-        $Person->family = $family;
-        $Person->national_code = $national_code;
-        $Person->howzah_code = $howzah_code;
-        $Person->mobile = $mobile;
-        $Person->gender = $gender;
+        $generalInformation = new GeneralInformation();
+        $generalInformation->name = $name;
+        $generalInformation->family = $family;
+        $generalInformation->national_code = $national_code;
+        $generalInformation->howzah_code = $howzah_code;
+        $generalInformation->mobile = $mobile;
+        $generalInformation->gender = $gender;
 
-        $Person->save();
-        $this->logActivity('Person Added =>' . $Person->id, \request()->ip(), \request()->userAgent(), \session('id'));
+        $generalInformation->save();
+        $this->logActivity('Person Added =>' . $generalInformation->id, \request()->ip(), \request()->userAgent(), \session('id'));
         return $this->success(true, 'PersonAdded', 'برای نمایش اطلاعات جدید، لطفا صفحه را رفرش نمایید.');
     }
 
@@ -84,21 +84,19 @@ class PersonController extends Controller
             return $this->alerts(false, 'nullGender', 'جنسیت وارد نشده است');
         }
 
-        $personExists = Person::where('national_code', $nationalCode)->where('id', '!=', $PersonID)->exists();
+        $personExists = GeneralInformation::where('national_code', $nationalCode)->where('user_id', '!=', $PersonID)->exists();
         if ($personExists) {
             return $this->alerts(false, 'personExists', 'کد ملی/پاسپورت تکراری وارد شده است.');
         }
 
         $user = User::firstOrCreate([
-            'name' => $name,
-            'family' => $family,
             'username' => $nationalCode,
             'password' => bcrypt('ketabesal402')
         ]);
         if ($user) {
             $this->logActivity('User Added =>' . $user->id, \request()->ip(), \request()->userAgent(), \session('id'));
         }
-        $Person = Person::find($PersonID);
+        $Person = GeneralInformation::where('user_id', $user->id)->first();
         $Person->fill([
             'user_id' => $user->id,
             'name' => $name,
@@ -118,7 +116,7 @@ class PersonController extends Controller
     {
         $personID = $request->input('id');
         if ($personID) {
-            return Person::find($personID);
+            return GeneralInformation::where('user_id',$personID)->first();
         }
     }
 

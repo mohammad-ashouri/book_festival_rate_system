@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Catalogs\Festival;
+use App\Models\GeneralInformation;
 use App\Models\Participants;
-use App\Models\Person;
 use App\Models\Post;
 use App\Models\RateInfo;
 use App\Models\SortingClassification;
@@ -17,7 +17,7 @@ class PostController extends Controller
     {
         $postList = Post::orderBy('festival_id', 'asc')->orderBy('id', 'desc')->paginate(10);
         $festival=Festival::orderByDesc('id')->first();
-        $persons=Person::orderBy('family','asc')->get();
+        $persons=GeneralInformation::orderBy('last_name','asc')->get();
         return \view('PostManager', compact('postList','festival','persons'));
     }
 
