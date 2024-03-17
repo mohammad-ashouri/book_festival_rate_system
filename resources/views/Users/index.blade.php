@@ -162,7 +162,7 @@
                                 <td class="px-6 py-4">{{ $user->generalInformationInfo->first_name . ' ' . $user->generalInformationInfo->last_name  }}</td>
                                 <td class="px-3 py-4">{{ $user->subject }}</td>
                                 <td class="px-3 py-4">
-                                    @if($user->active==1)
+                                    @if($user->status==1)
                                         فعال
                                     @else
                                         غیر فعال
