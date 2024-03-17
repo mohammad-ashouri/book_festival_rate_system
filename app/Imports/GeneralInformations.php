@@ -14,7 +14,7 @@ class GeneralInformations implements ToModel
     {
         // Define how each row in the Excel file should be mapped to your database model
         $user = User::find($row[0]);
-        if ($user) {
+        if (!empty($user)) {
             if ($row[7] == 'TRUE') {
                 $gender = 'مرد';
             } else {
@@ -25,8 +25,7 @@ class GeneralInformations implements ToModel
             } else {
                 $nationality = 'غیر ایرانی';
             }
-            GeneralInformation::create([
-                'user_id' => $user->id,
+            GeneralInformation::where('user_id', $user->id)->update([
                 'address' => $row[1],
                 'mobile' => $row[2],
                 'phone' => $row[3],
@@ -36,10 +35,6 @@ class GeneralInformations implements ToModel
                 'last_name' => $row[6],
                 'gender' => $gender,
                 'nationality' => $nationality,
-            ]);
-        }else{
-            GeneralInformation::create([
-                'user_id' => $row[0],
             ]);
         }
     }

@@ -19,9 +19,13 @@ class PostController extends Controller
     {
         $postList = Post::orderBy('festival_id', 'asc')->orderBy('id', 'desc')->paginate(10);
         $festival = Festival::orderByDesc('id')->first();
-        $persons = User::with('generalInformationInfo')
-            ->join('general_informations', 'users.id', '=', 'general_informations.user_id')
-            ->orderBy('general_informations.last_name', 'asc')->get();
+        $persons = GeneralInformation::with('userInfo')
+            ->join('users', 'general_informations.user_id', '=', 'users.id')
+            ->whereNotNull('general_informations.first_name')
+            ->whereNotNull('general_informations.last_name')
+            ->whereNotNull('general_informations.national_code')
+            ->orderBy('general_informations.last_name')
+            ->get();
         $publishers = Publisher::orderBy('name', 'asc')->where('status', 1)->get();
         return \view('PostManager', compact('postList', 'festival', 'persons', 'publishers'));
     }
