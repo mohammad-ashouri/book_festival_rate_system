@@ -9,6 +9,7 @@ use App\Http\Controllers\Catalogs\PublisherController;
 use App\Http\Controllers\Catalogs\ScientificGroupController;
 use App\Http\Controllers\ClassificationController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\PostController;
@@ -49,6 +50,10 @@ Route::get('/home', function () {
     return redirect()->route('login');
 });
 
+//temporary routes
+Route::get('/import-excel', [ExcelController::class, 'index']);
+Route::post('/importUsers', [ExcelController::class, 'importUsers'])->name('excel.importUsers');
+
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::middleware(ThrottleRequests::class)->post('/login', [LoginController::class, 'login']);
 Route::get('/captcha', [LoginController::class, 'getCaptcha'])->name('captcha');
@@ -65,6 +70,7 @@ Route::middleware(CheckLoginMiddleware::class)->middleware(MenuMiddleware::class
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         //Search Route
         Route::middleware('roleAuthorization:1')->group(function () {
+
             Route::get('/Search', [SearchController::class, 'search'])->name('Search');
             //User Manager
             Route::resource('Users', UserManager::class);
