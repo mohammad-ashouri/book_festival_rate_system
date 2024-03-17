@@ -31,7 +31,7 @@ class SearchController extends Controller
                     });
                     $this->logActivity('Search In User Manager With Type => ' . $type, request()->ip(), request()->userAgent(), session('id'));
                 }
-                $result = $search->get();
+                $result = $search->with('generalInformationInfo')->get();
                 return response()->json($result);
                 break;
             case 'ClassificationSearch':

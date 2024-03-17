@@ -97,7 +97,7 @@
                                                     <option value="" disabled selected>انتخاب کنید</option>
                                                     @php
                                                         $groups=\App\Models\Catalogs\ScientificGroup::
-                                                        where('active',1)
+                                                        where('status',1)
                                                         ->orderBy('name')->get();
                                                     @endphp
                                                     @foreach($groups as $group)

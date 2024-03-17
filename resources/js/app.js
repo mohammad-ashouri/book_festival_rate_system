@@ -172,20 +172,14 @@ $(document).ready(function () {
                                     type = 'نویسنده';
                                     break;
                             }
-                            var row = '<tr class="bg-white"><td class="px-6 py-4">' + user.username + '</td><td class="px-6 py-4">' + user.name + ' ' + user.family + '</td><td class="px-6 py-4">' + type + '</td>';
+                            var row = '<tr class="bg-white"><td class="px-6 py-4">' + user.username + '</td><td class="px-6 py-4">' + user.general_information_info.first_name + ' ' + user.general_information_info.last_name + '</td><td class="px-6 py-4">' + type + '</td>';
                             if (user.status == 1) {
-                                row += '<td class="px-6 py-4">' + '<button type="submit" data-username="' + user.username + '" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-blue-300 ASUM" data-active="1">غیرفعال‌سازی</button>';
+                                row += '<td class="px-6 py-4">' + 'فعال';
                             } else if (user.status == 0) {
-                                row += '<td class="px-6 py-4">' + '<button type="submit" data-username="' + user.username + '" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300 ASUM" data-active="0">فعال‌سازی</button>';
+                                row += '<td class="px-6 py-4">' + 'غیر فعال';
                             }
                             row += '</td>';
-                            if (user.NTCP == 1) {
-                                row += '<td class="px-6 py-4">' + '<button type="submit" data-ntcp-username="' + user.username + '" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-blue-300 ntcp" data-ntcp="1">می باشد</button>';
-                            } else if (user.NTCP == 0) {
-                                row += '<td class="px-6 py-4">' + '<button type="submit" data-ntcp-username="' + user.username + '" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300 ntcp" data-ntcp="0">نمی باشد</button>';
-                            }
-                            row += '</td>';
-                            row += '<td class="px-6 py-4">' + '<button type="submit" data-rp-username="' + user.username + '" class="px-4 py-2 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300 rp">بازنشانی رمز</button>';
+                            row += '<td class="px-6 py-4">' + '<a href= Users/'+ user.id + '/edit>' + '<button type="button" class="px-4 py-2 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300 rp">ویرایش</button>';
                             row += '</td>';
                             row += '</tr>';
                             tableBody.append(row);
@@ -233,20 +227,14 @@ $(document).ready(function () {
                                     type = 'نویسنده';
                                     break;
                             }
-                            var row = '<tr class="bg-white"><td class="px-6 py-4">' + user.username + '</td><td class="px-6 py-4">' + user.name + ' ' + user.family + '</td><td class="px-6 py-4">' + type + '</td>';
+                            var row = '<tr class="bg-white"><td class="px-6 py-4">' + user.username + '</td><td class="px-6 py-4">' + user.general_information_info.first_name + ' ' + user.general_information_info.last_name + '</td><td class="px-6 py-4">' + type + '</td>';
                             if (user.status == 1) {
-                                row += '<td class="px-6 py-4">' + '<button type="submit" data-username="' + user.username + '" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-blue-300 ASUM" data-active="1">غیرفعال‌سازی</button>';
+                                row += '<td class="px-6 py-4">' + 'فعال';
                             } else if (user.status == 0) {
-                                row += '<td class="px-6 py-4">' + '<button type="submit" data-username="' + user.username + '" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300 ASUM" data-active="0">فعال‌سازی</button>';
+                                row += '<td class="px-6 py-4">' + 'غیر فعال';
                             }
                             row += '</td>';
-                            if (user.NTCP == 1) {
-                                row += '<td class="px-6 py-4">' + '<button type="submit" data-ntcp-username="' + user.username + '" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-blue-300 ntcp" data-ntcp="1">می باشد</button>';
-                            } else if (user.NTCP == 0) {
-                                row += '<td class="px-6 py-4">' + '<button type="submit" data-ntcp-username="' + user.username + '" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:border-blue-300 ntcp" data-ntcp="0">نمی باشد</button>';
-                            }
-                            row += '</td>';
-                            row += '<td class="px-6 py-4">' + '<button type="submit" data-rp-username="' + user.username + '" class="px-4 py-2 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300 rp">بازنشانی رمز</button>';
+                            row += '<td class="px-6 py-4">' + '<a href= Users/'+ user.id + '/edit>' + '<button type="button" class="px-4 py-2 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300 rp">ویرایش</button>';
                             row += '</td>';
                             row += '</tr>';
                             tableBody.append(row);
