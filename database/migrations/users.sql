@@ -3,15 +3,6 @@
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `type`, `scientific_group`, `subject`, `status`, `NTCP`, `user_image`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'ashouri', '$2y$10$4Q8DPButArWNczjEJMIjA./l1sVxHc/gQ34VOqVOeXdsWsa0O480O', 1, NULL, 'ادمین کل', 1, 0, NULL, NULL, '2024-03-17 13:08:15', '2024-03-17 13:08:15', NULL),
-(2, 'vahedi', '$2y$10$3rbgmo10LFJYVvGmSusIo.FNE1BtKhAzj4/oJ2F7ALEw.gNSVYVeS', 1, NULL, 'ادمین کل', 1, 0, NULL, NULL, '2024-03-17 13:08:15', '2024-03-17 13:08:15', NULL),
-(3, 'zarei', '$2y$10$Kf1j0VSvzUCsI2pzIa/IouafV9CjKQ1rMO2A.3WaS6dzHjDku.sTm', 1, NULL, 'ادمین کل', 1, 0, NULL, NULL, '2024-03-17 13:08:15', '2024-03-17 13:08:15', NULL),
-(4, 'akbarpour', '$2y$10$H8wu86NYX.kWvx.iZHs51ecBYGvWxD3Sap1fcdldyrFGDUXboELY2', 1, NULL, 'ادمین کل', 1, 0, NULL, NULL, '2024-03-17 13:08:15', '2024-03-17 13:08:15', NULL),
-(5, 'test1', '$2y$10$34FZ7EbMN84S6/aGUNhrVO7qD6xnE.Uw28eFe1Q.84seTiypBp9Xe', 4, 3, 'ارزیاب', 1, 0, NULL, NULL, '2024-03-17 13:08:15', '2024-03-17 13:08:15', NULL),
-(6, 'test2', '$2y$10$ovtxOu5r2BNi/Sqnr4bU3.Sy70n7x1uWxxFbNDynGp2/bYLDKoU6a', 1, 3, 'ارزیاب', 1, 0, NULL, NULL, '2024-03-17 13:08:15', '2024-03-17 13:08:15', NULL),
-(7, 'test3', '$2y$10$DMA2V9.1PWP.i6TRQzEzUOXA0D9h6D0s0qTkYzvvt98hBX3Fk8zPu', 1, 3, 'ارزیاب', 1, 0, NULL, NULL, '2024-03-17 13:08:15', '2024-03-17 13:08:15', NULL),
-(8, 'htest', '$2y$10$H44KKcqKElDIJWf1CQTO1.Yd77M9fDD1zedFb5OoLHgO9.yAAbVtW', 1, 3, 'مدیر گروه', 1, 0, NULL, NULL, '2024-03-17 13:08:15', '2024-03-17 13:08:15', NULL),
-(9, 'moradi', '$2y$10$hcCfFtZbzPjZIuGZg7FzkeWwN1UxsKZVd/gOqbIS2TiDcMLAXp9ae', 5, NULL, 'کارشناس گونه بندی', 1, 0, NULL, NULL, '2024-03-17 13:08:15', '2024-03-17 13:08:15', NULL),
 (53, '3110165368', '$2y$10$5Lfve7x87E./ihrcPJnRBeESpHtdf2UxkqFdpVJBEWhUJFreKSk32', 6, NULL, 'نویسنده', 1, 0, NULL, NULL, NULL, NULL, NULL),
 (54, '4722901244', '$2y$10$RBTiHm6m1vEs6VWhAwrVquHpbeaSS8q7OaMfB5KekMeqky8j0TCEC', 6, NULL, 'نویسنده', 1, 0, NULL, NULL, '2024-03-17 13:08:47', '2024-03-17 13:08:47', NULL),
 (55, '0322083257', '$2y$10$lWlGk.bfCXInSneWHklQzuK3b1nMwDeMWVE5fvANtJaxQHCEq8dwu', 6, NULL, 'نویسنده', 1, 0, NULL, NULL, '2024-03-17 13:08:47', '2024-03-17 13:08:47', NULL),

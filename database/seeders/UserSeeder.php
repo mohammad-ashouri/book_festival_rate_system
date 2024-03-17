@@ -22,13 +22,13 @@ class UserSeeder extends Seeder
                 'subject' => 'ادمین کل',
             ]
         );
-        GeneralInformation::create([
-            'user_id' => $user->id,
-            'first_name' => 'محمد',
-            'last_name' => 'عاشوری',
-            'gender' => 'مرد',
-            'mobile' => '09398888226',
-        ]);
+//        GeneralInformation::create([
+//            'user_id' => $user->id,
+//            'first_name' => 'محمد',
+//            'last_name' => 'عاشوری',
+//            'gender' => 'مرد',
+//            'mobile' => '09398888226',
+//        ]);
 
         $user = User::create(
             [
@@ -38,13 +38,13 @@ class UserSeeder extends Seeder
                 'subject' => 'ادمین کل',
             ]
         );
-        GeneralInformation::create([
-            'user_id' => $user->id,
-            'first_name' => 'سید سجاد',
-            'last_name' => 'واحدی',
-            'gender' => 'مرد',
-            'mobile' => '09191964151',
-        ]);
+//        GeneralInformation::create([
+//            'user_id' => $user->id,
+//            'first_name' => 'سید سجاد',
+//            'last_name' => 'واحدی',
+//            'gender' => 'مرد',
+//            'mobile' => '09191964151',
+//        ]);
 
         $user = User::create(
             [
@@ -54,13 +54,13 @@ class UserSeeder extends Seeder
                 'subject' => 'ادمین کل',
             ]
         );
-        GeneralInformation::create([
-            'user_id' => $user->id,
-            'first_name' => 'حسین',
-            'last_name' => 'زارعی',
-            'gender' => 'مرد',
-            'mobile' => '09192735336',
-        ]);
+//        GeneralInformation::create([
+//            'user_id' => $user->id,
+//            'first_name' => 'حسین',
+//            'last_name' => 'زارعی',
+//            'gender' => 'مرد',
+//            'mobile' => '09192735336',
+//        ]);
 
         $user = User::create(
             [
@@ -70,13 +70,13 @@ class UserSeeder extends Seeder
                 'subject' => 'ادمین کل',
             ]
         );
-        GeneralInformation::create([
-            'user_id' => $user->id,
-            'first_name' => 'عباس',
-            'last_name' => 'اکبرپور',
-            'gender' => 'مرد',
-            'mobile' => '09191488088',
-        ]);
+//        GeneralInformation::create([
+//            'user_id' => $user->id,
+//            'first_name' => 'عباس',
+//            'last_name' => 'اکبرپور',
+//            'gender' => 'مرد',
+//            'mobile' => '09191488088',
+//        ]);
 
         $user = User::create(
             [
@@ -87,13 +87,13 @@ class UserSeeder extends Seeder
                 'scientific_group' => 3,
             ]
         );
-        GeneralInformation::create([
-            'user_id' => $user->id,
-            'first_name' => 'ارزیاب',
-            'last_name' => 'اقتصاد 1',
-            'gender' => 'مرد',
-            'mobile' => '09191234567',
-        ]);
+//        GeneralInformation::create([
+//            'user_id' => $user->id,
+//            'first_name' => 'ارزیاب',
+//            'last_name' => 'اقتصاد 1',
+//            'gender' => 'مرد',
+//            'mobile' => '09191234567',
+//        ]);
 
         $user = User::create(
             [
@@ -104,13 +104,13 @@ class UserSeeder extends Seeder
                 'scientific_group' => 3,
             ]
         );
-        GeneralInformation::create([
-            'user_id' => $user->id,
-            'first_name' => 'ارزیاب',
-            'last_name' => 'اقتصاد 2',
-            'gender' => 'مرد',
-            'mobile' => '09191234561',
-        ]);
+//        GeneralInformation::create([
+//            'user_id' => $user->id,
+//            'first_name' => 'ارزیاب',
+//            'last_name' => 'اقتصاد 2',
+//            'gender' => 'مرد',
+//            'mobile' => '09191234561',
+//        ]);
 
         $user = User::create(
             [
@@ -121,13 +121,13 @@ class UserSeeder extends Seeder
                 'scientific_group' => 3,
             ]
         );
-        GeneralInformation::create([
-            'user_id' => $user->id,
-            'first_name' => 'ارزیاب',
-            'last_name' => 'اقتصاد 3',
-            'gender' => 'مرد',
-            'mobile' => '09191234564',
-        ]);
+//        GeneralInformation::create([
+//            'user_id' => $user->id,
+//            'first_name' => 'ارزیاب',
+//            'last_name' => 'اقتصاد 3',
+//            'gender' => 'مرد',
+//            'mobile' => '09191234564',
+//        ]);
 
         $user = User::create(
             [
@@ -138,13 +138,13 @@ class UserSeeder extends Seeder
                 'scientific_group' => 3,
             ]
         );
-        GeneralInformation::create([
-            'user_id' => $user->id,
-            'first_name' => 'مدیر گروه',
-            'last_name' => 'اقتصاد',
-            'gender' => 'مرد',
-            'mobile' => '09191234567',
-        ]);
+//        GeneralInformation::create([
+//            'user_id' => $user->id,
+//            'first_name' => 'مدیر گروه',
+//            'last_name' => 'اقتصاد',
+//            'gender' => 'مرد',
+//            'mobile' => '09191234567',
+//        ]);
 
         $user = User::create(
             [
@@ -154,12 +154,12 @@ class UserSeeder extends Seeder
                 'subject' => 'کارشناس گونه بندی',
             ]
         );
-        GeneralInformation::create([
-            'user_id' => $user->id,
-            'first_name' => 'علی',
-            'last_name' => 'مرادی',
-            'gender' => 'مرد',
-            'mobile' => '09191234537',
-        ]);
+//        GeneralInformation::create([
+//            'user_id' => $user->id,
+//            'first_name' => 'علی',
+//            'last_name' => 'مرادی',
+//            'gender' => 'مرد',
+//            'mobile' => '09191234537',
+//        ]);
     }
 }
