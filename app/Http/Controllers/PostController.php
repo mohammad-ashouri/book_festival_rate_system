@@ -17,7 +17,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $postList = Post::orderBy('festival_id', 'asc')->orderBy('id', 'desc')->paginate(10);
+        $postList = Post::with('languageInfo')->with('scientificGroup1Info')->with('scientificGroup2Info')->with('festivalInfo')->with('personInfo')->orderBy('festival_id', 'asc')->orderBy('id', 'desc')->paginate(10);
         $festival = Festival::orderByDesc('id')->first();
         $persons = GeneralInformation::with('userInfo')
             ->join('users', 'general_informations.user_id', '=', 'users.id')

@@ -15,13 +15,13 @@
                         <div class="fixed z-10 inset-0 overflow-y-auto hidden" id="newPostModal">
                             {{--                        <div class="fixed z-10 inset-0 overflow-y-auto" id="newPostModal">--}}
                             <div
-                                class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center  sm:block sm:p-0">
+                                    class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center  sm:block sm:p-0">
                                 <div class="fixed inset-0 transition-opacity" aria-hidden="true">
                                     <div class="absolute inset-0 bg-gray-500 opacity-75 add"></div>
                                 </div>
 
                                 <div
-                                    class="inline-block align-bottom bg-white rounded-lg text-right overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full sm:max-w-[900px]">
+                                        class="inline-block align-bottom bg-white rounded-lg text-right overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full sm:max-w-[900px]">
                                     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                         <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
                                             تعریف اثر جدید در جشنواره
@@ -88,7 +88,7 @@
                                                         @endphp
                                                         @foreach($languages as $language)
                                                             <option
-                                                                value="{{ $language->id }}">{{ $language->name }}</option>
+                                                                    value="{{ $language->id }}">{{ $language->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -116,7 +116,7 @@
                                                         @endphp
                                                         @foreach($special_sections as $special_section)
                                                             <option
-                                                                value="{{ $special_section->id }}">{{ $special_section->name }}</option>
+                                                                    value="{{ $special_section->id }}">{{ $special_section->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -131,7 +131,7 @@
                                                         <option value="" disabled selected>انتخاب کنید</option>
                                                         @foreach($publishers as $publisher)
                                                             <option
-                                                                value="{{ $publisher->id }}">{{ $publisher->name }}</option>
+                                                                    value="{{ $publisher->id }}">{{ $publisher->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -205,7 +205,7 @@
                                                         @endphp
                                                         @foreach($defenceplaces as $defenceplace)
                                                             <option
-                                                                value="{{ $defenceplace->id }}">{{ $defenceplace->name }}</option>
+                                                                    value="{{ $defenceplace->id }}">{{ $defenceplace->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -263,7 +263,7 @@
                                                         @endphp
                                                         @foreach($groups as $group)
                                                             <option
-                                                                value="{{ $group->id }}">{{ $group->name }}</option>
+                                                                    value="{{ $group->id }}">{{ $group->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -280,7 +280,7 @@
                                                         @endphp
                                                         @foreach($groups as $group)
                                                             <option
-                                                                value="{{ $group->id }}">{{ $group->name }}</option>
+                                                                    value="{{ $group->id }}">{{ $group->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -435,7 +435,8 @@
                                                         <option value="digital">دیجیتال</option>
                                                     </select>
                                                     <label for="number_of_received"
-                                                           class="text-gray-700 text-sm font-bold whitespace-nowrap">تعداد نسخ واصله به دبیرخانه:</label>
+                                                           class="text-gray-700 text-sm font-bold whitespace-nowrap">تعداد
+                                                        نسخ واصله به دبیرخانه:</label>
                                                     <input type="number" name="number_of_received"
                                                            id="number_of_received"
                                                            class="border rounded-md w-full px-3 py-2"
@@ -482,13 +483,13 @@
                         <div class="fixed z-10 inset-0 overflow-y-auto hidden" id="editPostModal">
                             {{--                        <div class="fixed z-10 inset-0 overflow-y-auto" id="newPostModal">--}}
                             <div
-                                class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center  sm:block sm:p-0">
+                                    class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center  sm:block sm:p-0">
                                 <div class="fixed inset-0 transition-opacity" aria-hidden="true">
                                     <div class="absolute inset-0 bg-gray-500 opacity-75 edit"></div>
                                 </div>
 
                                 <div
-                                    class="inline-block align-bottom bg-white rounded-lg text-right overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full sm:max-w-[900px]">
+                                        class="inline-block align-bottom bg-white rounded-lg text-right overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full sm:max-w-[900px]">
                                     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                         <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
                                             ویرایش اثر
@@ -498,12 +499,12 @@
                                                 <label for="personForEdit"
                                                        class="block text-gray-700 text-sm font-bold mb-2">مشخصات صاحب
                                                     اثر*:</label>
-                                                <select id="personForEdit" class="border rounded-md w-full px-3 py-2 "
+                                                <select id="personForEdit" class="select2 border rounded-md w-full px-3 py-2 personForEdit"
                                                         name="personForEdit">
                                                     <option value="" disabled selected>انتخاب کنید</option>
                                                     @foreach($persons as $person)
                                                         <option
-                                                            value="{{ $person->user_id }}">{{ $person->first_name . ' ' . $person->last_name . ' - ' . $person->national_code }}
+                                                                value="{{ $person->user_id }}">{{ $person->first_name . ' ' . $person->last_name . ' - ' . $person->national_code }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -557,7 +558,7 @@
                                                         @endphp
                                                         @foreach($languages as $language)
                                                             <option
-                                                                value="{{ $language->id }}">{{ $language->name }}</option>
+                                                                    value="{{ $language->id }}">{{ $language->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -587,7 +588,7 @@
                                                         @endphp
                                                         @foreach($special_sections as $special_section)
                                                             <option
-                                                                value="{{ $special_section->id }}">{{ $special_section->name }}</option>
+                                                                    value="{{ $special_section->id }}">{{ $special_section->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -602,7 +603,7 @@
                                                         <option value="" disabled selected>انتخاب کنید</option>
                                                         @foreach($publishers as $publisher)
                                                             <option
-                                                                value="{{ $publisher->id }}">{{ $publisher->name }}</option>
+                                                                    value="{{ $publisher->id }}">{{ $publisher->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -677,7 +678,7 @@
                                                         @endphp
                                                         @foreach($defenceplaces as $defenceplace)
                                                             <option
-                                                                value="{{ $defenceplace->id }}">{{ $defenceplace->name }}</option>
+                                                                    value="{{ $defenceplace->id }}">{{ $defenceplace->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -740,7 +741,7 @@
                                                         @endphp
                                                         @foreach($groups as $group)
                                                             <option
-                                                                value="{{ $group->id }}">{{ $group->name }}</option>
+                                                                    value="{{ $group->id }}">{{ $group->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -757,7 +758,7 @@
                                                         @endphp
                                                         @foreach($groups as $group)
                                                             <option
-                                                                value="{{ $group->id }}">{{ $group->name }}</option>
+                                                                    value="{{ $group->id }}">{{ $group->name }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -937,7 +938,8 @@
                                                         <option value="digital">دیجیتال</option>
                                                     </select>
                                                     <label for="number_of_receivedForEdit"
-                                                           class="text-gray-700 text-sm font-bold whitespace-nowrap">تعداد نسخ واصله به دبیرخانه:</label>
+                                                           class="text-gray-700 text-sm font-bold whitespace-nowrap">تعداد
+                                                        نسخ واصله به دبیرخانه:</label>
                                                     <input type="number" name="number_of_receivedForEdit"
                                                            id="number_of_receivedForEdit"
                                                            class="border rounded-md w-full px-3 py-2"
@@ -1037,36 +1039,31 @@
                                     {{ $post-> id }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    @php
-                                        $festivalInfo=\App\Models\Catalogs\Festival::find($post->festival_id)
-                                    @endphp
-                                    {{ $festivalInfo->name }}
+                                    @if($post->festivalInfo)
+                                        {{ $post->festivalInfo->name }}
+                                    @endif
                                 </td>
                                 <td class="px-6 py-4">{{ $post->title  }}</td>
                                 <td class="px-6 py-4">{{$post->post_format  }}</td>
                                 <td class="px-3 py-4">{{ $post->post_type }}</td>
                                 <td class="px-3 py-4">
-                                    @php
-                                        $languageInfo=\App\Models\Catalogs\Language::find($post->language)
-                                    @endphp
-                                    {{ $languageInfo->name }}
+                                    @if($post->languageInfo)
+                                        {{ $post->languageInfo->name }}
+                                    @endif
                                 </td>
                                 <td class="px-3 py-4">
-                                @php
-                                    $sg1Info=\App\Models\Catalogs\ScientificGroup::find($post->scientific_group_v1)
-                                @endphp
-                                {{ $sg1Info->name }}
+                                @if($post->scientificGroup1Info)
+                                    {{ $post->scientificGroup1Info->name }}
+                                @endif
                                 <td class="px-3 py-4">
-                                    @php
-                                        $sg2Info=\App\Models\Catalogs\ScientificGroup::find($post->scientific_group_v2)
-                                    @endphp
-                                    {{ @$sg2Info->name }}
+                                    @if($post->scientificGroup2Info)
+                                        {{ $post->scientificGroup2Info->name }}
+                                    @endif
                                 </td>
                                 <td class="px-3 py-4">
-                                    @php
-                                        $personInfo=\App\Models\Person::find($post->person_id)
-                                    @endphp
-                                    {{ @$personInfo->name .' ' . @$personInfo->family }}
+                                    @if($post->personInfo)
+                                        {{ $post->personInfo->first_name }} {{ $post->personInfo->last_name }}
+                                    @endif
                                 </td>
                                 <td class="flex px-6 py-4">
                                     <button type="submit" data-id="{{ $post->id }}"

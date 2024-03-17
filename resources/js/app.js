@@ -102,7 +102,8 @@ $(document).ready(function () {
                     }
                 });
             });
-        } else if (pathname.includes("Festivals")) {
+        }
+        else if (pathname.includes("Festivals")) {
             $('#new-festival').submit(function (e) {
                 e.preventDefault();
                 Swal.fire({
@@ -133,7 +134,8 @@ $(document).ready(function () {
                     }
                 });
             });
-        } else if (pathname.includes("Users")) {
+        }
+        else if (pathname.includes("Users")) {
             //Search In User Manager
             $('#search-Username-UserManager').on('input', function () {
                 var inputUsername = $('#search-Username-UserManager').val().trim().toLowerCase();
@@ -840,7 +842,9 @@ $(document).ready(function () {
                             success: function (response) {
                                 if (response) {
                                     postIDForEdit.value = response.id;
-                                    personForEdit.value = response.person_id;
+                                    console.log(response.user_id);
+                                    $('.personForEdit').val(59).trigger('change.select2');
+
                                     nameForEdit.value = response.title;
                                     post_formatForEdit.value = response.post_format;
                                     post_typeForEdit.value = response.post_type;

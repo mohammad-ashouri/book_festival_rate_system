@@ -12,7 +12,15 @@ class ExcelController extends Controller
 {
     function __construct()
     {
-        ini_set('max_execution_time', 3600);
+        ini_set('max_execution_time', 7200);
+        ini_set('memory_limit', '256M');
+
+    }
+    function __destruct()
+    {
+        ini_set('max_execution_time', 60);
+        ini_set('memory_limit', '32M');
+
     }
     public function index()
     {
