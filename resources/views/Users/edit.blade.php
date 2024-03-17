@@ -78,8 +78,8 @@
                         <select id="status"
                                 class="border rounded-md w-full px-3 py-2"
                                 name="status">
-                            <option @if($user->active==1) selected @endif value="1">فعال</option>
-                            <option @if($user->active==0) selected @endif value="0">غیرفعال</option>
+                            <option @if($user->status==1) selected @endif value="1">فعال</option>
+                            <option @if($user->status==0) selected @endif value="0">غیرفعال</option>
                         </select>
                     </div>
                 </div>
