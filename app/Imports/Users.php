@@ -17,7 +17,7 @@ class Users implements ToModel
         if (!$user) {
             User::insert([
                 'id' => $row[0],
-                'username' => $row[3],
+                'username' => $row[1],
                 'password' => bcrypt(12345678),
                 'type' => 6,
                 'subject' => 'نویسنده',
