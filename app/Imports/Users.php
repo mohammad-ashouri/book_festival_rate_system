@@ -22,13 +22,13 @@ class Users implements ToModel
                 'type' => 6,
                 'subject' => 'نویسنده',
             ]);
-            GeneralInformation::create([
-                'user_id' => $row[0],
-                'first_name' => $row[1],
-                'last_name' => $row[2],
-                'national_code' => $row[3],
-                'email' => $row[4],
-            ]);
+//            GeneralInformation::create([
+//                'user_id' => $row[0],
+//                'first_name' => $row[1],
+//                'last_name' => $row[2],
+//                'national_code' => $row[3],
+//                'email' => $row[4],
+//            ]);
         }
     }
 }
