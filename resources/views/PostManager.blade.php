@@ -256,7 +256,6 @@
                                                     <select id="scientific_group1"
                                                             class="border rounded-md w-full px-3 py-2"
                                                             name="scientific_group1">
-                                                        name="scientific_group1">
                                                         <option value="" disabled selected>انتخاب کنید</option>
                                                         @php
                                                             $groups=\App\Models\Catalogs\ScientificGroup::orderBy('name','asc')->get();

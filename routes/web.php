@@ -54,6 +54,7 @@ Route::get('/home', function () {
 Route::get('/import-excel', [ExcelController::class, 'index']);
 Route::post('/importUsers', [ExcelController::class, 'importUsers'])->name('excel.importUsers');
 Route::post('/importGeneralInformations', [ExcelController::class, 'importGeneralInformations'])->name('excel.importGeneralInformations');
+Route::post('/importPosts', [ExcelController::class, 'importPosts'])->name('excel.importPosts');
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::middleware(ThrottleRequests::class)->post('/login', [LoginController::class, 'login']);

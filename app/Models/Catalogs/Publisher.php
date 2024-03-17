@@ -10,5 +10,9 @@ class Publisher extends Model
 {
     use HasFactory,SoftDeletes;
     protected $table='publishers';
+    protected $fillable = [
+        'name',
+        'status',
+    ];
     protected $hidden=['created_at','updated_at','deleted_at'];
 }

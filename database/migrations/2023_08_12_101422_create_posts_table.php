@@ -34,6 +34,7 @@ return new class extends Migration
             $table->integer('number_of_covers')->nullable();
             $table->string('book_size')->nullable();
             $table->integer('circulation')->nullable();
+            $table->string('publish_date')->nullable();
 
             //thesis fields
             $table->string('thesis_certificate_number')->nullable();

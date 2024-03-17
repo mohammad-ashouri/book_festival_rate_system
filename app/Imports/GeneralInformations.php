@@ -37,6 +37,10 @@ class GeneralInformations implements ToModel
                 'gender' => $gender,
                 'nationality' => $nationality,
             ]);
+        }else{
+            GeneralInformation::create([
+                'user_id' => $row[0],
+            ]);
         }
     }
 }
