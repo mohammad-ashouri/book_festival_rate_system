@@ -37,7 +37,7 @@
                                                     <option value="" disabled selected>انتخاب کنید</option>
                                                     @foreach($persons as $person)
                                                         <option
-                                                                value="{{ $person->id }}">{{ $person->first_name . ' ' . $person->last_name . ' - ' . $person->national_code }}
+                                                                value="{{ $person->user_id }}">{{ $person->first_name . ' ' . $person->last_name . ' - ' . $person->national_code }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -503,7 +503,8 @@
                                                     <option value="" disabled selected>انتخاب کنید</option>
                                                     @foreach($persons as $person)
                                                         <option
-                                                            value="{{ $person->id }}">{{ $person->name . ' ' . $person->family . ' - ' .$person->national_code }}</option>
+                                                            value="{{ $person->user_id }}">{{ $person->first_name . ' ' . $person->last_name . ' - ' . $person->national_code }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
