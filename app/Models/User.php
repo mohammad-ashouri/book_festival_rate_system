@@ -22,7 +22,7 @@ class User extends Authenticatable
         'username',
         'password',
         'NTCP',
-        'active',
+        'status',
         'type',
         'scientific_group',
         'subject',

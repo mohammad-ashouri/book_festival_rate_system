@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('special_sections', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->tinyInteger('active')->default(1);
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

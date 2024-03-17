@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('scientific_group')->nullable();
             $table->foreign('scientific_group')->references('id')->on('scientific_groups');
             $table->string('subject');
-            $table->tinyInteger('active')->default(1);
+            $table->tinyInteger('status')->default(1);
             $table->tinyInteger('NTCP')->default(0)->comment('Needs To Change Password');
             $table->text('user_image')->nullable();
             $table->rememberToken();

@@ -159,7 +159,7 @@
             name="special_section">
         <option value="" selected>بدون محور ویژه</option>
         @php
-            $specialSections=\App\Models\Catalogs\SpecialSection::where('active',1)->orderBy('name','asc')->get();
+            $specialSections=\App\Models\Catalogs\SpecialSection::where('status',1)->orderBy('name','asc')->get();
         @endphp
         @foreach($specialSections as $section)
             <option value="{{ $section->id }}">{{ $section->name }}</option>

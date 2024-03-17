@@ -10,5 +10,9 @@ class ScientificGroup extends Model
 {
     use HasFactory,SoftDeletes;
     protected $table='scientific_groups';
+    protected $fillable = [
+        'name',
+        'status',
+    ];
     protected $hidden=['created_at','updated_at','deleted_at'];
 }

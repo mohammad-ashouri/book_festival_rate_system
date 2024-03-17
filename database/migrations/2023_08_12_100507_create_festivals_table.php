@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('finish_date')->nullable();
             $table->unsignedBigInteger('finisher')->nullable();
             $table->foreign('finisher')->references('id')->on('users');
-            $table->tinyInteger('active')->default(1);
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

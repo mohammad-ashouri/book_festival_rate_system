@@ -66,7 +66,7 @@ class UserManager extends Controller
             }
             $user->scientific_group = $scientific_group;
             $user->subject = $subject;
-            $user->active = $status;
+            $user->status = $status;
             $user->NTCP = $ntcp;
             $user->save();
         }

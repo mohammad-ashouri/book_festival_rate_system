@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('ip_address');
             $table->integer('attempts_count')->default(10);
-            $table->tinyInteger('active')->default(1);
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

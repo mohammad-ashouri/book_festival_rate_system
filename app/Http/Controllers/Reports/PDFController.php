@@ -15,7 +15,7 @@ class PDFController extends Controller
         $message = null;
         switch ($request->input('work')) {
             case 'GetAllClassifications':
-                $lastFestival=Festival::where('active',1)->first();
+                $lastFestival=Festival::where('status',1)->first();
                 $nonClassificatedPosts = Post::with('personInfo')->with('languageInfo')->with('personInfo')->with('sorterInfo')->with('scientificGroup1Info')->with('scientificGroup2Info')->where('sorted', 0)->where('festival_id', $lastFestival->id)->get();
                 $pdf = Pdf::loadView('Reports.PDFReportPages.AllClassifications', compact('nonClassificatedPosts','lastFestival'));
                 return $pdf->stream(1 . '.pdf');

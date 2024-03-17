@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Catalogs\ScientificGroup;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +15,7 @@ return new class extends Migration {
         Schema::create('scientific_groups', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->tinyInteger('active')->default(1);
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -40,6 +41,10 @@ return new class extends Migration {
             ['name' => 'کتب مرجع', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'انقلاب اسلامی', 'created_at' => now(), 'updated_at' => now()],
             ['name' => 'فلسفه', 'created_at' => now(), 'updated_at' => now()],
+        ]);
+
+        DB::table('scientific_groups')->insert([
+            ['name' => 'نامشخص', 'status' => 0],
         ]);
 
     }

@@ -298,7 +298,7 @@ class RateController extends Controller
                     ->first();
                 if ($rateInfo->count() > 0) {
                     $assessmentStatus = 'Detailed';
-                    $specialSections = \App\Models\Catalogs\SpecialSection::where('active', 1)->orderBy('name', 'asc')->get();
+                    $specialSections = \App\Models\Catalogs\SpecialSection::where('status', 1)->orderBy('name', 'asc')->get();
                     return view('RatePages.index', compact('rateInfo', 'assessmentStatus', 'specialSections'));
                 }
                 abort(403);

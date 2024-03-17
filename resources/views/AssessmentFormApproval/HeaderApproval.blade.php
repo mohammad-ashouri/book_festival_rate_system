@@ -143,7 +143,7 @@
                                                         name="scientific_group">
                                                         <option value="" selected disabled>انتخاب کنید</option>
                                                         @php
-                                                            $scientificGroups=\App\Models\Catalogs\ScientificGroup::where('active',1)->where('id','!=',$post->postInfo->scientific_group_v1)->orderBy('name','asc')->get();
+                                                            $scientificGroups=\App\Models\Catalogs\ScientificGroup::where('status',1)->where('id','!=',$post->postInfo->scientific_group_v1)->orderBy('name','asc')->get();
                                                         @endphp
                                                         @foreach($scientificGroups as $scientificGroup)
                                                             <option

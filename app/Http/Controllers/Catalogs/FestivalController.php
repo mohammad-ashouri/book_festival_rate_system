@@ -31,10 +31,10 @@ class FestivalController extends Controller
 
     public function store(Request $request)
     {
-        $activeFestival = Festival::where('active', 1)->first();
+        $activeFestival = Festival::where('status', 1)->first();
 
         if ($activeFestival) {
-            $activeFestival->active = 0;
+            $activeFestival->status = 0;
             $activeFestival->save();
         }
 
@@ -75,7 +75,7 @@ class FestivalController extends Controller
         if ($request->finish_year) {
             $festival->finish_date = Jalalian::fromFormat('Y/n/j', $request->finish_year . '/' . $request->finish_month . '/' . $request->finish_day)->toCarbon();
         }
-        $festival->active = $request->status;
+        $festival->status = $request->status;
         $festival->save();
 
         return redirect()->route('Festivals.index')

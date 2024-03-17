@@ -35,18 +35,18 @@ class ThrottleRequests
                 'device' => $agent->device(),
             ]);
             $blacklist->attempts_count = 30;
-            $blacklist->active = 1;
+            $blacklist->status = 1;
             $blacklist->save();
         }
 
         if ($blacklist->exists) {
-            if ($blacklist->active !== 0) {
+            if ($blacklist->status !== 0) {
                 $blacklist->attempts_count -= 1;
                 $blacklist->save();
             }
 
             if ($blacklist->attempts_count <= 0) {
-                if ($blacklist->active !== 0) {
+                if ($blacklist->status !== 0) {
                     ActivityLog::create([
                         'activity' => 'Blocked IP=> ' . request()->ip(),
                         'ip_address' => request()->ip(),
@@ -54,7 +54,7 @@ class ThrottleRequests
                         'device' => $agent->device(),
                     ]);
                 }
-                $blacklist->active = 0;
+                $blacklist->status = 0;
                 $blacklist->save();
 
                 return response()->json(['YouAreLocked' => 'تعداد تلاش‌های شما به پایان رسیده است. لطفاً بعد از یک ساعت مجدداً اقدام کنید.'], 403);
@@ -62,7 +62,7 @@ class ThrottleRequests
         } else {
             $blacklist->ip_address = $key;
             $blacklist->attempts_count = 30;
-            $blacklist->active = 1;
+            $blacklist->status = 1;
             $blacklist->save();
         }
 

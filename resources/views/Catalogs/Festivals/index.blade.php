@@ -69,7 +69,7 @@
                                 @endif
                             </td>
                             <td class="px-6 py-4">
-                                @if($festival->active==1)
+                                @if($festival->status==1)
                                     فعال
                                 @else
                                     غیرفعال
