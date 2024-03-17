@@ -13,7 +13,7 @@ class Users implements ToModel
     public function model(array $row)
     {
         // Define how each row in the Excel file should be mapped to your database model
-        $user = User::where('username',$row[3])->exists();
+        $user = User::where('username',$row[1])->exists();
         if (!$user) {
             User::insert([
                 'id' => $row[0],
