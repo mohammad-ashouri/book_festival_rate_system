@@ -19,8 +19,9 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('national_code',20)->unique()->nullable();
             $table->string('howzah_code')->nullable();
-            $table->string('mobile',11);
-            $table->string('gender',5);
+            $table->string('mobile',11)->nullable();
+            $table->string('gender',5)->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
