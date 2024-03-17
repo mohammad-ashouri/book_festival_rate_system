@@ -233,7 +233,7 @@ class PostController extends Controller
         } else {
             $Post->id = $festival . '00001';
         }
-        $Post->person_id = $person;
+        $Post->user_id = $person;
         $Post->festival_id = $festival;
         $Post->title = $name;
         $Post->post_format = $post_format;
@@ -532,7 +532,7 @@ class PostController extends Controller
 
         }
 
-        $Post->person_id = $person;
+        $Post->user_id = $person;
         $Post->title = $name;
         $Post->post_format = $post_format;
         $Post->post_type = $post_type;
