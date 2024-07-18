@@ -15,7 +15,7 @@ function swalFire(title = null, text, icon, confirmButtonText) {
 }
 
 function toggleModal(modalID) {
-    var modal = document.getElementById(modalID);
+    let modal = document.getElementById(modalID);
     if (modal.classList.contains('modal-active')) {
         modal.classList.remove('animate-fade-in');
         modal.classList.add('animate-fade-out');
@@ -31,12 +31,12 @@ function toggleModal(modalID) {
 }
 
 function hasOnlyPersianCharacters(input) {
-    var persianPattern = /^[\u0600-\u06FF\s]+$/;
+    let persianPattern = /^[\u0600-\u06FF\s]+$/;
     return persianPattern.test(input);
 }
 
 function hasOnlyEnglishCharacters(input) {
-    var englishPattern = /^[a-zA-Z\s]+$/;
+    let englishPattern = /^[a-zA-Z\s]+$/;
     return englishPattern.test(input);
 }
 
@@ -69,7 +69,7 @@ function resetFields() {
 }
 
 $(document).ready(function () {
-        var pattern = /^\/Rate\/Summary\/\d+$/;
+        let pattern = /^\/Rate\/Summary\/\d+$/;
         let pathname = window.location.pathname;
         if (pathname.includes("Publishers")) {
             $('#new-publisher').submit(function (e) {
@@ -102,8 +102,7 @@ $(document).ready(function () {
                     }
                 });
             });
-        }
-        else if (pathname.includes("Festivals")) {
+        } else if (pathname.includes("Festivals")) {
             $('#new-festival').submit(function (e) {
                 e.preventDefault();
                 Swal.fire({
@@ -134,12 +133,11 @@ $(document).ready(function () {
                     }
                 });
             });
-        }
-        else if (pathname.includes("Users")) {
+        } else if (pathname.includes("Users")) {
             //Search In User Manager
             $('#search-Username-UserManager').on('input', function () {
-                var inputUsername = $('#search-Username-UserManager').val().trim().toLowerCase();
-                var type = $('#search-type-UserManager').val();
+                let inputUsername = $('#search-Username-UserManager').val().trim().toLowerCase();
+                let type = $('#search-type-UserManager').val();
                 $.ajax({
                     url: '/Search',
                     type: 'GET',
@@ -149,11 +147,11 @@ $(document).ready(function () {
                         work: 'UserManagerSearch'
                     },
                     success: function (data) {
-                        var tableBody = $('.w-full.border-collapse.rounded-lg.overflow-hidden.text-center tbody');
+                        let tableBody = $('.w-full.border-collapse.rounded-lg.overflow-hidden.text-center tbody');
                         tableBody.empty();
 
                         data.forEach(function (user) {
-                            var type;
+                            let type;
                             switch (user.type) {
                                 case 1:
                                     type = 'ادمین کل';
@@ -174,14 +172,14 @@ $(document).ready(function () {
                                     type = 'نویسنده';
                                     break;
                             }
-                            var row = '<tr class="bg-white"><td class="px-6 py-4">' + user.username + '</td><td class="px-6 py-4">' + user.general_information_info.first_name + ' ' + user.general_information_info.last_name + '</td><td class="px-6 py-4">' + type + '</td>';
+                            let row = '<tr class="bg-white"><td class="px-6 py-4">' + user.username + '</td><td class="px-6 py-4">' + user.general_information_info.first_name + ' ' + user.general_information_info.last_name + '</td><td class="px-6 py-4">' + type + '</td>';
                             if (user.status == 1) {
                                 row += '<td class="px-6 py-4">' + 'فعال';
                             } else if (user.status == 0) {
                                 row += '<td class="px-6 py-4">' + 'غیر فعال';
                             }
                             row += '</td>';
-                            row += '<td class="px-6 py-4">' + '<a href= Users/'+ user.id + '/edit>' + '<button type="button" class="px-4 py-2 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300 rp">ویرایش</button>';
+                            row += '<td class="px-6 py-4">' + '<a href= Users/' + user.id + '/edit>' + '<button type="button" class="px-4 py-2 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300 rp">ویرایش</button>';
                             row += '</td>';
                             row += '</tr>';
                             tableBody.append(row);
@@ -193,8 +191,8 @@ $(document).ready(function () {
                 });
             });
             $('#search-type-UserManager').on('change', function () {
-                var inputUsername = $('#search-Username-UserManager').val().trim().toLowerCase();
-                var type = $('#search-type-UserManager').val();
+                let inputUsername = $('#search-Username-UserManager').val().trim().toLowerCase();
+                let type = $('#search-type-UserManager').val();
                 $.ajax({
                     url: '/Search',
                     type: 'GET',
@@ -204,11 +202,11 @@ $(document).ready(function () {
                         work: 'UserManagerSearch'
                     },
                     success: function (data) {
-                        var tableBody = $('.w-full.border-collapse.rounded-lg.overflow-hidden.text-center tbody');
+                        let tableBody = $('.w-full.border-collapse.rounded-lg.overflow-hidden.text-center tbody');
                         tableBody.empty();
 
                         data.forEach(function (user) {
-                            var type;
+                            let type;
                             switch (user.type) {
                                 case 1:
                                     type = 'ادمین کل';
@@ -229,14 +227,14 @@ $(document).ready(function () {
                                     type = 'نویسنده';
                                     break;
                             }
-                            var row = '<tr class="bg-white"><td class="px-6 py-4">' + user.username + '</td><td class="px-6 py-4">' + user.general_information_info.first_name + ' ' + user.general_information_info.last_name + '</td><td class="px-6 py-4">' + type + '</td>';
+                            let row = '<tr class="bg-white"><td class="px-6 py-4">' + user.username + '</td><td class="px-6 py-4">' + user.general_information_info.first_name + ' ' + user.general_information_info.last_name + '</td><td class="px-6 py-4">' + type + '</td>';
                             if (user.status == 1) {
                                 row += '<td class="px-6 py-4">' + 'فعال';
                             } else if (user.status == 0) {
                                 row += '<td class="px-6 py-4">' + 'غیر فعال';
                             }
                             row += '</td>';
-                            row += '<td class="px-6 py-4">' + '<a href= Users/'+ user.id + '/edit>' + '<button type="button" class="px-4 py-2 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300 rp">ویرایش</button>';
+                            row += '<td class="px-6 py-4">' + '<a href= Users/' + user.id + '/edit>' + '<button type="button" class="px-4 py-2 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300 rp">ویرایش</button>';
                             row += '</td>';
                             row += '</tr>';
                             tableBody.append(row);
@@ -253,12 +251,12 @@ $(document).ready(function () {
             //New User
             $('#new-user').submit(function (e) {
                 e.preventDefault();
-                var name = document.getElementById('name').value;
-                var family = document.getElementById('family').value;
-                var username = document.getElementById('username').value;
-                var password = document.getElementById('password').value;
-                var type = document.getElementById('type').value;
-                var scientific_group = document.getElementById('scientific_group').value;
+                let name = document.getElementById('name').value;
+                let family = document.getElementById('family').value;
+                let username = document.getElementById('username').value;
+                let password = document.getElementById('password').value;
+                let type = document.getElementById('type').value;
+                let scientific_group = document.getElementById('scientific_group').value;
 
                 if (name.length === 0) {
                     swalFire('خطا!', 'نام وارد نشده است.', 'error', 'تلاش مجدد');
@@ -281,8 +279,8 @@ $(document).ready(function () {
                 } else if (hasOnlyPersianCharacters(password)) {
                     swalFire('خطا!', 'رمز عبور نمی تواند مقدار فارسی داشته باشد.', 'error', 'تلاش مجدد');
                 } else {
-                    var form = $(this);
-                    var data = form.serialize();
+                    let form = $(this);
+                    let data = form.serialize();
 
                     $.ajax({
                         type: 'POST',
@@ -304,8 +302,7 @@ $(document).ready(function () {
                     });
                 }
             });
-        }
-        else if (pathname.includes("Languages")) {
+        } else if (pathname.includes("Languages")) {
             $('#new-language').submit(function (e) {
                 e.preventDefault();
                 Swal.fire({
@@ -336,8 +333,7 @@ $(document).ready(function () {
                     }
                 });
             });
-        }
-        else if (pathname.includes("DefencePlaces")) {
+        } else if (pathname.includes("DefencePlaces")) {
             $('#new-defence-place').submit(function (e) {
                 e.preventDefault();
                 Swal.fire({
@@ -368,18 +364,17 @@ $(document).ready(function () {
                     }
                 });
             });
-        }
-        else if (pathname.includes("DeliveryStatus")) {
+        } else if (pathname.includes("DeliveryStatus")) {
 
             $('#post_id').on('input', function () {
-                var originalValue = $(this).val();
-                var trimmedValue = originalValue.replace(/\s/g, ''); // استفاده از عبارت منظم برای جایگزینی همه فضاها با رشته خالی
+                let originalValue = $(this).val();
+                let trimmedValue = originalValue.replace(/\s/g, ''); // استفاده از عبارت منظم برای جایگزینی همه فضاها با رشته خالی
                 $(this).val(trimmedValue);
             });
 
             $('#delivery-status').on('submit', function (e) {
                 e.preventDefault();
-                var postID = $('#post_id').val();
+                let postID = $('#post_id').val();
                 $.ajax({
                     type: 'GET',
                     url: '/DeliveryStatus/Show',
@@ -492,11 +487,11 @@ $(document).ready(function () {
                 });
 
                 function displayComments(comments) {
-                    var table = $('.CommentsTable tbody');
+                    let table = $('.CommentsTable tbody');
                     table.empty();
                     let raterInfo = null;
                     $.each(comments, function (index, comment) {
-                        var row = $('<tr class="comments-table-row-spacing">');
+                        let row = $('<tr class="comments-table-row-spacing">');
                         row.append($('<td>').text(index + 1)); // افزودن ردیف
                         row.append($('<td>').text(comment.description)); // افزودن توضیحات
                         row.append($('<td>').text(comment.jalali_date)); // افزودن تاریخ ثبت
@@ -524,8 +519,7 @@ $(document).ready(function () {
             $('.absolute.inset-0.bg-gray-500.opacity-75.history').on('click', function () {
                 toggleModal(HistoryModal.id)
             });
-        }
-        else if (pathname.includes("Person")) {
+        } else if (pathname.includes("Person")) {
             $('#new-person').on('submit', function (e) {
                 e.preventDefault();
                 Swal.fire({
@@ -556,16 +550,15 @@ $(document).ready(function () {
                     }
                 });
             });
-        }
-        else {
+        } else {
             switch (pathname) {
                 case "/Profile":
                     resetFields();
                     $('#change-password').submit(function (e) {
                         e.preventDefault();
 
-                        var form = $(this);
-                        var data = form.serialize();
+                        let form = $(this);
+                        let data = form.serialize();
 
                         $.ajax({
                             type: 'POST', url: "/ChangePasswordInc", data: data, headers: {
@@ -602,8 +595,8 @@ $(document).ready(function () {
                     });
                     $('#change-user-image').submit(function (e) {
                         e.preventDefault();
-                        var form = $(this);
-                        var formData = new FormData(form[0]);
+                        let form = $(this);
+                        let formData = new FormData(form[0]);
                         $.ajax({
                             type: 'POST',
                             url: "/ChangeUserImage",
@@ -732,8 +725,8 @@ $(document).ready(function () {
                                 confirmButtonText: 'بله',
                             }).then((result) => {
                                 if (result.isConfirmed) {
-                                    var form = $(this);
-                                    var formData = new FormData(form[0]);
+                                    let form = $(this);
+                                    let formData = new FormData(form[0]);
                                     $.ajax({
                                         type: 'POST',
                                         url: '/newPost',
@@ -969,8 +962,8 @@ $(document).ready(function () {
                                 confirmButtonText: 'بله',
                             }).then((result) => {
                                 if (result.isConfirmed) {
-                                    var form = $(this);
-                                    var formData = new FormData(form[0]);
+                                    let form = $(this);
+                                    let formData = new FormData(form[0]);
                                     $.ajax({
                                         type: 'POST',
                                         url: '/editPost',
@@ -1136,14 +1129,14 @@ $(document).ready(function () {
                         });
                     });
                     $("#search-SG1-Classification, #search-SG2-Classification, #search-title-Classification").on("change keyup", function () {
-                        var sg1Value = $("#search-SG1-Classification").val();
-                        var sg2Value = $("#search-SG2-Classification").val();
-                        var titleValue = $("#search-title-Classification").val().toLowerCase();
+                        let sg1Value = $("#search-SG1-Classification").val();
+                        let sg2Value = $("#search-SG2-Classification").val();
+                        let titleValue = $("#search-title-Classification").val().toLowerCase();
 
                         $("tbody tr").hide().filter(function () {
-                            var sg1Column = $(this).find(".sg1").val();
-                            var sg2Column = $(this).find(".sg2").val();
-                            var titleColumn = $(this).find(".title").text().toLowerCase();
+                            let sg1Column = $(this).find(".sg1").val();
+                            let sg2Column = $(this).find(".sg2").val();
+                            let titleColumn = $(this).find(".title").text().toLowerCase();
 
                             return (sg1Value === "" || sg1Column === sg1Value) &&
                                 (sg2Value === "" || sg2Column === sg2Value) &&
@@ -1204,8 +1197,8 @@ $(document).ready(function () {
                             confirmButtonText: 'بله',
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                var form = $(this);
-                                var formData = new FormData(form[0]);
+                                let form = $(this);
+                                let formData = new FormData(form[0]);
                                 $.ajax({
                                     type: 'POST',
                                     url: '/Classification',
@@ -1229,14 +1222,14 @@ $(document).ready(function () {
                         });
                     });
                     $("#search-SG1-Classification, #search-SG2-Classification, #search-title-Classification").on("change keyup", function () {
-                        var sg1Value = $("#search-SG1-Classification").val();
-                        var sg2Value = $("#search-SG2-Classification").val();
-                        var titleValue = $("#search-title-Classification").val().toLowerCase();
+                        let sg1Value = $("#search-SG1-Classification").val();
+                        let sg2Value = $("#search-SG2-Classification").val();
+                        let titleValue = $("#search-title-Classification").val().toLowerCase();
 
                         $("tbody tr").hide().filter(function () {
-                            var sg1Column = $(this).find(".sg1").val();
-                            var sg2Column = $(this).find(".sg2").val();
-                            var titleColumn = $(this).find(".title").text().toLowerCase();
+                            let sg1Column = $(this).find(".sg1").val();
+                            let sg2Column = $(this).find(".sg2").val();
+                            let titleColumn = $(this).find(".title").text().toLowerCase();
 
                             return (sg1Value === "" || sg1Column === sg1Value) &&
                                 (sg2Value === "" || sg2Column === sg2Value) &&
@@ -1250,9 +1243,9 @@ $(document).ready(function () {
                     selectors.forEach(select => select.value = "");
 
                     $('.relation-with-summary-group').on('change', function () {
-                        var row = $(this).data('row');
-                        var SetScientificGroupDIV = $('.SetScientificGroupDIV[data-row="' + row + '"]');
-                        var SetFormTypeDIV = $('.SetFormTypeDIV[data-row="' + row + '"]');
+                        let row = $(this).data('row');
+                        let SetScientificGroupDIV = $('.SetScientificGroupDIV[data-row="' + row + '"]');
+                        let SetFormTypeDIV = $('.SetFormTypeDIV[data-row="' + row + '"]');
                         switch (this.value) {
                             case 'اثر مربوط به گروه حاضر است':
                                 SetScientificGroupDIV.addClass('hidden');
@@ -1280,8 +1273,8 @@ $(document).ready(function () {
                             confirmButtonText: 'بله',
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                var form = $(this);
-                                var data = form.serialize();
+                                let form = $(this);
+                                let data = form.serialize();
                                 $.ajax({
                                     type: 'POST',
                                     url: $(this).attr("action"),

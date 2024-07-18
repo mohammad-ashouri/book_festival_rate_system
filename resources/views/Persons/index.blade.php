@@ -50,12 +50,12 @@
                         @foreach ($personList as $person)
                             <tr class="bg-white">
                                 <td class="px-6 py-4">{{ $loop->iteration  }}</td>
-                                <td class="px-6 py-4">{{ $person->generalInformationInfo->first_name }}</td>
-                                <td class="px-6 py-4">{{ $person->generalInformationInfo->last_name }}</td>
-                                <td class="px-3 py-4">{{ $person->generalInformationInfo->national_code }}</td>
-                                <td class="px-3 py-4">{{ $person->generalInformationInfo->mobile }}</td>
-                                <td class="px-3 py-4">{{ $person->generalInformationInfo->gender }}</td>
-                                <td class="px-3 py-4">{{ $person->generalInformationInfo->howzah_code }}</td>
+                                <td class="px-6 py-4">{{ $person->generalInformationInfo?->first_name }}</td>
+                                <td class="px-6 py-4">{{ $person->generalInformationInfo?->last_name }}</td>
+                                <td class="px-3 py-4">{{ $person->generalInformationInfo?->national_code }}</td>
+                                <td class="px-3 py-4">{{ $person->generalInformationInfo?->mobile }}</td>
+                                <td class="px-3 py-4">{{ $person->generalInformationInfo?->gender }}</td>
+                                <td class="px-3 py-4">{{ $person->generalInformationInfo?->howzah_code }}</td>
                                 <td class="px-6 py-4">
                                     <a href="{{route('Person.edit',$person->id)}}">
                                         <button type="button"
@@ -70,7 +70,7 @@
                     </table>
                 </div>
 
-                <div dir="ltr" class="mt-4 flex justify-center" id="laravel-next-prev">
+                <div class="mt-4 flex justify-center">
                     {{ $personList->links() }}
                 </div>
 

@@ -110,12 +110,12 @@ input[type="file"].hidden {
     visibility: hidden;
 }
 
-#laravel-next-prev a {
-    position: static;
-}
-#laravel-next-prev span {
-    position: static;
-}
+/*#laravel-next-prev a {*/
+/*    position: static;*/
+/*}*/
+/*#laravel-next-prev span {*/
+/*    position: static;*/
+/*}*/
 
 #user_icon{
     background: url(../images/Panel/icon.png) no-repeat;

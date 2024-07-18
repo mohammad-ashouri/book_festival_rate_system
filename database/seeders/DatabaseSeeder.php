@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             FestivalSeeder::class,
             ImportSQLSeeder::class,
+            FixNullCells::class,
         ]);
     }
 }
