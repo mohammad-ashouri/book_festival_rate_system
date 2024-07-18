@@ -13,10 +13,9 @@ class ClassificationController extends Controller
 {
     public function showClassification()
     {
-        $postList = Post::where('sorted', 0)->orderBy('festival_id', 'asc')->orderBy('title', 'asc')->get();
-        $this->logActivity('Getting Classification Posts', \request()->ip(), \request()->userAgent(), \session('id'));
+        $postList = Post::where('sorted', 0)->orderBy('festival_id', 'desc')->orderBy('title', 'asc')->paginate(50);
         $type = User::where('id', session('id'))->pluck('type')->first();
-        return \view('Classification', ['postList' => $postList, 'type' => $type]);
+        return view('Classification', ['postList' => $postList, 'type' => $type]);
     }
 
     public function changeScientificGroup(Request $request)

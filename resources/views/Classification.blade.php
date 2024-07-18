@@ -89,7 +89,7 @@
                                     </td>
                                     <td class="px-6 py-4">{{$post->post_format  }}</td>
                                     <td class="px-3 py-4">{{ $post->post_type }}</td>
-                                    <td class="px-3 py-4">{{ $post->languageInfo->name }}</td>
+                                    <td class="px-3 py-4">{{ $post->languageInfo?->name }}</td>
                                     <td class="px-3 py-4">
                                         <select data-postid="{{ $post->id }}"
                                                 class="border rounded-md w-full px-3 py-2 sg1"
@@ -124,12 +124,15 @@
                                             @endforeach
                                         </select>
                                     </td>
-                                    <td class="px-3 py-4">{{ $post->personInfo->name .' ' . $post->personInfo->family }}</td>
+                                    <td class="px-3 py-4">{{ $post->personInfo?->name .' ' . $post->personInfo?->family }}</td>
                                 </tr>
                             @endforeach
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="mt-4 flex justify-center" id="laravel-next-prev">
+                    {{ $postList->links() }}
                 </div>
                 @if($type==1 or $type==2)
                     <form id="classification-form">
