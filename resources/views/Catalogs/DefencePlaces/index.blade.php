@@ -74,7 +74,7 @@
                     </tbody>
                 </table>
 
-                <div dir="ltr" class="mt-4 flex justify-center">
+                <div class="mt-4 flex justify-center">
                     {{ $defencePlaces->links() }}
                 </div>
             </div>

@@ -135,7 +135,7 @@
                     اثری برای ارزیابی وجود ندارد
                 @endif
             </div>
-            <div dir="ltr" class="mt-4 flex justify-center" id="laravel-next-prev">
+            <div class="mt-4 flex justify-center" id="laravel-next-prev">
                 {{ $detailed->links() }}
             </div>
         </div>
