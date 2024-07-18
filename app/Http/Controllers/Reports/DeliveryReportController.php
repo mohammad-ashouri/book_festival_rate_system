@@ -62,7 +62,6 @@ class DeliveryReportController extends Controller
         $status->rater_id = $rater->id;
         $status->registrar = session('id');
         $status->save();
-        $this->logActivity('New Delivery Status Added', \request()->ip(), \request()->userAgent(), \session('id'), $status->post_id);
         return $this->success(200, 'statusSet', 'به ارزیاب ارسال شد!');
 
     }
@@ -97,7 +96,6 @@ class DeliveryReportController extends Controller
         $comment->jalali_date = Jalalian::fromDateTime(now())->format('H:i:s Y/m/d');
         $comment->registrar = session('id');
         $comment->save();
-        $this->logActivity('New Delivery Report Comment Added For Status ->' . $statusID, \request()->ip(), \request()->userAgent(), \session('id'));
         return $this->success(200, 'deliveryCommentSet', 'توضیحات تنظیم شد!');
     }
 
@@ -108,7 +106,6 @@ class DeliveryReportController extends Controller
             return $this->alerts(false, 'nullStatusID', 'کد وضعیت خالی می باشد!');
         }
         $comments = DeliveryReportComment::with('registrarInfo')->with('statusInfo')->where('status_id',$statusID)->get();
-        $this->logActivity('Get Comments For This Status ->' . $statusID, \request()->ip(), \request()->userAgent(), \session('id'));
         return response()->json(['comments' => $comments]);
     }
 }

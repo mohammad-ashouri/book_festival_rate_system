@@ -70,7 +70,6 @@ class UserManager extends Controller
             $user->NTCP = $ntcp;
             $user->save();
         }
-        $this->logActivity('Edited User With ID => ' . $userID, request()->ip(), request()->userAgent(), session('id'));
         return redirect()->route('Users.index')
             ->with('success', 'کاربر با موفقیت ویرایش شد');
     }
@@ -123,14 +122,12 @@ class UserManager extends Controller
         $generalInformation->last_name = $last_name;
         $generalInformation->save();
 
-        $this->logActivity('Added User With Name => ' . $username, request()->ip(), request()->userAgent(), session('id'));
         return $this->success(true, 'userAdded', 'کاربر با موفقیت تعریف شد. برای نمایش اطلاعات جدید، لطفا صفحه را رفرش نمایید.');
     }
 
     public function getUserInfo(Request $request)
     {
         $user = User::find($request->userID);
-        $this->logActivity('Getting User Information With ID => ' . $request->userID, request()->ip(), request()->userAgent(), session('id'));
         return $user;
     }
 

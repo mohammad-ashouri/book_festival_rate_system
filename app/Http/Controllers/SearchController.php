@@ -21,15 +21,12 @@ class SearchController extends Controller
                         ->where(function ($query) use ($type) {
                             $query->where('type', $type);
                         });
-                    $this->logActivity('Search In User Manager With Username => ' . $username . ' And Type => ' . $type, request()->ip(), request()->userAgent(), session('id'));
                 } elseif ($username) {
                     $search->where('username', 'LIKE', '%' . $username . '%');
-                    $this->logActivity('Search In User Manager With Username => ' . $username, request()->ip(), request()->userAgent(), session('id'));
                 } elseif ($type) {
                     $search->where(function ($query) use ($type) {
                         $query->where('type', $type);
                     });
-                    $this->logActivity('Search In User Manager With Type => ' . $type, request()->ip(), request()->userAgent(), session('id'));
                 }
                 $result = $search->with('generalInformationInfo')->get();
                 return response()->json($result);
@@ -50,7 +47,6 @@ class SearchController extends Controller
                 }
                 $search->where('sorted', 0);
                 $result = $search->get();
-                $this->logActivity('Search In Classification With Title => ' . $title . ' And SG1 => ' . $SG1 . ' And SG2 => ' . $SG2, request()->ip(), request()->userAgent(), session('id'));
                 return response()->json($result);
 
         }

@@ -70,7 +70,6 @@ class PersonController extends Controller
         $generalInformation->gender = $gender;
         $generalInformation->save();
 
-        $this->logActivity('Person Added =>' . $generalInformation->id, \request()->ip(), \request()->userAgent(), \session('id'));
         return redirect()->route('Person.index')
             ->with('success', 'صاحب اثر با موفقیت اضافه شد');
     }
@@ -121,7 +120,6 @@ class PersonController extends Controller
             'username' => $national_code,
         ]);
         if ($user) {
-            $this->logActivity('User Edited =>' . $user_id, \request()->ip(), \request()->userAgent(), \session('id'));
         }
         $Person = GeneralInformation::where('user_id', $user_id)->first();
         $Person->fill([
@@ -135,7 +133,6 @@ class PersonController extends Controller
         ]);
         $Person->save();
 
-        $this->logActivity('Person Edited =>' . $user_id, \request()->ip(), \request()->userAgent(), \session('id'));
         return redirect()->route('Person.index')
             ->with('success', 'صاحب اثر با موفقیت ویرایش شد');
     }

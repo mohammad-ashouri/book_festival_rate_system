@@ -45,7 +45,6 @@ class LoginController extends Controller
     {
 
         if (!$request->input('username')) {
-            $this->logActivity('Login Failed (Null Username)', request()->ip(), request()->userAgent());
             return response()->json([
                 'success' => false,
                 'errors' => [
@@ -53,7 +52,6 @@ class LoginController extends Controller
                 ]
             ]);
         } elseif (!$request->input('password')) {
-            $this->logActivity('Failed Login With This Username (Null Password)', request()->ip(), request()->userAgent());
             return response()->json([
                 'success' => false,
                 'errors' => [
@@ -61,7 +59,6 @@ class LoginController extends Controller
                 ]
             ]);
         } elseif (!$request->input('captcha')) {
-            $this->logActivity('Login Failed (Null Captcha) For User => ( ' . $request->input('username').' )', request()->ip(), request()->userAgent());
             return response()->json([
                 'success' => false,
                 'errors' => [
@@ -73,7 +70,6 @@ class LoginController extends Controller
         $captcha = $request->input('captcha');
         $sessionCaptcha = session('captcha')['key'];
         if (!password_verify($captcha, $sessionCaptcha)) {
-            $this->logActivity('Login Failed (Wrong Captcha) For User => ( ' . $request->input('username') . ' )', request()->ip(), request()->userAgent());
             return response()->json([
                 'success' => false,
                 'errors' => [
@@ -85,7 +81,6 @@ class LoginController extends Controller
         $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials)) {
-            $this->logActivity('Login With This Username => ' . $request->input('username'), request()->ip(), request()->userAgent());
             Session::put('username', $request->input('username'));
             $user = User::where('username', $request->input('username'))->first();
             $userID=$user['id'];
@@ -95,7 +90,6 @@ class LoginController extends Controller
                 'redirect' => route('dashboard')
             ]);
         }
-        $this->logActivity('Login Failed (Wrong Username Or Password) For User => ( ' . $request->input('username') . ' )', request()->ip(), request()->userAgent());
         return response()->json([
             'success' => false,
             'errors' => [
@@ -106,7 +100,6 @@ class LoginController extends Controller
 
     public function logout()
     {
-        $this->logActivity('Logout With This Username => ' . \session('id'), request()->ip(), request()->userAgent());
         Auth::logout();
         return redirect()->route('login');
     }

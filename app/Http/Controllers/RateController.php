@@ -104,7 +104,6 @@ class RateController extends Controller
                     $summaryS3G1 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g1')->first();
                     $rateInfo->avg_sg1 = $sum + $summaryS2G1->sum + $summaryS3G1->sum;
                 }
-                $this->logActivity('S1G1 Rate Successfully Submitted =>' . $rateInfo->id, \request()->ip(), \request()->userAgent(), \session('id'));
                 break;
             case 's2g1':
                 $rateInfo->s2g1_status = 1;
@@ -113,7 +112,6 @@ class RateController extends Controller
                     $summaryS3G1 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g1')->first();
                     $rateInfo->avg_sg1 = $sum + $summaryS1G1->sum + $summaryS3G1->sum;
                 }
-                $this->logActivity('S2G1 Rate Successfully Submitted =>' . $rateInfo->id, \request()->ip(), \request()->userAgent(), \session('id'));
                 break;
             case 's3g1':
                 $rateInfo->s3g1_status = 1;
@@ -122,7 +120,6 @@ class RateController extends Controller
                     $summaryS2G1 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's2g1')->first();
                     $rateInfo->avg_sg1 = $sum + $summaryS1G1->sum + $summaryS2G1->sum;
                 }
-                $this->logActivity('S3G1 Rate Successfully Submitted =>' . $rateInfo->id, \request()->ip(), \request()->userAgent(), \session('id'));
                 break;
             case 's1g2':
                 $rateInfo->s1g2_status = 1;
@@ -131,7 +128,6 @@ class RateController extends Controller
                     $summaryS3G2 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g2')->first();
                     $rateInfo->avg_sg2 = $sum + $summaryS2G2->sum + $summaryS3G2->sum;
                 }
-                $this->logActivity('S1G2 Rate Successfully Submitted =>' . $rateInfo->id, \request()->ip(), \request()->userAgent(), \session('id'));
                 break;
             case 's2g2':
                 $rateInfo->s2g2_status = 1;
@@ -140,7 +136,6 @@ class RateController extends Controller
                     $summaryS3G2 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's3g2')->first();
                     $rateInfo->avg_sg2 = $sum + $summaryS1G2->sum + $summaryS3G2->sum;
                 }
-                $this->logActivity('S2G1 Rate Successfully Submitted =>' . $rateInfo->id, \request()->ip(), \request()->userAgent(), \session('id'));
                 break;
             case 's3g2':
                 $rateInfo->s3g2_status = 1;
@@ -149,7 +144,6 @@ class RateController extends Controller
                     $summaryS2G2 = SummaryRate::where('rate_info_id', $rate_info_id)->where('rate_type', 's2g2')->first();
                     $rateInfo->avg_sg2 = $sum + $summaryS1G2->sum + $summaryS2G2->sum;
                 }
-                $this->logActivity('S3G1 Rate Successfully Submitted =>' . $rateInfo->id, \request()->ip(), \request()->userAgent(), \session('id'));
                 break;
         }
 
@@ -258,7 +252,6 @@ class RateController extends Controller
                 abort(403);
         }
         $rateInfo->save();
-        $this->logActivity('Formal literary rate set', \request()->ip(), \request()->userAgent(), \session('id'), $rateInfo->postInfo->post_id);
         return response()->json([
             'success' => true,
             'redirect' => route('dashboard')
@@ -453,7 +446,6 @@ class RateController extends Controller
         $rateInfo->rate_status = $status;
         $rateInfo->save();
         $detailedForm->save();
-        $this->logActivity('Detailed rate set', \request()->ip(), \request()->userAgent(), \session('id'), $rateInfo->postInfo->post_id);
         return response()->json([
             'success' => true,
             'redirect' => route('dashboard')

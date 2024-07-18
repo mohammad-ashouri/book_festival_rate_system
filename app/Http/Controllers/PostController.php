@@ -330,7 +330,6 @@ class PostController extends Controller
             $participant->save();
         }
 
-        $this->logActivity('Post Added', \request()->ip(), \request()->userAgent(), \session('id'), $Post->id);
         return $this->success(true, 'PostAdded', 'برای نمایش اطلاعات جدید، لطفا صفحه را رفرش نمایید.');
     }
 
@@ -626,7 +625,6 @@ class PostController extends Controller
             $participant->save();
         }
 
-        $this->logActivity('Post Edited', \request()->ip(), \request()->userAgent(), \session('id'), $Post->id);
         return $this->success(true, 'PostEdited', 'برای نمایش اطلاعات جدید، لطفا صفحه را رفرش نمایید.');
     }
 
@@ -634,7 +632,6 @@ class PostController extends Controller
     {
         $postID = $request->input('id');
         if ($postID) {
-            $this->logActivity('Getting Info', \request()->ip(), \request()->userAgent(), \session('id'), $postID);
             return Post::find($postID);
         }
     }
@@ -643,7 +640,6 @@ class PostController extends Controller
     {
         $postID = $request->input('id');
         if ($postID) {
-            $this->logActivity('Getting Participants', \request()->ip(), \request()->userAgent(), \session('id'), $postID);
             return Participants::where('post_id', $postID)->get();
         }
     }
@@ -654,7 +650,6 @@ class PostController extends Controller
         if ($postID) {
             $post = Post::find($postID);
             $post->delete();
-            $this->logActivity('Post Deleted', \request()->ip(), \request()->userAgent(), \session('id'), $post->id);
         }
     }
 

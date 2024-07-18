@@ -36,7 +36,6 @@ class ClassificationController extends Controller
                     $post->sorter = session('id');
                 }
                 $post->save();
-                $this->logActivity('Scientific Group 1 Changed From => ' . $oldSG1 . ' To => ' . $newSG1, \request()->ip(), \request()->userAgent(), \session('id'), $post->id);
                 break;
             case 'ChangeScientificGroup2':
                 $newSG2 = $request->input('newSG2');
@@ -50,7 +49,6 @@ class ClassificationController extends Controller
                     $post->sorter = session('id');
                 }
                 $post->save();
-                $this->logActivity('Scientific Group 2 Changed From => ' . $oldSG2 . ' To => ' . $newSG2, \request()->ip(), \request()->userAgent(), \session('id'), $post->id);
                 break;
         }
     }
@@ -81,7 +79,6 @@ class ClassificationController extends Controller
                 $post->sorting_classification_id = $SCFile->id;
             }
             $post->save();
-            $this->logActivity('Classification Done', \request()->ip(), \request()->userAgent(), \session('id'), $post->id);
 
             $rateInfo = new RateInfo();
             $rateInfo->post_id = $post->id;
@@ -89,10 +86,8 @@ class ClassificationController extends Controller
                 $rateInfo->sg2_form_type = null;
             }
             $rateInfo->save();
-            $this->logActivity('Added To Rate Info Table', \request()->ip(), \request()->userAgent(), \session('id'), $post->id);
         }
 
-        $this->logActivity('Classification For All Posts Done', \request()->ip(), \request()->userAgent(), \session('id'));
         return $this->success(true, 'classificationSuccessful', 'برای نمایش اطلاعات جدید، لطفا صفحه را رفرش نمایید.');
     }
 
