@@ -12,7 +12,7 @@ class UserManager extends Controller
 {
     public function index()
     {
-        $userList = User::orderByDesc('id')->paginate(20);
+        $userList = User::orderByDesc('id')->paginate(150);
         return view('Users.index', compact('userList'));
     }
 
