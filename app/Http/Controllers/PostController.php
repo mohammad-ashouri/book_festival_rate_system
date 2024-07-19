@@ -32,22 +32,22 @@ class PostController extends Controller
 
     public function newPost(Request $request)
     {
-        $person = $request->input('person');
+        $person = $request->person;
         $festival = Festival::orderBy('id', 'desc')->first();
         $festival = $festival->id;
-        $name = $request->input('name');
-        $post_format = $request->input('post_format');
-        $post_type = $request->input('post_type');
-        $language = $request->input('language');
-        $pages_number = $request->input('pages_number');
-        $special_section = $request->input('special_section');
-        $scientific_group1 = $request->input('scientific_group1');
-        $scientific_group2 = $request->input('scientific_group2');
-        $properties = $request->input('properties');
-        $activity_type = $request->input('activity_type');
+        $name = $request->name;
+        $post_format = $request->post_format;
+        $post_type = $request->post_type;
+        $language = $request->language;
+        $pages_number = $request->pages_number;
+        $special_section = $request->special_section;
+        $scientific_group1 = $request->scientific_group1;
+        $scientific_group2 = $request->scientific_group2;
+        $properties = $request->properties;
+        $activity_type = $request->activity_type;
         $participation_percentage = 100;
-        $post_delivery_method = $request->input('post_delivery_method');
-        $number_of_received = $request->input('number_of_received');
+        $post_delivery_method = $request->post_delivery_method;
+        $number_of_received = $request->number_of_received;
         $postFilePath = null;
         $thesisFilePath = null;
         if (!$person) {
@@ -83,56 +83,56 @@ class PostController extends Controller
 
         //cooperators
         if ($activity_type == 'common') {
-            if ($request->input('comm_name1') and $request->input('comm_family1') and $request->input('comm_percentage1') and $request->input('comm_national_code1') and $request->input('comm_mobile1')) {
-                $comm_name1 = $request->input('comm_name1');
-                $comm_family1 = $request->input('comm_family1');
-                $comm_national_code1 = $request->input('comm_national_code1');
-                $comm_percentage1 = $request->input('comm_percentage1');
-                $comm_mobile1 = $request->input('comm_mobile1');
+            if ($request->comm_name1 and $request->comm_family1 and $request->comm_percentage1 and $request->comm_national_code1 and $request->comm_mobile1) {
+                $comm_name1 = $request->comm_name1;
+                $comm_family1 = $request->comm_family1;
+                $comm_national_code1 = $request->comm_national_code1;
+                $comm_percentage1 = $request->comm_percentage1;
+                $comm_mobile1 = $request->comm_mobile1;
                 $participation_percentage -= $comm_percentage1;
                 if (!$comm_national_code1) {
                     return $this->alerts(false, 'nullCooperatorInformation', 'اطلاعات مشترک ناقص وارد است');
                 }
             }
-            if ($request->input('comm_name2') and $request->input('comm_family2') and $request->input('comm_percentage2') and $request->input('comm_national_code2') and $request->input('comm_mobile2')) {
-                $comm_name2 = $request->input('comm_name2');
-                $comm_family2 = $request->input('comm_family2');
-                $comm_national_code2 = $request->input('comm_national_code2');
-                $comm_percentage2 = $request->input('comm_percentage2');
-                $comm_mobile2 = $request->input('comm_mobile2');
+            if ($request->comm_name2 and $request->comm_family2 and $request->comm_percentage2 and $request->comm_national_code2 and $request->comm_mobile2) {
+                $comm_name2 = $request->comm_name2;
+                $comm_family2 = $request->comm_family2;
+                $comm_national_code2 = $request->comm_national_code2;
+                $comm_percentage2 = $request->comm_percentage2;
+                $comm_mobile2 = $request->comm_mobile2;
                 $participation_percentage -= $comm_percentage2;
                 if (!$comm_national_code2) {
                     return $this->alerts(false, 'nullCooperatorInformation', 'اطلاعات مشترک ناقص وارد است');
                 }
             }
-            if ($request->input('comm_name3') and $request->input('comm_family3') and $request->input('comm_percentage3') and $request->input('comm_national_code3') and $request->input('comm_mobile3')) {
-                $comm_name3 = $request->input('comm_name3');
-                $comm_family3 = $request->input('comm_family3');
-                $comm_national_code3 = $request->input('comm_national_code3');
-                $comm_percentage3 = $request->input('comm_percentage3');
-                $comm_mobile3 = $request->input('comm_mobile3');
+            if ($request->comm_name3 and $request->comm_family3 and $request->comm_percentage3 and $request->comm_national_code3 and $request->comm_mobile3) {
+                $comm_name3 = $request->comm_name3;
+                $comm_family3 = $request->comm_family3;
+                $comm_national_code3 = $request->comm_national_code3;
+                $comm_percentage3 = $request->comm_percentage3;
+                $comm_mobile3 = $request->comm_mobile3;
                 $participation_percentage -= $comm_percentage3;
                 if (!$comm_national_code3) {
                     return $this->alerts(false, 'nullCooperatorInformation', 'اطلاعات مشترک ناقص وارد است');
                 }
             }
-            if ($request->input('comm_name4') and $request->input('comm_family4') and $request->input('comm_percentage4') and $request->input('comm_national_code4') and $request->input('comm_mobile4')) {
-                $comm_name4 = $request->input('comm_name4');
-                $comm_family4 = $request->input('comm_family4');
-                $comm_national_code4 = $request->input('comm_national_code4');
-                $comm_percentage4 = $request->input('comm_percentage4');
-                $comm_mobile4 = $request->input('comm_mobile4');
+            if ($request->comm_name4 and $request->comm_family4 and $request->comm_percentage4 and $request->comm_national_code4 and $request->comm_mobile4) {
+                $comm_name4 = $request->comm_name4;
+                $comm_family4 = $request->comm_family4;
+                $comm_national_code4 = $request->comm_national_code4;
+                $comm_percentage4 = $request->comm_percentage4;
+                $comm_mobile4 = $request->comm_mobile4;
                 $participation_percentage -= $comm_percentage4;
                 if (!$comm_national_code4) {
                     return $this->alerts(false, 'nullCooperatorInformation', 'اطلاعات مشترک ناقص وارد است');
                 }
             }
-            if ($request->input('comm_name5') and $request->input('comm_family5') and $request->input('comm_percentage5') and $request->input('comm_national_code5') and $request->input('comm_mobile5')) {
-                $comm_name5 = $request->input('comm_name5');
-                $comm_family5 = $request->input('comm_family5');
-                $comm_national_code5 = $request->input('comm_national_code5');
-                $comm_percentage5 = $request->input('comm_percentage5');
-                $comm_mobile5 = $request->input('comm_mobile5');
+            if ($request->comm_name5 and $request->comm_family5 and $request->comm_percentage5 and $request->comm_national_code5 and $request->comm_mobile5) {
+                $comm_name5 = $request->comm_name5;
+                $comm_family5 = $request->comm_family5;
+                $comm_national_code5 = $request->comm_national_code5;
+                $comm_percentage5 = $request->comm_percentage5;
+                $comm_mobile5 = $request->comm_mobile5;
                 $participation_percentage -= $comm_percentage5;
                 if (!$comm_national_code5) {
                     return $this->alerts(false, 'nullCooperatorInformation', 'اطلاعات مشترک ناقص وارد است');
@@ -142,49 +142,49 @@ class PostController extends Controller
 
         switch ($post_format) {
             case 'کتاب':
-                $publisher = $request->input('publisher');
+                $publisher = $request->publisher;
                 if (!$publisher) {
                     return $this->alerts(false, 'nullPublisher', 'ناشر انتخاب نشده است');
                 }
-                $ISSN = $request->input('ISSN');
+                $ISSN = $request->ISSN;
 //                if (!$ISSN) {
 //                    return $this->alerts(false, 'nullISSN', 'شابک وارد نشده است');
 //                }
-                $number_of_covers = $request->input('number_of_covers');
+                $number_of_covers = $request->number_of_covers;
                 if (!$number_of_covers) {
                     return $this->alerts(false, 'nullNumberOfCovers', 'تعداد جلد انتخاب نشده است');
                 }
-                $circulation = $request->input('circulation');
+                $circulation = $request->circulation;
 //                if (!$circulation) {
 //                    return $this->alerts(false, 'nullCirculation', 'تیراژ وارد نشده است');
 //                }
-                $book_size = $request->input('book_size');
+                $book_size = $request->book_size;
                 if (!$book_size) {
                     return $this->alerts(false, 'nullBookSize', 'قطع انتخاب نشده است');
                 }
                 break;
             case 'پایان نامه':
-                $thesis_certificate_number = $request->input('thesis_certificate_number');
+                $thesis_certificate_number = $request->thesis_certificate_number;
                 if (!$thesis_certificate_number) {
                     return $this->alerts(false, 'nullThesisCertificateNumber', 'شماره گواهی دفاع پایان نامه وارد نشده است');
                 }
-                $thesis_defence_place = $request->input('thesis_defence_place');
+                $thesis_defence_place = $request->thesis_defence_place;
                 if (!$thesis_defence_place) {
                     return $this->alerts(false, 'nullThesisDefencePlace', 'محل دفاع پایان نامه انتخاب نشده است');
                 }
-                $thesis_grade = $request->input('thesis_grade');
+                $thesis_grade = $request->thesis_grade;
                 if (!$thesis_grade) {
                     return $this->alerts(false, 'nullGrade', 'امتیاز پایان نامه وارد نشده است');
                 }
-                $thesis_supervisor = $request->input('thesis_supervisor');
+                $thesis_supervisor = $request->thesis_supervisor;
                 if (!$thesis_supervisor) {
                     return $this->alerts(false, 'nullSupervisor', 'مشخصات استاد راهنما وارد نشده است');
                 }
-                $thesis_advisor = $request->input('thesis_advisor');
+                $thesis_advisor = $request->thesis_advisor;
                 if (!$thesis_advisor) {
                     return $this->alerts(false, 'nullAdvisor', 'مشخصات استاد مشاور وارد نشده است');
                 }
-                $thesis_referee = $request->input('thesis_referee');
+                $thesis_referee = $request->thesis_referee;
                 if (!$thesis_referee) {
                     return $this->alerts(false, 'nullReferee', 'مشخصات استاد داور وارد نشده است');
                 }
@@ -335,21 +335,21 @@ class PostController extends Controller
 
     public function editPost(Request $request)
     {
-        $Post = Post::find($request->input('postIDForEdit'));
-        $person = $request->input('personForEdit');
-        $name = $request->input('nameForEdit');
-        $post_format = $request->input('post_formatForEdit');
-        $post_type = $request->input('post_typeForEdit');
-        $language = $request->input('languageForEdit');
-        $pages_number = $request->input('pages_numberForEdit');
-        $special_section = $request->input('special_sectionForEdit');
-        $scientific_group1 = $request->input('scientific_group1ForEdit');
-        $scientific_group2 = $request->input('scientific_group2ForEdit');
-        $properties = $request->input('propertiesForEdit');
-        $activity_type = $request->input('activity_typeForEdit');
+        $Post = Post::find($request->postIDForEdit);
+        $person = $request->personForEdit;
+        $name = $request->nameForEdit;
+        $post_format = $request->post_formatForEdit;
+        $post_type = $request->post_typeForEdit;
+        $language = $request->languageForEdit;
+        $pages_number = $request->pages_numberForEdit;
+        $special_section = $request->special_sectionForEdit;
+        $scientific_group1 = $request->scientific_group1ForEdit;
+        $scientific_group2 = $request->scientific_group2ForEdit;
+        $properties = $request->propertiesForEdit;
+        $activity_type = $request->activity_typeForEdit;
         $participation_percentage = 100;
-        $post_delivery_method = $request->input('post_delivery_methodForEdit');
-        $number_of_received = $request->input('number_of_receivedForEdit');
+        $post_delivery_method = $request->post_delivery_methodForEdit;
+        $number_of_received = $request->number_of_receivedForEdit;
         $postFilePath = null;
         $thesisFilePath = null;
         if (!$person) {
@@ -385,56 +385,56 @@ class PostController extends Controller
 
         //cooperators
         if ($activity_type == 'common') {
-            if ($request->input('comm_name1ForEdit') and $request->input('comm_family1ForEdit') and $request->input('comm_percentage1ForEdit') and $request->input('comm_national_code1ForEdit') and $request->input('comm_mobile1ForEdit')) {
-                $comm_name1 = $request->input('comm_name1ForEdit');
-                $comm_family1 = $request->input('comm_family1ForEdit');
-                $comm_national_code1 = $request->input('comm_national_code1ForEdit');
-                $comm_percentage1 = $request->input('comm_percentage1ForEdit');
-                $comm_mobile1 = $request->input('comm_mobile1ForEdit');
+            if ($request->comm_name1ForEdit and $request->comm_family1ForEdit and $request->comm_percentage1ForEdit and $request->comm_national_code1ForEdit and $request->comm_mobile1ForEdit) {
+                $comm_name1 = $request->comm_name1ForEdit;
+                $comm_family1 = $request->comm_family1ForEdit;
+                $comm_national_code1 = $request->comm_national_code1ForEdit;
+                $comm_percentage1 = $request->comm_percentage1ForEdit;
+                $comm_mobile1 = $request->comm_mobile1ForEdit;
                 $participation_percentage -= $comm_percentage1;
                 if (!$comm_national_code1) {
                     return $this->alerts(false, 'nullCooperatorInformation', 'اطلاعات مشترک ناقص وارد است');
                 }
             }
-            if ($request->input('comm_name2ForEdit') and $request->input('comm_family2ForEdit') and $request->input('comm_percentage2ForEdit') and $request->input('comm_national_code2ForEdit') and $request->input('comm_mobile2ForEdit')) {
-                $comm_name2 = $request->input('comm_name2ForEdit');
-                $comm_family2 = $request->input('comm_family2ForEdit');
-                $comm_national_code2 = $request->input('comm_national_code2ForEdit');
-                $comm_percentage2 = $request->input('comm_percentage2ForEdit');
-                $comm_mobile2 = $request->input('comm_mobile2ForEdit');
+            if ($request->comm_name2ForEdit and $request->comm_family2ForEdit and $request->comm_percentage2ForEdit and $request->comm_national_code2ForEdit and $request->comm_mobile2ForEdit) {
+                $comm_name2 = $request->comm_name2ForEdit;
+                $comm_family2 = $request->comm_family2ForEdit;
+                $comm_national_code2 = $request->comm_national_code2ForEdit;
+                $comm_percentage2 = $request->comm_percentage2ForEdit;
+                $comm_mobile2 = $request->comm_mobile2ForEdit;
                 $participation_percentage -= $comm_percentage2;
                 if (!$comm_national_code2) {
                     return $this->alerts(false, 'nullCooperatorInformation', 'اطلاعات مشترک ناقص وارد است');
                 }
             }
-            if ($request->input('comm_name3ForEdit') and $request->input('comm_family3ForEdit') and $request->input('comm_percentage3ForEdit') and $request->input('comm_national_code3ForEdit') and $request->input('comm_mobile3ForEdit')) {
-                $comm_name3 = $request->input('comm_name3ForEdit');
-                $comm_family3 = $request->input('comm_family3ForEdit');
-                $comm_national_code3 = $request->input('comm_national_code3ForEdit');
-                $comm_percentage3 = $request->input('comm_percentage3ForEdit');
-                $comm_mobile3 = $request->input('comm_mobile3ForEdit');
+            if ($request->comm_name3ForEdit and $request->comm_family3ForEdit and $request->comm_percentage3ForEdit and $request->comm_national_code3ForEdit and $request->comm_mobile3ForEdit) {
+                $comm_name3 = $request->comm_name3ForEdit;
+                $comm_family3 = $request->comm_family3ForEdit;
+                $comm_national_code3 = $request->comm_national_code3ForEdit;
+                $comm_percentage3 = $request->comm_percentage3ForEdit;
+                $comm_mobile3 = $request->comm_mobile3ForEdit;
                 $participation_percentage -= $comm_percentage3;
                 if (!$comm_national_code3) {
                     return $this->alerts(false, 'nullCooperatorInformation', 'اطلاعات مشترک ناقص وارد است');
                 }
             }
-            if ($request->input('comm_name4ForEdit') and $request->input('comm_family4ForEdit') and $request->input('comm_percentage4ForEdit') and $request->input('comm_national_code4ForEdit') and $request->input('comm_mobile4ForEdit')) {
-                $comm_name4 = $request->input('comm_name4ForEdit');
-                $comm_family4 = $request->input('comm_family4ForEdit');
-                $comm_national_code4 = $request->input('comm_national_code4ForEdit');
-                $comm_percentage4 = $request->input('comm_percentage4ForEdit');
-                $comm_mobile4 = $request->input('comm_mobile4ForEdit');
+            if ($request->comm_name4ForEdit and $request->comm_family4ForEdit and $request->comm_percentage4ForEdit and $request->comm_national_code4ForEdit and $request->comm_mobile4ForEdit) {
+                $comm_name4 = $request->comm_name4ForEdit;
+                $comm_family4 = $request->comm_family4ForEdit;
+                $comm_national_code4 = $request->comm_national_code4ForEdit;
+                $comm_percentage4 = $request->comm_percentage4ForEdit;
+                $comm_mobile4 = $request->comm_mobile4ForEdit;
                 $participation_percentage -= $comm_percentage4;
                 if (!$comm_national_code4) {
                     return $this->alerts(false, 'nullCooperatorInformation', 'اطلاعات مشترک ناقص وارد است');
                 }
             }
-            if ($request->input('comm_name5ForEdit') and $request->input('comm_family5ForEdit') and $request->input('comm_percentage5ForEdit') and $request->input('comm_national_code5ForEdit') and $request->input('comm_mobile5ForEdit')) {
-                $comm_name5 = $request->input('comm_name5ForEdit');
-                $comm_family5 = $request->input('comm_family5ForEdit');
-                $comm_national_code5 = $request->input('comm_national_code5ForEdit');
-                $comm_percentage5 = $request->input('comm_percentage5ForEdit');
-                $comm_mobile5 = $request->input('comm_mobile5ForEdit');
+            if ($request->comm_name5ForEdit and $request->comm_family5ForEdit and $request->comm_percentage5ForEdit and $request->comm_national_code5ForEdit and $request->comm_mobile5ForEdit) {
+                $comm_name5 = $request->comm_name5ForEdit;
+                $comm_family5 = $request->comm_family5ForEdit;
+                $comm_national_code5 = $request->comm_national_code5ForEdit;
+                $comm_percentage5 = $request->comm_percentage5ForEdit;
+                $comm_mobile5 = $request->comm_mobile5ForEdit;
                 $participation_percentage -= $comm_percentage5;
                 if (!$comm_national_code5) {
                     return $this->alerts(false, 'nullCooperatorInformation', 'اطلاعات مشترک ناقص وارد است');
@@ -444,49 +444,49 @@ class PostController extends Controller
 
         switch ($post_format) {
             case 'کتاب':
-                $publisher = $request->input('publisherForEdit');
+                $publisher = $request->publisherForEdit;
                 if (!$publisher) {
                     return $this->alerts(false, 'nullPublisher', 'ناشر انتخاب نشده است');
                 }
-                $ISSN = $request->input('ISSNForEdit');
+                $ISSN = $request->ISSNForEdit;
 //                if (!$ISSN) {
 //                    return $this->alerts(false, 'nullISSN', 'شابک وارد نشده است');
 //                }
-                $number_of_covers = $request->input('number_of_coversForEdit');
+                $number_of_covers = $request->number_of_coversForEdit;
                 if (!$number_of_covers) {
                     return $this->alerts(false, 'nullNumberOfCovers', 'تعداد جلد انتخاب نشده است');
                 }
-                $circulation = $request->input('circulationForEdit');
+                $circulation = $request->circulationForEdit;
 //                if (!$circulation) {
 //                    return $this->alerts(false, 'nullCirculation', 'تیراژ وارد نشده است');
 //                }
-                $book_size = $request->input('book_sizeForEdit');
+                $book_size = $request->book_sizeForEdit;
                 if (!$book_size) {
                     return $this->alerts(false, 'nullBookSize', 'قطع انتخاب نشده است');
                 }
                 break;
             case 'پایان نامه':
-                $thesis_certificate_number = $request->input('thesis_certificate_numberForEdit');
+                $thesis_certificate_number = $request->thesis_certificate_numberForEdit;
                 if (!$thesis_certificate_number) {
                     return $this->alerts(false, 'nullThesisCertificateNumber', 'شماره گواهی دفاع پایان نامه وارد نشده است');
                 }
-                $thesis_defence_place = $request->input('thesis_defence_placeForEdit');
+                $thesis_defence_place = $request->thesis_defence_placeForEdit;
                 if (!$thesis_defence_place) {
                     return $this->alerts(false, 'nullThesisDefencePlace', 'محل دفاع پایان نامه انتخاب نشده است');
                 }
-                $thesis_grade = $request->input('thesis_gradeForEdit');
+                $thesis_grade = $request->thesis_gradeForEdit;
                 if (!$thesis_grade) {
                     return $this->alerts(false, 'nullGrade', 'امتیاز پایان نامه وارد نشده است');
                 }
-                $thesis_supervisor = $request->input('thesis_supervisorForEdit');
+                $thesis_supervisor = $request->thesis_supervisorForEdit;
                 if (!$thesis_supervisor) {
                     return $this->alerts(false, 'nullSupervisor', 'مشخصات استاد راهنما وارد نشده است');
                 }
-                $thesis_advisor = $request->input('thesis_advisorForEdit');
+                $thesis_advisor = $request->thesis_advisorForEdit;
                 if (!$thesis_advisor) {
                     return $this->alerts(false, 'nullAdvisor', 'مشخصات استاد مشاور وارد نشده است');
                 }
-                $thesis_referee = $request->input('thesis_refereeForEdit');
+                $thesis_referee = $request->thesis_refereeForEdit;
                 if (!$thesis_referee) {
                     return $this->alerts(false, 'nullReferee', 'مشخصات استاد داور وارد نشده است');
                 }
@@ -630,7 +630,7 @@ class PostController extends Controller
 
     public function getPostInfo(Request $request)
     {
-        $postID = $request->input('id');
+        $postID = $request->id;
         if ($postID) {
             return Post::find($postID);
         }
@@ -638,7 +638,7 @@ class PostController extends Controller
 
     public function getParticipants(Request $request)
     {
-        $postID = $request->input('id');
+        $postID = $request->id;
         if ($postID) {
             return Participants::where('post_id', $postID)->get();
         }
@@ -646,7 +646,7 @@ class PostController extends Controller
 
     public function deletePost(Request $request)
     {
-        $postID = $request->input('id');
+        $postID = $request->id;
         if ($postID) {
             $post = Post::find($postID);
             $post->delete();
