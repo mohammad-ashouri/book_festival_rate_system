@@ -15,6 +15,6 @@ class ImportSQLSeeder extends Seeder
     {
         DB::unprepared(file_get_contents('database/migrations/users.sql'));
         DB::unprepared(file_get_contents('database/migrations/general_informations.sql'));
-        DB::unprepared(file_get_contents('database/migrations/posts.sql'));
+//        DB::unprepared(file_get_contents('database/migrations/posts.sql'));
     }
 }
